@@ -2,15 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="%BASE_URL%favicon.svg" />
+    <link rel="apple-touch-icon" href="%BASE_URL%favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amit Pal — Security Analyst (VAPT) • Web & API Security • Ampcus Cyber</title>
-    <meta name="description" content="Amit Pal — Security Analyst (VAPT) at Ampcus Cyber since Feb 2026. Web Application & API Security, practical VAPT, manual testing. I build CyberBuddy (7 live browser security tools, local-first) and VAPT Checklist (in development), and write about browser security on Medium. Roots West Bengal, building in Bengaluru." />
+    <meta name="description" content="Amit Pal is a Security Analyst (VAPT) at Ampcus Cyber, focused on practical Web and API security, manual testing, evidence-led tooling, and research." />
     <meta name="author" content="Amit Pal" />
     <meta name="keywords" content="Amit Pal, Application Security, VAPT, Web Security, API Security, CyberBuddy, VAPT Checklist, Security Research, Browser Security" />
-    <meta name="theme-color" content="#050507" />
+    <meta name="theme-color" content="#0a1019" />
     <meta name="color-scheme" content="dark light" />
+    <script>
+      try {
+        const storedTheme = localStorage.getItem('theme');
+        const theme = storedTheme === 'light' || storedTheme === 'dark'
+          ? storedTheme
+          : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        document.documentElement.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0a1019' : '#f4f7fb');
+      } catch (_) {}
+    </script>
     <link rel="canonical" href="https://amitpal-cyberbuddy.github.io/Portfolio/" />
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:; object-src 'none'" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
@@ -19,7 +30,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://amitpal-cyberbuddy.github.io/Portfolio/" />
     <meta property="og:title" content="Amit Pal — Security Analyst (VAPT) • Web & API Security" />
-    <meta property="og:description" content="Security Analyst (VAPT) at Ampcus Cyber — Web & API Security, practical VAPT. Builder of CyberBuddy (live) and VAPT Checklist (in dev). Technical writing on Medium. Roots West Bengal, building in Bengaluru." />
+    <meta property="og:description" content="Security Analyst (VAPT) at Ampcus Cyber, focused on practical Web and API security. Builder of CyberBuddy and VAPT Checklist, a v1.0.0-r29 release candidate." />
     <meta property="og:image" content="https://amitpal-cyberbuddy.github.io/Portfolio/og-image.webp" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -43,26 +54,25 @@
       "url": "https://amitpal-cyberbuddy.github.io/Portfolio/",
       "sameAs": ["https://github.com/AmitPal-CyberBuddy","https://www.linkedin.com/in/amitpal-wb/","https://amitpxl.medium.com/"],
       "knowsAbout": ["Application Security","VAPT","Web Security","API Security","OWASP"],
-      "description": "Identifying Vulnerabilities Before Attackers Do"
+      "description": "Evidence-led Web and API security testing"
     }
     </script>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap" rel="stylesheet">
     
     <!-- Preload critical -->
-    <link rel="preload" as="image" href="/favicon.svg" />
+    <link rel="preload" as="image" href="%BASE_URL%favicon.svg" />
   </head>
   <body>
-    <a href="#main" class="skip-link">Skip to main content</a>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <noscript>
       <div style="padding: 48px; font-family: monospace; background: #050507; color: #F5F3EF; min-height: 100vh;">
         <h1 style="font-family: Syne, sans-serif; font-size: 48px; font-weight: 800;">AMIT PAL — APPLICATION SECURITY</h1>
-        <p style="margin-top: 24px; max-width: 600px; line-height: 1.6;">This portfolio requires JavaScript to display the interactive experience. Please enable JavaScript to view the full living archive of VAPT Checklist (in development), CyberBuddy (7 browser security tools), and technical writing.</p>
+        <p style="margin-top: 24px; max-width: 600px; line-height: 1.6;">This portfolio uses JavaScript for its interactive experience. Enable it to explore VAPT Checklist (v1.0.0-r29 release candidate; browser and visual QA pending), CyberBuddy (7 browser security tools), and technical writing.</p>
         <p style="margin-top: 24px;">Links: <a href="https://github.com/AmitPal-CyberBuddy" style="color: #3A5BFF;">GitHub</a> • <a href="https://amitpxl.medium.com/" style="color: #3A5BFF;">Medium</a> • <a href="https://www.linkedin.com/in/amitpal-wb/" style="color: #3A5BFF;">LinkedIn</a> • <a href="mailto:amitpal.secure@gmail.com" style="color: #3A5BFF;">amitpal.secure@gmail.com</a></p>
       </div>
     </noscript>
