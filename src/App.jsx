@@ -352,7 +352,7 @@ function VaptCinematic({ theme }) {
 
 function ApproachMinimal({ theme }) {
   return (
-    <section className="approach-mobile" style={{ position: 'relative', background: theme === 'light' ? '#FFF1D6' : 'var(--black)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '28px 48px', overflow: 'hidden' }}>
+    <section className="approach-mobile" style={{ position: 'relative', background: theme === 'light' ? '#FFF8EC' : 'var(--black)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '28px 48px', overflow: 'hidden' }}>
       <div className="approach-mobile-inner" style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gray-500)', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Route size={14} /> How I work
@@ -377,7 +377,7 @@ function ProfessionalFocusMinimal({ theme }) {
   const pathLength = useSpring(scrollYProgress, { stiffness: 80, damping: 20 });
 
   return (
-    <section ref={ref} id="focus" className="journey-section" style={{ position: 'relative', background: theme === 'light' ? '#FFFEF9' : '#08080C', color: theme === 'light' ? 'black' : 'white', padding: '100px 48px', borderTop: '1px solid var(--border)', overflow: 'hidden' }}>
+    <section ref={ref} id="focus" className="journey-section" style={{ position: 'relative', background: theme === 'light' ? '#FBF2DF' : '#0A0A0F', color: theme === 'light' ? 'black' : 'white', padding: '100px 48px', borderTop: '1px solid var(--border)', overflow: 'hidden' }}>
 
 
       <div className="journey-responsive" style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '80px' }}>
@@ -405,7 +405,7 @@ function ProfessionalFocusMinimal({ theme }) {
             <span style={{ padding: '6px 10px', border: `1px solid ${theme === 'light' ? 'rgba(10,92,54,0.35)' : 'rgba(0,255,157,0.28)'}`, color: theme === 'light' ? '#0A5C36' : '#00FF9D', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}><Fingerprint size={10} /> Credible • Practical • Authorized only</span>
             <span style={{ padding: '6px 10px', border: '1px solid var(--border)', color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={10} /> Based Bengaluru • Roots WB</span>
           </div>
-          <p style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)', maxWidth: '340px', display: 'flex', gap: '8px' }}>
+          <p style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)', maxWidth: '340px', display: 'flex', gap: '8px' }}>
             <Target size={14} style={{ flexShrink: 0, marginTop: '2px' }} color="#00FF9D" />
             I'm working across a growing range of client environments and APIs — Web & API focused.
           </p>
@@ -431,7 +431,7 @@ function ProfessionalFocusMinimal({ theme }) {
                   {i > 0 && <span style={{ color: 'var(--gray-500)' }}>→</span>}
                   <span style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
                     <span>{s.step}</span>
-                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', letterSpacing: '0', textTransform: 'none', lineHeight: 1.3, color: theme === 'light' ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.4)' }}>{s.note}</span>
+                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', letterSpacing: '0', textTransform: 'none', lineHeight: 1.3, color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.5)' }}>{s.note}</span>
                   </span>
                 </span>
               ))}
@@ -460,7 +460,7 @@ function ProfessionalFocusMinimal({ theme }) {
             </div>
             <div style={{ marginTop: '14px', display: 'flex', flexWrap: 'wrap', gap: '6px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
               {["Practice", "Building", "Learning", "Sharing"].map((p, i) => (
-                <span key={i} style={{ padding: '4px 8px', border: '1px solid var(--border)', color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <span key={i} style={{ padding: '4px 8px', border: '1px solid var(--border)', color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: '6px' }}>
                   {i > 0 && <span style={{ color: 'var(--gray-500)' }}>→</span>}{p}
                 </span>
               ))}
@@ -499,7 +499,7 @@ function LearningLoop({ theme }) {
   // the growth story reads as a system instead of a resume.
   const L = theme === 'light';
   const c = {
-    bg: L ? '#FFFEF9' : '#08080C',
+    bg: L ? '#FBF2DF' : '#0A0A0F',
     head: L ? 'black' : 'white',
     body: L ? 'rgba(10,10,15,0.66)' : 'rgba(245,243,239,0.6)',
     soft: L ? 'rgba(10,10,15,0.55)' : 'rgba(245,243,239,0.5)',
@@ -593,7 +593,7 @@ function TransitionMinimal({ theme }) {
   const pathLength = useSpring(scrollYProgress, { stiffness: 70, damping: 20 });
 
   return (
-    <section ref={ref} id="journey" className="journey-section" style={{ position: 'relative', background: theme === 'light' ? '#F5F3EF' : '#0A0A0F', color: theme === 'light' ? '#0A0A0F' : 'white', padding: '100px 48px', borderTop: '1px solid var(--border)', overflow: 'hidden' }}>
+    <section ref={ref} id="journey" className="journey-section" style={{ position: 'relative', background: theme === 'light' ? '#FFF8EC' : '#0A0A0F', color: theme === 'light' ? '#0A0A0F' : 'white', padding: '100px 48px', borderTop: '1px solid var(--border)', overflow: 'hidden' }}>
 
 
       <div className="journey-responsive" style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '80px' }}>
@@ -612,7 +612,7 @@ function TransitionMinimal({ theme }) {
           <p style={{ marginTop: '20px', fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.6, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)', maxWidth: '380px' }}>
             For someone new: I joined Ampcus Cyber in Nov 2023 as a fresher in research & analysis (OSINT, market research, target profiling). That attention to detail became my foundation. In Feb 2026, I transitioned into VAPT as Security Analyst — hands-on technical work I wanted.
           </p>
-          <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)', maxWidth: '380px' }}>
+          <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)', maxWidth: '380px' }}>
             Research & analysis → Professional growth → Cybersecurity transition → Security testing → Independent building & research. Not a résumé timeline, but the pattern matters.
           </p>
         </div>
@@ -681,7 +681,7 @@ function ExperimentsMinimal({ theme }) {
   const y = useTransform(scrollYProgress, [0, 1], isMobile ? [0, 0] : [20, -20]);
 
   return (
-    <section ref={ref} className="experiments-section" style={{ position: 'relative', background: theme === 'light' ? '#FFFEF9' : '#08080C', borderTop: '1px solid var(--border)', padding: '80px 48px', overflow: 'hidden' }}>
+    <section ref={ref} className="experiments-section" style={{ position: 'relative', background: theme === 'light' ? '#FBF2DF' : '#0A0A0F', borderTop: '1px solid var(--border)', padding: '80px 48px', overflow: 'hidden' }}>
 
       <div className="project-responsive experiments-grid" style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '48px', alignItems: 'center' }}>
         <div>
@@ -703,7 +703,7 @@ function ExperimentsMinimal({ theme }) {
             <span style={{ padding: '10px 16px', border: '1px solid var(--border)', color: 'var(--gray-500)', fontFamily: 'var(--font-mono)', fontSize: '10px', display: 'flex', alignItems: 'center', gap: '6px' }}><Code2 size={12} />Python • Experimental • 2026</span>
           </div>
         </div>
-        <motion.div style={{ y, position: 'relative', border: '1px solid rgba(255,214,10,0.12)', background: theme === 'light' ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.4)', backdropFilter: 'blur(12px)', padding: '20px', fontFamily: 'var(--font-mono)', fontSize: '10px', lineHeight: 1.6, color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.55)' }}>
+        <motion.div style={{ y, position: 'relative', border: '1px solid rgba(255,214,10,0.12)', background: theme === 'light' ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.55)', backdropFilter: 'blur(12px)', padding: '20px', fontFamily: 'var(--font-mono)', fontSize: '10px', lineHeight: 1.6, color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.55)' }}>
           <div style={{ fontSize: '9px', letterSpacing: '0.2em', textTransform: 'uppercase', color: '#FFD60A', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}><Lightbulb size={10} /> Why I built this</div>
           <div>I'm exploring beyond browser security — line-by-line risk detection. I test real systems, build what helps during my engagements, research, write, repeat.</div>
           <div style={{ marginTop: '16px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
@@ -745,10 +745,10 @@ function MilestoneMinimal({ theme }) {
   // against paper, i.e. invisible. Dark mode keeps the originals.
   const L = theme === 'light';
   const c = {
-    bg: L ? '#F0DFB8' : '#111111',
+    bg: L ? '#FBF2DF' : '#0A0A0F',
     text: L ? '#14120E' : 'white',
     body: L ? 'rgba(20,18,14,0.68)' : 'rgba(255,255,255,0.6)',
-    muted: L ? 'rgba(20,18,14,0.52)' : 'rgba(255,255,255,0.35)',
+    muted: L ? 'rgba(20,18,14,0.52)' : 'rgba(255,255,255,0.45)',
     soft: L ? 'rgba(20,18,14,0.62)' : 'rgba(255,255,255,0.5)',
     quote: L ? 'rgba(20,18,14,0.9)' : 'rgba(255,255,255,0.9)',
     hair: L ? 'rgba(20,18,14,0.14)' : 'rgba(255,255,255,0.06)',
@@ -887,7 +887,7 @@ function CyberBuddyCinematic({ theme }) {
           <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#27C93F' }} />
           <div style={{ marginLeft: 'auto', fontFamily: 'IBM Plex Mono', fontSize: '8px', color: 'rgba(255,255,255,0.5)', letterSpacing: '0.1em', display: 'flex', alignItems: 'center', gap: '4px' }}><Shield size={10} /> CLICKJACKING • HEADERS • CORS</div>
         </div>
-        <div style={{ flex: 1, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.4)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div style={{ flex: 1, border: '1px solid rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.55)', padding: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <div style={{ height: '6px', width: '60%', background: 'rgba(138,92,255,0.3)' }} />
           <div style={{ height: '4px', width: '90%', background: 'rgba(255,255,255,0.08)' }} />
           <div style={{ height: '4px', width: '75%', background: 'rgba(255,255,255,0.06)' }} />
@@ -908,7 +908,7 @@ function CyberBuddyCinematic({ theme }) {
           <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}><Code2 size={10} />MY JWT WORKBENCH — LOCAL ONLY</span>
           <span style={{ color: '#00FF9D' }}>● LOCAL</span>
         </div>
-        <div style={{ flex: 1, background: 'rgba(0,0,0,0.5)', border: '1px solid rgba(255,255,255,0.06)', padding: '10px', fontFamily: 'IBM Plex Mono', fontSize: '9px', lineHeight: 1.5, color: 'rgba(255,255,255,0.6)' }}>
+        <div style={{ flex: 1, background: 'rgba(0,0,0,0.62)', border: '1px solid rgba(255,255,255,0.06)', padding: '10px', fontFamily: 'IBM Plex Mono', fontSize: '9px', lineHeight: 1.5, color: 'rgba(255,255,255,0.6)' }}>
           <div style={{ color: '#8A5CFF' }}>eyJhbGciOiJIUzI1NiIs...</div>
           <div style={{ color: 'rgba(255,255,255,0.3)', marginTop: '8px' }}>{"{ payload: { sub: '...' } }"}</div>
           <div style={{ marginTop: '12px', display: 'flex', gap: '6px' }}>
@@ -917,7 +917,7 @@ function CyberBuddyCinematic({ theme }) {
             <div style={{ padding: '3px 6px', background: 'rgba(255,92,161,0.12)', border: '1px solid rgba(255,92,161,0.2)', color: '#FF5CA1', fontSize: '7px' }}>TEST</div>
           </div>
         </div>
-        <div style={{ fontFamily: 'IBM Plex Mono', fontSize: '7px', color: 'rgba(255,255,255,0.35)', letterSpacing: '0.08em' }}>I ENSURE NO TOKEN EVER LEAVES BROWSER</div>
+        <div style={{ fontFamily: 'IBM Plex Mono', fontSize: '7px', color: 'rgba(255,255,255,0.45)', letterSpacing: '0.08em' }}>I ENSURE NO TOKEN EVER LEAVES BROWSER</div>
       </motion.div>
 
       <motion.div
@@ -953,11 +953,11 @@ export default function App() {
   // light mode gets its own designed surface instead of reusing it.
   const isLight = theme === 'light';
   const cx = {
-    bg: isLight ? '#E6EAF5' : '#0A0A0F',
+    bg: isLight ? '#FBF2DF' : '#0A0A0F',
     text: isLight ? '#0A0A0F' : 'white',
     body: isLight ? 'rgba(10,10,15,0.72)' : 'rgba(255,255,255,0.7)',
-    soft: isLight ? 'rgba(10,10,15,0.58)' : 'rgba(255,255,255,0.45)',
-    muted: isLight ? 'rgba(10,10,15,0.48)' : 'rgba(255,255,255,0.35)',
+    soft: isLight ? 'rgba(10,10,15,0.58)' : 'rgba(255,255,255,0.55)',
+    muted: isLight ? 'rgba(10,10,15,0.48)' : 'rgba(255,255,255,0.45)',
     faint: isLight ? 'rgba(10,10,15,0.42)' : 'rgba(255,255,255,0.5)',
     hair: isLight ? 'rgba(10,10,15,0.14)' : 'rgba(255,255,255,0.08)',
     box: isLight ? 'rgba(10,10,15,0.05)' : 'rgba(255,255,255,0.02)',
@@ -1150,7 +1150,7 @@ export default function App() {
                 </div>
                 <h1 className="hero-title" style={{ color: theme === 'light' ? 'black' : 'white' }}>
                   <span className="hero-title-line"><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}>FIND THE GAP.</motion.span></span>
-                  <span className="hero-title-line hero-title-line--sub outline" style={{ WebkitTextStroke: theme === 'light' ? '1px rgba(0,0,0,0.35)' : '1px rgba(255,255,255,0.35)' }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}>PROVE THE IMPACT.</motion.span></span>
+                  <span className="hero-title-line hero-title-line--sub outline" style={{ WebkitTextStroke: theme === 'light' ? '1px rgba(0,0,0,0.35)' : '1px rgba(255,255,255,0.45)' }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}>PROVE THE IMPACT.</motion.span></span>
                 </h1>
                 <div className="hero-tagline" style={{ color: theme === 'light' ? 'rgba(0,0,0,0.75)' : 'var(--gray-300)' }}>
                   <p style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, letterSpacing: '-0.01em', textTransform: 'uppercase', lineHeight: 1.1 }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.7, delay: 0.6 }} style={{ display: 'block' }}>Web Application & API Security —</motion.span></p>
@@ -1171,7 +1171,7 @@ export default function App() {
                 <HeroVisual theme={theme} />
               </div>
             </motion.div>
-            <div className="scroll-indicator" aria-hidden="true" style={{ color: theme === 'light' ? 'rgba(0,0,0,0.4)' : 'rgba(255,255,255,0.4)' }}>
+            <div className="scroll-indicator" aria-hidden="true" style={{ color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.5)' }}>
               <div className="scroll-indicator-line" style={{ background: theme === 'light' ? 'rgba(0,0,0,0.15)' : 'rgba(255,255,255,0.2)' }}></div>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><ArrowUpRight size={12} /> Scroll to explore</span>
             </div>
@@ -1211,7 +1211,7 @@ export default function App() {
                 <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.6, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)', maxWidth: '440px' }}>
                   For someone arriving from LinkedIn: I'm Amit Pal, Security Analyst (VAPT) focused on Web & API. I test real apps end-to-end — scope, recon, manual validation, impact, reporting. I also build tools and write about what I learn.
                 </p>
-                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)', maxWidth: '440px' }}>
+                <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)', maxWidth: '440px' }}>
                   No skills matrix, no certification wall. Just a believable pattern of <b style={{ color: theme === 'light' ? 'black' : 'white' }}>practice + building + learning + sharing</b>. Projects below are discoverable with live links.
                 </p>
                 <div style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: '14px', lineHeight: 1.3, color: 'var(--cyan)', maxWidth: '420px', display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -1240,7 +1240,7 @@ export default function App() {
 
           {/* VAPT — VISUAL SHOWCASE */}
           {/* VAPT — VISUAL SHOWCASE — Cohesive, low contrast, visitor friendly */}
-          <section className="project-section" style={{ position: 'relative', background: theme === 'light' ? '#FFFEF9' : '#0A0A0F', minHeight: '90vh', overflow: 'hidden', borderTop: '1px solid var(--border)' }}>
+          <section className="project-section" style={{ position: 'relative', background: theme === 'light' ? '#FFF8EC' : '#050507', minHeight: '90vh', overflow: 'hidden', borderTop: '1px solid var(--border)' }}>
             <VaptCinematic theme={theme} />
             <div className="project-responsive" style={{ position: 'relative', zIndex: 2, minHeight: '90vh', display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: '48px', padding: '100px 48px 80px', alignItems: 'center' }}>
               <div>
@@ -1256,7 +1256,7 @@ export default function App() {
                   <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '17px', lineHeight: 1.5, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)' }}>
                     VAPT = Vulnerability Assessment & Penetration Testing — systematic approach to find and prove security issues in web apps & APIs. I was frustrated with fragmented checklists that miss context, so I'm building a structured, operator-focused workflow.
                   </p>
-                  <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)' }}>
+                  <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)' }}>
                     For recruiters: shows how I think about coverage, not just tool output. For security pros: taxonomy, context, honest gaps. For collaborators: active dev, open to feedback on methodology.
                   </p>
                 </div>
@@ -1265,7 +1265,7 @@ export default function App() {
                   <button onClick={copyEmail} style={{ padding: '14px 24px', border: '1px solid var(--border)', color: theme === 'light' ? 'black' : 'white', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }} data-cursor="COPY EMAIL"><Mail size={12} /> Email me</button>
                 </div>
               </div>
-              <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.4)', backdropFilter: 'blur(12px)' }}>
+              <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.55)', backdropFilter: 'blur(12px)' }}>
                 <img src="/Portfolio/assets/vapt-workflow.jpg" alt="VAPT Checklist workflow" className="responsive-bg-img" style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', display: 'block' }} loading="lazy" />
                 <div style={{ padding: '16px', display: 'flex', gap: '8px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
                   <span style={{ padding: '4px 8px', background: theme === 'light' ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)', border: '1px solid var(--border)' }}>Operator-focused</span>
@@ -1276,12 +1276,12 @@ export default function App() {
           </section>
 
           {/* CYBERBUDDY — Cohesive */}
-          <section className="project-section" style={{ position: 'relative', background: theme === 'light' ? '#FFFEF9' : '#0A0A0F', minHeight: '90vh', overflow: 'hidden', borderTop: '1px solid var(--border)' }}>
+          <section className="project-section" style={{ position: 'relative', background: theme === 'light' ? '#FFF8EC' : '#050507', minHeight: '90vh', overflow: 'hidden', borderTop: '1px solid var(--border)' }}>
             <div style={{ position: 'absolute', inset: 0, opacity: theme === 'light' ? 0.06 : 0.15 }}>
               <img src="/Portfolio/assets/cyberbuddy-tools.jpg" alt="" className="responsive-bg-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
             </div>
             <div className="project-responsive" style={{ position: 'relative', zIndex: 2, minHeight: '90vh', display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '48px', padding: '100px 48px 80px', alignItems: 'center' }}>
-              <div style={{ order: 1, position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.4)' }}>
+              <div style={{ order: 1, position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.55)' }}>
                 <img src="/Portfolio/assets/cyberbuddy-tools.jpg" alt="CyberBuddy tools" className="responsive-bg-img" style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', display: 'block' }} loading="lazy" />
                 <div style={{ padding: '16px', display: 'flex', gap: '8px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
                   <span style={{ padding: '4px 8px', background: 'rgba(138,92,255,0.08)', border: '1px solid rgba(138,92,255,0.15)', color: '#8A5CFF' }}>7 tools live</span>
@@ -1301,7 +1301,7 @@ export default function App() {
                   <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '17px', lineHeight: 1.5, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)' }}>
                     Browser security checks (clickjacking, headers, CORS, JWT, CSRF) are often scattered and heavy. I built CyberBuddy to keep 7 checks under one roof — evidence-grade, 100% local (no data leaves browser), for my real engagements.
                   </p>
-                  <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)' }}>
+                  <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)' }}>
                     For general visitors: think of it as a toolkit that helps prove a security issue visually. For security pros: non-destructive, local-first, shows practical problem-solving. Live at the link below.
                   </p>
                 </div>
@@ -1316,7 +1316,7 @@ export default function App() {
           <ExperimentsMinimal theme={theme} />
 
           {/* ——— WRITING ——— */}
-          <section id="writing" style={{ background: theme === 'light' ? '#F2E3C6' : 'var(--cream)', color: theme === 'light' ? 'black' : 'var(--black)', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
+          <section id="writing" style={{ background: theme === 'light' ? '#FFF8EC' : '#F5F0E6', color: theme === 'light' ? 'black' : 'var(--black)', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
             <WritingCinematic theme={theme} />
             <div className="writing-responsive writing-header" style={{ padding: '100px 48px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'end', maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
               <div>
@@ -1352,7 +1352,7 @@ export default function App() {
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(28px, 3.2vw, 42px)', lineHeight: 0.95, letterSpacing: '-0.02em', fontWeight: 400, transform: hoveredWriting === 0 ? 'scale(1.02)' : 'scale(1)', transformOrigin: 'left', transition: 'transform 0.4s ease' }}>
                     CORS Misconfiguration: When Reflecting the Origin Is Not the Whole Story
                   </h3>
-                  <p style={{ marginTop: '20px', fontFamily: 'var(--font-mono)', fontSize: '11px', lineHeight: 1.5, color: hoveredWriting === 0 ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.5)', maxWidth: '400px', letterSpacing: '0.02em', textTransform: 'uppercase', transition: 'color 0.4s' }}>
+                  <p style={{ marginTop: '20px', fontFamily: 'var(--font-mono)', fontSize: '11px', lineHeight: 1.5, color: hoveredWriting === 0 ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.62)', maxWidth: '400px', letterSpacing: '0.02em', textTransform: 'uppercase', transition: 'color 0.4s' }}>
                     I learned reflection ≠ exploitation. Proving authenticated impact matters. I built a two-origin probe. {hoveredWriting === 0 ? "→ Full article on Medium has my PoC." : ""}
                   </p>
                 </div>
@@ -1361,7 +1361,7 @@ export default function App() {
                 </div>
               </div>
               <div className="writing-list" style={{ background: 'var(--black)', color: 'var(--cream)', padding: '48px', display: 'flex', flexDirection: 'column', gap: '0' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.4)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}><PenTool size={12} /> More — I curated</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.5)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}><PenTool size={12} /> More — I curated</div>
                 {WRITING.slice(1).map((w, i) => (
                   <a key={i} href={w.link} target="_blank" rel="noopener noreferrer"
                     onMouseEnter={() => setHoveredWriting(i + 1)}
@@ -1369,7 +1369,7 @@ export default function App() {
                     onTouchStart={() => setHoveredWriting(i + 1)}
                     style={{ display: 'block', padding: '24px 0', borderTop: `1px solid ${theme === 'light' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.08)'}`, borderBottom: `1px solid ${theme === 'light' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.08)'}`, marginBottom: '-1px', transform: hoveredWriting === i + 1 ? 'translateX(8px)' : 'none', transition: 'transform 0.3s ease' }} data-cursor="READ">
                     <div style={{ fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 600, lineHeight: 1.1, letterSpacing: '-0.01em', textTransform: 'uppercase', color: hoveredWriting === i + 1 ? (theme === 'light' ? '#B03400' : 'white') : 'var(--cream)', transition: 'color 0.3s' }}>{w.title}</div>
-                    <div style={{ marginTop: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: hoveredWriting === i + 1 ? (theme === 'light' ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.7)') : (theme === 'light' ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.45)'), lineHeight: 1.4, transition: 'color 0.3s', opacity: hoveredWriting === i + 1 ? 1 : 0.85 }}>{w.insight} {hoveredWriting === i + 1 ? "↗" : ""}</div>
+                    <div style={{ marginTop: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: hoveredWriting === i + 1 ? (theme === 'light' ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.7)') : (theme === 'light' ? 'rgba(0,0,0,0.62)' : 'rgba(255,255,255,0.55)'), lineHeight: 1.4, transition: 'color 0.3s', opacity: hoveredWriting === i + 1 ? 1 : 0.85 }}>{w.insight} {hoveredWriting === i + 1 ? "↗" : ""}</div>
                   </a>
                 ))}
                 <div style={{ marginTop: 'auto', paddingTop: '24px', fontFamily: 'var(--font-mono)', fontSize: '10px', color: theme === 'light' ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.3)', lineHeight: 1.5 }}>
@@ -1386,7 +1386,7 @@ export default function App() {
           <MilestoneMinimal theme={theme} />
 
           {/* ——— NOW ——— */}
-          <section id="now" className="now-section" style={{ background: theme === 'light' ? '#D9EBE0' : 'var(--white)', color: theme === 'light' ? 'black' : 'var(--black)', padding: '100px 48px', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
+          <section id="now" className="now-section" style={{ background: theme === 'light' ? '#FFF8EC' : '#F5F0E6', color: theme === 'light' ? 'black' : 'var(--black)', padding: '100px 48px', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
 
             <div className="now-responsive" style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '80px', position: 'relative', zIndex: 2 }}>
               <div>
@@ -1394,7 +1394,7 @@ export default function App() {
                 <div style={{ marginTop: '20px', fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'rgba(0,0,0,0.6)', lineHeight: 1.5, maxWidth: '380px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={12} /> Roots West Bengal • Building in Bengaluru — open to remote collab</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Clock size={12} /> This is a living site — Last updated Aug 2026 • {time}</span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.5)' }}>For collaborators: active work below is discoverable with links</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)' }}>For collaborators: active work below is discoverable with links</span>
                 </div>
                 <div style={{ marginTop: '24px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   <span style={{ padding: '6px 10px', background: 'black', color: 'white', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '5px', height: '5px', background: '#00FF9D', borderRadius: '50%', display: 'inline-block', animation: 'pulse 1.2s infinite' }}></span>I'm Building</span>
@@ -1403,12 +1403,12 @@ export default function App() {
                 </div>
 
                 <div style={{ marginTop: '48px', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: '24px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.5)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}><Award size={12} /> My selected learning</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}><Award size={12} /> My selected learning</div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     <span style={{ padding: '4px 8px', border: '1px solid rgba(0,0,0,0.1)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', gap: '4px' }}><FileText size={10} /> API Penetration Testing — APIsec University — Jan 2026 — I completed</span>
-                    <span style={{ padding: '4px 8px', border: '1px solid rgba(0,0,0,0.08)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.5)' }}>API Security Fundamentals — APIsec '25</span>
+                    <span style={{ padding: '4px 8px', border: '1px solid rgba(0,0,0,0.08)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)' }}>API Security Fundamentals — APIsec '25</span>
                   </div>
-                  <div style={{ marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.45)', lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <BookOpen size={10} /> I did BCA — Techno Main Salt Lake — 2020-2023
                   </div>
                 </div>
@@ -1423,7 +1423,7 @@ export default function App() {
                   const Icon = item.icon;
                   return (
                   <div key={i} className="now-item" style={{ display: 'grid', gridTemplateColumns: '120px 1fr auto', gap: '24px', padding: '28px 0', borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)', marginBottom: '-1px', alignItems: 'center' }}>
-                    <div className="now-item-label" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <div className="now-item-label" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)', display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span style={{ width: '6px', height: '6px', background: item.color, borderRadius: '50%', display: 'inline-block', animation: `pulse ${1.2 + i * 0.3}s infinite` }}></span>
                       <Icon size={12} /> {item.k}
                     </div>
@@ -1432,7 +1432,7 @@ export default function App() {
                   </div>
                 )})}
 
-                <div style={{ marginTop: '32px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.45)', lineHeight: 1.6, borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ marginTop: '32px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', lineHeight: 1.6, borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <MapPin size={12} /> I do practical security, not just tools — Based in Bengaluru, open to remote collab
                 </div>
               </div>
@@ -1506,7 +1506,7 @@ export default function App() {
               </div>
             </div>
 
-            <div className="connect-footer" style={{ position: 'relative', zIndex: 2, maxWidth: '1400px', width: '100%', margin: '80px auto 0', borderTop: `1px solid ${cx.hair}`, paddingTop: '24px', display: 'flex', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>
+            <div className="connect-footer" style={{ position: 'relative', zIndex: 2, maxWidth: '1400px', width: '100%', margin: '80px auto 0', borderTop: `1px solid ${cx.hair}`, paddingTop: '24px', display: 'flex', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5 }}>
               <span>© 2026 Amit Pal — Application Security — Built with care, no tracking</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}><Mail size={10} />{LINKS.email} • linkedin.com/in/amitpal-wb • github.com/AmitPal-CyberBuddy</span>
             </div>
