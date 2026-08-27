@@ -306,6 +306,25 @@ img { display: block; max-width: 100%; }
   .loop-grid { grid-template-columns: 1fr !important; row-gap: 44px !important; }
   .loop-phase { padding: 0 !important; }
 }
+
+/* ——— Project media containment ——— */
+/* A visual that is a side-by-side card on wide desktop must not become a
+   giant full-width block when the grid stacks. Cap it, and keep the image
+   fully legible (it is a content visual, not ambient decoration). */
+.project-media { width: 100%; max-width: 620px; }
+.project-media .responsive-bg-img { opacity: 1 !important; }
+@media (max-width: 1280px) {
+  .project-section { min-height: auto !important; }
+  .project-responsive { min-height: auto !important; }
+  .project-media { max-width: 560px; }
+}
+@media (max-width: 1024px) {
+  .project-media { max-width: 620px; margin: 0 auto; }
+  .project-media--lead { order: 2 !important; }
+}
+@media (max-width: 768px) {
+  .project-media { max-width: 100%; margin: 0; }
+}
 .hero-marquee {
   position: absolute; bottom: 0; left: 0; right: 0;
   border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);

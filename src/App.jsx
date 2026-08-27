@@ -607,7 +607,7 @@ function TransitionMinimal({ theme }) {
             <span style={{ display: 'block' }}>FROM</span>
             <span style={{ display: 'block' }}>RESEARCH</span>
             <span style={{ display: 'block', color: 'transparent', WebkitTextStroke: theme === 'light' ? '1px rgba(0,0,0,0.15)' : '1px rgba(255,255,255,0.15)' }}>TO</span>
-            <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: '#8A5CFF' }}>security.</span>
+            <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: PUR }}>security.</span>
           </h2>
           <p style={{ marginTop: '20px', fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.6, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)', maxWidth: '380px' }}>
             For someone new: I joined Ampcus Cyber in Nov 2023 as a fresher in research & analysis (OSINT, market research, target profiling). That attention to detail became my foundation. In Feb 2026, I transitioned into VAPT as Security Analyst — hands-on technical work I wanted.
@@ -909,11 +909,11 @@ function CyberBuddyCinematic({ theme }) {
           <span style={{ color: '#00FF9D' }}>● LOCAL</span>
         </div>
         <div style={{ flex: 1, background: 'rgba(0,0,0,0.62)', border: '1px solid rgba(255,255,255,0.06)', padding: '10px', fontFamily: 'IBM Plex Mono', fontSize: '9px', lineHeight: 1.5, color: 'rgba(255,255,255,0.6)' }}>
-          <div style={{ color: '#8A5CFF' }}>eyJhbGciOiJIUzI1NiIs...</div>
+          <div style={{ color: PUR }}>eyJhbGciOiJIUzI1NiIs...</div>
           <div style={{ color: 'rgba(255,255,255,0.3)', marginTop: '8px' }}>{"{ payload: { sub: '...' } }"}</div>
           <div style={{ marginTop: '12px', display: 'flex', gap: '6px' }}>
             <div style={{ padding: '3px 6px', background: 'rgba(0,255,157,0.12)', border: '1px solid rgba(0,255,157,0.2)', color: '#00FF9D', fontSize: '7px' }}>DECODE</div>
-            <div style={{ padding: '3px 6px', background: 'rgba(138,92,255,0.12)', border: '1px solid rgba(138,92,255,0.2)', color: '#8A5CFF', fontSize: '7px' }}>VERIFY</div>
+            <div style={{ padding: '3px 6px', background: 'rgba(138,92,255,0.12)', border: '1px solid rgba(138,92,255,0.2)', color: PUR, fontSize: '7px' }}>VERIFY</div>
             <div style={{ padding: '3px 6px', background: 'rgba(255,92,161,0.12)', border: '1px solid rgba(255,92,161,0.2)', color: '#FF5CA1', fontSize: '7px' }}>TEST</div>
           </div>
         </div>
@@ -993,6 +993,7 @@ export default function App() {
     purple: isLight ? '#4E27BF' : '#8A5CFF',
     gold: isLight ? '#7A5C00' : '#FFD60A',
   };
+  const PUR = isLight ? '#4E27BF' : '#8A5CFF';
   const heroRef = useRef(null);
   const workHeaderRef = useRef(null);
   const connectRef = useRef(null);
@@ -1288,7 +1289,7 @@ export default function App() {
                   <button onClick={copyEmail} style={{ padding: '14px 24px', border: '1px solid var(--border)', color: theme === 'light' ? 'black' : 'white', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '8px' }} data-cursor="COPY EMAIL"><Mail size={12} /> Email me</button>
                 </div>
               </div>
-              <div style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.55)', backdropFilter: 'blur(12px)' }}>
+              <div className="project-media" style={{ position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.55)', backdropFilter: 'blur(12px)' }}>
                 <img src="/Portfolio/assets/vapt-workflow.jpg" alt="VAPT Checklist workflow" className="responsive-bg-img" style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', display: 'block' }} loading="lazy" />
                 <div style={{ padding: '16px', display: 'flex', gap: '8px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
                   <span style={{ padding: '4px 8px', background: theme === 'light' ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)', border: '1px solid var(--border)' }}>Operator-focused</span>
@@ -1304,16 +1305,16 @@ export default function App() {
               <img src="/Portfolio/assets/cyberbuddy-tools.jpg" alt="" className="responsive-bg-img" style={{ width: '100%', height: '100%', objectFit: 'cover' }} loading="lazy" />
             </div>
             <div className="project-responsive" style={{ position: 'relative', zIndex: 2, minHeight: '90vh', display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '48px', padding: '100px 48px 80px', alignItems: 'center' }}>
-              <div style={{ order: 1, position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.55)' }}>
+              <div className="project-media project-media--lead" style={{ order: 1, position: 'relative', borderRadius: '12px', overflow: 'hidden', border: '1px solid var(--border)', background: theme === 'light' ? 'white' : 'rgba(0,0,0,0.55)' }}>
                 <img src="/Portfolio/assets/cyberbuddy-tools.jpg" alt="CyberBuddy tools" className="responsive-bg-img" style={{ width: '100%', aspectRatio: '16/10', objectFit: 'cover', display: 'block' }} loading="lazy" />
                 <div style={{ padding: '16px', display: 'flex', gap: '8px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px' }}>
-                  <span style={{ padding: '4px 8px', background: 'rgba(138,92,255,0.08)', border: '1px solid rgba(138,92,255,0.15)', color: '#8A5CFF' }}>7 tools live</span>
+                  <span style={{ padding: '4px 8px', background: 'rgba(138,92,255,0.08)', border: '1px solid rgba(138,92,255,0.15)', color: PUR }}>7 tools live</span>
                   <span style={{ padding: '4px 8px', background: theme === 'light' ? 'rgba(0,0,0,0.04)' : 'rgba(255,255,255,0.06)', border: '1px solid var(--border)' }}>Local-first</span>
                 </div>
               </div>
               <div style={{ order: 2 }}>
                 <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '28px' }}>
-                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: '#8A5CFF', border: '1px solid rgba(138,92,255,0.2)', padding: '6px 12px', background: 'rgba(138,92,255,0.06)', display: 'flex', alignItems: 'center', gap: '6px' }}><Hammer size={12} /> Live Product</span>
+                  <span style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: PUR, border: '1px solid rgba(138,92,255,0.2)', padding: '6px 12px', background: 'rgba(138,92,255,0.06)', display: 'flex', alignItems: 'center', gap: '6px' }}><Hammer size={12} /> Live Product</span>
                   <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', background: '#8A5CFF', color: 'white', padding: '4px 8px', fontWeight: 700 }}>LIVE</span>
                 </div>
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 4.5vw, 56px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.03em', textTransform: 'uppercase', color: theme === 'light' ? 'black' : 'white' }}>
