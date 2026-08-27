@@ -970,6 +970,29 @@ export default function App() {
     greenBd: isLight ? 'rgba(10,107,69,0.32)' : 'rgba(0,255,157,0.25)',
     blue: isLight ? '#2B44C4' : 'var(--electric-blue)',
   };
+  // Shared per-mode palettes so Writing/Now stay inside the mode's world.
+  const w = {
+    bg: isLight ? '#FFF8EC' : '#0A0A0F',
+    ink: isLight ? '#0A0A0F' : '#F5F3EF',
+    body: isLight ? 'rgba(10,10,15,0.66)' : 'rgba(245,243,239,0.66)',
+    soft: isLight ? 'rgba(10,10,15,0.62)' : 'rgba(245,243,239,0.62)',
+    faint: isLight ? 'rgba(10,10,15,0.55)' : 'rgba(245,243,239,0.5)',
+    hair: isLight ? 'rgba(10,10,15,0.1)' : 'rgba(245,243,239,0.1)',
+    orange: isLight ? '#B03400' : '#FF8A5C',
+    featBg: isLight ? '#FFFEF9' : '#101018',
+    quote: isLight ? 'rgba(10,10,15,0.05)' : 'rgba(245,243,239,0.07)',
+    quoteH: isLight ? 'rgba(10,10,15,0.08)' : 'rgba(245,243,239,0.11)',
+  };
+  const n = {
+    bg: isLight ? '#FFF8EC' : '#050507',
+    ink: isLight ? '#0A0A0F' : '#F5F3EF',
+    body: isLight ? 'rgba(10,10,15,0.66)' : 'rgba(245,243,239,0.66)',
+    soft: isLight ? 'rgba(10,10,15,0.62)' : 'rgba(245,243,239,0.62)',
+    faint: isLight ? 'rgba(10,10,15,0.55)' : 'rgba(245,243,239,0.5)',
+    hair: isLight ? 'rgba(10,10,15,0.08)' : 'rgba(245,243,239,0.1)',
+    purple: isLight ? '#4E27BF' : '#8A5CFF',
+    gold: isLight ? '#7A5C00' : '#FFD60A',
+  };
   const heroRef = useRef(null);
   const workHeaderRef = useRef(null);
   const connectRef = useRef(null);
@@ -1316,19 +1339,19 @@ export default function App() {
           <ExperimentsMinimal theme={theme} />
 
           {/* ——— WRITING ——— */}
-          <section id="writing" style={{ background: theme === 'light' ? '#FFF8EC' : '#F5F0E6', color: theme === 'light' ? 'black' : 'var(--black)', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
+          <section id="writing" style={{ background: w.bg, color: w.ink, borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
             <WritingCinematic theme={theme} />
             <div className="writing-responsive writing-header" style={{ padding: '100px 48px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'end', maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
               <div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? '#B03400' : 'var(--orange)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: w.orange, marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <PenTool size={14} />
-                  <span style={{ width: '24px', height: '1px', background: theme === 'light' ? '#B03400' : 'var(--orange)', display: 'inline-block' }}></span>
+                  <span style={{ width: '24px', height: '1px', background: w.orange, display: 'inline-block' }}></span>
                   My writing — Research Log
                 </div>
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 64px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
                   <span style={{ display: 'block' }}>MY</span>
                   <span style={{ display: 'block' }}>RESEARCH</span>
-                  <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: theme === 'light' ? '#B03400' : 'var(--orange)' }}>Log — 02</span>
+                  <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: w.orange }}>Log — 02</span>
                 </h2>
               </div>
               <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '18px', lineHeight: 1.5, fontWeight: 300, maxWidth: '440px' }}>
@@ -1342,22 +1365,22 @@ export default function App() {
                 onMouseEnter={() => setHoveredWriting(0)}
                 onMouseLeave={() => setHoveredWriting(null)}
                 onClick={() => setHoveredWriting(hoveredWriting === 0 ? null : 0)}
-                style={{ background: theme === 'light' ? 'white' : 'var(--cream)', padding: '48px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '520px', position: 'relative', overflow: 'hidden', transition: 'all 0.4s ease', transform: hoveredWriting === 0 ? 'translateY(-2px)' : 'none', cursor: 'pointer' }}>
-                <div style={{ position: 'absolute', left: '24px', top: '24px', fontFamily: 'var(--font-serif)', fontSize: '120px', lineHeight: 0.8, color: hoveredWriting === 0 ? 'rgba(0,0,0,0.07)' : 'rgba(0,0,0,0.04)', pointerEvents: 'none', transition: 'color 0.4s' }}>“</div>
+                style={{ background: w.featBg, padding: '48px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', minHeight: '520px', position: 'relative', overflow: 'hidden', transition: 'all 0.4s ease', transform: hoveredWriting === 0 ? 'translateY(-2px)' : 'none', cursor: 'pointer' }}>
+                <div style={{ position: 'absolute', left: '24px', top: '24px', fontFamily: 'var(--font-serif)', fontSize: '120px', lineHeight: 0.8, color: hoveredWriting === 0 ? w.quoteH : w.quote, pointerEvents: 'none', transition: 'color 0.4s' }}>“</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ width: '5px', height: '5px', background: theme === 'light' ? '#B03400' : 'var(--orange)', borderRadius: '50%', display: 'inline-block', animation: 'pulse 1.2s infinite' }}></span>
+                    <span style={{ width: '5px', height: '5px', background: w.orange, borderRadius: '50%', display: 'inline-block', animation: 'pulse 1.2s infinite' }}></span>
                     Featured — I wrote on Medium @amitpxl — {hoveredWriting === 0 ? "Hovering — Read →" : "Spec vs Reality"}
                   </div>
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(28px, 3.2vw, 42px)', lineHeight: 0.95, letterSpacing: '-0.02em', fontWeight: 400, transform: hoveredWriting === 0 ? 'scale(1.02)' : 'scale(1)', transformOrigin: 'left', transition: 'transform 0.4s ease' }}>
                     CORS Misconfiguration: When Reflecting the Origin Is Not the Whole Story
                   </h3>
-                  <p style={{ marginTop: '20px', fontFamily: 'var(--font-mono)', fontSize: '11px', lineHeight: 1.5, color: hoveredWriting === 0 ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.62)', maxWidth: '400px', letterSpacing: '0.02em', textTransform: 'uppercase', transition: 'color 0.4s' }}>
+                  <p style={{ marginTop: '20px', fontFamily: 'var(--font-mono)', fontSize: '11px', lineHeight: 1.5, color: hoveredWriting === 0 ? w.body : w.soft, maxWidth: '400px', letterSpacing: '0.02em', textTransform: 'uppercase', transition: 'color 0.4s' }}>
                     I learned reflection ≠ exploitation. Proving authenticated impact matters. I built a two-origin probe. {hoveredWriting === 0 ? "→ Full article on Medium has my PoC." : ""}
                   </p>
                 </div>
                 <div style={{ marginTop: '40px', position: 'relative', zIndex: 2 }}>
-                  <a href={WRITING[0].link} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: hoveredWriting === 0 ? '24px' : '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600, borderBottom: '1px solid black', paddingBottom: '8px', transition: 'gap 0.3s' }} data-cursor="READ"><BookOpen size={12} /> Read my article on Medium ↗</a>
+                  <a href={WRITING[0].link} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: hoveredWriting === 0 ? '24px' : '16px', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', fontWeight: 600, borderBottom: `1px solid ${w.ink}`, paddingBottom: '8px', transition: 'gap 0.3s' }} data-cursor="READ"><BookOpen size={12} /> Read my article on Medium ↗</a>
                 </div>
               </div>
               <div className="writing-list" style={{ background: 'var(--black)', color: 'var(--cream)', padding: '48px', display: 'flex', flexDirection: 'column', gap: '0' }}>
@@ -1386,29 +1409,29 @@ export default function App() {
           <MilestoneMinimal theme={theme} />
 
           {/* ——— NOW ——— */}
-          <section id="now" className="now-section" style={{ background: theme === 'light' ? '#FFF8EC' : '#F5F0E6', color: theme === 'light' ? 'black' : 'var(--black)', padding: '100px 48px', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
+          <section id="now" className="now-section" style={{ background: n.bg, color: n.ink, padding: '100px 48px', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
 
             <div className="now-responsive" style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '80px', position: 'relative', zIndex: 2 }}>
               <div>
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>I'M<br/>NOW — 04</h2>
-                <div style={{ marginTop: '20px', fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'rgba(0,0,0,0.6)', lineHeight: 1.5, maxWidth: '380px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ marginTop: '20px', fontFamily: 'var(--font-sans)', fontSize: '13px', color: n.body, lineHeight: 1.5, maxWidth: '380px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={12} /> Roots West Bengal • Building in Bengaluru — open to remote collab</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Clock size={12} /> This is a living site — Last updated Aug 2026 • {time}</span>
-                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)' }}>For collaborators: active work below is discoverable with links</span>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: n.soft }}>For collaborators: active work below is discoverable with links</span>
                 </div>
                 <div style={{ marginTop: '24px', display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                   <span style={{ padding: '6px 10px', background: 'black', color: 'white', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}><span style={{ width: '5px', height: '5px', background: '#00FF9D', borderRadius: '50%', display: 'inline-block', animation: 'pulse 1.2s infinite' }}></span>I'm Building</span>
-                  <span style={{ padding: '6px 10px', border: '1px solid rgba(0,0,0,0.12)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px' }}><PenTool size={10} />I'm Writing</span>
-                  <span style={{ padding: '6px 10px', border: '1px solid rgba(255,214,10,0.3)', color: '#8A5C00', background: 'rgba(255,214,10,0.08)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px' }}><BookOpen size={10} />I'm Learning Mobile PT</span>
+                  <span style={{ padding: '6px 10px', border: `1px solid ${n.hair}`, fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px' }}><PenTool size={10} />I'm Writing</span>
+                  <span style={{ padding: '6px 10px', border: '1px solid rgba(255,214,10,0.3)', color: n.gold, background: 'rgba(255,214,10,0.08)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px' }}><BookOpen size={10} />I'm Learning Mobile PT</span>
                 </div>
 
-                <div style={{ marginTop: '48px', borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: '24px' }}>
-                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}><Award size={12} /> My selected learning</div>
+                <div style={{ marginTop: '48px', borderTop: `1px solid ${n.hair}`, paddingTop: '24px' }}>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: n.soft, marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}><Award size={12} /> My selected learning</div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    <span style={{ padding: '4px 8px', border: '1px solid rgba(0,0,0,0.1)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', gap: '4px' }}><FileText size={10} /> API Penetration Testing — APIsec University — Jan 2026 — I completed</span>
-                    <span style={{ padding: '4px 8px', border: '1px solid rgba(0,0,0,0.08)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)' }}>API Security Fundamentals — APIsec '25</span>
+                    <span style={{ padding: '4px 8px', border: `1px solid ${n.hair}`, fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: n.body, display: 'flex', alignItems: 'center', gap: '4px' }}><FileText size={10} /> API Penetration Testing — APIsec University — Jan 2026 — I completed</span>
+                    <span style={{ padding: '4px 8px', border: '1px solid rgba(0,0,0,0.08)', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: n.soft }}>API Security Fundamentals — APIsec '25</span>
                   </div>
-                  <div style={{ marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <div style={{ marginTop: '16px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: n.body, lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <BookOpen size={10} /> I did BCA — Techno Main Salt Lake — 2020-2023
                   </div>
                 </div>
@@ -1417,22 +1440,22 @@ export default function App() {
                 {[
                   { k: "I'm Building", v: "I'm building VAPT Checklist — structured, operator-focused workflow. It's in active development.", link: LINKS.vaptLive, cta: "Live Dev →", color: theme === "light" ? "#0A6B45" : "#00FF9D", icon: Hammer },
                   { k: "I'm Writing", v: "I write about browser security & real impact — CORS, JWT, CSP, client-side crypto.", link: LINKS.medium, cta: "Medium →", color: theme === "light" ? "#B03400" : "#FF4D00", icon: PenTool },
-                  { k: "I'm Maintaining", v: "I maintain CyberBuddy — my browser security suite, evidence-grade, local-first. 7 tools live.", link: LINKS.cyberbuddyLive, cta: "Live →", color: "#8A5CFF", icon: Shield },
+                  { k: "I'm Maintaining", v: "I maintain CyberBuddy — my browser security suite, evidence-grade, local-first. 7 tools live.", link: LINKS.cyberbuddyLive, cta: "Live →", color: n.purple, icon: Shield },
                   { k: "I'm Learning", v: "I'm learning Mobile PT next — expanding from Web & API to mobile attack surface.", link: LINKS.github, cta: "GitHub →", color: theme === "light" ? "#7A5C00" : "#FFD60A", icon: BookOpen },
                 ].map((item, i) => {
                   const Icon = item.icon;
                   return (
-                  <div key={i} className="now-item" style={{ display: 'grid', gridTemplateColumns: '120px 1fr auto', gap: '24px', padding: '28px 0', borderTop: '1px solid rgba(0,0,0,0.08)', borderBottom: '1px solid rgba(0,0,0,0.08)', marginBottom: '-1px', alignItems: 'center' }}>
-                    <div className="now-item-label" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.62)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div key={i} className="now-item" style={{ display: 'grid', gridTemplateColumns: '120px 1fr auto', gap: '24px', padding: '28px 0', borderTop: `1px solid ${n.hair}`, borderBottom: `1px solid ${n.hair}`, marginBottom: '-1px', alignItems: 'center' }}>
+                    <div className="now-item-label" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: n.soft, display: 'flex', alignItems: 'center', gap: '8px' }}>
                       <span style={{ width: '6px', height: '6px', background: item.color, borderRadius: '50%', display: 'inline-block', animation: `pulse ${1.2 + i * 0.3}s infinite` }}></span>
                       <Icon size={12} /> {item.k}
                     </div>
                     <div className="now-item-desc" style={{ fontFamily: 'var(--font-sans)', fontSize: '15px', lineHeight: 1.5 }}>{item.v}</div>
-                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="now-item-cta" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', borderBottom: '1px solid black', paddingBottom: '2px', display: 'flex', alignItems: 'center', gap: '4px' }} data-cursor="EXPLORE">{item.cta} <ArrowUpRight size={12} /></a>
+                    <a href={item.link} target="_blank" rel="noopener noreferrer" className="now-item-cta" style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', borderBottom: `1px solid ${n.ink}`, paddingBottom: '2px', display: 'flex', alignItems: 'center', gap: '4px' }} data-cursor="EXPLORE">{item.cta} <ArrowUpRight size={12} /></a>
                   </div>
                 )})}
 
-                <div style={{ marginTop: '32px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.6)', lineHeight: 1.6, borderTop: '1px solid rgba(0,0,0,0.06)', paddingTop: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ marginTop: '32px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.1em', textTransform: 'uppercase', color: n.body, lineHeight: 1.6, borderTop: `1px solid ${n.hair}`, paddingTop: '16px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <MapPin size={12} /> I do practical security, not just tools — Based in Bengaluru, open to remote collab
                 </div>
               </div>

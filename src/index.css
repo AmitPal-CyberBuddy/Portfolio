@@ -383,27 +383,14 @@ img { display: block; max-width: 100%; }
 }
 
 [data-theme="light"] .project-section {
-  background: #FFFEF9 !important;
+  background: #FBF2DF !important;
   border-top: 1px solid rgba(0,0,0,0.06) !important;
 }
 
-[data-theme="light"] .journey-section {
-  background: #FFFEF9 !important;
-  color: #0A0A0F !important;
-}
-
-[data-theme="light"] .milestone-section {
-  background: #0A0A0F !important;
-}
-
-[data-theme="light"] .experiments-section {
-  background: #FFF8EC !important;
-  color: #0A0A0F !important;
-}
-
-[data-theme="light"] .connect-section {
-  background: #050507 !important;
-}
+/* Journey / experiments / milestone / connect previously had light-mode
+   !important overrides that forced dark (or off-ramp) surfaces, creating
+   theme shocks mid-scroll. They now inherit their inline ramp surfaces so
+   each mode stays inside one continuous visual world. */
 
 /* Light mode — make focus areas readable */
 [data-theme="light"] .journey-timeline {
