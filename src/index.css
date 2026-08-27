@@ -260,13 +260,14 @@ img { display: block; max-width: 100%; }
 }
 .hero-content {
   position: relative; z-index: 2; display: grid; grid-template-columns: 1.2fr 0.8fr;
-  min-height: 100vh; align-items: end; padding: 120px 48px 48px; gap: 48px;
+  min-height: 100vh; align-items: center; padding: 120px 48px 48px; gap: 48px;
 }
 .hero-left { display: flex; flex-direction: column; gap: 32px; }
 .hero-title {
   font-family: var(--font-display); font-weight: 800;
-  font-size: clamp(52px, 8vw, 112px); line-height: 0.88; letter-spacing: -0.05em; text-transform: uppercase;
+  font-size: clamp(40px, 5.5vw, 88px); line-height: 0.94; letter-spacing: -0.04em; text-transform: uppercase;
 }
+.hero-title-line--sub { font-size: 0.82em; }
 .hero-title-line { display: block; overflow: hidden; position: relative; }
 .hero-title-line span { display: block; transform: translateY(100%); }
 .hero-title-line.outline { color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.3); }
@@ -279,7 +280,22 @@ img { display: block; max-width: 100%; }
 .hero-tagline p { overflow: hidden; }
 .hero-tagline p span { display: block; transform: translateY(100%); }
 .hero-right { position: relative; height: 100%; min-height: 60vh; display: flex; align-items: center; justify-content: center; }
-.hero-visual { position: relative; width: 100%; aspect-ratio: 1; max-width: 520px; }
+
+/* ——— Hero evidence artifact ——— */
+.hero-evidence { position: relative; width: 100%; max-width: 400px; }
+.hero-evidence-card {
+  position: relative; overflow: hidden; border: 1px solid;
+  box-shadow: 0 24px 60px rgba(5, 5, 7, 0.18);
+}
+[data-theme="dark"] .hero-evidence-card { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5); }
+.ev-scan { position: absolute; top: 0; bottom: 0; left: 0; width: 1px; background: currentColor; opacity: 0.14; pointer-events: none; }
+.ev-dot { width: 5px; height: 5px; border-radius: 50%; display: inline-block; }
+@media (prefers-reduced-motion: no-preference) {
+  .ev-scan { animation: evscan 3.4s ease-in-out infinite; }
+  .ev-dot { animation: evpulse 1.6s ease-in-out infinite; }
+}
+@keyframes evscan { 0% { left: 0; opacity: 0; } 12% { opacity: 0.16; } 50% { left: 100%; } 62% { opacity: 0; } 100% { left: 100%; opacity: 0; } }
+@keyframes evpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 .hero-marquee {
   position: absolute; bottom: 0; left: 0; right: 0;
   border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
@@ -333,7 +349,7 @@ img { display: block; max-width: 100%; }
 .manifesto { position: relative; background: var(--black); border-top: 1px solid var(--border); }
 
 /* ——— Visual ——— */
-.architecture-canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
+
 
 /* ——— Responsive Images — Already generated assets ——— */
 .responsive-bg-img {
@@ -343,10 +359,6 @@ img { display: block; max-width: 100%; }
   object-position: center;
   transition: opacity 0.4s ease, transform 0.6s var(--ease-out-expo);
   will-change: transform;
-}
-
-.hero-visual img {
-  border-radius: 12px;
 }
 
 /* Contrast cohesion — reduce harsh full-color switches */
@@ -393,20 +405,12 @@ img { display: block; max-width: 100%; }
   .responsive-bg-img {
     opacity: 0.7 !important;
   }
-  .hero-visual img {
-    opacity: 0.2 !important;
-  }
 }
 
 @media (max-width: 480px) {
   .responsive-bg-img {
     opacity: 0.6 !important;
   }
-}
-
-/* Light mode image opacity tuning */
-[data-theme="light"] .hero-visual img {
-  opacity: 0.12 !important;
 }
 
 [data-theme="light"] .responsive-bg-img {
@@ -426,7 +430,7 @@ img { display: block; max-width: 100%; }
 @media (min-width: 1600px) {
   :root { --content-max: 1600px; }
   .hero-content { padding: 140px 64px 64px; gap: 64px; max-width: 1600px; margin: 0 auto; width: 100%; }
-  .hero-visual { max-width: 640px; }
+  .hero-evidence { max-width: 440px; }
   .manifesto, .journey-section, .milestone-section, .now-section, .connect-section, .experiments-section { padding-left: 64px !important; padding-right: 64px !important; }
   .section-header { padding: 100px 64px 48px !important; }
   .project-responsive { padding: 140px 64px 100px !important; max-width: 1600px; margin: 0 auto; }
@@ -448,9 +452,9 @@ img { display: block; max-width: 100%; }
 /* ——— 1280px — Small Laptop / MacBook Air 13" / 1280x800 ——— */
 @media (max-width: 1280px) {
   .hero-content { padding: 100px 32px 40px; gap: 32px; }
-  .hero-title { font-size: clamp(56px, 9vw, 128px) !important; }
+  .hero-title { font-size: clamp(40px, 6vw, 92px) !important; }
   .hero-right { min-height: 52vh; }
-  .hero-visual { max-width: 440px; }
+  .hero-evidence { max-width: 400px; }
   .manifesto { padding: 100px 32px !important; }
   .journey-section, .milestone-section, .now-section, .connect-section, .experiments-section { padding: 100px 32px !important; }
   .section-header { padding: 64px 32px 32px !important; }
@@ -464,7 +468,7 @@ img { display: block; max-width: 100%; }
 /* ——— 1100px — Intermediate Laptop / iPad Pro Landscape ——— */
 @media (max-width: 1100px) {
   .hero-content { grid-template-columns: 1fr 0.9fr; padding: 90px 28px 36px; gap: 28px; }
-  .hero-title { font-size: clamp(52px, 8vw, 96px) !important; }
+  .hero-title { font-size: clamp(38px, 5.5vw, 80px) !important; }
   .section-title { font-size: clamp(44px, 7vw, 96px) !important; }
   .journey-responsive, .milestone-responsive, .now-responsive, .connect-responsive { gap: 40px !important; }
   .project-responsive { grid-template-columns: 1fr !important; gap: 40px !important; }
@@ -488,7 +492,7 @@ img { display: block; max-width: 100%; }
   .journey-responsive { gap: 40px !important; }
   .milestone-responsive { gap: 40px !important; }
   .hero-content { grid-template-columns: 1fr !important; padding: 100px 24px 80px !important; }
-  .hero-right { order: -1; min-height: 44vh !important; }
+  .hero-right { min-height: 40vh !important; }
   .section-header { padding: 60px 24px 32px !important; flex-direction: column; align-items: flex-start !important; gap: 16px !important; }
   .scroll-indicator { left: 24px; bottom: 100px; }
 }
@@ -497,7 +501,7 @@ img { display: block; max-width: 100%; }
 @media (max-width: 900px) {
   .hero-content { padding: 90px 24px 64px !important; gap: 24px !important; min-height: auto !important; }
   .hero-right { min-height: 40vh !important; }
-  .hero-title { font-size: clamp(48px, 10vw, 84px) !important; }
+  .hero-title { font-size: clamp(36px, 7vw, 72px) !important; }
   .manifesto { padding: 80px 24px !important; }
   .journey-section, .milestone-section, .now-section, .connect-section { padding: 80px 24px !important; }
   .section-header { padding: 48px 24px 24px !important; }
@@ -521,10 +525,10 @@ img { display: block; max-width: 100%; }
   .hero { min-height: 100svh; min-height: 100dvh; }
   .hero-content { padding: 88px 20px 72px !important; gap: 24px !important; min-height: 100svh; min-height: 100dvh; align-items: start; }
   .hero-left { gap: 20px; }
-  .hero-title { font-size: clamp(52px, 16vw, 84px) !important; line-height: 0.88; }
+  .hero-title { font-size: clamp(32px, 8.5vw, 60px) !important; line-height: 0.94; }
   .hero-tagline { font-size: 12px !important; max-width: 100%; }
-  .hero-right { min-height: 42svh !important; min-height: 42dvh !important; order: -1; }
-  .hero-visual { max-width: 100%; aspect-ratio: 1.2; }
+  .hero-right { min-height: auto !important; margin-top: 8px; }
+  .hero-evidence { max-width: 100%; }
   .scroll-indicator { left: 20px; bottom: 88px; font-size: 9px; }
   .hero-marquee { padding: 10px 0; }
   .marquee-item { font-size: 9px; gap: 24px; }
@@ -601,7 +605,7 @@ img { display: block; max-width: 100%; }
 /* ——— 640px — Large Mobile / Phablet ——— */
 @media (max-width: 640px) {
   .hero-content { padding: 84px 18px 64px !important; }
-  .hero-title { font-size: clamp(44px, 14vw, 68px) !important; }
+  .hero-title { font-size: clamp(30px, 9vw, 52px) !important; }
   .hero-tagline { font-size: 11px !important; }
   .section-title { font-size: clamp(36px, 11vw, 56px) !important; }
   .project-responsive { padding: 40px 18px 32px !important; }
@@ -617,10 +621,10 @@ img { display: block; max-width: 100%; }
 /* ——— 480px — Mobile ——— */
 @media (max-width: 480px) {
   .hero-content { padding: 80px 16px 64px !important; }
-  .hero-title { font-size: clamp(42px, 13vw, 60px) !important; }
+  .hero-title { font-size: clamp(28px, 8.5vw, 44px) !important; }
   .hero-tagline { font-size: 10px !important; line-height: 1.5 !important; }
-  .hero-right { min-height: 38svh !important; min-height: 38dvh !important; }
-  .hero-visual { aspect-ratio: 1.1; }
+  .hero-right { min-height: auto !important; }
+  .hero-evidence { max-width: 100%; }
   .section-header { padding: 40px 16px 20px !important; }
   .section-title { font-size: clamp(32px, 10vw, 48px) !important; }
   .project-responsive { padding: 36px 16px 28px !important; gap: 24px !important; }
@@ -646,7 +650,7 @@ img { display: block; max-width: 100%; }
 /* ——— 375px — iPhone SE / Small Mobile ——— */
 @media (max-width: 375px) {
   .hero-content { padding: 72px 14px 56px !important; }
-  .hero-title { font-size: clamp(36px, 12vw, 52px) !important; }
+  .hero-title { font-size: clamp(26px, 8vw, 40px) !important; }
   .hero-tagline { font-size: 9px !important; }
   .section-header { padding: 32px 14px 16px !important; }
   .section-title { font-size: clamp(28px, 9vw, 40px) !important; }
@@ -665,7 +669,7 @@ img { display: block; max-width: 100%; }
 /* ——— 320px — Extra Small / Fold ——— */
 @media (max-width: 320px) {
   .hero-content { padding: 64px 12px 48px !important; }
-  .hero-title { font-size: clamp(32px, 11vw, 44px) !important; }
+  .hero-title { font-size: clamp(24px, 7.5vw, 36px) !important; }
   .section-title { font-size: clamp(24px, 8vw, 36px) !important; }
   .project-responsive { padding: 28px 12px 20px !important; }
   .journey-section, .milestone-section, .now-section, .connect-section, .manifesto { padding: 36px 12px !important; }
@@ -678,7 +682,7 @@ img { display: block; max-width: 100%; }
   .hero { min-height: 100vh; }
   .hero-content { padding: 80px 48px 32px; min-height: 100vh; gap: 24px; align-items: center; }
   .hero-right { min-height: 48vh; }
-  .hero-visual { max-width: 400px; }
+  .hero-evidence { max-width: 380px; }
   .scroll-indicator { bottom: 60px; }
   .hero-marquee { padding: 10px 0; }
   .journey-sticky { top: 80px !important; }
@@ -688,9 +692,9 @@ img { display: block; max-width: 100%; }
 
 @media (max-height: 700px) and (min-width: 1024px) {
   .hero-content { padding: 70px 40px 24px; gap: 20px; }
-  .hero-title { font-size: clamp(48px, 7vw, 96px) !important; }
+  .hero-title { font-size: clamp(40px, 5.5vw, 80px) !important; }
   .hero-right { min-height: 40vh; }
-  .hero-visual { max-width: 360px; }
+  .hero-evidence { max-width: 340px; }
   .manifesto { padding: 80px 40px !important; }
   .journey-section, .milestone-section, .now-section { padding: 80px 40px !important; }
 }

@@ -169,148 +169,61 @@ function Cursor({ activeSection }) {
 // ———————————————————————————————
 
 function HeroVisual({ theme }) {
-  const canvasRef = useRef(null);
-  const mouseRef = useRef({ x: 0, y: 0 });
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d', { alpha: true });
-    let raf, w, h, dpr;
-    const nodes = [];
-    let isVisible = true;
-
-    const resize = () => {
-      dpr = Math.min(window.devicePixelRatio, isMobile ? 1.2 : 2);
-      w = canvas.clientWidth;
-      h = canvas.clientHeight;
-      canvas.width = w * dpr;
-      canvas.height = h * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      nodes.length = 0;
-      const count = isMobile ? 16 : 28;
-      for (let i = 0; i < count; i++) {
-        nodes.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          vx: (Math.random() - 0.5) * (isMobile ? 0.18 : 0.28),
-          vy: (Math.random() - 0.5) * (isMobile ? 0.18 : 0.28),
-          r: Math.random() * 1.6 + 0.6,
-          pulse: Math.random() * Math.PI * 2,
-          type: i % 3,
-        });
-      }
-    };
-
-    const onMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top };
-    };
-
-    resize();
-    window.addEventListener('resize', resize);
-    canvas.addEventListener('mousemove', onMove);
-
-    const observer = new IntersectionObserver(([entry]) => {
-      isVisible = entry.isIntersecting;
-      if (isVisible && !raf) draw();
-    }, { threshold: 0.1 });
-    observer.observe(canvas);
-
-    const draw = () => {
-      if (!isVisible) { raf = null; return; }
-      ctx.clearRect(0, 0, w, h);
-      const isLight = theme === 'light';
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 120) {
-            const opacity = (1 - dist / 120) * (isLight ? 0.08 : 0.14);
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = nodes[i].type === 1 ? `rgba(58,91,255,${opacity})` : isLight ? `rgba(0,0,0,${opacity * 0.5})` : `rgba(110,255,229,${opacity * 0.8})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-        const mdx = nodes[i].x - mouseRef.current.x;
-        const mdy = nodes[i].y - mouseRef.current.y;
-        const mdist = Math.hypot(mdx, mdy);
-        if (mdist < 160) {
-          ctx.beginPath();
-          ctx.moveTo(nodes[i].x, nodes[i].y);
-          ctx.lineTo(mouseRef.current.x, mouseRef.current.y);
-          ctx.strokeStyle = `rgba(58,91,255,${(1 - mdist / 160) * (isLight ? 0.1 : 0.18)})`;
-          ctx.lineWidth = 0.8;
-          ctx.stroke();
-        }
-      }
-
-      nodes.forEach(n => {
-        n.x += n.vx; n.y += n.vy; n.pulse += 0.016;
-        if (n.x < 0 || n.x > w) n.vx *= -1;
-        if (n.y < 0 || n.y > h) n.vy *= -1;
-        ctx.beginPath();
-        if (n.type === 0) {
-          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-          ctx.fillStyle = isLight ? `rgba(0,0,0,${0.25 + Math.sin(n.pulse) * 0.1})` : `rgba(245,243,239,${0.45 + Math.sin(n.pulse) * 0.2})`;
-        } else if (n.type === 1) {
-          ctx.rect(n.x - n.r, n.y - n.r, n.r * 2, n.r * 2);
-          ctx.fillStyle = isLight ? `rgba(58,91,255,${0.35 + Math.sin(n.pulse) * 0.1})` : `rgba(110,255,229,${0.55 + Math.sin(n.pulse) * 0.15})`;
-        } else {
-          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(58,91,255,${0.6 + Math.sin(n.pulse) * 0.15})`;
-        }
-        ctx.fill();
-      });
-
-      const cx = w * 0.5, cy = h * 0.5;
-      ctx.save();
-      ctx.translate(cx, cy);
-      const t = Date.now() * 0.00022;
-      for (let k = 0; k < 3; k++) {
-        ctx.rotate(t * (k + 1) * 0.16);
-        ctx.strokeStyle = isLight ? `rgba(0,0,0,${0.04 - k * 0.01})` : `rgba(110,255,229,${0.06 - k * 0.015})`;
-        ctx.lineWidth = 0.6;
-        const s = 60 + k * 28;
-        ctx.strokeRect(-s, -s, s * 2, s * 2);
-      }
-      ctx.restore();
-
-      raf = requestAnimationFrame(draw);
-    };
-    draw();
-    return () => {
-      cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
-      canvas.removeEventListener('mousemove', onMove);
-      observer.disconnect();
-    };
-  }, [isMobile, theme]);
+  // "Observation -> Evidence": a single art-directed intercept artifact, not a
+  // boxed stock image. It shows the signature moment of manual application
+  // security work -- a request the automation marks safe but the logic does
+  // not -- expected 403 vs observed 200. Specific, credible, and not a
+  // flowchart, terminal, or particle field.
+  const L = theme === 'light';
+  const ink = L ? '#0A0A0F' : '#F5F3EF';
+  const dim = L ? 'rgba(10,10,15,0.62)' : 'rgba(245,243,239,0.55)';
+  const faint = L ? 'rgba(10,10,15,0.52)' : 'rgba(245,243,239,0.42)';
+  const hair = L ? 'rgba(10,10,15,0.18)' : 'rgba(245,243,239,0.18)';
+  const card = L ? '#FBF1DC' : '#0B0B12';
+  const ok = L ? '#0A6B45' : '#00FF9D';      // observed -- confirmed impact
+  const bad = L ? 'rgba(10,10,15,0.42)' : 'rgba(245,243,239,0.36)'; // expected
+  const blue = L ? '#2B44C4' : '#6E8CFF';
+  const mono = "var(--font-mono)";
 
   return (
-    <div className="hero-visual">
-      <img src="/Portfolio/assets/hero-abstract.jpg" alt="" className="responsive-bg-img" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: theme === 'light' ? 0.15 : 0.35, mixBlendMode: theme === 'light' ? 'multiply' : 'screen', borderRadius: '16px' }} loading="lazy" />
-      <canvas ref={canvasRef} className="architecture-canvas" style={{ width: '100%', height: '100%', position: 'relative', zIndex: 2 }} aria-hidden="true" />
-      <img src="/Portfolio/assets/hero.png" alt="" style={{ position: 'absolute', top: '50%', left: '50%', width: '42%', aspectRatio: '1', objectFit: 'contain', transform: 'translate(-50%, -50%)', opacity: theme === 'light' ? 0.08 : 0.14, zIndex: 2, pointerEvents: 'none' }} loading="lazy" />
-      <svg viewBox="0 0 520 520" fill="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 3 }}>
-        <g opacity={theme === 'light' ? 0.08 : 0.14}>
-          <rect x="0.5" y="0.5" width="519" height="519" stroke={theme === 'light' ? "black" : "white"} strokeDasharray="10 10" />
-          <circle cx="260" cy="260" r="110" stroke="#6EFFE5" strokeWidth="0.6" strokeDasharray="5 7" />
-          <circle cx="260" cy="260" r="175" stroke="#3A5BFF" strokeWidth="0.5" opacity="0.5" strokeDasharray="3 12" />
-        </g>
-        <g fontFamily="IBM Plex Mono" fontSize="8" fill={theme === 'light' ? "rgba(0,0,0,0.28)" : "rgba(255,255,255,0.28)"} letterSpacing="0.12em">
-          <text x="14" y="18">I BUILD • I BREAK • I LEARN • 2026</text>
-          <text x="14" y="506">CLIENT → API → AUTH → DATA</text>
-        </g>
-      </svg>
-      <div style={{ position: 'absolute', bottom: '12px', right: '12px', zIndex: 4, display: 'flex', gap: '6px' }}>
-        <span style={{ padding: '4px 8px', background: theme === 'light' ? 'rgba(0,0,0,0.06)' : 'rgba(255,255,255,0.06)', border: '1px solid rgba(110,255,229,0.2)', fontFamily: 'var(--font-mono)', fontSize: '8px', color: theme === 'light' ? 'black' : 'white', display: 'flex', alignItems: 'center', gap: '4px', borderRadius: '6px' }}><Fingerprint size={10} /> LOCAL-FIRST</span>
-        <span style={{ padding: '4px 8px', background: 'rgba(58,91,255,0.12)', border: '1px solid rgba(58,91,255,0.2)', fontFamily: 'var(--font-mono)', fontSize: '8px', color: '#3A5BFF', display: 'flex', alignItems: 'center', gap: '4px', borderRadius: '6px' }}><Globe size={10} /> WB → BLR</span>
+    <div className="hero-evidence" aria-hidden="true">
+      <div className="hero-evidence-card" style={{ background: card, borderColor: hair, color: ink }}>
+        <div className="ev-scan" />
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 14px', borderBottom: `1px solid ${hair}`, fontFamily: mono, fontSize: '9px', letterSpacing: '0.16em', textTransform: 'uppercase', color: dim }}>
+          <span>Intercept #0417</span>
+          <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><span className="ev-dot" style={{ background: blue }} />live</span>
+        </div>
+
+        <div style={{ padding: '14px 14px 10px', fontFamily: mono }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '12px', fontWeight: 600, letterSpacing: '0.02em', color: ink }}>
+            <span style={{ padding: '2px 6px', background: blue, color: L ? '#FBF1DC' : '#050507', fontSize: '9px', letterSpacing: '0.1em' }}>GET</span>
+            <span style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>/api/admin/users</span>
+          </div>
+          <div style={{ marginTop: '8px', display: 'flex', gap: '8px', flexWrap: 'wrap', fontFamily: mono, fontSize: '9px', letterSpacing: '0.08em', color: dim }}>
+            <span style={{ border: `1px solid ${hair}`, padding: '2px 6px' }}>identity: user</span>
+            <span style={{ border: `1px solid ${hair}`, padding: '2px 6px' }}>session: valid</span>
+          </div>
+        </div>
+
+        <div style={{ padding: '4px 14px 12px', fontFamily: mono, fontSize: '11px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 0', color: bad, textDecoration: 'line-through', textDecorationColor: faint }}>
+            <span style={{ letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '9px' }}>expected</span>
+            <span>403 Forbidden</span>
+          </div>
+          <div className="ev-observed" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '8px 10px', border: `1px solid ${ok}`, color: ok }}>
+            <span style={{ letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: '9px', textDecoration: 'none' }}>observed</span>
+            <span style={{ fontWeight: 700 }}>200 OK</span>
+          </div>
+          <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'space-between', fontFamily: mono, fontSize: '9px', letterSpacing: '0.1em', color: dim, textTransform: 'uppercase' }}>
+            <span>authorization logic</span>
+            <span style={{ color: ok }}>gap found</span>
+          </div>
+        </div>
+
+        <div style={{ padding: '8px 14px', borderTop: `1px solid ${hair}`, display: 'flex', justifyContent: 'space-between', fontFamily: mono, fontSize: '8px', letterSpacing: '0.12em', textTransform: 'uppercase', color: faint }}>
+          <span>evidence captured</span>
+          <span>manual • beyond the scanner</span>
+        </div>
       </div>
     </div>
   );
@@ -1106,7 +1019,7 @@ export default function App() {
             <motion.div className="hero-glow" style={{ y: heroY, background: theme === 'light' ? 'radial-gradient(circle, rgba(58,91,255,0.12) 0%, rgba(110,255,229,0.06) 30%, transparent 70%)' : 'radial-gradient(circle, rgba(58,91,255,0.15) 0%, rgba(110,255,229,0.08) 30%, transparent 70%)' }} />
             <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', pointerEvents: 'none' }}>
               <motion.div style={{ y: heroY, position: 'absolute', left: '-2%', top: '8%', fontFamily: 'var(--font-display)', fontSize: '12vw', fontWeight: 800, lineHeight: 0.8, letterSpacing: '-0.06em', color: theme === 'light' ? 'rgba(0,0,0,0.02)' : 'rgba(255,255,255,0.015)', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
-                I AM AMIT PAL • APPLICATION SECURITY
+                FIND THE GAP • PROVE THE IMPACT
               </motion.div>
             </div>
             <motion.div className="hero-content" style={{ y: heroY, opacity: heroOpacity }}>
@@ -1117,12 +1030,12 @@ export default function App() {
                   </div>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.18em', textTransform: 'uppercase', color: theme === 'light' ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                     <span style={{ width: '24px', height: '1px', background: 'var(--cyan)', display: 'inline-block' }}></span>
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Shield size={10} /> Security Analyst (VAPT) • Ampcus Cyber • Since Feb 2026</span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Shield size={10} /> Amit Pal — Security Analyst (VAPT) • Ampcus Cyber</span>
                   </div>
                 </div>
                 <h1 className="hero-title" style={{ color: theme === 'light' ? 'black' : 'white' }}>
-                  <span className="hero-title-line"><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}>I'M AMIT</motion.span></span>
-                  <span className="hero-title-line outline" style={{ WebkitTextStroke: theme === 'light' ? '1px rgba(0,0,0,0.2)' : '1px rgba(255,255,255,0.3)' }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}>PAL</motion.span></span>
+                  <span className="hero-title-line"><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.25 }}>FIND THE GAP.</motion.span></span>
+                  <span className="hero-title-line hero-title-line--sub outline" style={{ WebkitTextStroke: theme === 'light' ? '1px rgba(0,0,0,0.35)' : '1px rgba(255,255,255,0.35)' }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.38 }}>PROVE THE IMPACT.</motion.span></span>
                 </h1>
                 <div className="hero-tagline" style={{ color: theme === 'light' ? 'rgba(0,0,0,0.75)' : 'var(--gray-300)' }}>
                   <p style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, letterSpacing: '-0.01em', textTransform: 'uppercase', lineHeight: 1.1 }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.7, delay: 0.6 }} style={{ display: 'block' }}>Web Application & API Security —</motion.span></p>
