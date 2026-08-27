@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, MotionConfig } from 'framer-motion';
 import {
   Shield, Search, Code2, FileText, Award, MapPin, Clock, Mail,
   ExternalLink, ArrowUpRight, Zap, BookOpen, Hammer, Layers, PenTool, Sun, Moon,
@@ -92,7 +92,7 @@ function useTheme() {
   return [theme, toggle];
 }
 
-function Cursor({ activeSection, theme }) {
+function Cursor({ activeSection }) {
   const dotRef = useRef(null);
   const cursorRef = useRef(null);
   const [hover, setHover] = useState(false);
@@ -101,16 +101,28 @@ function Cursor({ activeSection, theme }) {
   const dot = useRef({ x: 0, y: 0 });
   const cur = useRef({ x: 0, y: 0 });
 
-  const colorMap = {
-    top: theme === 'light' ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.5)",
-    work: "#00FF9D",
-    writing: "#FF4D00",
-    journey: "#3A5BFF",
-    now: theme === 'light' ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.5)",
-    connect: "#3A5BFF",
+  // The dot, ring and label are painted WHITE and the CSS applies
+  // `mix-blend-mode: difference`. Under `difference` the rendered colour is
+  // |backdrop - source|, so a white source resolves to the complement of
+  // whatever is underneath: near-black over cream, near-white over #050507.
+  // That keeps the cursor legible on all 11 section surfaces in both themes.
+  //
+  // A BLACK source must never be used here: black is the identity element for
+  // `difference` (|bg - 0| = bg), so it renders the cursor exactly the same
+  // colour as the page and it disappears completely.
+  const sectionTint = {
+    focus: "rgba(110,255,229,0.12)",
+    work: "rgba(0,255,157,0.12)",
+    writing: "rgba(255,77,0,0.12)",
+    journey: "rgba(138,92,255,0.12)",
+    connect: "rgba(58,91,255,0.12)",
   };
+  const tint = sectionTint[activeSection] || "rgba(255,255,255,0.08)";
 
   useEffect(() => {
+    // Hide the native cursor only once this component is actually driving one.
+    // If JS fails, the class is never added and the OS cursor stays available.
+    document.documentElement.classList.add('custom-cursor-on');
     const onMove = (e) => { mouse.current = { x: e.clientX, y: e.clientY }; };
     const onHover = (e) => {
       const target = e.target.closest('[data-cursor]');
@@ -119,12 +131,16 @@ function Cursor({ activeSection, theme }) {
     };
     window.addEventListener('mousemove', onMove);
     window.addEventListener('mouseover', onHover);
+    // Under reduced motion, snap the cursor instead of easing it.
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let raf;
     const animate = () => {
-      dot.current.x += (mouse.current.x - dot.current.x) * 0.3;
-      dot.current.y += (mouse.current.y - dot.current.y) * 0.3;
-      cur.current.x += (mouse.current.x - cur.current.x) * 0.12;
-      cur.current.y += (mouse.current.y - cur.current.y) * 0.12;
+      const k1 = reduce ? 1 : 0.3;
+      const k2 = reduce ? 1 : 0.12;
+      dot.current.x += (mouse.current.x - dot.current.x) * k1;
+      dot.current.y += (mouse.current.y - dot.current.y) * k1;
+      cur.current.x += (mouse.current.x - cur.current.x) * k2;
+      cur.current.y += (mouse.current.y - cur.current.y) * k2;
       if (dotRef.current) dotRef.current.style.transform = `translate3d(${dot.current.x}px, ${dot.current.y}px, 0)`;
       if (cursorRef.current) cursorRef.current.style.transform = `translate3d(${cur.current.x - 12}px, ${cur.current.y - 12}px, 0)`;
       raf = requestAnimationFrame(animate);
@@ -133,16 +149,15 @@ function Cursor({ activeSection, theme }) {
     return () => {
       window.removeEventListener('mousemove', onMove);
       window.removeEventListener('mouseover', onHover);
+      document.documentElement.classList.remove('custom-cursor-on');
       cancelAnimationFrame(raf);
     };
   }, []);
 
-  const borderColor = colorMap[activeSection] || (theme === 'light' ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.5)");
-
   return (
     <>
-      <div ref={dotRef} className="cursor-dot" style={{ background: hover ? borderColor : (theme === 'light' ? "black" : "white") }} />
-      <div ref={cursorRef} className={`cursor ${hover ? 'hover' : ''}`} style={{ borderColor: hover ? borderColor : (theme === 'light' ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.5)"), color: hover ? borderColor : (theme === 'light' ? "black" : "white") }}>
+      <div ref={dotRef} className="cursor-dot" style={{ background: "white" }} />
+      <div ref={cursorRef} className={`cursor ${hover ? 'hover' : ''}`} style={{ borderColor: hover ? "white" : "rgba(255,255,255,0.85)", background: hover ? tint : undefined, color: "white" }}>
         <span className="cursor-label">{label}</span>
       </div>
     </>
@@ -424,7 +439,7 @@ function VaptCinematic({ theme }) {
 
 function ApproachMinimal({ theme }) {
   return (
-    <section className="approach-mobile" style={{ position: 'relative', background: theme === 'light' ? 'var(--cream-2)' : 'var(--black)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '28px 48px', overflow: 'hidden' }}>
+    <section className="approach-mobile" style={{ position: 'relative', background: theme === 'light' ? '#FFF1D6' : 'var(--black)', borderTop: '1px solid var(--border)', borderBottom: '1px solid var(--border)', padding: '28px 48px', overflow: 'hidden' }}>
       <div className="approach-mobile-inner" style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2, display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '24px', flexWrap: 'wrap' }}>
         <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--gray-500)', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <Route size={14} /> How I work
@@ -884,6 +899,10 @@ export default function App() {
   const isMobileGlobal = useIsMobile();
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30, restDelta: 0.001 });
+  // The nav starts visually integrated with the hero, then gains its surface
+  // over the first 2% of page scroll so content never appears to collide with
+  // it. Interpolated rather than toggled, so it eases in instead of popping.
+  const navSurface = useTransform(scrollYProgress, [0, 0.02], [0, 1]);
   const heroRef = useRef(null);
   const workHeaderRef = useRef(null);
   const connectRef = useRef(null);
@@ -952,9 +971,9 @@ export default function App() {
   }, [loading]);
 
   return (
-    <>
+    <MotionConfig reducedMotion="user">
       <div className="noise" />
-      <Cursor activeSection={activeSection} theme={theme} />
+      <Cursor activeSection={activeSection} />
       <motion.div className="scroll-progress" style={{ scaleX, backgroundColor: { top: "#3A5BFF", work: "#00FF9D", writing: "#FF4D00", journey: "#3A5BFF", now: "#111", connect: "#3A5BFF" }[activeSection] || "#3A5BFF" }} />
 
       <AnimatePresence>
@@ -991,7 +1010,8 @@ export default function App() {
         <>
           <a href="#main" className="skip-link">Skip to content</a>
 
-          <nav className="nav" role="navigation" aria-label="Main" style={{ background: theme === 'light' ? 'rgba(255,248,236,0.88)' : 'rgba(5,5,7,0.88)', backdropFilter: 'blur(16px)', borderBottom: theme === 'light' ? '1px solid rgba(0,0,0,0.08)' : '1px solid rgba(255,255,255,0.08)' }}>
+          <nav className="nav" role="navigation" aria-label="Main">
+            <motion.div className="nav-surface" aria-hidden="true" style={{ opacity: navSurface }} />
             <a href="#" className="nav-logo" data-cursor="HOME" aria-label="Home" style={{ color: theme === 'light' ? 'black' : 'white' }}>
               <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Shield size={14} /> AMIT</span><span>PAL</span>
             </a>
@@ -1429,6 +1449,6 @@ export default function App() {
       <style>{`
         @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.6; transform: scale(0.85); } }
       `}</style>
-    </>
+    </MotionConfig>
   );
 }

@@ -70,7 +70,6 @@
 
 [data-theme="light"] .nav {
   color: #0A0A0F;
-  mix-blend-mode: normal;
 }
 
 [data-theme="light"] .manifesto {
@@ -100,9 +99,11 @@ body {
   color: var(--white);
   font-family: var(--font-sans);
   overflow-x: hidden;
-  cursor: none;
 }
-@media (max-width: 1024px) { body { cursor: auto; } }
+/* The native cursor is hidden only while the custom cursor is live. If the
+   script never mounts, the OS cursor remains available. */
+html.custom-cursor-on body { cursor: none; }
+@media (max-width: 1024px) { html.custom-cursor-on body { cursor: auto; } }
 
 .skip-link {
   position: absolute;
@@ -176,8 +177,29 @@ img { display: block; max-width: 100%; }
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
-  padding: 20px 32px; mix-blend-mode: difference; color: white;
+  padding: 20px 32px; color: white;
 }
+/* Scroll-adaptive navigation surface. A solid tint plus a hairline rather
+   than a glass card, so it reads as a technical surface. `mix-blend-mode`
+   is deliberately NOT used on .nav: under `difference` the tint resolved to
+   within 1.03 contrast of the page on every section, so the nav had no
+   surface at all and content appeared to collide with it. */
+.nav-surface {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: rgba(5,5,7,0.92);
+  /* Hairline is measured against the nav's OWN fill, not the page: 0.4 white
+     over #050507 resolves to #69696a = 3.71:1. Lower alphas fall under 3:1
+     and the boundary disappears. */
+  border-bottom: 1px solid rgba(255,255,255,0.4);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+[data-theme="light"] .nav-surface {
+  background: rgba(255,248,236,0.94);
+  /* 0.44 black over #FFF8EC -> #8f8b84 = 3.22:1. Light needs a stronger edge
+     than dark because the fill is near-white. */
+  border-bottom-color: rgba(0,0,0,0.44);
+}
+.nav > *:not(.nav-surface) { position: relative; z-index: 1; }
 .nav-logo { font-family: var(--font-display); font-weight: 800; font-size: 16px; letter-spacing: -0.02em; line-height: 0.9; }
 .nav-logo span { display: block; }
 .nav-links { display: flex; gap: 28px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
@@ -193,6 +215,12 @@ img { display: block; max-width: 100%; }
   display: none; width: 44px; height: 44px; align-items: center; justify-content: center;
   border: 1px solid rgba(255,255,255,0.15); background: rgba(0,0,0,0.5); backdrop-filter: blur(12px);
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+}
+/* The toggle inherits .nav's colour, which is near-black in light theme. Its
+   dark default background made the label unreadable there. */
+[data-theme="light"] .mobile-nav-toggle {
+  border-color: rgba(0,0,0,0.18);
+  background: rgba(0,0,0,0.05);
 }
 .mobile-nav {
   position: fixed; inset: 0; background: var(--black); z-index: 99;
@@ -482,7 +510,11 @@ img { display: block; max-width: 100%; }
 
 /* ——— 768px — Tablet Portrait / iPad — Mobile Nav On ——— */
 @media (max-width: 768px) {
-  .nav { padding: 16px 20px; mix-blend-mode: normal; background: rgba(5,5,7,0.88); backdrop-filter: blur(16px); border-bottom: 1px solid var(--border); }
+  /* The nav surface is now the .nav-surface layer, which is theme-aware and
+     scroll-adaptive at every breakpoint. This rule used to hardcode a dark
+     rgba(5,5,7,0.88) background for both themes, which made the light-mode
+     mobile header invisible (dark text on a dark bar). */
+  .nav { padding: 16px 20px; }
   .nav-links, .nav-time { display: none; }
   .mobile-nav-toggle { display: flex; }
 
