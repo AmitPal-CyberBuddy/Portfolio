@@ -607,7 +607,7 @@ function TransitionMinimal({ theme }) {
             <span style={{ display: 'block' }}>FROM</span>
             <span style={{ display: 'block' }}>RESEARCH</span>
             <span style={{ display: 'block', color: 'transparent', WebkitTextStroke: theme === 'light' ? '1px rgba(0,0,0,0.15)' : '1px rgba(255,255,255,0.15)' }}>TO</span>
-            <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: PUR }}>security.</span>
+            <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: theme === 'light' ? '#4E27BF' : '#8A5CFF' }}>security.</span>
           </h2>
           <p style={{ marginTop: '20px', fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.6, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)', maxWidth: '420px' }}>
             For someone new: I joined Ampcus Cyber in Nov 2023 as a fresher in research & analysis (OSINT, market research, target profiling). That attention to detail became my foundation. In Feb 2026, I transitioned into VAPT as Security Analyst — hands-on technical work I wanted.
@@ -909,11 +909,11 @@ function CyberBuddyCinematic({ theme }) {
           <span style={{ color: '#00FF9D' }}>● LOCAL</span>
         </div>
         <div style={{ flex: 1, background: 'rgba(0,0,0,0.62)', border: '1px solid rgba(255,255,255,0.06)', padding: '10px', fontFamily: 'IBM Plex Mono', fontSize: '9px', lineHeight: 1.5, color: 'rgba(255,255,255,0.6)' }}>
-          <div style={{ color: PUR }}>eyJhbGciOiJIUzI1NiIs...</div>
+          <div style={{ color: '#8A5CFF' }}>eyJhbGciOiJIUzI1NiIs...</div>
           <div style={{ color: 'rgba(255,255,255,0.3)', marginTop: '8px' }}>{"{ payload: { sub: '...' } }"}</div>
           <div style={{ marginTop: '12px', display: 'flex', gap: '6px' }}>
             <div style={{ padding: '3px 6px', background: 'rgba(0,255,157,0.12)', border: '1px solid rgba(0,255,157,0.2)', color: '#00FF9D', fontSize: '7px' }}>DECODE</div>
-            <div style={{ padding: '3px 6px', background: 'rgba(138,92,255,0.12)', border: '1px solid rgba(138,92,255,0.2)', color: PUR, fontSize: '7px' }}>VERIFY</div>
+            <div style={{ padding: '3px 6px', background: 'rgba(138,92,255,0.12)', border: '1px solid rgba(138,92,255,0.2)', color: '#8A5CFF', fontSize: '7px' }}>VERIFY</div>
             <div style={{ padding: '3px 6px', background: 'rgba(255,92,161,0.12)', border: '1px solid rgba(255,92,161,0.2)', color: '#FF5CA1', fontSize: '7px' }}>TEST</div>
           </div>
         </div>
