@@ -230,9 +230,9 @@ img { display: block; max-width: 100%; }
 .mobile-nav.open { transform: translateX(0); }
 .mobile-nav-links { display: flex; flex-direction: column; gap: 0; flex: 1; }
 .mobile-nav-links a {
-  font-family: var(--font-display); font-size: clamp(32px, 8vw, 56px); font-weight: 800;
-  line-height: 0.9; letter-spacing: -0.03em; text-transform: uppercase;
-  padding: 20px 0; border-bottom: 1px solid var(--border);
+  font-family: var(--font-display); font-size: clamp(28px, 7.5vw, 48px); font-weight: 800;
+  line-height: 0.95; letter-spacing: -0.03em; text-transform: uppercase;
+  padding: 18px 0; border-bottom: 1px solid var(--border);
   display: flex; justify-content: space-between; align-items: center;
 }
 .mobile-nav-links a span:last-child { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.15em; opacity: 0.4; }

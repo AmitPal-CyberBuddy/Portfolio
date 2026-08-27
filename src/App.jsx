@@ -609,10 +609,10 @@ function TransitionMinimal({ theme }) {
             <span style={{ display: 'block', color: 'transparent', WebkitTextStroke: theme === 'light' ? '1px rgba(0,0,0,0.15)' : '1px rgba(255,255,255,0.15)' }}>TO</span>
             <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: PUR }}>security.</span>
           </h2>
-          <p style={{ marginTop: '20px', fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.6, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)', maxWidth: '380px' }}>
+          <p style={{ marginTop: '20px', fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.6, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)', maxWidth: '420px' }}>
             For someone new: I joined Ampcus Cyber in Nov 2023 as a fresher in research & analysis (OSINT, market research, target profiling). That attention to detail became my foundation. In Feb 2026, I transitioned into VAPT as Security Analyst — hands-on technical work I wanted.
           </p>
-          <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)', maxWidth: '380px' }}>
+          <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.55)', maxWidth: '420px' }}>
             Research & analysis → Professional growth → Cybersecurity transition → Security testing → Independent building & research. Not a résumé timeline, but the pattern matters.
           </p>
         </div>
@@ -1179,7 +1179,7 @@ export default function App() {
                 <div className="hero-tagline" style={{ color: theme === 'light' ? 'rgba(0,0,0,0.75)' : 'var(--gray-300)' }}>
                   <p style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, letterSpacing: '-0.01em', textTransform: 'uppercase', lineHeight: 1.1 }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.7, delay: 0.6 }} style={{ display: 'block' }}>Web Application & API Security —</motion.span></p>
                   <p style={{ fontFamily: 'var(--font-display)', fontSize: '13px', fontWeight: 700, letterSpacing: '-0.01em', textTransform: 'uppercase', lineHeight: 1.1 }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.7, delay: 0.64 }} style={{ display: 'block' }}>Practical VAPT • Manual Testing • App Logic</motion.span></p>
-                  <p style={{ marginTop: '16px', fontFamily: 'var(--font-serif-2)', fontSize: '15px', lineHeight: 1.5, fontWeight: 300, maxWidth: '400px', color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)' }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.7, delay: 0.68 }} style={{ display: 'block' }}>I break systems to understand them. I build tools that prove impact — evidence-grade, local-first, authorized testing only.</motion.span></p>
+                  <p style={{ marginTop: '16px', fontFamily: 'var(--font-serif-2)', fontSize: '15px', lineHeight: 1.5, fontWeight: 300, maxWidth: '460px', color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)' }}><motion.span initial={{ y: "100%" }} animate={{ y: "0%" }} transition={{ duration: 0.7, delay: 0.68 }} style={{ display: 'block' }}>I break systems to understand them. I build tools that prove impact — evidence-grade, local-first, authorized testing only.</motion.span></p>
                   <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
                     <span style={{ padding: '5px 10px', background: theme === 'light' ? 'black' : 'white', color: theme === 'light' ? 'white' : 'black', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px' }}><Target size={10} /> Web & API Focused</span>
                     <span style={{ padding: '5px 10px', border: '1px solid var(--border)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '4px' }}><Layers size={10} /> End-to-End VAPT</span>
@@ -1188,6 +1188,7 @@ export default function App() {
                   <div style={{ marginTop: '16px', display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
                     <a href="#work" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', borderBottom: '1px solid currentColor', paddingBottom: '2px', display: 'flex', alignItems: 'center', gap: '4px' }} data-cursor="PROJECTS">↓ Projects — CyberBuddy Live • VAPT Checklist <ArrowUpRight size={10} /></a>
                     <a href="#writing" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', borderBottom: '1px solid currentColor', paddingBottom: '2px', display: 'flex', alignItems: 'center', gap: '4px' }} data-cursor="WRITING">→ Writing on Medium <BookOpen size={10} /></a>
+                    <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', borderBottom: '1px solid currentColor', paddingBottom: '2px', display: 'flex', alignItems: 'center', gap: '4px' }} data-cursor="LINKEDIN">→ LinkedIn <LinkedinIcon size={10} /></a>
                   </div>
                 </div>
               </div>
@@ -1257,7 +1258,7 @@ export default function App() {
                 <span><i>WHAT I</i></span><span><i>BUILD</i></span>
               </h2>
             </div>
-            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--gray-500)', letterSpacing: '0.12em', textTransform: 'uppercase', maxWidth: '260px', lineHeight: 1.5, position: 'relative', zIndex: 2, display: 'flex', gap: '6px' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'var(--gray-500)', letterSpacing: '0.12em', textTransform: 'uppercase', maxWidth: '320px', lineHeight: 1.5, position: 'relative', zIndex: 2, display: 'flex', gap: '6px' }}>
               <Layers size={12} /> For collaborators: active projects below. For recruiters: evidence of initiative beyond job title.
             </div>
           </div>
@@ -1415,7 +1416,7 @@ export default function App() {
             <div className="now-responsive" style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '80px', position: 'relative', zIndex: 2 }}>
               <div>
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px, 6vw, 64px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>I'M<br/>NOW — 04</h2>
-                <div style={{ marginTop: '20px', fontFamily: 'var(--font-sans)', fontSize: '13px', color: n.body, lineHeight: 1.5, maxWidth: '380px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <div style={{ marginTop: '20px', fontFamily: 'var(--font-sans)', fontSize: '13px', color: n.body, lineHeight: 1.5, maxWidth: '420px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={12} /> Roots West Bengal • Building in Bengaluru — open to remote collab</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}><Clock size={12} /> This is a living site — Last updated Aug 2026 • {time}</span>
                   <span style={{ display: 'flex', alignItems: 'center', gap: '6px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: n.soft }}>For collaborators: active work below is discoverable with links</span>
