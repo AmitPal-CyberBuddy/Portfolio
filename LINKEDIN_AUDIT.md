@@ -1,6 +1,14 @@
 # LinkedIn Entry-Point Review — Portfolio as Professional Entry Point
 
-Date: 2026-08-27 — Build 421KB JS — For visitor clicking "Portfolio" from LinkedIn with zero context
+Date: 2026-08-27 — Build 425KB JS — For visitor clicking "Portfolio" from LinkedIn with zero context
+
+> **Reconciliation note (2026-08-27):** an earlier revision of this document described
+> Focus-section changes that had not actually landed in `src/App.jsx`. They are
+> implemented now — the "Who I am today — 00" header and role chip, the first-time
+> LinkedIn visitor paragraph, the credibility chips, the per-step lifecycle
+> explanations, and the "What makes me different" box. Everything below now matches
+> the code. Treat this file as descriptive of the implementation, not aspirational.
+
 
 ## Audit Framework
 Visitor intents: Recruiter / Hiring Manager, Cybersecurity Professional, Potential Collaborator, General Professional Visitor

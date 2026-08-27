@@ -454,9 +454,12 @@ function ProfessionalFocusMinimal({ theme }) {
 
       <div className="journey-responsive" style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2, display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: '80px' }}>
         <div className="journey-sticky" style={{ position: 'sticky', top: '120px', height: 'fit-content' }}>
-          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '10px' }}>
             <Shield size={14} color="#00FF9D" />
-            I work as Security Analyst • VAPT
+            Who I am today — 00
+          </div>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+            <span style={{ padding: '6px 10px', background: theme === 'light' ? '#0A5C36' : '#00FF9D', color: theme === 'light' ? '#FFFFFF' : '#04140C', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', fontWeight: 700 }}>Security Analyst (VAPT) • Ampcus Cyber • Feb 2026 → Now</span>
           </div>
           <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(32px, 4vw, 48px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.03em', textTransform: 'uppercase' }}>
             <span style={{ display: 'block' }}>I DO</span>
@@ -467,6 +470,13 @@ function ProfessionalFocusMinimal({ theme }) {
           <p style={{ marginTop: '20px', fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.6, fontWeight: 300, color: theme === 'light' ? 'rgba(0,0,0,0.7)' : 'rgba(255,255,255,0.7)', maxWidth: '360px' }}>
             I'm a Security Analyst in VAPT at Ampcus Cyber since Feb 2026. I do end-to-end testing — I understand systems, validate impact, and write clear reports.
           </p>
+          <p style={{ marginTop: '12px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)', maxWidth: '360px' }}>
+            <strong style={{ fontWeight: 600, color: theme === 'light' ? 'rgba(0,0,0,0.8)' : 'rgba(255,255,255,0.8)' }}>New here from LinkedIn?</strong> VAPT = Vulnerability Assessment &amp; Penetration Testing. I work on Web Application &amp; API Security — I scope, recon, test manually, validate impact, and write reports that give a clear path to fix.
+          </p>
+          <div style={{ marginTop: '16px', display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+            <span style={{ padding: '6px 10px', border: `1px solid ${theme === 'light' ? 'rgba(10,92,54,0.35)' : 'rgba(0,255,157,0.28)'}`, color: theme === 'light' ? '#0A5C36' : '#00FF9D', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}><Fingerprint size={10} /> Credible • Practical • Authorized only</span>
+            <span style={{ padding: '6px 10px', border: '1px solid var(--border)', color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)', fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }}><MapPin size={10} /> Based Bengaluru • Roots WB</span>
+          </div>
           <p style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)', maxWidth: '340px', display: 'flex', gap: '8px' }}>
             <Target size={14} style={{ flexShrink: 0, marginTop: '2px' }} color="#00FF9D" />
             I'm working across a growing range of client environments and APIs — Web & API focused.
@@ -483,15 +493,18 @@ function ProfessionalFocusMinimal({ theme }) {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: theme === 'light' ? '#0A5C36' : '#00FF9D', marginBottom: '14px', display: 'flex', alignItems: 'center', gap: '8px' }}><Layers size={12} /> How I test — end-to-end</div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', lineHeight: 1.4 }}>
               {[
-                "Scope & Recon",
-                "Web & API Testing",
-                "Manual Validation",
-                "Impact Analysis",
-                "Reporting",
-              ].map((step, i) => (
+                { step: "Scope & Recon", note: "understanding the attack surface" },
+                { step: "Web & API Testing", note: "manual first, not scanner-only" },
+                { step: "Manual Validation", note: "confirming it is real and reproducible" },
+                { step: "Impact Analysis", note: "what it actually means for the business" },
+                { step: "Reporting", note: "a clear path to fix" },
+              ].map((s, i) => (
                 <span key={i} style={{ padding: '8px 12px', border: '1px solid var(--border)', background: theme === 'light' ? (i === 0 ? 'rgba(0,255,157,0.08)' : 'white') : (i === 0 ? 'rgba(0,255,157,0.06)' : 'rgba(0,0,0,0.3)'), color: i === 0 ? (theme === 'light' ? '#0A5C36' : '#00FF9D') : (theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.6)'), display: 'flex', alignItems: 'center', gap: '8px' }}>
                   {i > 0 && <span style={{ color: 'var(--gray-500)' }}>→</span>}
-                  {step}
+                  <span style={{ display: 'flex', flexDirection: 'column', gap: '3px' }}>
+                    <span>{s.step}</span>
+                    <span style={{ fontFamily: 'var(--font-sans)', fontSize: '10px', letterSpacing: '0', textTransform: 'none', lineHeight: 1.3, color: theme === 'light' ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.4)' }}>{s.note}</span>
+                  </span>
                 </span>
               ))}
             </div>
@@ -512,10 +525,17 @@ function ProfessionalFocusMinimal({ theme }) {
             </div>
           </div>
 
-          <div>
-            <div style={{ fontFamily: 'var(--font-sans)', fontSize: '14px', lineHeight: 1.6, color: theme === 'light' ? 'rgba(0,0,0,0.6)' : 'rgba(255,255,255,0.6)', maxWidth: '400px', display: 'flex', gap: '8px' }}>
-              <Lightbulb size={14} style={{ flexShrink: 0, marginTop: '3px' }} color={theme === 'light' ? '#0A5C36' : "#6EFFE5"} />
-              I apply a research mindset to security — I test real systems, build what helps me during engagements, and share what I learn.
+          <div style={{ padding: '20px', border: `1px solid ${theme === 'light' ? 'rgba(10,92,54,0.25)' : 'rgba(110,255,229,0.18)'}`, background: theme === 'light' ? 'rgba(0,255,157,0.05)' : 'rgba(110,255,229,0.03)' }}>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: theme === 'light' ? '#0A5C36' : '#6EFFE5', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}><Lightbulb size={12} /> What makes me different</div>
+            <div style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: theme === 'light' ? 'rgba(0,0,0,0.65)' : 'rgba(255,255,255,0.65)', maxWidth: '440px' }}>
+              I don't just list skills. I test real systems, build tools that help me during engagements (CyberBuddy, VAPT Checklist), research edge cases, and write about spec vs reality.
+            </div>
+            <div style={{ marginTop: '14px', display: 'flex', flexWrap: 'wrap', gap: '6px', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+              {["Practice", "Building", "Learning", "Sharing"].map((p, i) => (
+                <span key={i} style={{ padding: '4px 8px', border: '1px solid var(--border)', color: theme === 'light' ? 'rgba(0,0,0,0.55)' : 'rgba(255,255,255,0.55)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  {i > 0 && <span style={{ color: 'var(--gray-500)' }}>→</span>}{p}
+                </span>
+              ))}
             </div>
           </div>
         </div>
@@ -687,39 +707,42 @@ function MilestoneMinimal({ theme }) {
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
               <Award size={14} color="#FFD60A" />
               <span style={{ width: '24px', height: '1px', background: 'var(--gray-500)', display: 'inline-block' }}></span>
-              My selected growth — curated moments
+              Beyond the timeline — how I keep growing
             </div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
               <span style={{ display: 'block' }}>MY</span>
               <span style={{ display: 'block' }}>GROWTH</span>
               <span style={{ display: 'block', color: 'transparent', WebkitTextStroke: '1px rgba(255,214,10,0.3)' }}>SIGNALS</span>
             </div>
+            <p style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: 'rgba(255,255,255,0.5)', maxWidth: '300px' }}>
+              Recognition and the transition itself are in Journey above. These are the signals that sit on top of it — the things I add on my own.
+            </p>
           </div>
           <div style={{ display: 'grid', gap: '0' }}>
             {[
               {
-                year: "EARLY 2025 — I GOT RECOGNIZED",
-                title: "My Performance Recognition — 2024",
-                desc: "I joined as a fresher in Nov 2023, learned fast, delivered consistently, and got recognized at Ampcus Cyber's Rewards & Recognition in early 2025.",
-                tag: "JOINED AS FRESHER → RECOGNITION",
+                year: "SIGNAL 01 — I BUILD",
+                title: "Tools I ship on my own time",
+                desc: "CyberBuddy is live — browser security checks under one roof, 100% local. VAPT Checklist is in active development. Neither was assigned to me; both came from friction I hit during real engagements.",
+                tag: "INITIATIVE • SHIPPED",
                 color: "#FFD60A",
-                icon: Award,
+                icon: Hammer,
               },
               {
-                year: "FEB 2026 — I TRANSITIONED",
-                title: "I moved: Research → Security Analyst",
-                desc: "I transitioned into VAPT as a Security Analyst. For me: research & analysis → deliberate learning → cybersecurity transition. I wanted hands-on technical work.",
-                tag: "DELIBERATE LEARNING • ADAPTABILITY",
+                year: "SIGNAL 02 — I GO DEEPER",
+                title: "Spec vs reality — browser internals",
+                desc: "I research what browsers actually do versus what the specs say — CORS, JWT, CSP, client-side crypto. ScriptSentry is my Python experiment in script-level analysis. Depth I add on top of the day job.",
+                tag: "RESEARCH • SELF-DIRECTED",
                 color: "#8A5CFF",
-                icon: Shield,
+                icon: Search,
               },
               {
-                year: "Q1 2026 — I TOOK OWNERSHIP",
-                title: "My Performer of the Quarter — VAPT",
-                desc: "Right after my transition, I focused on learning fast and taking ownership. I was named Performer of the Quarter in Q1 2026 — it meant ownership, not just an award.",
-                tag: "OWNERSHIP → RECOGNITION",
+                year: "SIGNAL 03 — I SHARE",
+                title: "Writing only what I verified",
+                desc: "I publish on Medium only what I have tested and reproduced myself. Each piece connects back to a tool I built to prove the point, so the writing and the work stay honest to each other.",
+                tag: "WRITING • VERIFIED",
                 color: "#00FF9D",
-                icon: TrendingUp,
+                icon: PenTool,
               },
             ].map((m, i) => {
               const Icon = m.icon;

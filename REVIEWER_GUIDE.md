@@ -9,7 +9,7 @@ If you received `Portfolio-Full-From-Zero.patch` (2.0MB, 30 files, 4797 insertio
 
 ```
 30 files:
-- src/App.jsx (1411 lines) — Entire UI: hero, focus, approach, manifesto bridge, projects (VAPT Checklist in dev, CyberBuddy live, ScriptSentry), writing, journey, milestones, now, connect
+- src/App.jsx (1434 lines) — Entire UI: hero, focus, approach, manifesto bridge, projects (VAPT Checklist in dev, CyberBuddy live, ScriptSentry), writing, journey, milestones, now, connect
 - src/index.css (680 lines) — Design system: Syne 800, Space Grotesk, Instrument Serif, IBM Plex Mono, variables, canvas, motion
 - index.html — SEO: title "Security Analyst (VAPT) • Web & API • Ampcus Cyber", meta, OG webp 60KB, CSP, canonical, JSON-LD Person
 - public/assets/ (5 JPGs) — hero-abstract 61KB, hero.png 13KB, vapt-workflow 167KB, cyberbuddy-tools 76KB, writing-research 134KB — all as textures, 16/10 rounded 12px
