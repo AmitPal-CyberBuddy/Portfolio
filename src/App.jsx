@@ -478,7 +478,14 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
         <div className="shell mobile-nav__inner">
           <p className="mobile-nav__label">Navigate the portfolio</p>
           {NAV_ITEMS.map((item, index) => (
-            <a key={item.id} href={`#${item.id}`} onClick={closeMenu} tabIndex={menuOpen ? 0 : -1}>
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={activeSection === item.id ? 'is-active' : ''}
+              aria-current={activeSection === item.id ? 'location' : undefined}
+              onClick={closeMenu}
+              tabIndex={menuOpen ? 0 : -1}
+            >
               <span>{item.label}</span>
               <small>0{index + 1}</small>
               <ChevronRight size={18} aria-hidden="true" />
