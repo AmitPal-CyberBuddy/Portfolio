@@ -712,24 +712,42 @@ function WritingCinematic({ theme }) {
 }
 
 function MilestoneMinimal({ theme }) {
+  // Light mode gets its own treatment instead of reusing the dark panel.
+  // The accents are darkened for it: #FFD60A measures 1.15 and #00FF9D 1.08
+  // against paper, i.e. invisible. Dark mode keeps the originals.
+  const L = theme === 'light';
+  const c = {
+    bg: L ? '#F0DFB8' : '#111111',
+    text: L ? '#14120E' : 'white',
+    body: L ? 'rgba(20,18,14,0.68)' : 'rgba(255,255,255,0.6)',
+    muted: L ? 'rgba(20,18,14,0.52)' : 'rgba(255,255,255,0.35)',
+    soft: L ? 'rgba(20,18,14,0.62)' : 'rgba(255,255,255,0.5)',
+    quote: L ? 'rgba(20,18,14,0.9)' : 'rgba(255,255,255,0.9)',
+    hair: L ? 'rgba(20,18,14,0.14)' : 'rgba(255,255,255,0.06)',
+    stroke: L ? 'rgba(20,18,14,0.22)' : 'rgba(255,255,255,0.2)',
+    goldStroke: L ? 'rgba(122,92,0,0.45)' : 'rgba(255,214,10,0.3)',
+    gold: L ? '#7A5C00' : '#FFD60A',
+    purple: L ? '#4E27BF' : '#8A5CFF',
+    green: L ? '#0A6B45' : '#00FF9D',
+  };
   return (
-    <section className="milestone-section" style={{ position: 'relative', background: theme === 'light' ? '#111111' : '#111111', color: 'white', padding: '100px 48px', borderTop: '1px solid rgba(255,255,255,0.06)', overflow: 'hidden' }}>
+    <section className="milestone-section" style={{ position: 'relative', background: c.bg, color: c.text, padding: '100px 48px', borderTop: `1px solid ${c.hair}`, overflow: 'hidden' }}>
 
 
       <div style={{ maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '80px', marginBottom: '80px' }} className="milestone-responsive">
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <Award size={14} color="#FFD60A" />
+              <Award size={14} color={c.gold} />
               <span style={{ width: '24px', height: '1px', background: 'var(--gray-500)', display: 'inline-block' }}></span>
               Beyond the timeline — how I keep growing
             </div>
             <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
               <span style={{ display: 'block' }}>MY</span>
               <span style={{ display: 'block' }}>GROWTH</span>
-              <span style={{ display: 'block', color: 'transparent', WebkitTextStroke: '1px rgba(255,214,10,0.3)' }}>SIGNALS</span>
+              <span style={{ display: 'block', color: 'transparent', WebkitTextStroke: `1px ${c.goldStroke}` }}>SIGNALS</span>
             </div>
-            <p style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: 'rgba(255,255,255,0.5)', maxWidth: '300px' }}>
+            <p style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: c.soft, maxWidth: '300px' }}>
               Recognition and the transition itself are in Journey above. These are the signals that sit on top of it — the things I add on my own.
             </p>
           </div>
@@ -740,7 +758,7 @@ function MilestoneMinimal({ theme }) {
                 title: "Tools I ship on my own time",
                 desc: "CyberBuddy is live — browser security checks under one roof, 100% local. VAPT Checklist is in active development. Neither was assigned to me; both came from friction I hit during real engagements.",
                 tag: "INITIATIVE • SHIPPED",
-                color: "#FFD60A",
+                color: c.gold,
                 icon: Hammer,
               },
               {
@@ -748,7 +766,7 @@ function MilestoneMinimal({ theme }) {
                 title: "Spec vs reality — browser internals",
                 desc: "I research what browsers actually do versus what the specs say — CORS, JWT, CSP, client-side crypto. ScriptSentry is my Python experiment in script-level analysis. Depth I add on top of the day job.",
                 tag: "RESEARCH • SELF-DIRECTED",
-                color: "#8A5CFF",
+                color: c.purple,
                 icon: Search,
               },
               {
@@ -756,40 +774,40 @@ function MilestoneMinimal({ theme }) {
                 title: "Writing only what I verified",
                 desc: "I publish on Medium only what I have tested and reproduced myself. Each piece connects back to a tool I built to prove the point, so the writing and the work stay honest to each other.",
                 tag: "WRITING • VERIFIED",
-                color: "#00FF9D",
+                color: c.green,
                 icon: PenTool,
               },
             ].map((m, i) => {
               const Icon = m.icon;
               return (
-              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.5 }} style={{ padding: '28px 0', borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', marginBottom: '-1px', display: 'grid', gridTemplateColumns: '140px 1fr', gap: '24px' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5 }}>
+              <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.12, duration: 0.5 }} style={{ padding: '28px 0', borderTop: `1px solid ${c.hair}`, borderBottom: `1px solid ${c.hair}`, marginBottom: '-1px', display: 'grid', gridTemplateColumns: '140px 1fr', gap: '24px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: c.muted, lineHeight: 1.5 }}>
                   <div style={{ color: m.color, marginBottom: '8px', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '6px' }}><Icon size={12} />{m.year}</div>
                   <div style={{ padding: '4px 8px', border: `1px solid ${m.color}40`, color: m.color, width: 'fit-content', fontSize: '10px' }}>{m.tag}</div>
                 </div>
                 <div>
                   <div style={{ fontFamily: 'var(--font-display)', fontSize: '18px', fontWeight: 700, lineHeight: 0.95, letterSpacing: '-0.02em', textTransform: 'uppercase' }}>{m.title}</div>
-                  <div style={{ marginTop: '10px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: 'rgba(255,255,255,0.6)', maxWidth: '520px' }}>{m.desc}</div>
+                  <div style={{ marginTop: '10px', fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.5, color: c.body, maxWidth: '520px' }}>{m.desc}</div>
                 </div>
               </motion.div>
             )})}
           </div>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '80px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '60px' }} className="milestone-responsive">
+        <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '80px', borderTop: `1px solid ${c.hair}`, paddingTop: '60px' }} className="milestone-responsive">
           <div>
             <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
               <Sparkles size={14} />
               <span style={{ width: '24px', height: '1px', background: 'var(--gray-500)', display: 'inline-block' }}></span>
               How I handle appreciation
             </div>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.03em', textTransform: 'uppercase', color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}>MY IMPACT</div>
+            <div style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.03em', textTransform: 'uppercase', color: 'transparent', WebkitTextStroke: `1px ${c.stroke}` }}>MY IMPACT</div>
           </div>
           <div style={{ position: 'relative' }}>
-            <div style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(20px, 2.4vw, 28px)', lineHeight: 1.3, fontStyle: 'italic', maxWidth: '600px', position: 'relative', zIndex: 2, color: 'rgba(255,255,255,0.9)' }}>
+            <div style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(20px, 2.4vw, 28px)', lineHeight: 1.3, fontStyle: 'italic', maxWidth: '600px', position: 'relative', zIndex: 2, color: c.quote }}>
               "Your team's professionalism and clarity made the difference. The report was not just findings — it was a clear path to fix things."
             </div>
-            <div style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5, maxWidth: '440px', display: 'flex', gap: '8px' }}>
+            <div style={{ marginTop: '16px', fontFamily: 'var(--font-sans)', fontSize: '13px', color: c.soft, lineHeight: 1.5, maxWidth: '440px', display: 'flex', gap: '8px' }}>
               <Target size={14} style={{ flexShrink: 0, marginTop: '2px' }} />
               I got this feedback on a SaaS assessment — multi-tenant, JWT, GraphQL. I adapted my checklist as scope expanded.
             </div>
@@ -903,6 +921,27 @@ export default function App() {
   // over the first 2% of page scroll so content never appears to collide with
   // it. Interpolated rather than toggled, so it eases in instead of popping.
   const navSurface = useTransform(scrollYProgress, [0, 0.02], [0, 1]);
+  // Connect is a full-bleed closer. Dark mode keeps the near-black panel;
+  // light mode gets its own designed surface instead of reusing it.
+  const isLight = theme === 'light';
+  const cx = {
+    bg: isLight ? '#E6EAF5' : '#0A0A0F',
+    text: isLight ? '#0A0A0F' : 'white',
+    body: isLight ? 'rgba(10,10,15,0.72)' : 'rgba(255,255,255,0.7)',
+    soft: isLight ? 'rgba(10,10,15,0.58)' : 'rgba(255,255,255,0.45)',
+    muted: isLight ? 'rgba(10,10,15,0.48)' : 'rgba(255,255,255,0.35)',
+    faint: isLight ? 'rgba(10,10,15,0.42)' : 'rgba(255,255,255,0.5)',
+    hair: isLight ? 'rgba(10,10,15,0.14)' : 'rgba(255,255,255,0.08)',
+    box: isLight ? 'rgba(10,10,15,0.05)' : 'rgba(255,255,255,0.02)',
+    boxBd: isLight ? 'rgba(10,10,15,0.16)' : 'rgba(255,255,255,0.12)',
+    stroke: isLight ? 'rgba(10,10,15,0.22)' : 'rgba(255,255,255,0.2)',
+    ghost: isLight ? 'rgba(10,10,15,0.05)' : 'rgba(255,255,255,0.02)',
+    purple: isLight ? '#4E27BF' : '#8A5CFF',
+    purpleBd: isLight ? 'rgba(78,39,191,0.32)' : 'rgba(138,92,255,0.25)',
+    green: isLight ? '#0A6B45' : '#00FF9D',
+    greenBd: isLight ? 'rgba(10,107,69,0.32)' : 'rgba(0,255,157,0.25)',
+    blue: isLight ? '#2B44C4' : 'var(--electric-blue)',
+  };
   const heroRef = useRef(null);
   const workHeaderRef = useRef(null);
   const connectRef = useRef(null);
@@ -1249,19 +1288,19 @@ export default function App() {
           <ExperimentsMinimal theme={theme} />
 
           {/* ——— WRITING ——— */}
-          <section id="writing" style={{ background: theme === 'light' ? '#FFF8EC' : 'var(--cream)', color: theme === 'light' ? 'black' : 'var(--black)', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
+          <section id="writing" style={{ background: theme === 'light' ? '#F2E3C6' : 'var(--cream)', color: theme === 'light' ? 'black' : 'var(--black)', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
             <WritingCinematic theme={theme} />
             <div className="writing-responsive writing-header" style={{ padding: '100px 48px 60px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'end', maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
               <div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'var(--orange)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? '#B03400' : 'var(--orange)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                   <PenTool size={14} />
-                  <span style={{ width: '24px', height: '1px', background: 'var(--orange)', display: 'inline-block' }}></span>
+                  <span style={{ width: '24px', height: '1px', background: theme === 'light' ? '#B03400' : 'var(--orange)', display: 'inline-block' }}></span>
                   My writing — Research Log
                 </div>
                 <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 64px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
                   <span style={{ display: 'block' }}>MY</span>
                   <span style={{ display: 'block' }}>RESEARCH</span>
-                  <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: 'var(--orange)' }}>Log — 02</span>
+                  <span style={{ display: 'block', fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontWeight: 400, textTransform: 'none', color: theme === 'light' ? '#B03400' : 'var(--orange)' }}>Log — 02</span>
                 </h2>
               </div>
               <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '18px', lineHeight: 1.5, fontWeight: 300, maxWidth: '440px' }}>
@@ -1279,7 +1318,7 @@ export default function App() {
                 <div style={{ position: 'absolute', left: '24px', top: '24px', fontFamily: 'var(--font-serif)', fontSize: '120px', lineHeight: 0.8, color: hoveredWriting === 0 ? 'rgba(0,0,0,0.07)' : 'rgba(0,0,0,0.04)', pointerEvents: 'none', transition: 'color 0.4s' }}>“</div>
                 <div style={{ position: 'relative', zIndex: 2 }}>
                   <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gray-500)', marginBottom: '24px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ width: '5px', height: '5px', background: 'var(--orange)', borderRadius: '50%', display: 'inline-block', animation: 'pulse 1.2s infinite' }}></span>
+                    <span style={{ width: '5px', height: '5px', background: theme === 'light' ? '#B03400' : 'var(--orange)', borderRadius: '50%', display: 'inline-block', animation: 'pulse 1.2s infinite' }}></span>
                     Featured — I wrote on Medium @amitpxl — {hoveredWriting === 0 ? "Hovering — Read →" : "Spec vs Reality"}
                   </div>
                   <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: 'clamp(28px, 3.2vw, 42px)', lineHeight: 0.95, letterSpacing: '-0.02em', fontWeight: 400, transform: hoveredWriting === 0 ? 'scale(1.02)' : 'scale(1)', transformOrigin: 'left', transition: 'transform 0.4s ease' }}>
@@ -1294,21 +1333,21 @@ export default function App() {
                 </div>
               </div>
               <div className="writing-list" style={{ background: 'var(--black)', color: 'var(--cream)', padding: '48px', display: 'flex', flexDirection: 'column', gap: '0' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}><PenTool size={12} /> More — I curated</div>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.2em', textTransform: 'uppercase', color: theme === 'light' ? 'rgba(0,0,0,0.45)' : 'rgba(255,255,255,0.4)', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '8px' }}><PenTool size={12} /> More — I curated</div>
                 {WRITING.slice(1).map((w, i) => (
                   <a key={i} href={w.link} target="_blank" rel="noopener noreferrer"
                     onMouseEnter={() => setHoveredWriting(i + 1)}
                     onMouseLeave={() => setHoveredWriting(null)}
                     onTouchStart={() => setHoveredWriting(i + 1)}
-                    style={{ display: 'block', padding: '24px 0', borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', marginBottom: '-1px', transform: hoveredWriting === i + 1 ? 'translateX(8px)' : 'none', transition: 'transform 0.3s ease' }} data-cursor="READ">
-                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 600, lineHeight: 1.1, letterSpacing: '-0.01em', textTransform: 'uppercase', color: hoveredWriting === i + 1 ? 'white' : 'var(--cream)', transition: 'color 0.3s' }}>{w.title}</div>
-                    <div style={{ marginTop: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: hoveredWriting === i + 1 ? 'rgba(255,255,255,0.7)' : 'rgba(255,255,255,0.45)', lineHeight: 1.4, transition: 'color 0.3s', opacity: hoveredWriting === i + 1 ? 1 : 0.85 }}>{w.insight} {hoveredWriting === i + 1 ? "↗" : ""}</div>
+                    style={{ display: 'block', padding: '24px 0', borderTop: `1px solid ${theme === 'light' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.08)'}`, borderBottom: `1px solid ${theme === 'light' ? 'rgba(0,0,0,0.10)' : 'rgba(255,255,255,0.08)'}`, marginBottom: '-1px', transform: hoveredWriting === i + 1 ? 'translateX(8px)' : 'none', transition: 'transform 0.3s ease' }} data-cursor="READ">
+                    <div style={{ fontFamily: 'var(--font-display)', fontSize: '16px', fontWeight: 600, lineHeight: 1.1, letterSpacing: '-0.01em', textTransform: 'uppercase', color: hoveredWriting === i + 1 ? (theme === 'light' ? '#B03400' : 'white') : 'var(--cream)', transition: 'color 0.3s' }}>{w.title}</div>
+                    <div style={{ marginTop: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', color: hoveredWriting === i + 1 ? (theme === 'light' ? 'rgba(0,0,0,0.75)' : 'rgba(255,255,255,0.7)') : (theme === 'light' ? 'rgba(0,0,0,0.5)' : 'rgba(255,255,255,0.45)'), lineHeight: 1.4, transition: 'color 0.3s', opacity: hoveredWriting === i + 1 ? 1 : 0.85 }}>{w.insight} {hoveredWriting === i + 1 ? "↗" : ""}</div>
                   </a>
                 ))}
-                <div style={{ marginTop: 'auto', paddingTop: '24px', fontFamily: 'var(--font-mono)', fontSize: '10px', color: 'rgba(255,255,255,0.3)', lineHeight: 1.5 }}>
+                <div style={{ marginTop: 'auto', paddingTop: '24px', fontFamily: 'var(--font-mono)', fontSize: '10px', color: theme === 'light' ? 'rgba(0,0,0,0.35)' : 'rgba(255,255,255,0.3)', lineHeight: 1.5 }}>
                   Full articles on Medium — curiosity, then depth.
                 </div>
-                <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--orange-light)', border: '1px solid rgba(255,196,168,0.2)', padding: '12px 16px', width: 'fit-content', marginTop: '16px', alignItems: 'center' }} data-cursor="MEDIUM"><BookOpen size={12} /> All my writing on Medium →</a>
+                <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', gap: '8px', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase', color: theme === 'light' ? '#A8500F' : 'var(--orange-light)', border: '1px solid rgba(255,196,168,0.2)', padding: '12px 16px', width: 'fit-content', marginTop: '16px', alignItems: 'center' }} data-cursor="MEDIUM"><BookOpen size={12} /> All my writing on Medium →</a>
               </div>
             </div>
           </section>
@@ -1318,7 +1357,7 @@ export default function App() {
           <MilestoneMinimal theme={theme} />
 
           {/* ——— NOW ——— */}
-          <section id="now" className="now-section" style={{ background: theme === 'light' ? 'white' : 'var(--white)', color: theme === 'light' ? 'black' : 'var(--black)', padding: '100px 48px', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
+          <section id="now" className="now-section" style={{ background: theme === 'light' ? '#D9EBE0' : 'var(--white)', color: theme === 'light' ? 'black' : 'var(--black)', padding: '100px 48px', borderTop: '1px solid var(--border-light)', position: 'relative', overflow: 'hidden' }}>
 
             <div className="now-responsive" style={{ maxWidth: '1400px', margin: '0 auto', display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '80px', position: 'relative', zIndex: 2 }}>
               <div>
@@ -1347,10 +1386,10 @@ export default function App() {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
                 {[
-                  { k: "I'm Building", v: "I'm building VAPT Checklist — structured, operator-focused workflow. It's in active development.", link: LINKS.vaptLive, cta: "Live Dev →", color: "#00FF9D", icon: Hammer },
-                  { k: "I'm Writing", v: "I write about browser security & real impact — CORS, JWT, CSP, client-side crypto.", link: LINKS.medium, cta: "Medium →", color: "#FF4D00", icon: PenTool },
+                  { k: "I'm Building", v: "I'm building VAPT Checklist — structured, operator-focused workflow. It's in active development.", link: LINKS.vaptLive, cta: "Live Dev →", color: theme === "light" ? "#0A6B45" : "#00FF9D", icon: Hammer },
+                  { k: "I'm Writing", v: "I write about browser security & real impact — CORS, JWT, CSP, client-side crypto.", link: LINKS.medium, cta: "Medium →", color: theme === "light" ? "#B03400" : "#FF4D00", icon: PenTool },
                   { k: "I'm Maintaining", v: "I maintain CyberBuddy — my browser security suite, evidence-grade, local-first. 7 tools live.", link: LINKS.cyberbuddyLive, cta: "Live →", color: "#8A5CFF", icon: Shield },
-                  { k: "I'm Learning", v: "I'm learning Mobile PT next — expanding from Web & API to mobile attack surface.", link: LINKS.github, cta: "GitHub →", color: "#FFD60A", icon: BookOpen },
+                  { k: "I'm Learning", v: "I'm learning Mobile PT next — expanding from Web & API to mobile attack surface.", link: LINKS.github, cta: "GitHub →", color: theme === "light" ? "#7A5C00" : "#FFD60A", icon: BookOpen },
                 ].map((item, i) => {
                   const Icon = item.icon;
                   return (
@@ -1372,8 +1411,8 @@ export default function App() {
           </section>
 
           {/* ——— CONNECT ——— */}
-          <section id="connect" ref={connectRef} className="connect-section" style={{ position: 'relative', background: theme === 'light' ? '#0A0A0F' : 'var(--black)', color: 'white', minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '80px 48px 48px', overflow: 'hidden' }}>
-            <div style={{ position: 'absolute', left: '-2%', bottom: '12%', fontFamily: 'var(--font-display)', fontSize: '10vw', fontWeight: 800, lineHeight: 0.8, letterSpacing: '-0.06em', color: 'rgba(255,255,255,0.01)', textTransform: 'uppercase', pointerEvents: 'none', whiteSpace: 'nowrap', overflow: 'hidden' }}>
+          <section id="connect" ref={connectRef} className="connect-section" style={{ position: 'relative', background: cx.bg, color: cx.text, minHeight: '90vh', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', padding: '80px 48px 48px', overflow: 'hidden' }}>
+            <div style={{ position: 'absolute', left: '-2%', bottom: '12%', fontFamily: 'var(--font-display)', fontSize: '10vw', fontWeight: 800, lineHeight: 0.8, letterSpacing: '-0.06em', color: cx.ghost, textTransform: 'uppercase', pointerEvents: 'none', whiteSpace: 'nowrap', overflow: 'hidden' }}>
               I AM AMIT PAL • 2026
             </div>
             <div style={{ position: 'absolute', inset: 0, opacity: 0.4 }}>
@@ -1395,17 +1434,17 @@ export default function App() {
             <div style={{ position: 'relative', zIndex: 2, maxWidth: '1400px', width: '100%', margin: '0 auto' }}>
               <h2 className="connect-title" style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(40px, 6vw, 84px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase' }}>
                 <motion.span style={{ display: 'block', x: isMobileGlobal ? 0 : connectMouse.x * 0.8, y: isMobileGlobal ? 0 : connectMouse.y * 0.5 }}>LET'S BUILD</motion.span>
-                <motion.span style={{ display: 'block', color: 'transparent', WebkitTextStroke: '1px rgba(255,255,255,0.2)', x: isMobileGlobal ? 0 : connectMouse.x * -0.6, y: isMobileGlobal ? 0 : connectMouse.y * 0.3 }}>MORE SECURE</motion.span>
-                <motion.span style={{ display: 'block', color: 'var(--electric-blue)', x: isMobileGlobal ? 0 : connectMouse.x * 0.4, y: isMobileGlobal ? 0 : connectMouse.y * -0.4 }}>THINGS TOGETHER.</motion.span>
+                <motion.span style={{ display: 'block', color: 'transparent', WebkitTextStroke: `1px ${cx.stroke}`, x: isMobileGlobal ? 0 : connectMouse.x * -0.6, y: isMobileGlobal ? 0 : connectMouse.y * 0.3 }}>MORE SECURE</motion.span>
+                <motion.span style={{ display: 'block', color: cx.blue, x: isMobileGlobal ? 0 : connectMouse.x * 0.4, y: isMobileGlobal ? 0 : connectMouse.y * -0.4 }}>THINGS TOGETHER.</motion.span>
               </h2>
-              <div style={{ marginTop: '24px', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', maxWidth: '520px', lineHeight: 1.6 }}>
+              <div style={{ marginTop: '24px', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.1em', textTransform: 'uppercase', color: cx.soft, maxWidth: '520px', lineHeight: 1.6 }}>
                 I do Application Security • VAPT • Web & API → I'm learning Mobile PT next. If you need Web/API VAPT that explains impact clearly, or want feedback on browser security tooling, I can help. Research collabs and methodology discussions welcome. Roots West Bengal • Building in Bengaluru.
               </div>
               <div style={{ marginTop: '32px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{ width: '48px', height: '48px', border: '1px solid rgba(255,255,255,0.12)', padding: '8px', background: 'rgba(255,255,255,0.02)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '18px', color: 'white' }}>
+                <div style={{ width: '48px', height: '48px', border: `1px solid ${cx.boxBd}`, padding: '8px', background: cx.box, display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-display)', fontWeight: 800, fontSize: '18px', color: 'white' }}>
                   AP
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)', lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: cx.faint, lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <Fingerprint size={12} /> My AP Monogram — my signature
                 </div>
               </div>
@@ -1413,18 +1452,18 @@ export default function App() {
 
             <div className="connect-responsive connect-grid" style={{ position: 'relative', zIndex: 2, maxWidth: '1400px', width: '100%', margin: '80px auto 0', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'end' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0' }}>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.45)', marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}><Globe size={12} /> Where you can find me</div>
-                <a href={`mailto:${LINKS.email}`} style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="EMAIL"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Mail size={12} />{LINKS.email}</span><span>↗</span></a>
-                <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="LINKEDIN"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><LinkedinIcon size={12} />LinkedIn — connect with me</span><span>↗</span></a>
-                <a href={LINKS.github} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="GITHUB"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><GithubIcon size={12} />GitHub — see my code</span><span>↗</span></a>
-                <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: '1px solid rgba(255,255,255,0.08)', fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="MEDIUM"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><BookOpen size={12} />Medium — read my writing</span><span>↗</span></a>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: cx.soft, marginBottom: '20px', display: 'flex', alignItems: 'center', gap: '8px' }}><Globe size={12} /> Where you can find me</div>
+                <a href={`mailto:${LINKS.email}`} style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: `1px solid ${cx.hair}`, fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="EMAIL"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><Mail size={12} />{LINKS.email}</span><span>↗</span></a>
+                <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: `1px solid ${cx.hair}`, fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="LINKEDIN"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><LinkedinIcon size={12} />LinkedIn — connect with me</span><span>↗</span></a>
+                <a href={LINKS.github} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: `1px solid ${cx.hair}`, fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="GITHUB"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><GithubIcon size={12} />GitHub — see my code</span><span>↗</span></a>
+                <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 0', borderBottom: `1px solid ${cx.hair}`, fontFamily: 'var(--font-mono)', fontSize: '12px', letterSpacing: '0.1em', textTransform: 'uppercase' }} data-cursor="MEDIUM"><span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}><BookOpen size={12} />Medium — read my writing</span><span>↗</span></a>
                 <div style={{ display: 'flex', gap: '16px', marginTop: '24px', flexWrap: 'wrap' }}>
-                  <a href={LINKS.cyberbuddyLive} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 16px', border: '1px solid rgba(138,92,255,0.25)', color: '#8A5CFF', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }} data-cursor="LIVE"><Hammer size={12} /> My CyberBuddy Live ↗</a>
-                  <a href={LINKS.vaptLive} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 16px', border: '1px solid rgba(0,255,157,0.25)', color: '#00FF9D', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }} data-cursor="LIVE DEV"><Layers size={12} /> My VAPT Live Dev ↗</a>
+                  <a href={LINKS.cyberbuddyLive} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 16px', border: `1px solid ${cx.purpleBd}`, color: cx.purple, fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }} data-cursor="LIVE"><Hammer size={12} /> My CyberBuddy Live ↗</a>
+                  <a href={LINKS.vaptLive} target="_blank" rel="noopener noreferrer" style={{ padding: '10px 16px', border: `1px solid ${cx.greenBd}`, color: cx.green, fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: '6px' }} data-cursor="LIVE DEV"><Layers size={12} /> My VAPT Live Dev ↗</a>
                 </div>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.5, fontWeight: 300, color: 'rgba(255,255,255,0.7)', maxWidth: '360px' }}>
+                <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '16px', lineHeight: 1.5, fontWeight: 300, color: cx.body, maxWidth: '360px' }}>
                   I'm Amit Pal — this is my curated identity and invitation. My projects have their own sites with depth. Let's build more secure things together.
                 </p>
                 <div style={{ display: 'inline-block', padding: '20px', margin: '-20px' }} ref={magneticRef}>
@@ -1432,13 +1471,13 @@ export default function App() {
                     <span style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}><Mail size={16} />EMAIL<br/>ME →</span>
                   </a>
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.35)', lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: cx.muted, lineHeight: 1.5, display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <Shield size={12} /> No tracking • No telemetry • Static-only • {theme === 'dark' ? 'Dark' : 'Light'} mode
                 </div>
               </div>
             </div>
 
-            <div className="connect-footer" style={{ position: 'relative', zIndex: 2, maxWidth: '1400px', width: '100%', margin: '80px auto 0', borderTop: '1px solid rgba(255,255,255,0.08)', paddingTop: '24px', display: 'flex', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>
+            <div className="connect-footer" style={{ position: 'relative', zIndex: 2, maxWidth: '1400px', width: '100%', margin: '80px auto 0', borderTop: `1px solid ${cx.hair}`, paddingTop: '24px', display: 'flex', justifyContent: 'space-between', gap: '16px', flexWrap: 'wrap', fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)', lineHeight: 1.5 }}>
               <span>© 2026 Amit Pal — Application Security — Built with care, no tracking</span>
               <span style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}><Mail size={10} />{LINKS.email} • linkedin.com/in/amitpal-wb • github.com/AmitPal-CyberBuddy</span>
             </div>
