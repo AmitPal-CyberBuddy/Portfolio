@@ -59,7 +59,7 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 - 1. **CORS Misconfiguration: When Reflecting the Origin Is Not the Whole Story** (2h ago) — https://amitpxl.medium.com/cors-misconfiguration-when-reflecting-the-origin-is-not-the-whole-story-956e2e6e18bc — Everyone notices reflected ACAO, fewer verify authenticated impact. Pairs with CORS Validator.
 - 2. **HTTP Request Smuggling vs HTTP Request Pipelining: Why They’re Often Confused** (Jun 19) — https://amitpxl.medium.com/http-request-smuggling-vs-http-request-pipelining-why-theyre-often-confused-44ffe6e528eb
 - 3. **How I Broke Client-Side Encryption By Frontend JavaScript Analysis** (May 27) — https://amitpxl.medium.com/how-i-broke-encrypted-requests-by-reading-frontend-javascript-b016c5b9078d
-- Editorial layout, not card grid — featured article + code visual + list. Architecture supports future articles without redesign, no invented titles.
+- A consistent research-note card system for all verified articles, followed by a direct “View all writing on Medium” link. Architecture supports future articles without redesign, with no invented titles.
 
 ## Sections
 
@@ -71,7 +71,7 @@ HERO — Amit Pal, Security Analyst (VAPT) • Ampcus Cyber; direct routes to pr
 → FOCUS — an accessible explanation of VAPT, end-to-end testing flow, focus areas, and working principles
 → HOW I WORK — Test → Build → Research → Write
 → PROJECTS — CyberBuddy (live), VAPT Checklist (in active development), and ScriptSentry (Python)
-→ WRITING — featured Medium article plus the remaining verified articles
+→ WRITING — consistent research-note cards for all verified Medium articles, followed by a direct view-all link
 → THE LOOP — Learn → Practice → Apply → Build & Share
 → JOURNEY — fresher → recognition → VAPT transition → Performer of the Quarter
 → GROWTH SIGNALS — building, research, and writing habits; one anonymized client-appreciation quote

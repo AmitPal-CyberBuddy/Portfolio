@@ -7,7 +7,6 @@ import {
   ChevronRight,
   Clock3,
   ExternalLink,
-  FileText,
   Fingerprint,
   Hammer,
   Layers3,
@@ -511,7 +510,7 @@ function Hero() {
             <span>&amp; APIs.</span>
             <strong>Find what others miss.</strong>
           </h1>
-          <p className="hero__lead">Practical Web Application &amp; API Security. I scope the work, test manually, validate impact, and report a clear path to fix.</p>
+          <p className="hero__lead">Practical Web Application &amp; API Security. I scope the work, test manually, validate impact, and provide clear remediation guidance.</p>
           <p className="hero__body">I build local-first tools that help prove security issues with evidence — always for authorized testing.</p>
           <div className="tag-row hero__tags" aria-label="Specialties">
             <span>Web &amp; API focused</span>
@@ -558,8 +557,8 @@ function Focus() {
           <Reveal className="section-intro focus-intro">
             <Eyebrow icon={Target}>Focus · what I do today</Eyebrow>
             <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
-            <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. The job is not a tool output: it is understanding a system well enough to test it responsibly.</p>
-            <p>I work across a growing range of client environments and APIs, with a Web &amp; API focus. VAPT means Vulnerability Assessment &amp; Penetration Testing: finding, validating, and explaining the security issues that matter.</p>
+            <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. Effective testing is more than a tool output: it means understanding a system well enough to test it responsibly.</p>
+            <p>I work across client environments and APIs, with a Web &amp; API focus. VAPT — Vulnerability Assessment &amp; Penetration Testing — is the work of finding, validating, and explaining the security issues that matter.</p>
             <div className="trust-note"><Fingerprint size={16} /><span>Credible, practical, and authorized-only testing.</span></div>
           </Reveal>
 
@@ -690,8 +689,8 @@ function Work() {
             type="live"
             eyebrow="CyberBuddy · live product"
             title="CyberBuddy"
-            summary="Seven browser security checks, under one roof. Evidence-grade and 100% local-first."
-            detail="I built CyberBuddy because common browser checks — clickjacking, headers, CORS, JWT, and CSRF — can be scattered or unnecessarily heavy. It helps prove a security issue visually without sending data away."
+            summary="Seven browser-based security checks in one evidence-led, local-first suite."
+            detail="I built CyberBuddy because checks for clickjacking, headers, CORS, JWT, and CSRF can be scattered or unnecessarily heavy. It helps demonstrate a security issue clearly without sending assessment data away."
             image="cyberbuddy-tools.jpg"
             alt="CyberBuddy browser security tools interface"
             tags={['7 tools live', 'Local-first', 'Non-destructive']}
@@ -721,7 +720,7 @@ function Work() {
           <div>
             <Eyebrow icon={TerminalSquare}>Other experiment · Python</Eyebrow>
             <h3>ScriptSentry</h3>
-            <p>Script analysis tooling: an experiment in looking line by line for risk beyond browser security work.</p>
+            <p>A Python experiment in line-by-line script analysis to surface risk beyond browser security work.</p>
           </div>
           <div className="experiment-card__aside">
             <span>Experimental · 2026</span>
@@ -743,43 +742,33 @@ function Writing() {
             <Eyebrow icon={PenTool}>Writing · research log</Eyebrow>
             <h2 id="writing-title">Research<br /><em>notes.</em></h2>
           </div>
-          <p>I write about spec versus reality: what browsers actually do, why it matters for security, and the proof behind the claim.</p>
+          <p>I write about the gap between security specifications and browser behavior — what actually happens, why it matters, and how I verified it.</p>
         </Reveal>
 
-        <div className="writing-grid">
-          <motion.article
-            className="featured-article"
-            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.18 }}
-            transition={{ duration: 0.55, ease: MOTION_EASE }}
-          >
-            <div className="featured-article__mark" aria-hidden="true">01</div>
-            <div>
-              <p className="article-kicker"><span className="status-dot" /> Featured on Medium</p>
-              <h3>{WRITING[0].title}</h3>
-              <p>{WRITING[0].insight} I built a two-origin probe to test the real impact.</p>
-            </div>
-            <ButtonLink href={WRITING[0].link} external className="text-link"><BookOpen size={16} /> Read article on Medium <ExternalArrow /></ButtonLink>
-          </motion.article>
-
-          <motion.div
-            className="article-list"
-            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.18 }}
-            transition={{ duration: 0.55, delay: 0.1, ease: MOTION_EASE }}
-          >
-            <div className="article-list__heading"><Eyebrow icon={FileText}>More from the log</Eyebrow><span>02 / 03</span></div>
-            {WRITING.slice(1).map((article, index) => (
-              <a key={article.title} className="article-row" href={article.link} target="_blank" rel="noopener noreferrer">
-                <span>0{index + 2}</span>
-                <div><h3>{article.title}</h3><p>{article.insight}</p></div>
-                <ExternalArrow />
-              </a>
-            ))}
-            <ButtonLink href={LINKS.medium} external className="button button--secondary"><BookOpen size={16} /> All writing on Medium <ExternalArrow /></ButtonLink>
-          </motion.div>
+        <div className="article-cards">
+          {WRITING.map((article, index) => (
+            <motion.a
+              key={article.title}
+              className="article-card"
+              href={article.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-cursor="READ"
+              initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.16 }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: MOTION_EASE }}
+            >
+              <div className="article-card__meta"><span>Research note {String(index + 1).padStart(2, '0')}</span><ExternalArrow /></div>
+              <h3>{article.title}</h3>
+              <p>{article.insight}{index === 0 ? ' I built a two-origin probe to test the actual impact.' : ''}</p>
+              <span className="article-card__action"><BookOpen size={15} /> Read on Medium</span>
+            </motion.a>
+          ))}
+        </div>
+        <div className="writing-cta">
+          <p>Three published pieces so far. Each starts with curiosity, tests the behavior, and documents the evidence.</p>
+          <ButtonLink href={LINKS.medium} external className="button button--secondary" cursorLabel="MEDIUM"><BookOpen size={16} /> View all writing on Medium <ExternalArrow /></ButtonLink>
         </div>
       </div>
     </section>
@@ -829,8 +818,8 @@ function Journey() {
         <Reveal className="section-intro journey-intro">
           <Eyebrow icon={Route}>Journey · Nov 2023 → now</Eyebrow>
           <h2 id="journey-title">From research<br />to <em>security.</em></h2>
-          <p className="intro-lead">My route into VAPT was built on research, deliberate learning, hands-on practice, and the desire to do technical work.</p>
-          <p>Not a résumé timeline — the pattern matters: attention to detail, consistent delivery, then ownership.</p>
+          <p className="intro-lead">My move into VAPT was built on research, deliberate learning, hands-on practice, and the desire to do technical work.</p>
+          <p>This is not a résumé timeline; it shows the pattern that matters: attention to detail, consistent delivery, then ownership.</p>
         </Reveal>
         <ol className="journey-timeline">
           {JOURNEY.map((item, index) => (
@@ -862,7 +851,7 @@ function Signals() {
         <div className="signals-heading">
           <Eyebrow icon={Award}>Beyond the timeline</Eyebrow>
           <h2 id="signals-title">Growth signals</h2>
-          <p>Recognition and the transition live in the journey. These are the habits I add on top of the day-to-day work.</p>
+          <p>The timeline covers recognition and transition. These are the habits I bring to the work beyond the day-to-day role.</p>
         </div>
         <div className="signals-list">
           {SIGNALS.map(([label, title, detail, Icon], index) => (
@@ -922,15 +911,17 @@ function Contact() {
         <div className="contact-copy">
           <Eyebrow icon={Mail}>Contact · collaborations welcome</Eyebrow>
           <h2 id="contact-title">Let’s build<br />more <em>secure</em><br />things together.</h2>
-          <p>If you need Web or API VAPT that explains impact clearly, or want to discuss browser security tooling, I would be glad to connect.</p>
+          <p>If you need Web or API VAPT with clear evidence and remediation context, or want to discuss browser-security tooling, let’s connect.</p>
           <a className="email-address" href={`mailto:${LINKS.email}`} data-cursor="EMAIL"><Mail size={17} /> {LINKS.email}</a>
         </div>
         <div className="contact-actions">
-          <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME"><Mail size={22} /><span>Email<br />me <ArrowUpRight size={18} /></span></a>
-          <div className="contact-links" aria-label="External profiles">
-            <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer"><LinkedInIcon size={17} /><span>LinkedIn</span><ExternalArrow /></a>
-            <a href={LINKS.medium} target="_blank" rel="noopener noreferrer"><BookOpen size={17} /><span>Medium</span><ExternalArrow /></a>
-            <a href={LINKS.github} target="_blank" rel="noopener noreferrer"><GitHubIcon size={17} /><span>GitHub</span><ExternalArrow /></a>
+          <div className="contact-primary-actions">
+            <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME"><Mail size={22} /><span>Email<br />me <ArrowUpRight size={18} /></span></a>
+            <ButtonLink href={LINKS.linkedin} external className="button contact-linkedin" cursorLabel="LINKEDIN"><LinkedInIcon size={16} /> Connect on LinkedIn <ExternalArrow /></ButtonLink>
+          </div>
+          <div className="contact-links" aria-label="More external profiles">
+            <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" data-cursor="MEDIUM"><BookOpen size={17} /><span>Medium</span><ExternalArrow /></a>
+            <a href={LINKS.github} target="_blank" rel="noopener noreferrer" data-cursor="GITHUB"><GitHubIcon size={17} /><span>GitHub</span><ExternalArrow /></a>
           </div>
           <p className="contact-note"><ShieldCheck size={15} /> Static site · no tracking · no telemetry</p>
         </div>
