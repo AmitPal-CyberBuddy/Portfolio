@@ -44,8 +44,8 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 - **Repo:** https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
 - **Status:** Currently Building / Active Project / In Development — **not production-final**
 - Story: `Fragmented security checks → Taxonomy and normalization → Structured testing workflow → Operator-focused VAPT workspace`
-- 623 original checks normalized into 25 categories, 196 families, 15 attack-chain graphs, 40 payload refs, 12 Burp workflows
-- Context-aware workspace: 7 presets, 18 scoping questions, multi-role matrix, honest coverage states (tested · testing now · blocked · N/A · not tested)
+- Taxonomy: original checks normalized into categories, families, attack-chain graphs, payload refs, and Burp workflows. **Live counts are not quoted here on purpose** — the project is in active development, so the [VAPT-Checklist repo](https://github.com/AmitPal-CyberBuddy/VAPT-Checklist) is the single authoritative source for any number.
+- Context-aware workspace: presets, scoping questions, multi-role matrix, honest coverage states (tested · testing now · blocked · N/A · not tested)
 - Check ≠ coverage ≠ finding — evidence packs, Markdown coverage, CSV export
 - Local-first, no backend, no telemetry, under active development
 
@@ -66,18 +66,31 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 
 ## Sections
 
+Order below is the actual render order in `src/App.jsx` — Hero → `ProfessionalFocusMinimal` → `ApproachMinimal` → `ManifestoLine` → VAPT → CyberBuddy → `ExperimentsMinimal` → `WritingCinematic` → `TransitionMinimal` → `MilestoneMinimal` → Now → Connect.
+
 ```
-HOME — Amit Pal, Application Security, VAPT•Web&API•Tooling•Research, breaking systems tagline, interactive architecture
-→ MANIFESTO — Not a résumé, living archive, Research→Tooling→Writing→Repeat, focus areas
-→ SELECTED WORK 01/03 — Tools that test real systems
-  → VAPT Checklist — In Development story, taxonomy convergence, operator flow
-  → CyberBuddy — Live product, 7 tools, architecture, guides
-→ RESEARCH LOG 02 — Editorial writing, real Medium articles, code visual
-→ JOURNEY 03 — Signal path, not CV, learning by breaking, work/learning/building
-→ MILESTONES — Gold/black, anonymized feedback, protected confidentiality
-→ NOW 04 — Living, concise: Building VAPT Checklist, Writing & Research browser security, Maintaining CyberBuddy
-→ CONNECT 05 — Let's build more secure things, email prominent, authoritative links only, magnetic CTA
+HERO — Amit Pal, Security Analyst (VAPT) • Ampcus Cyber • Since Feb 2026,
+       chips: Web & API Focused / End-to-End VAPT / WB → BLR,
+       jump links to Projects and Writing, interactive node network (client→api→auth→data)
+→ FOCUS 00 — "Who I am today", first-time LinkedIn visitor explanation of VAPT,
+       end-to-end lifecycle with per-step explanations, focus tags, "What makes me different" box
+→ APPROACH — How I work
+→ MANIFESTO BRIDGE — Why this site exists (single line, deliberately short)
+→ PROJECTS 01 — Tools that test real systems
+  → VAPT Checklist — In Development, taxonomy convergence, operator flow
+  → CyberBuddy — Live product, browser security checks, architecture, guides
+  → Experiments — ScriptSentry (Python)
+→ WRITING 02 — Editorial layout, real Medium articles
+→ JOURNEY 03 — From research to security: fresher → recognition → VAPT transition → Performer of the Quarter
+→ GROWTH SIGNALS — Evidence that sits on top of the timeline (building / research / writing)
+       plus one anonymized client appreciation quote; confidentiality protected
+→ NOW 04 — Building VAPT Checklist, Writing & Research, Maintaining CyberBuddy
+→ CONNECT 05 — Email prominent, authoritative links only, magnetic CTA
 ```
+
+Journey owns the chronology and the recognition. Growth Signals deliberately does **not**
+repeat those milestones — it carries only additional evidence, so the same story is never
+told twice on the page.
 
 ## Professional Focus (Authoritative)
 
@@ -123,10 +136,24 @@ Workflow:
 All authoritative content in `src/App.jsx` top:
 
 - `LINKS` — LinkedIn, Medium, GitHub, live projects, email (authoritative only)
-- `WRITING_REAL` — Real Medium articles, verified links, no invented titles
-- `VAPT_CATEGORIES` — 25 categories
-- `CYBERBUDDY_TOOLS` — 7 tools
-- Now section — 3 items: Building, Writing & Research, Maintaining
+- `WRITING` — Real Medium articles, verified links, no invented titles
+- All other section content is inline JSX in `src/App.jsx`, not extracted constants.
+
+There are no `VAPT_CATEGORIES`, `CYBERBUDDY_TOOLS`, or `WRITING_REAL` constants —
+earlier revisions of this README described them, but they were never in the code.
+
+### VAPT Checklist numbers: one authoritative source
+
+The portfolio deliberately renders **no** VAPT Checklist counts. Category, family,
+payload, and check totals change while the project is in active development, so the
+authoritative source is the project itself:
+https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
+
+Any figure quoted in this repo's docs is a snapshot at the time of writing and is
+**not** load-bearing. If a number must be cited, cite the repo, not the docs. This
+also matches `ASSET_DECISIONS.md` — statistics infographics belong on project sites,
+not on the portfolio.
+
 
 Future tools/articles/milestones can be added without redesign — grid and list architectures support it.
 
@@ -144,7 +171,7 @@ Future tools/articles/milestones can be added without redesign — grid and list
 
 **Typography:** Major visual element — Syne 800 for display, Instrument Serif for editorial, Space Grotesk for sans, IBM Plex Mono for technical. Hierarchy strong, readable despite experimental.
 
-**Navigation:** Minimal, supports journey — Work 01, Writing 02, Journey 03, Now 04, Connect 05, time display. One cohesive journey.
+**Navigation:** Minimal, supports journey — Focus 00, Projects 01, Writing 02, Journey 03, Now 04, Connect 05, time display. Mobile nav adds descriptive subtitles ("00 — Who I am now", etc.). One cohesive journey.
 
 **Responsiveness:** Intentionally designed — mobile not just shrunk, grids collapse, typography scales, canvas degrades gracefully.
 
