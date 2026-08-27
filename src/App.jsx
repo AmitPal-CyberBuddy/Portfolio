@@ -472,6 +472,121 @@ function ProfessionalFocusMinimal({ theme }) {
   );
 }
 
+function LoopLabel({ color, children }) {
+  return (
+    <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.16em', textTransform: 'uppercase', color, marginBottom: '8px' }}>{children}</div>
+  );
+}
+
+function LoopPhase({ num, title, icon: Icon, color, hair, head, first, children }) {
+  return (
+    <div className="loop-phase" style={{ position: 'relative', padding: first ? '0 24px 0 0' : '0 24px', borderLeft: first ? 'none' : `1px solid ${hair}` }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '18px' }}>
+        <span style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.14em', color }}>{num}</span>
+        <span style={{ flex: 1, height: '1px', background: hair }}></span>
+        <Icon size={14} color={color} />
+      </div>
+      <div style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(20px, 2vw, 28px)', fontWeight: 800, letterSpacing: '-0.02em', textTransform: 'uppercase', color: head, marginBottom: '14px' }}>{title}</div>
+      {children}
+    </div>
+  );
+}
+
+function LearningLoop({ theme }) {
+  // The learning engine behind the transition. Journey (below) already tells
+  // APPLY; Growth Signals tells BUILD & SHARE. This section supplies the two
+  // missing beats - LEARN and PRACTICE - and ties all four into one loop, so
+  // the growth story reads as a system instead of a resume.
+  const L = theme === 'light';
+  const c = {
+    bg: L ? '#FFFEF9' : '#08080C',
+    head: L ? 'black' : 'white',
+    body: L ? 'rgba(10,10,15,0.66)' : 'rgba(245,243,239,0.6)',
+    soft: L ? 'rgba(10,10,15,0.55)' : 'rgba(245,243,239,0.5)',
+    faint: L ? 'rgba(10,10,15,0.52)' : 'rgba(245,243,239,0.42)',
+    hair: L ? 'rgba(10,10,15,0.12)' : 'rgba(245,243,239,0.12)',
+    accent: L ? '#4E27BF' : '#8A5CFF',
+    blue: L ? '#2B44C4' : '#6E8CFF',
+    green: L ? '#0A6B45' : '#00FF9D',
+    gold: L ? '#7A5C00' : '#FFD60A',
+    chipBg: L ? 'rgba(10,10,15,0.04)' : 'rgba(255,255,255,0.04)',
+  };
+  return (
+    <section id="learning" style={{ position: 'relative', background: c.bg, color: c.body, padding: '100px 48px', borderTop: `1px solid ${c.hair}`, overflow: 'hidden' }}>
+      <div style={{ maxWidth: '1400px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '12px', fontFamily: 'var(--font-mono)', fontSize: '11px', letterSpacing: '0.2em', textTransform: 'uppercase', color: c.soft, marginBottom: '24px' }}>
+          <Lightbulb size={14} color={c.accent} />
+          <span style={{ width: '24px', height: '1px', background: c.soft, display: 'inline-block' }}></span>
+          How I got here — and keep going
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', gap: '16px', marginBottom: '12px' }}>
+          <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 'clamp(36px, 5vw, 56px)', fontWeight: 800, lineHeight: 0.9, letterSpacing: '-0.04em', textTransform: 'uppercase', color: c.head }}>THE LOOP</h2>
+          <span style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', fontSize: 'clamp(16px, 2vw, 22px)', color: c.accent }}>learn → practice → apply → build & share</span>
+        </div>
+        <p style={{ fontFamily: 'var(--font-serif-2)', fontSize: '15px', lineHeight: 1.6, fontWeight: 300, maxWidth: '640px', color: c.body, marginBottom: '56px' }}>
+          The transition below didn't come from a single course. It came from running this loop — structured learning, deliberate practice in labs, real engagements, then building and writing about what survived. It still runs.
+        </p>
+
+        <div className="loop-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0' }}>
+          <LoopPhase num="01" title="Learn" icon={BookOpen} color={c.accent} hair={c.hair} head={c.head} first>
+            <LoopLabel color={c.accent}>Structured</LoopLabel>
+            <div style={{ display: 'grid', gap: '10px', marginBottom: '18px' }}>
+              {[
+                ['API Penetration Testing', 'APIsec University • Jan 2026'],
+                ['API Security Fundamentals ’25', 'APIsec University • Jan 2026'],
+              ].map(([t, m], i) => (
+                <div key={i} style={{ border: `1px solid ${c.hair}`, background: c.chipBg, padding: '10px 12px' }}>
+                  <div style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', fontWeight: 600, color: c.head }}>{t}</div>
+                  <div style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.08em', color: c.soft, marginTop: '4px', textTransform: 'uppercase' }}>{m}</div>
+                </div>
+              ))}
+            </div>
+            <LoopLabel color={c.faint}>Self-directed</LoopLabel>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: c.body, margin: 0 }}>
+              Most of it is self-taught — documentation, research, and reading until the mental model is mine, not borrowed.
+            </p>
+          </LoopPhase>
+
+          <LoopPhase num="02" title="Practice" icon={Terminal} color={c.blue} hair={c.hair} head={c.head}>
+            <LoopLabel color={c.blue}>Hands-on labs</LoopLabel>
+            <div style={{ border: `1px solid ${c.hair}`, background: c.chipBg, padding: '12px', marginBottom: '14px' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '8px' }}>
+                <span style={{ fontFamily: 'var(--font-display)', fontSize: '28px', fontWeight: 800, color: c.head }}>135+</span>
+                <span style={{ fontFamily: 'var(--font-mono)', fontSize: '9px', letterSpacing: '0.1em', color: c.soft, textTransform: 'uppercase' }}>labs • and counting</span>
+              </div>
+              <div style={{ fontFamily: 'var(--font-sans)', fontSize: '12px', lineHeight: 1.5, color: c.body, marginTop: '6px' }}>
+                PortSwigger Web Security Academy, plus lab environments like TryHackMe.
+              </div>
+            </div>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: c.body, margin: 0 }}>
+              I don't read about a flaw — I reproduce it in a lab first, so the theory has hands on it.
+            </p>
+          </LoopPhase>
+
+          <LoopPhase num="03" title="Apply" icon={Target} color={c.green} hair={c.hair} head={c.head}>
+            <LoopLabel color={c.green}>Real engagements</LoopLabel>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: c.body, margin: '0 0 14px' }}>
+              End-to-end VAPT across web applications and APIs — where the practice meets real systems and real stakes.
+            </p>
+            <div style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.08em', color: c.soft, textTransform: 'uppercase', marginBottom: '14px' }}>
+              12+ clients • ~30 web apps • ~10 API collections
+            </div>
+            <a href="#journey" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: c.green, borderBottom: '1px solid currentColor', paddingBottom: '2px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>The transition ↓ <ArrowUpRight size={10} /></a>
+          </LoopPhase>
+
+          <LoopPhase num="04" title="Build & Share" icon={Hammer} color={c.gold} hair={c.hair} head={c.head}>
+            <LoopLabel color={c.gold}>Compound it</LoopLabel>
+            <p style={{ fontFamily: 'var(--font-sans)', fontSize: '13px', lineHeight: 1.6, color: c.body, margin: '0 0 14px' }}>
+              Friction from real work becomes tools — CyberBuddy, VAPT Checklist — and writing about only what I verified.
+            </p>
+            <a href="#writing" style={{ fontFamily: 'var(--font-mono)', fontSize: '10px', letterSpacing: '0.12em', textTransform: 'uppercase', color: c.gold, borderBottom: '1px solid currentColor', paddingBottom: '2px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>Writing & tools ↓ <ArrowUpRight size={10} /></a>
+          </LoopPhase>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function TransitionMinimal({ theme }) {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 75%", "end 30%"] });
@@ -1265,6 +1380,7 @@ export default function App() {
             </div>
           </section>
 
+          <LearningLoop theme={theme} />
           <TransitionMinimal theme={theme} />
 
           <MilestoneMinimal theme={theme} />

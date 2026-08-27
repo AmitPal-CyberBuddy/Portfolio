@@ -296,6 +296,16 @@ img { display: block; max-width: 100%; }
 }
 @keyframes evscan { 0% { left: 0; opacity: 0; } 12% { opacity: 0.16; } 50% { left: 100%; } 62% { opacity: 0; } 100% { left: 100%; opacity: 0; } }
 @keyframes evpulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+/* ——— Learning loop ——— */
+@media (max-width: 1100px) {
+  .loop-grid { grid-template-columns: 1fr 1fr !important; row-gap: 48px !important; }
+  .loop-phase { border-left: none !important; padding: 0 24px 0 0 !important; }
+}
+@media (max-width: 768px) {
+  .loop-grid { grid-template-columns: 1fr !important; row-gap: 44px !important; }
+  .loop-phase { padding: 0 !important; }
+}
 .hero-marquee {
   position: absolute; bottom: 0; left: 0; right: 0;
   border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
