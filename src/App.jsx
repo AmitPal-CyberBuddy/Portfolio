@@ -400,6 +400,7 @@ function ButtonLink({ href, children, className = 'button button--secondary', ex
       {...props}
     >
       {children}
+      {external && <span className="sr-only"> (opens in a new tab)</span>}
     </a>
   );
 }
@@ -626,7 +627,7 @@ function ProjectDataVisual({ type, image, alt }) {
           transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
         />
         <div className="project-visual-frame__scrim" aria-hidden="true" />
-        <div className="project-data" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist release candidate data'}>
+        <div className="project-data" role="group" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist release candidate data'}>
           <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // release candidate'}</span><span>{isLive ? 'Local-first' : 'v1.0.0 RC'}</span></div>
           <div className="project-data__metrics">
             {metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
@@ -766,7 +767,7 @@ function Writing() {
               <div className="article-card__meta"><span>Research note {String(index + 1).padStart(2, '0')}</span><ExternalArrow /></div>
               <h3>{article.title}</h3>
               <p>{article.insight}{index === 0 ? ' I built a two-origin probe to test the actual impact.' : ''}</p>
-              <span className="article-card__action"><BookOpen size={15} /> Read on Medium</span>
+              <span className="article-card__action"><BookOpen size={15} /> Read on Medium <span className="sr-only">(opens in a new tab)</span></span>
             </motion.a>
           ))}
         </div>
@@ -924,8 +925,8 @@ function Contact() {
             <ButtonLink href={LINKS.linkedin} external className="button contact-linkedin" cursorLabel="LINKEDIN"><LinkedInIcon size={16} /> Connect on LinkedIn <ExternalArrow /></ButtonLink>
           </div>
           <div className="contact-links" aria-label="More external profiles">
-            <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" data-cursor="MEDIUM"><BookOpen size={17} /><span>Medium</span><ExternalArrow /></a>
-            <a href={LINKS.github} target="_blank" rel="noopener noreferrer" data-cursor="GITHUB"><GitHubIcon size={17} /><span>GitHub</span><ExternalArrow /></a>
+            <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" data-cursor="MEDIUM"><BookOpen size={17} /><span>Medium <span className="sr-only">(opens in a new tab)</span></span><ExternalArrow /></a>
+            <a href={LINKS.github} target="_blank" rel="noopener noreferrer" data-cursor="GITHUB"><GitHubIcon size={17} /><span>GitHub <span className="sr-only">(opens in a new tab)</span></span><ExternalArrow /></a>
           </div>
           <p className="contact-note"><ShieldCheck size={15} /> Static site · no tracking · no telemetry</p>
         </div>
