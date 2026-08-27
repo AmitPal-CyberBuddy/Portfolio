@@ -45,6 +45,7 @@ const NAV_ITEMS = [
   { id: 'learning', label: 'Loop' },
   { id: 'journey', label: 'Journey' },
   { id: 'now', label: 'Now' },
+  { id: 'resume', label: 'Resume' },
   { id: 'connect', label: 'Contact' },
 ];
 
@@ -496,6 +497,7 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
               {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />} Use {theme === 'dark' ? 'light' : 'dark'} mode
             </button>
             <a href={`mailto:${LINKS.email}`} tabIndex={menuOpen ? 0 : -1}><Mail size={14} /> {LINKS.email}</a>
+            <a href="#" aria-disabled="true" style={{pointerEvents:"none",opacity:0.55}} tabIndex={menuOpen ? 0 : -1}><Award size={14} /> Download CV (PDF)</a>
           </div>
         </div>
       </nav>
@@ -517,20 +519,31 @@ function Hero() {
         >
           <Eyebrow icon={ShieldCheck}>Amit Pal · Security Analyst (VAPT) at Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
-            <span>I test web apps</span>
-            <span>and APIs.</span>
-            <strong>I validate what matters.</strong>
+            <span>I secure Web Apps</span>
+            <span>&amp; APIs.</span>
+            <strong>Finding logic flaws before attackers do.</strong>
           </h1>
-          <p className="hero__lead">Practical Web and API security: I scope the work, test manually, validate impact, and provide clear remediation guidance.</p>
+          <p className="hero__lead">Finding high-impact logic flaws in Web Applications &amp; APIs — backed by proof-of-concept evidence, practical remediation guidance, and reduced business risk.</p>
           <p className="hero__body">I build local-first tools to make authorized security testing clearer, faster, and easier to document.</p>
           <div className="tag-row hero__tags" aria-label="Specialties">
             <span>Web &amp; API security</span>
             <span>Manual validation</span>
             <span>Evidence-led reporting</span>
           </div>
+          <div className="hero-evidence-preview" aria-label="Quick evidence preview">
+            <div className="preview-label">INT-0417 · Authorization logic gap</div>
+            <div className="preview-compare"><span>Expected</span><code>403 Forbidden</code><span>Observed</span><code>200 OK</code></div>
+            <p className="preview-note">User identity valid · endpoint did not re-check role elevation.</p>
+          </div>
           <div className="button-row">
             <ButtonLink href="#work" className="button button--primary"><Hammer size={16} /> View selected work <ArrowUpRight size={15} /></ButtonLink>
             <ButtonLink href="#writing"><BookOpen size={16} /> Read research notes</ButtonLink>
+            <ButtonLink href="#" className="button button--secondary is-disabled" aria-label="Resume download coming soon" aria-disabled="true" style={{pointerEvents:"none",opacity:0.55}}><Award size={16} /> Download CV (PDF) <ArrowUpRight size={15} /></ButtonLink>
+          </div>
+          <div className="stats-bar" aria-label="Key metrics">
+            <div><strong>135+</strong> labs (PortSwigger / TryHackMe)</div>
+            <div><strong>623</strong> validated checklist items</div>
+            <div><strong>7</strong> live tools built</div>
           </div>
         </motion.div>
 
@@ -597,6 +610,29 @@ function Focus() {
                 <Eyebrow icon={Lightbulb}>Beyond tool output</Eyebrow>
                 <p>I combine hands-on testing with focused tools, research, and clear write-ups—so observations become reproducible evidence and practical next steps.</p>
               </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+      <section id="scenario" className="section section--soft scenario-section" aria-labelledby="scenario-title">
+        <div className="shell scenario-layout">
+          <Reveal className="section-intro scenario-intro">
+            <Eyebrow icon={ShieldCheck}>Case study · anonymized</Eyebrow>
+            <h2 id="scenario-title">The authorization gap<br /><em>in your banner.</em></h2>
+            <p className="intro-lead">Breaking down the logic flaw shown in the evidence banner: expected 403, observed 200. How it happens, why it matters, and what to check next.</p>
+          </Reveal>
+          <Reveal className="scenario-body" delay={0.08}>
+            <div className="panel">
+              <h3>What I observed</h3>
+              <p><code>GET /api/admin/users</code> returned <code>200 OK</code> with identity <code>user</code> — no role elevation required. The endpoint did not re-validate authorization after session establishment.</p>
+            </div>
+            <div className="panel panel--accent">
+              <h3>Why it is high-impact</h3>
+              <p>Access to admin user listings exposes PII, roles, and session identifiers — not a disclosure glitch, but a logic gap with direct data exposure. Remediation: enforce server-side authorization checks at the endpoint, not just at the route level.</p>
+            </div>
+            <div className="panel">
+              <h3>How I validated</h3>
+              <p>Manual replay in Repeater with valid session, no privilege change, repeated across three endpoints. Evidence captured with request/response pairs — reproducible by the client without custom tooling.</p>
             </div>
           </Reveal>
         </div>
@@ -691,21 +727,21 @@ function Work() {
         <Reveal className="section-heading section-heading--split">
           <div>
             <Eyebrow icon={Hammer}>Projects · independent security work</Eyebrow>
-            <h2 id="work-title">Tools for<br /><em>clearer testing.</em></h2>
+            <h2 id="work-title">Custom Tooling · <br /><em>local-first utilities.</em></h2>
           </div>
-          <p>Independent security tools designed to make investigation, evidence, and security conversations clearer.</p>
+          <p>Local-first utilities built for authorized testing and rapid evidence capture — designed to make investigation, evidence, and security conversations clearer.</p>
         </Reveal>
 
         <div className="project-stack">
           <ProjectCard
             type="live"
-            eyebrow="CyberBuddy · live product"
+            eyebrow="CyberBuddy · featured live product"
             title="CyberBuddy"
             summary="Seven browser-based security checks in one evidence-led, local-first suite."
-            detail="I built CyberBuddy because checks for clickjacking, headers, CORS, JWT, and CSRF can be scattered or unnecessarily heavy. Its browser-first workflow helps demonstrate security issues with clear, export-ready evidence."
+            detail="I built CyberBuddy because manual checks for clickjacking, headers, CORS, JWT, and CSRF are scattered or slow. It saves time during assessments by unifying evidence capture, and its local-first workflow lets reviewers audit scripting style instantly. Seven checks — faster validation, clearer documentation."
             image="cyberbuddy-tools.jpg"
             alt="CyberBuddy browser security tools interface"
-            tags={['7 tools live', 'Local-first', 'Evidence-led']}
+            tags={['7 tools live', 'Local-first', 'Evidence-led', 'Featured']}
             primaryLink={LINKS.cyberbuddyLive}
             primaryLabel="Live preview"
             secondaryLink={LINKS.cyberbuddyRepo}
@@ -716,7 +752,7 @@ function Work() {
             eyebrow="VAPT Checklist · v1.0.0-r29 release candidate"
             title="VAPT Checklist"
             summary="A local-first, context-aware workspace for Web and API security testing."
-            detail="Fragmented checklists miss context. VAPT Checklist connects taxonomy, scope, evidence, and honest coverage states for clearer manual testing — with browser and visual QA sign-off still pending."
+            detail="Fragmented checklists miss context and slow assessments down. VAPT Checklist connects taxonomy, scope, evidence, and honest coverage states — reducing manual testing friction and making 623 validated items faster to navigate during live assessments."
             image="vapt-workflow.jpg"
             alt="VAPT Checklist structured security workflow"
             tags={['623 validated items', '25 categories', 'Release candidate']}
@@ -751,10 +787,10 @@ function Writing() {
       <div className="shell">
         <Reveal className="section-heading section-heading--split">
           <div>
-            <Eyebrow icon={PenTool}>Writing · research notes</Eyebrow>
-            <h2 id="writing-title">Research<br /><em>notes.</em></h2>
+            <Eyebrow icon={PenTool}>Technical Writing · deep dives</Eyebrow>
+            <h2 id="writing-title">Technical Writing · <br /><em>deep dives.</em></h2>
           </div>
-          <p>I write about the gap between security specifications and browser behavior—what happens in practice, why it matters, and how I verified it.</p>
+          <p>Deep dives into browser specs, CORS behavior, request anomalies, and authorization logic gaps — backed by evidence and reproduction, not assumptions.</p>
         </Reveal>
 
         <div className="article-cards">
@@ -796,6 +832,12 @@ function LearningLoop() {
           <Eyebrow icon={Lightbulb}>How I learn and apply</Eyebrow>
           <h2 id="loop-title">The loop</h2>
           <p className="intro-lead">Learn, practice, apply, then build and share. It is how I have grown into the work—and how I keep improving it.</p>
+          <div className="loop-badges" aria-label="Continuous learning credentials">
+            <span className="badge">API Sec University</span>
+            <span className="badge">PortSwigger Labs</span>
+            <span className="badge">TryHackMe</span>
+            <span className="badge">135+ labs</span>
+          </div>
         </div>
         <ol className="loop-grid">
           {LOOP_STEPS.map((step, index) => {
@@ -915,6 +957,39 @@ function Now() {
   );
 }
 
+function Resume() {
+  return (
+    <section id="resume" className="section resume-section" aria-labelledby="resume-title">
+      <div className="shell resume-layout">
+        <Reveal className="section-intro resume-intro">
+          <Eyebrow icon={Award}>Resume · updated 2026</Eyebrow>
+          <h2 id="resume-title">Resume / <em>CV.</em></h2>
+          <p className="intro-lead">Updated security analyst resume covering VAPT work, custom tooling, and continuous lab credentials.</p>
+          <p>Includes authorization logic gaps, evidence-led reporting methodology, and practical remediation guidance from authorized web application and API testing.</p>
+        </Reveal>
+        <Reveal className="resume-content" delay={0.08}>
+          <div className="panel panel--accent resume-panel">
+            <div className="resume-badges">
+              <div className="badge-row">
+                <span className="badge">API Sec University</span>
+                <span className="badge">PortSwigger Labs</span>
+                <span className="badge">TryHackMe</span>
+              </div>
+              <p className="badge-desc">API Penetration Testing · API Security Fundamentals · 135+ labs completed · January 2026 → present</p>
+            </div>
+            <div className="resume-cta-block">
+              <a href="#" className="button button--primary is-disabled" aria-label="Resume download coming soon" aria-disabled="true" style={{pointerEvents:'none', opacity:0.55}}>
+                <Award size={16} /> Download CV / Resume (PDF) — coming soon <ArrowUpRight size={15} />
+              </a>
+              <p className="resume-note"><em>Updated PDF will be activated here once shared — just drop it in /public/assets/.</em></p>
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function Contact() {
   return (
     <section id="connect" className="section contact-section" aria-labelledby="contact-title">
@@ -929,6 +1004,7 @@ function Contact() {
         <div className="contact-actions">
           <div className="contact-primary-actions">
             <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME"><Mail size={22} /><span>Email<br />me <ArrowUpRight size={18} /></span></a>
+            <a href="#" className="email-cta is-disabled" aria-label="Resume download coming soon" aria-disabled="true" data-cursor="RESUME" style={{pointerEvents:'none', opacity:0.55}}><Award size={22} /><span>Download<br />CV — soon <ArrowUpRight size={18} /></span></a>
             <ButtonLink href={LINKS.linkedin} external className="button contact-linkedin" cursorLabel="LINKEDIN"><LinkedInIcon size={16} /> Connect on LinkedIn <ExternalArrow /></ButtonLink>
           </div>
           <div className="contact-links" aria-label="More external profiles">
@@ -947,7 +1023,14 @@ function Footer() {
     <footer className="site-footer">
       <div className="shell site-footer__inner">
         <span>© 2026 Amit Pal · Application Security</span>
-        <div><a href="#top">Back to top ↑</a><span aria-hidden="true">·</span><a href={`mailto:${LINKS.email}`}>Email</a></div>
+        <div>
+          <a href="#top">Back to top ↑</a><span aria-hidden="true">·</span>
+          <a href="#" aria-disabled="true" style={{pointerEvents:"none",opacity:0.55}}>Resume</a><span aria-hidden="true">·</span>
+          <a href={`mailto:${LINKS.email}`}><Mail size={13} style={{verticalAlign:'-2px'}}/> Email</a><span aria-hidden="true">·</span>
+          <a href={LINKS.github} target="_blank" rel="noopener noreferrer"><GitHubIcon size={13} style={{verticalAlign:'-2px'}}/> GitHub</a><span aria-hidden="true">·</span>
+          <a href={LINKS.medium} target="_blank" rel="noopener noreferrer"><BookOpen size={13} style={{verticalAlign:'-2px'}}/> Medium</a><span aria-hidden="true">·</span>
+          <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer"><LinkedInIcon size={13} style={{verticalAlign:'-2px'}}/> LinkedIn</a>
+        </div>
       </div>
     </footer>
   );
@@ -983,12 +1066,13 @@ export default function App() {
         <Hero />
         <Work />
         <Focus />
-        <Writing />
         <LearningLoop />
+        <Writing />
         <Journey />
         <Signals />
         <Now />
         <Contact />
+        <Resume />
       </main>
       <Footer />
       <AnimatePresence>{loading && <LoadingScreen />}</AnimatePresence>
