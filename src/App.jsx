@@ -39,9 +39,10 @@ const LINKS = {
 };
 
 const NAV_ITEMS = [
-  { id: 'focus', label: 'Focus' },
   { id: 'work', label: 'Projects' },
+  { id: 'focus', label: 'Focus' },
   { id: 'writing', label: 'Writing' },
+  { id: 'learning', label: 'Loop' },
   { id: 'journey', label: 'Journey' },
   { id: 'now', label: 'Now' },
   { id: 'connect', label: 'Contact' },
@@ -78,7 +79,7 @@ const LOOP_STEPS = [
     title: 'Learn',
     icon: BookOpen,
     tone: 'violet',
-    detail: 'Structured API security learning, then self-directed study until the mental model is mine.',
+    detail: 'Structured API-security learning, followed by self-directed study until I understand the underlying model.',
     meta: 'APIsec University · documentation · research',
   },
   {
@@ -86,7 +87,7 @@ const LOOP_STEPS = [
     title: 'Practice',
     icon: TerminalSquare,
     tone: 'blue',
-    detail: 'I reproduce flaws in labs before carrying a theory into a real engagement.',
+    detail: 'I reproduce issues in labs before applying the underlying ideas to authorized work.',
     meta: '135+ labs · PortSwigger · TryHackMe',
   },
   {
@@ -94,7 +95,7 @@ const LOOP_STEPS = [
     title: 'Apply',
     icon: Target,
     tone: 'green',
-    detail: 'End-to-end VAPT across web applications and APIs, where practice meets real stakes.',
+    detail: 'End-to-end VAPT across web applications and APIs, where structured practice meets real-world constraints.',
     meta: 'Web apps · API collections · authorized testing',
   },
   {
@@ -102,7 +103,7 @@ const LOOP_STEPS = [
     title: 'Build & share',
     icon: Hammer,
     tone: 'gold',
-    detail: 'Friction from real work becomes tools, research, and writing about what I verified.',
+    detail: 'Friction from real work becomes tools, research notes, and writing grounded in what I verified.',
     meta: 'CyberBuddy · VAPT Checklist · Medium',
   },
 ];
@@ -110,9 +111,9 @@ const LOOP_STEPS = [
 const JOURNEY = [
   {
     date: 'Nov 2023',
-    title: 'I joined as a fresher',
+    title: 'I started in research',
     role: 'Ampcus Cyber · Lead Generation Executive',
-    detail: 'I began in research and analysis: OSINT, market research, target profiling, and structuring information. That attention to detail became my foundation for security.',
+    detail: 'I started with research and analysis: OSINT, market research, target profiling, and structured information. That attention to detail became a foundation for security work.',
   },
   {
     date: '2024 → early 2025',
@@ -122,23 +123,23 @@ const JOURNEY = [
   },
   {
     date: 'Feb 2026',
-    title: 'I moved into VAPT',
+    title: 'I transitioned into VAPT',
     role: 'Security Analyst · VAPT Team',
-    detail: 'I transitioned into hands-on technical work: research and analysis, deliberate learning, then cybersecurity testing.',
+    detail: 'I moved into hands-on technical work: research and analysis, deliberate learning, then cybersecurity testing.',
     current: true,
   },
   {
     date: 'Q1 2026',
-    title: 'I took ownership',
+    title: 'Recognized for ownership',
     role: 'Performer of the Quarter · VAPT',
-    detail: 'Soon after transitioning, I focused on learning fast and taking ownership. The recognition means ownership to me, not just an award.',
+    detail: 'Soon after transitioning, I focused on learning quickly and taking ownership. The recognition reflects that approach, not just an award.',
   },
 ];
 
 const SIGNALS = [
-  ['I build', 'Tools I ship on my own time', 'CyberBuddy is live, and VAPT Checklist is moving through release-candidate QA. Both started with friction I met during real engagements.', Hammer],
-  ['I go deeper', 'Spec vs reality', 'I research what browsers actually do versus what the specs say: CORS, JWT, CSP, client-side crypto, and script-level analysis.', Search],
-  ['I share', 'Writing only what I verified', 'My Medium articles are grounded in testing and reproduction, with tools that help demonstrate the point.', PenTool],
+  ['I build', 'Tools I ship independently', 'CyberBuddy is live, and VAPT Checklist is moving through release-candidate QA. Both began with friction I encountered during real engagements.', Hammer],
+  ['I go deeper', 'Where specifications meet behavior', 'I research how browsers behave in practice: CORS, JWT, CSP, client-side crypto, and script-level analysis.', Search],
+  ['I share', 'Writing grounded in verification', 'My Medium articles are grounded in testing and reproduction, with tools that help demonstrate the point.', PenTool],
 ];
 
 const NOW_ITEMS = [
@@ -167,8 +168,8 @@ const NOW_ITEMS = [
     icon: ShieldCheck,
   },
   {
-    label: 'Learning',
-    detail: 'Mobile PT next, expanding from Web & API security into the mobile attack surface.',
+    label: 'Learning next',
+    detail: 'Next: mobile penetration testing, expanding from Web and API security into the mobile attack surface.',
     href: '#learning',
     action: 'See the loop',
     tone: 'gold',
@@ -270,7 +271,7 @@ function LoadingScreen() {
       aria-label="Loading portfolio"
     >
       <div className="loader__top"><span><ShieldCheck size={15} /> Amit Pal · application security</span><span>2026</span></div>
-      <div className="loader__main"><span>Amit</span><strong>Pal</strong><em>Find the gap · prove the impact.</em></div>
+      <div className="loader__main"><span>Amit</span><strong>Pal</strong><em>Test deliberately · validate impact.</em></div>
       <div className="loader__bar"><motion.span initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.85, ease: MOTION_EASE }} /></div>
       <div className="loader__bottom"><span>Web · API · VAPT · tooling</span><span>Loading experience</span></div>
     </motion.div>
@@ -506,22 +507,22 @@ function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.08, ease: MOTION_EASE }}
         >
-          <Eyebrow icon={ShieldCheck}>Amit Pal · Security Analyst (VAPT) · Ampcus Cyber</Eyebrow>
+          <Eyebrow icon={ShieldCheck}>Amit Pal · Security Analyst (VAPT) at Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
             <span>I test web apps</span>
-            <span>&amp; APIs.</span>
-            <strong>Find what others miss.</strong>
+            <span>and APIs.</span>
+            <strong>I validate what matters.</strong>
           </h1>
-          <p className="hero__lead">Practical Web Application &amp; API Security. I scope the work, test manually, validate impact, and provide clear remediation guidance.</p>
-          <p className="hero__body">I build local-first tools that help prove security issues with evidence — always for authorized testing.</p>
+          <p className="hero__lead">Practical Web and API security: I scope the work, test manually, validate impact, and provide clear remediation guidance.</p>
+          <p className="hero__body">I build local-first tools to make authorized security testing clearer, faster, and easier to document.</p>
           <div className="tag-row hero__tags" aria-label="Specialties">
-            <span>Web &amp; API focused</span>
-            <span>End-to-end VAPT</span>
+            <span>Web &amp; API security</span>
             <span>Manual validation</span>
+            <span>Evidence-led reporting</span>
           </div>
           <div className="button-row">
-            <ButtonLink href="#work" className="button button--primary"><Hammer size={16} /> Explore projects <ArrowUpRight size={15} /></ButtonLink>
-            <ButtonLink href="#writing"><BookOpen size={16} /> Read the research log</ButtonLink>
+            <ButtonLink href="#work" className="button button--primary"><Hammer size={16} /> View selected work <ArrowUpRight size={15} /></ButtonLink>
+            <ButtonLink href="#writing"><BookOpen size={16} /> Read research notes</ButtonLink>
           </div>
         </motion.div>
 
@@ -557,12 +558,12 @@ function Focus() {
       <section id="focus" className="section section--soft" aria-labelledby="focus-title">
         <div className="shell focus-layout">
           <Reveal className="section-intro focus-intro">
-            <Eyebrow icon={Target}>Focus · what I do today</Eyebrow>
+            <Eyebrow icon={Target}>Focus · what I do</Eyebrow>
             <p className="role-badge"><span className="status-dot" /><span>Current role</span><b>Security Analyst (VAPT) · Ampcus Cyber · Feb 2026 → now</b></p>
             <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
-            <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. Effective testing is more than a tool output: it means understanding a system well enough to test it responsibly.</p>
-            <p>I work across client environments and APIs, with a Web &amp; API focus. VAPT — Vulnerability Assessment &amp; Penetration Testing — is the work of finding, validating, and explaining the security issues that matter.</p>
-            <div className="trust-note"><Fingerprint size={16} /><span>Credible, practical, and authorized-only testing.</span></div>
+            <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. I assess web applications and APIs by understanding the system, testing it responsibly, and validating real impact.</p>
+            <p>VAPT — Vulnerability Assessment and Penetration Testing — is the practice of finding, validating, and clearly explaining security issues that need attention.</p>
+            <div className="trust-note"><Fingerprint size={16} /><span>Authorized, evidence-led security testing.</span></div>
           </Reveal>
 
           <Reveal className="focus-content" delay={0.08}>
@@ -585,8 +586,8 @@ function Focus() {
                 </div>
               </div>
               <div className="panel">
-                <Eyebrow icon={Lightbulb}>What makes me different</Eyebrow>
-                <p>I test real systems, build tools that help during engagements, research edge cases, and write about spec versus reality.</p>
+                <Eyebrow icon={Lightbulb}>Beyond tool output</Eyebrow>
+                <p>I combine hands-on testing with focused tools, research, and clear write-ups—so observations become reproducible evidence and practical next steps.</p>
               </div>
             </div>
           </Reveal>
@@ -596,7 +597,7 @@ function Focus() {
         <div className="shell approach-band__inner">
           <Eyebrow icon={Route}>How I work</Eyebrow>
           <p><Search size={15} /> Test <i>→</i> <Hammer size={15} /> Build <i>→</i> <Lightbulb size={15} /> Research <i>→</i> <PenTool size={15} /> Write</p>
-          <span>Identifying vulnerabilities before attackers do.</span>
+          <span>From testing to practical next steps.</span>
         </div>
       </section>
     </>
@@ -682,9 +683,9 @@ function Work() {
         <Reveal className="section-heading section-heading--split">
           <div>
             <Eyebrow icon={Hammer}>Projects · independent security work</Eyebrow>
-            <h2 id="work-title">Tools that<br /><em>test real systems.</em></h2>
+            <h2 id="work-title">Tools for<br /><em>clearer testing.</em></h2>
           </div>
-          <p>Practical tooling, built to make investigation, evidence, and security conversations clearer.</p>
+          <p>Independent security tools designed to make investigation, evidence, and security conversations clearer.</p>
         </Reveal>
 
         <div className="project-stack">
@@ -723,7 +724,7 @@ function Work() {
           <div>
             <Eyebrow icon={TerminalSquare}>Other experiment · Python</Eyebrow>
             <h3>ScriptSentry</h3>
-            <p>A Python experiment in line-by-line script analysis to surface risk beyond browser security work.</p>
+            <p>A Python experiment in line-by-line script analysis, extending the work beyond browser security.</p>
           </div>
           <div className="experiment-card__aside">
             <span>Experimental · 2026</span>
@@ -742,10 +743,10 @@ function Writing() {
       <div className="shell">
         <Reveal className="section-heading section-heading--split">
           <div>
-            <Eyebrow icon={PenTool}>Writing · research log</Eyebrow>
+            <Eyebrow icon={PenTool}>Writing · research notes</Eyebrow>
             <h2 id="writing-title">Research<br /><em>notes.</em></h2>
           </div>
-          <p>I write about the gap between security specifications and browser behavior — what actually happens, why it matters, and how I verified it.</p>
+          <p>I write about the gap between security specifications and browser behavior—what happens in practice, why it matters, and how I verified it.</p>
         </Reveal>
 
         <div className="article-cards">
@@ -770,7 +771,7 @@ function Writing() {
           ))}
         </div>
         <div className="writing-cta">
-          <p>{WRITING.length} published pieces so far. Each starts with curiosity, tests the behavior, and documents the evidence.</p>
+          <p>{WRITING.length} published pieces so far. Each begins with a question, tests the behavior, and documents the evidence.</p>
           <ButtonLink href={LINKS.medium} external className="button button--secondary" cursorLabel="MEDIUM"><BookOpen size={16} /> View all writing on Medium <ExternalArrow /></ButtonLink>
         </div>
       </div>
@@ -784,9 +785,9 @@ function LearningLoop() {
     <section id="learning" className="section loop-section" aria-labelledby="loop-title">
       <div className="shell">
         <div className="section-heading loop-heading">
-          <Eyebrow icon={Lightbulb}>The learning engine</Eyebrow>
+          <Eyebrow icon={Lightbulb}>How I learn and apply</Eyebrow>
           <h2 id="loop-title">The loop</h2>
-          <p className="intro-lead">Learn, practice, apply, then build and share. It is the system behind the transition, and it still runs.</p>
+          <p className="intro-lead">Learn, practice, apply, then build and share. It is how I have grown into the work—and how I keep improving it.</p>
         </div>
         <ol className="loop-grid">
           {LOOP_STEPS.map((step, index) => {
@@ -821,8 +822,8 @@ function Journey() {
         <Reveal className="section-intro journey-intro">
           <Eyebrow icon={Route}>Journey · Nov 2023 → now</Eyebrow>
           <h2 id="journey-title">From research<br />to <em>security.</em></h2>
-          <p className="intro-lead">My move into VAPT was built on research, deliberate learning, hands-on practice, and the desire to do technical work.</p>
-          <p>This is not a résumé timeline; it shows the pattern that matters: attention to detail, consistent delivery, then ownership.</p>
+          <p className="intro-lead">My move into VAPT was shaped by research, deliberate learning, hands-on practice, and a desire to take on technical work.</p>
+          <p>The timeline shows a clear thread: attention to detail, consistent delivery, and growing ownership.</p>
         </Reveal>
         <ol className="journey-timeline">
           {JOURNEY.map((item, index) => (
@@ -854,7 +855,7 @@ function Signals() {
         <div className="signals-heading">
           <Eyebrow icon={Award}>Beyond the timeline</Eyebrow>
           <h2 id="signals-title">Growth signals</h2>
-          <p>The timeline covers recognition and transition. These are the habits I bring to the work beyond the day-to-day role.</p>
+          <p>The timeline covers recognition and transition. These are the habits I bring beyond day-to-day delivery.</p>
         </div>
         <div className="signals-list">
           {SIGNALS.map(([label, title, detail, Icon], index) => (
@@ -881,7 +882,7 @@ function Now() {
         <div className="section-intro">
           <Eyebrow icon={Clock3}>Now · August 2026</Eyebrow>
           <h2 id="now-title">What I am<br /><em>working on.</em></h2>
-          <p className="intro-lead">A living snapshot of current work, writing, and learning.</p>
+          <p className="intro-lead">A current snapshot of work, writing, maintenance, and learning.</p>
           <div className="now-meta">
             <p><MapPin size={16} /> Roots in West Bengal · building in Bengaluru · open to remote collaboration</p>
             <p><Clock3 size={16} /> Current time in India · updated August 2026</p>
@@ -913,8 +914,8 @@ function Contact() {
       <div className="shell contact-layout">
         <div className="contact-copy">
           <Eyebrow icon={Mail}>Contact · collaborations welcome</Eyebrow>
-          <h2 id="contact-title">Let’s build<br />more <em>secure</em><br />things together.</h2>
-          <p>If you need Web or API VAPT with clear evidence and remediation context, or want to discuss browser-security tooling, let’s connect.</p>
+          <h2 id="contact-title">Let’s make<br />security <em>clearer</em><br />together.</h2>
+          <p>Need Web or API VAPT with clear evidence and practical remediation context? Or want to discuss browser-security tooling? Let’s connect.</p>
           <a className="email-address" href={`mailto:${LINKS.email}`} data-cursor="EMAIL"><Mail size={17} /> {LINKS.email}</a>
         </div>
         <div className="contact-actions">
@@ -972,8 +973,8 @@ export default function App() {
       />
       <main id="main">
         <Hero />
-        <Focus />
         <Work />
+        <Focus />
         <Writing />
         <LearningLoop />
         <Journey />

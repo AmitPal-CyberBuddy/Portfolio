@@ -63,7 +63,7 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 
 ## Sections
 
-Order below is the actual render order in `src/App.jsx` — Hero → Focus → How I work → Projects → Writing → The Loop → Journey → Growth Signals → Now → Contact → Footer.
+Order below is the actual render order in `src/App.jsx` — Hero → Projects → Focus → How I work → Writing → The Loop → Journey → Growth Signals → Now → Contact → Footer.
 
 ```
 HERO — Amit Pal, Security Analyst (VAPT) • Ampcus Cyber; direct routes to projects and writing,
