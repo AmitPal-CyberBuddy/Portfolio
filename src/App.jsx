@@ -31,7 +31,9 @@ const LINKS = {
   linkedin: 'https://www.linkedin.com/in/amitpal-wb/',
   medium: 'https://amitpxl.medium.com/',
   cyberbuddyLive: 'https://amitpal-cyberbuddy.github.io/CyberBuddy/',
+  cyberbuddyRepo: 'https://github.com/AmitPal-CyberBuddy/CyberBuddy',
   vaptLive: 'https://amitpal-cyberbuddy.github.io/VAPT-Checklist/',
+  vaptRepo: 'https://github.com/AmitPal-CyberBuddy/VAPT-Checklist',
   scriptSentry: 'https://github.com/AmitPal-CyberBuddy/ScriptSentry',
   email: 'amitpal.secure@gmail.com',
 };
@@ -50,7 +52,6 @@ const WRITING = [
     title: 'CORS Misconfiguration: When Reflecting the Origin Is Not the Whole Story',
     insight: 'Reflection is not exploitation. Proving authenticated impact matters.',
     link: 'https://amitpxl.medium.com/cors-misconfiguration-when-reflecting-the-origin-is-not-the-whole-story-956e2e6e18bc',
-    featured: true,
   },
   {
     title: "HTTP Request Smuggling vs Pipelining: Why They're Often Confused",
@@ -326,6 +327,7 @@ function useTheme() {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     document.documentElement.style.colorScheme = theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0a1019' : '#f4f7fb');
     window.localStorage.setItem('theme', theme);
   }, [theme]);
 
@@ -556,6 +558,7 @@ function Focus() {
         <div className="shell focus-layout">
           <Reveal className="section-intro focus-intro">
             <Eyebrow icon={Target}>Focus · what I do today</Eyebrow>
+            <p className="role-badge"><span className="status-dot" /><span>Current role</span><b>Security Analyst (VAPT) · Ampcus Cyber · Feb 2026 → now</b></p>
             <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
             <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. Effective testing is more than a tool output: it means understanding a system well enough to test it responsibly.</p>
             <p>I work across client environments and APIs, with a Web &amp; API focus. VAPT — Vulnerability Assessment &amp; Penetration Testing — is the work of finding, validating, and explaining the security issues that matter.</p>
@@ -696,8 +699,8 @@ function Work() {
             tags={['7 tools live', 'Local-first', 'Non-destructive']}
             primaryLink={LINKS.cyberbuddyLive}
             primaryLabel="Live preview"
-            secondaryLink={LINKS.github}
-            secondaryLabel="GitHub profile"
+            secondaryLink={LINKS.cyberbuddyRepo}
+            secondaryLabel="View GitHub"
           />
           <ProjectCard
             type="development"
@@ -710,7 +713,7 @@ function Work() {
             tags={['Operator-focused', 'Taxonomy', 'Evidence-led']}
             primaryLink={LINKS.vaptLive}
             primaryLabel="Live preview"
-            secondaryLink="https://github.com/AmitPal-CyberBuddy/VAPT-Checklist"
+            secondaryLink={LINKS.vaptRepo}
             secondaryLabel="View GitHub"
             reverse
           />
@@ -767,7 +770,7 @@ function Writing() {
           ))}
         </div>
         <div className="writing-cta">
-          <p>Three published pieces so far. Each starts with curiosity, tests the behavior, and documents the evidence.</p>
+          <p>{WRITING.length} published pieces so far. Each starts with curiosity, tests the behavior, and documents the evidence.</p>
           <ButtonLink href={LINKS.medium} external className="button button--secondary" cursorLabel="MEDIUM"><BookOpen size={16} /> View all writing on Medium <ExternalArrow /></ButtonLink>
         </div>
       </div>

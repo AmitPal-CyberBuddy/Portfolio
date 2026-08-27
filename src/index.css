@@ -278,7 +278,11 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 }
 .section h2 em { color: var(--accent); font-family: var(--font-serif); font-size: 0.93em; font-weight: 400; letter-spacing: -0.045em; text-transform: none; }
 .section-intro { max-width: 30rem; }
-.section-intro > p:not(.intro-lead) { margin: 1rem 0 0; color: var(--text-secondary); }
+.section-intro > p:not(.intro-lead):not(.role-badge) { margin: 1rem 0 0; color: var(--text-secondary); }
+.role-badge { display: flex; flex-wrap: wrap; align-items: center; gap: 0.45rem 0.55rem; width: fit-content; margin: 0 0 1.2rem; padding: 0.45rem 0.6rem; color: var(--text-secondary); background: color-mix(in srgb, var(--surface) 86%, transparent); border: 1px solid var(--border); font: 600 0.61rem/1.35 var(--font-mono); letter-spacing: 0.055em; text-transform: uppercase; }
+.role-badge .status-dot { width: 6px; height: 6px; }
+.role-badge > span:nth-child(2) { color: var(--accent); }
+.role-badge b { color: var(--text); font-weight: 600; }
 .intro-lead { margin: 1.35rem 0 0; color: var(--text-secondary); font: 400 clamp(1.12rem, 1.6vw, 1.32rem)/1.48 var(--font-serif); }
 .tag-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .tag-row span {
