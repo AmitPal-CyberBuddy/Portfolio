@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, MotionConfig, motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowUpRight,
   Award,
@@ -176,6 +177,105 @@ const NOW_ITEMS = [
 ];
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
+const MOTION_EASE = [0.16, 1, 0.3, 1];
+
+function Reveal({ children, className, delay = 0, amount = 0.18 }) {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount }}
+      transition={{ duration: 0.6, delay, ease: MOTION_EASE }}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+function CustomCursor() {
+  const dotRef = useRef(null);
+  const ringRef = useRef(null);
+  const [enabled, setEnabled] = useState(false);
+  const [label, setLabel] = useState('');
+  const [hovering, setHovering] = useState(false);
+
+  useEffect(() => {
+    const query = window.matchMedia('(pointer: fine)');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const sync = () => setEnabled(query.matches && !reduceMotion.matches && window.innerWidth > 1024);
+    sync();
+    query.addEventListener('change', sync);
+    reduceMotion.addEventListener('change', sync);
+    window.addEventListener('resize', sync);
+    return () => {
+      query.removeEventListener('change', sync);
+      reduceMotion.removeEventListener('change', sync);
+      window.removeEventListener('resize', sync);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return undefined;
+    const point = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
+    const dot = { ...point };
+    const ring = { ...point };
+    let frame;
+
+    const onMove = (event) => { point.x = event.clientX; point.y = event.clientY; };
+    const onOver = (event) => {
+      const trigger = event.target.closest?.('[data-cursor]');
+      setHovering(Boolean(trigger));
+      setLabel(trigger?.getAttribute('data-cursor') || '');
+    };
+    const animate = () => {
+      dot.x += (point.x - dot.x) * 0.34;
+      dot.y += (point.y - dot.y) * 0.34;
+      ring.x += (point.x - ring.x) * 0.13;
+      ring.y += (point.y - ring.y) * 0.13;
+      if (dotRef.current) dotRef.current.style.transform = `translate3d(${dot.x}px, ${dot.y}px, 0)`;
+      if (ringRef.current) ringRef.current.style.transform = `translate3d(${ring.x}px, ${ring.y}px, 0)`;
+      frame = window.requestAnimationFrame(animate);
+    };
+
+    document.documentElement.classList.add('custom-cursor-on');
+    window.addEventListener('pointermove', onMove, { passive: true });
+    window.addEventListener('pointerover', onOver);
+    animate();
+    return () => {
+      document.documentElement.classList.remove('custom-cursor-on');
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerover', onOver);
+      window.cancelAnimationFrame(frame);
+    };
+  }, [enabled]);
+
+  if (!enabled) return null;
+  return (
+    <div className="cursor-system" aria-hidden="true">
+      <span ref={dotRef} className="cursor-dot" />
+      <span ref={ringRef} className={`cursor-ring ${hovering ? 'is-hovering' : ''}`}><span>{label}</span></span>
+    </div>
+  );
+}
+
+function LoadingScreen() {
+  return (
+    <motion.div
+      className="loader"
+      initial={{ opacity: 1 }}
+      exit={{ opacity: 0, y: '-100%', transition: { duration: 0.7, ease: MOTION_EASE } }}
+      aria-live="polite"
+      aria-label="Loading portfolio"
+    >
+      <div className="loader__top"><span><ShieldCheck size={15} /> Amit Pal · application security</span><span>2026</span></div>
+      <div className="loader__main"><span>Amit</span><strong>Pal</strong><em>Find the gap · prove the impact.</em></div>
+      <div className="loader__bar"><motion.span initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: 0.85, ease: MOTION_EASE }} /></div>
+      <div className="loader__bottom"><span>Web · API · VAPT · tooling</span><span>Loading experience</span></div>
+    </motion.div>
+  );
+}
 
 function GitHubIcon({ size = 16 }) {
   return (
@@ -288,11 +388,12 @@ function Eyebrow({ icon: Icon, children }) {
   );
 }
 
-function ButtonLink({ href, children, className = 'button button--secondary', external = false, ...props }) {
+function ButtonLink({ href, children, className = 'button button--secondary', external = false, cursorLabel, ...props }) {
   return (
     <a
       href={href}
       className={className}
+      data-cursor={cursorLabel || (external ? 'OPEN' : 'GO')}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       {...props}
     >
@@ -320,7 +421,7 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
   return (
     <header className="site-header">
       <div className="site-header__inner shell">
-        <a href="#top" className="brand" aria-label="Amit Pal — back to top" onClick={closeMenu}>
+        <a href="#top" className="brand" aria-label="Amit Pal — back to top" onClick={closeMenu} data-cursor="HOME">
           <span className="brand-mark"><ShieldCheck size={17} aria-hidden="true" /></span>
           <span className="brand-name"><b>Amit</b><span>Pal</span></span>
         </a>
@@ -332,6 +433,7 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
               href={`#${item.id}`}
               className={activeSection === item.id ? 'is-active' : ''}
               aria-current={activeSection === item.id ? 'location' : undefined}
+              data-cursor={item.label.toUpperCase()}
             >
               {item.label}
             </a>
@@ -350,6 +452,7 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
             aria-pressed={theme === 'light'}
             title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+            data-cursor={theme === 'dark' ? 'LIGHT' : 'DARK'}
           >
             {theme === 'dark' ? <Sun size={17} aria-hidden="true" /> : <Moon size={17} aria-hidden="true" />}
             <span className="sr-only">Toggle color theme</span>
@@ -391,11 +494,17 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
 }
 
 function Hero() {
+  const reduceMotion = useReducedMotion();
   return (
     <section id="top" className="hero section" aria-labelledby="hero-title">
       <div className="hero-grid" aria-hidden="true" />
       <div className="shell hero__layout">
-        <div className="hero__copy">
+        <motion.div
+          className="hero__copy"
+          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.75, delay: 0.08, ease: MOTION_EASE }}
+        >
           <Eyebrow icon={ShieldCheck}>Amit Pal · Security Analyst (VAPT) · Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
             <span>I test web apps</span>
@@ -413,9 +522,15 @@ function Hero() {
             <ButtonLink href="#work" className="button button--primary"><Hammer size={16} /> Explore projects <ArrowUpRight size={15} /></ButtonLink>
             <ButtonLink href="#writing"><BookOpen size={16} /> Read the research log</ButtonLink>
           </div>
-        </div>
+        </motion.div>
 
-        <aside className="evidence-panel" aria-label="Example security testing evidence">
+        <motion.aside
+          className="evidence-panel"
+          aria-label="Example security testing evidence"
+          initial={reduceMotion ? false : { opacity: 0, x: 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.75, delay: 0.22, ease: MOTION_EASE }}
+        >
           <div className="evidence-panel__top">
             <span><span className="status-dot" /> Evidence capture</span>
             <span>INT-0417</span>
@@ -428,7 +543,7 @@ function Hero() {
           </div>
           <div className="evidence-panel__result"><span>Authorization logic</span><strong>Gap found</strong></div>
           <div className="evidence-panel__footer">Manual validation · evidence before assumptions</div>
-        </aside>
+        </motion.aside>
       </div>
       <div className="hero__signal shell" aria-hidden="true"><span /> Scroll to explore</div>
     </section>
@@ -440,15 +555,15 @@ function Focus() {
     <>
       <section id="focus" className="section section--soft" aria-labelledby="focus-title">
         <div className="shell focus-layout">
-          <div className="section-intro focus-intro">
+          <Reveal className="section-intro focus-intro">
             <Eyebrow icon={Target}>Focus · what I do today</Eyebrow>
             <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
             <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. The job is not a tool output: it is understanding a system well enough to test it responsibly.</p>
             <p>I work across a growing range of client environments and APIs, with a Web &amp; API focus. VAPT means Vulnerability Assessment &amp; Penetration Testing: finding, validating, and explaining the security issues that matter.</p>
             <div className="trust-note"><Fingerprint size={16} /><span>Credible, practical, and authorized-only testing.</span></div>
-          </div>
+          </Reveal>
 
-          <div className="focus-content">
+          <Reveal className="focus-content" delay={0.08}>
             <div className="panel panel--accent">
               <Eyebrow icon={Layers3}>How I test · end to end</Eyebrow>
               <ol className="process-list">
@@ -472,7 +587,7 @@ function Focus() {
                 <p>I test real systems, build tools that help during engagements, research edge cases, and write about spec versus reality.</p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
       <section className="approach-band" aria-label="How I work">
@@ -486,9 +601,62 @@ function Focus() {
   );
 }
 
-function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel, reverse = false }) {
+function ProjectDataVisual({ type, image, alt }) {
+  const reduceMotion = useReducedMotion();
+  const isLive = type === 'live';
+  const metrics = isLive
+    ? [['07', 'checks live'], ['LOCAL', 'data stays in browser']]
+    : [['SCOPE', 'context first'], ['EVIDENCE', 'report-ready']];
+  const rows = isLive
+    ? [['CORS validation', 'origin checked'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']]
+    : [['Scope & recon', 'attack surface'], ['Manual validation', 'reproducible'], ['Coverage state', 'honest gaps']];
+
   return (
-    <article className={`project-card ${reverse ? 'project-card--reverse' : ''}`}>
+    <figure className={`project-media project-media--${isLive ? 'live' : 'dev'}`}>
+      <div className="project-visual-frame">
+        <motion.img
+          src={asset(image)}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          animate={reduceMotion ? { scale: 1, x: '0%' } : { scale: [1.03, 1.11, 1.03], x: ['-1.5%', '1.5%', '-1.5%'] }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+        />
+        <div className="project-visual-frame__scrim" aria-hidden="true" />
+        <div className="project-data" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist workflow data'}>
+          <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // building'}</span><span>{isLive ? 'Local-first' : 'Active dev'}</span></div>
+          <div className="project-data__metrics">
+            {metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
+          </div>
+          <div className="project-data__rows">
+            {rows.map(([label, value], index) => (
+              <div key={label}><span>0{index + 1}</span><b>{label}</b><small>{value}</small></div>
+            ))}
+          </div>
+          <div className="project-data__footer"><span>{isLive ? 'Authorized testing only' : 'Web + API workflow'}</span><span>{isLive ? 'Evidence-grade' : 'Context-aware'}</span></div>
+        </div>
+        <motion.span
+          className="project-scanline"
+          aria-hidden="true"
+          animate={reduceMotion ? { top: '0%' } : { top: ['-2%', '102%'] }}
+          transition={reduceMotion ? { duration: 0 } : { duration: 5.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' }}
+        />
+      </div>
+      <figcaption><span>{isLive ? 'Live · 7 tools' : 'In development'}</span><span>{isLive ? 'Local-first browser security' : 'Structured VAPT workflow'}</span></figcaption>
+    </figure>
+  );
+}
+
+function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel, reverse = false }) {
+  const reduceMotion = useReducedMotion();
+  return (
+    <motion.article
+      className={`project-card ${reverse ? 'project-card--reverse' : ''}`}
+      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.16 }}
+      transition={{ duration: 0.65, ease: MOTION_EASE }}
+    >
       <div className="project-card__copy">
         <Eyebrow icon={type === 'live' ? Zap : Layers3}>{eyebrow}</Eyebrow>
         <h3>{title}</h3>
@@ -500,11 +668,8 @@ function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, 
           <ButtonLink href={secondaryLink} external><GitHubIcon size={16} /> {secondaryLabel}</ButtonLink>
         </div>
       </div>
-      <figure className="project-media">
-        <img src={asset(image)} alt={alt} loading="lazy" decoding="async" />
-        <figcaption><span>{type === 'live' ? 'Live · 7 tools' : 'In development'}</span><span>{type === 'live' ? 'Local-first browser security' : 'Structured VAPT workflow'}</span></figcaption>
-      </figure>
-    </article>
+      <ProjectDataVisual type={type} image={image} alt={alt} />
+    </motion.article>
   );
 }
 
@@ -512,13 +677,13 @@ function Work() {
   return (
     <section id="work" className="section work-section" aria-labelledby="work-title">
       <div className="shell">
-        <div className="section-heading section-heading--split">
+        <Reveal className="section-heading section-heading--split">
           <div>
             <Eyebrow icon={Hammer}>Projects · independent security work</Eyebrow>
             <h2 id="work-title">Tools that<br /><em>test real systems.</em></h2>
           </div>
           <p>Practical tooling, built to make investigation, evidence, and security conversations clearer.</p>
-        </div>
+        </Reveal>
 
         <div className="project-stack">
           <ProjectCard
@@ -569,19 +734,26 @@ function Work() {
 }
 
 function Writing() {
+  const reduceMotion = useReducedMotion();
   return (
     <section id="writing" className="section section--soft writing-section" aria-labelledby="writing-title">
       <div className="shell">
-        <div className="section-heading section-heading--split">
+        <Reveal className="section-heading section-heading--split">
           <div>
             <Eyebrow icon={PenTool}>Writing · research log</Eyebrow>
             <h2 id="writing-title">Research<br /><em>notes.</em></h2>
           </div>
           <p>I write about spec versus reality: what browsers actually do, why it matters for security, and the proof behind the claim.</p>
-        </div>
+        </Reveal>
 
         <div className="writing-grid">
-          <article className="featured-article">
+          <motion.article
+            className="featured-article"
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.55, ease: MOTION_EASE }}
+          >
             <div className="featured-article__mark" aria-hidden="true">01</div>
             <div>
               <p className="article-kicker"><span className="status-dot" /> Featured on Medium</p>
@@ -589,9 +761,15 @@ function Writing() {
               <p>{WRITING[0].insight} I built a two-origin probe to test the real impact.</p>
             </div>
             <ButtonLink href={WRITING[0].link} external className="text-link"><BookOpen size={16} /> Read article on Medium <ExternalArrow /></ButtonLink>
-          </article>
+          </motion.article>
 
-          <div className="article-list">
+          <motion.div
+            className="article-list"
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.18 }}
+            transition={{ duration: 0.55, delay: 0.1, ease: MOTION_EASE }}
+          >
             <div className="article-list__heading"><Eyebrow icon={FileText}>More from the log</Eyebrow><span>02 / 03</span></div>
             {WRITING.slice(1).map((article, index) => (
               <a key={article.title} className="article-row" href={article.link} target="_blank" rel="noopener noreferrer">
@@ -601,7 +779,7 @@ function Writing() {
               </a>
             ))}
             <ButtonLink href={LINKS.medium} external className="button button--secondary"><BookOpen size={16} /> All writing on Medium <ExternalArrow /></ButtonLink>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
@@ -609,6 +787,7 @@ function Writing() {
 }
 
 function LearningLoop() {
+  const reduceMotion = useReducedMotion();
   return (
     <section id="learning" className="section loop-section" aria-labelledby="loop-title">
       <div className="shell">
@@ -618,15 +797,22 @@ function LearningLoop() {
           <p className="intro-lead">Learn, practice, apply, then build and share. It is the system behind the transition, and it still runs.</p>
         </div>
         <ol className="loop-grid">
-          {LOOP_STEPS.map((step) => {
+          {LOOP_STEPS.map((step, index) => {
             const Icon = step.icon;
             return (
-              <li key={step.number} className={`loop-card loop-card--${step.tone}`}>
+              <motion.li
+                key={step.number}
+                className={`loop-card loop-card--${step.tone}`}
+                initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.08, ease: MOTION_EASE }}
+              >
                 <div className="loop-card__head"><span>{step.number}</span><Icon size={18} aria-hidden="true" /></div>
                 <h3>{step.title}</h3>
                 <p>{step.detail}</p>
                 <small>{step.meta}</small>
-              </li>
+              </motion.li>
             );
           })}
         </ol>
@@ -636,24 +822,32 @@ function LearningLoop() {
 }
 
 function Journey() {
+  const reduceMotion = useReducedMotion();
   return (
     <section id="journey" className="section section--soft journey-section" aria-labelledby="journey-title">
       <div className="shell journey-layout">
-        <div className="section-intro journey-intro">
+        <Reveal className="section-intro journey-intro">
           <Eyebrow icon={Route}>Journey · Nov 2023 → now</Eyebrow>
           <h2 id="journey-title">From research<br />to <em>security.</em></h2>
           <p className="intro-lead">My route into VAPT was built on research, deliberate learning, hands-on practice, and the desire to do technical work.</p>
           <p>Not a résumé timeline — the pattern matters: attention to detail, consistent delivery, then ownership.</p>
-        </div>
+        </Reveal>
         <ol className="journey-timeline">
           {JOURNEY.map((item, index) => (
-            <li key={item.date} className={item.current ? 'is-current' : ''}>
+            <motion.li
+              key={item.date}
+              className={item.current ? 'is-current' : ''}
+              initial={reduceMotion ? false : { opacity: 0, x: 18 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.22 }}
+              transition={{ duration: 0.5, delay: index * 0.08, ease: MOTION_EASE }}
+            >
               <div className="journey-timeline__marker"><span>{String(index + 1).padStart(2, '0')}</span></div>
               <p className="journey-timeline__date">{item.date}</p>
               <h3>{item.title}</h3>
               <h4>{item.role}</h4>
               <p>{item.detail}</p>
-            </li>
+            </motion.li>
           ))}
         </ol>
       </div>
@@ -729,10 +923,10 @@ function Contact() {
           <Eyebrow icon={Mail}>Contact · collaborations welcome</Eyebrow>
           <h2 id="contact-title">Let’s build<br />more <em>secure</em><br />things together.</h2>
           <p>If you need Web or API VAPT that explains impact clearly, or want to discuss browser security tooling, I would be glad to connect.</p>
-          <a className="email-address" href={`mailto:${LINKS.email}`}><Mail size={17} /> {LINKS.email}</a>
+          <a className="email-address" href={`mailto:${LINKS.email}`} data-cursor="EMAIL"><Mail size={17} /> {LINKS.email}</a>
         </div>
         <div className="contact-actions">
-          <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta"><Mail size={22} /><span>Email<br />me <ArrowUpRight size={18} /></span></a>
+          <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME"><Mail size={22} /><span>Email<br />me <ArrowUpRight size={18} /></span></a>
           <div className="contact-links" aria-label="External profiles">
             <a href={LINKS.linkedin} target="_blank" rel="noopener noreferrer"><LinkedInIcon size={17} /><span>LinkedIn</span><ExternalArrow /></a>
             <a href={LINKS.medium} target="_blank" rel="noopener noreferrer"><BookOpen size={17} /><span>Medium</span><ExternalArrow /></a>
@@ -759,12 +953,19 @@ function Footer() {
 export default function App() {
   const [theme, toggleTheme] = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const time = useCurrentTime();
   const activeSection = useActiveSection();
   const progress = useScrollProgress();
 
+  useEffect(() => {
+    const timer = window.setTimeout(() => setLoading(false), 1050);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
-    <>
+    <MotionConfig reducedMotion="user">
+      <CustomCursor />
       <a className="skip-link" href="#main">Skip to content</a>
       <div className="scroll-progress" style={{ transform: `scaleX(${progress})` }} aria-hidden="true" />
       <Header
@@ -787,6 +988,7 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
-    </>
+      <AnimatePresence>{loading && <LoadingScreen />}</AnimatePresence>
+    </MotionConfig>
   );
 }

@@ -99,9 +99,10 @@ told twice on the page.
 
 - React 19 + Vite (base `/Portfolio/` for GitHub Pages)
 - A token-based CSS design system with responsive component layouts
+- Framer Motion for the loading screen, sectional reveals, and restrained project-data animations
 - Lucide icons and semantic HTML for technical visual cues, navigation, and CTAs
-- No heavy animation library or canvas runtime; `prefers-reduced-motion`, keyboard focus, clear interaction states, and contrast are built in
-- Build: ~226kb JS (71kb gzipped), ~34kb CSS
+- `prefers-reduced-motion`, keyboard focus, clear interaction states, and contrast are built in
+- Build: ~358kb JS (113kb gzipped), ~41kb CSS
 
 ## Development
 
