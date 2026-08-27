@@ -13,7 +13,7 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 - **Medium:** https://amitpxl.medium.com/ (3 articles published)
 - **GitHub:** https://github.com/AmitPal-CyberBuddy
 - **CyberBuddy Live:** https://amitpal-cyberbuddy.github.io/CyberBuddy/ — Browser-based security assessment suite
-- **VAPT Checklist Live Dev:** https://amitpal-cyberbuddy.github.io/VAPT-Checklist/ — **In Active Development**
+- **VAPT Checklist Live:** https://amitpal-cyberbuddy.github.io/VAPT-Checklist/ — **v1.0.0-r29 release candidate; browser and visual QA sign-off pending**
 - **Email:** amitpal.secure@gmail.com
 
 ## Visual Concept
@@ -36,20 +36,20 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 
 ## Projects — Storytelling, Not Cards
 
-### VAPT Checklist — In Active Development
-- **Live Dev:** https://amitpal-cyberbuddy.github.io/VAPT-Checklist/
+### VAPT Checklist — v1.0.0-r29 Release Candidate
+- **Live preview:** https://amitpal-cyberbuddy.github.io/VAPT-Checklist/
 - **Repo:** https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
-- **Status:** Currently Building / Active Project / In Development — **not production-final**
+- **Status:** v1.0.0-r29 release candidate — browser and visual QA sign-off is still pending, so it is **not production-final**.
 - Story: `Fragmented security checks → Taxonomy and normalization → Structured testing workflow → Operator-focused VAPT workspace`
-- Taxonomy: original checks normalized into categories, families, attack-chain graphs, payload refs, and Burp workflows. **Live counts are not quoted here on purpose** — the project is in active development, so the [VAPT-Checklist repo](https://github.com/AmitPal-CyberBuddy/VAPT-Checklist) is the single authoritative source for any number.
+- Project-documented snapshot: 623 validated items across 25 categories. The [VAPT-Checklist repo](https://github.com/AmitPal-CyberBuddy/VAPT-Checklist) remains the authoritative source when these evolve.
 - Context-aware workspace: presets, scoping questions, multi-role matrix, honest coverage states (tested · testing now · blocked · N/A · not tested)
 - Check ≠ coverage ≠ finding — evidence packs, Markdown coverage, CSV export
-- Local-first, no backend, no telemetry, under active development
+- Local-first, no backend, no telemetry
 
 ### CyberBuddy — Browser-Based Security Assessment Suite — Live
 - **Live:** https://amitpal-cyberbuddy.github.io/CyberBuddy/
 - **Repo:** https://github.com/AmitPal-CyberBuddy/CyberBuddy
-- Why built: Tooling scattered, heavy setups, external data. CyberBuddy is local-first where it matters, no framework, static HTML/CSS/JS + Python stdlib, same graders in browser and server.py
+- Why built: Tooling scattered, heavy setups, external data. CyberBuddy is a no-account, browser-based suite with a static HTML/CSS/JS frontend and a Python stdlib helper for supported checks.
 - 7 tools: Clickjacking Validator, Security Headers Auditor, CORS Validator, CSP Auditor, DNS Analyzer, CSRF PoC Generator, JWT Workbench
 - Guides under /guides/ — short, tool-connected, OWASP/CWE/MDN/specs references
 - Authorized testing only — GET baseline + analyst-selected HEAD/OPTIONS + CORS preflight simulation, never POST/PUT/PATCH/DELETE to target
@@ -70,7 +70,7 @@ HERO — Amit Pal, Security Analyst (VAPT) • Ampcus Cyber; direct routes to pr
        plus a compact evidence-capture artifact
 → FOCUS — an accessible explanation of VAPT, end-to-end testing flow, focus areas, and working principles
 → HOW I WORK — Test → Build → Research → Write
-→ PROJECTS — CyberBuddy (live), VAPT Checklist (in active development), and ScriptSentry (Python)
+→ PROJECTS — CyberBuddy (live), VAPT Checklist (v1.0.0-r29 release candidate; QA pending), and ScriptSentry (Python)
 → WRITING — consistent research-note cards for all verified Medium articles, followed by a direct view-all link
 → THE LOOP — Learn → Practice → Apply → Build & Share
 → JOURNEY — fresher → recognition → VAPT transition → Performer of the Quarter
@@ -133,17 +133,16 @@ All authoritative content in `src/App.jsx` top:
 
 There are no `VAPT_CATEGORIES`, `CYBERBUDDY_TOOLS`, or `WRITING_REAL` constants — earlier revisions of this README described them, but they were never in the code.
 
-### VAPT Checklist numbers: one authoritative source
+### VAPT Checklist status and numbers: one authoritative source
 
-The portfolio deliberately renders **no** VAPT Checklist counts. Category, family,
-payload, and check totals change while the project is in active development, so the
-authoritative source is the project itself:
+The portfolio reflects the project-documented release-candidate snapshot: **v1.0.0-r29**,
+**623 validated items**, and **25 categories**. Browser and visual QA sign-off remains
+pending. Status and counts can evolve, so the authoritative source is the project itself:
 https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
 
-Any figure quoted in this repo's docs is a snapshot at the time of writing and is
-**not** load-bearing. If a number must be cited, cite the repo, not the docs. This
-also matches `ASSET_DECISIONS.md` — statistics infographics belong on project sites,
-not on the portfolio.
+These figures are a snapshot at the time of writing, not a claim of final production
+release. If a number or status needs verification, cite the project repository rather
+than this portfolio documentation.
 
 
 Future tools/articles/milestones can be added without redesign — grid and list architectures support it.

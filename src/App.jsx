@@ -136,7 +136,7 @@ const JOURNEY = [
 ];
 
 const SIGNALS = [
-  ['I build', 'Tools I ship on my own time', 'CyberBuddy is live; VAPT Checklist is in active development. Both started with friction I met during real engagements.', Hammer],
+  ['I build', 'Tools I ship on my own time', 'CyberBuddy is live, and VAPT Checklist is moving through release-candidate QA. Both started with friction I met during real engagements.', Hammer],
   ['I go deeper', 'Spec vs reality', 'I research what browsers actually do versus what the specs say: CORS, JWT, CSP, client-side crypto, and script-level analysis.', Search],
   ['I share', 'Writing only what I verified', 'My Medium articles are grounded in testing and reproduction, with tools that help demonstrate the point.', PenTool],
 ];
@@ -144,7 +144,7 @@ const SIGNALS = [
 const NOW_ITEMS = [
   {
     label: 'Building',
-    detail: 'VAPT Checklist — a structured, operator-focused testing workflow in active development.',
+    detail: 'VAPT Checklist — a local-first, context-aware workspace in v1.0.0-r29 release-candidate QA.',
     href: LINKS.vaptLive,
     action: 'Live preview',
     tone: 'green',
@@ -607,14 +607,14 @@ function ProjectDataVisual({ type, image, alt }) {
   const reduceMotion = useReducedMotion();
   const isLive = type === 'live';
   const metrics = isLive
-    ? [['07', 'checks live'], ['LOCAL', 'data stays in browser']]
-    : [['SCOPE', 'context first'], ['EVIDENCE', 'report-ready']];
+    ? [['07', 'checks live'], ['NO ACCOUNT', 'no sign-up']]
+    : [['623', 'validated items'], ['25', 'categories']];
   const rows = isLive
-    ? [['CORS validation', 'origin checked'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']]
-    : [['Scope & recon', 'attack surface'], ['Manual validation', 'reproducible'], ['Coverage state', 'honest gaps']];
+    ? [['CORS validation', 'evidence led'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']]
+    : [['Adaptive scope', 'context first'], ['Manual validation', 'reproducible'], ['Coverage state', 'honest gaps']];
 
   return (
-    <figure className={`project-media project-media--${isLive ? 'live' : 'dev'}`}>
+    <figure className={`project-media project-media--${isLive ? 'live' : 'release'}`}>
       <div className="project-visual-frame">
         <motion.img
           src={asset(image)}
@@ -625,8 +625,8 @@ function ProjectDataVisual({ type, image, alt }) {
           transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
         />
         <div className="project-visual-frame__scrim" aria-hidden="true" />
-        <div className="project-data" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist workflow data'}>
-          <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // building'}</span><span>{isLive ? 'Local-first' : 'Active dev'}</span></div>
+        <div className="project-data" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist release candidate data'}>
+          <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // release candidate'}</span><span>{isLive ? 'Local-first' : 'v1.0.0 RC'}</span></div>
           <div className="project-data__metrics">
             {metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
           </div>
@@ -635,7 +635,7 @@ function ProjectDataVisual({ type, image, alt }) {
               <div key={label}><span>0{index + 1}</span><b>{label}</b><small>{value}</small></div>
             ))}
           </div>
-          <div className="project-data__footer"><span>{isLive ? 'Authorized testing only' : 'Web + API workflow'}</span><span>{isLive ? 'Evidence-grade' : 'Context-aware'}</span></div>
+          <div className="project-data__footer"><span>{isLive ? 'Authorized testing only' : 'Local-first workspace'}</span><span>{isLive ? 'Evidence-grade' : 'Browser & visual QA'}</span></div>
         </div>
         <motion.span
           className="project-scanline"
@@ -644,7 +644,7 @@ function ProjectDataVisual({ type, image, alt }) {
           transition={reduceMotion ? { duration: 0 } : { duration: 5.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' }}
         />
       </div>
-      <figcaption><span>{isLive ? 'Live · 7 tools' : 'In development'}</span><span>{isLive ? 'Local-first browser security' : 'Structured VAPT workflow'}</span></figcaption>
+      <figcaption><span>{isLive ? 'Live · 7 tools' : 'v1.0.0 release candidate'}</span><span>{isLive ? 'Local-first browser security' : 'Context-aware VAPT workspace'}</span></figcaption>
     </figure>
   );
 }
@@ -693,24 +693,24 @@ function Work() {
             eyebrow="CyberBuddy · live product"
             title="CyberBuddy"
             summary="Seven browser-based security checks in one evidence-led, local-first suite."
-            detail="I built CyberBuddy because checks for clickjacking, headers, CORS, JWT, and CSRF can be scattered or unnecessarily heavy. It helps demonstrate a security issue clearly without sending assessment data away."
+            detail="I built CyberBuddy because checks for clickjacking, headers, CORS, JWT, and CSRF can be scattered or unnecessarily heavy. Its browser-first workflow helps demonstrate security issues with clear, export-ready evidence."
             image="cyberbuddy-tools.jpg"
             alt="CyberBuddy browser security tools interface"
-            tags={['7 tools live', 'Local-first', 'Non-destructive']}
+            tags={['7 tools live', 'Local-first', 'Evidence-led']}
             primaryLink={LINKS.cyberbuddyLive}
             primaryLabel="Live preview"
             secondaryLink={LINKS.cyberbuddyRepo}
             secondaryLabel="View GitHub"
           />
           <ProjectCard
-            type="development"
-            eyebrow="VAPT Checklist · active development"
+            type="release"
+            eyebrow="VAPT Checklist · v1.0.0-r29 release candidate"
             title="VAPT Checklist"
-            summary="A structured, operator-focused workflow for Web and API security testing."
-            detail="Fragmented checklists miss context. I am building a workflow that connects taxonomy, scope, evidence, and honest coverage states — for clearer manual testing, not just a longer list of checks."
+            summary="A local-first, context-aware workspace for Web and API security testing."
+            detail="Fragmented checklists miss context. VAPT Checklist connects taxonomy, scope, evidence, and honest coverage states for clearer manual testing — with browser and visual QA sign-off still pending."
             image="vapt-workflow.jpg"
             alt="VAPT Checklist structured security workflow"
-            tags={['Operator-focused', 'Taxonomy', 'Evidence-led']}
+            tags={['623 validated items', '25 categories', 'Release candidate']}
             primaryLink={LINKS.vaptLive}
             primaryLabel="Live preview"
             secondaryLink={LINKS.vaptRepo}
