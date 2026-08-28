@@ -402,7 +402,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .project-card { display: grid; grid-template-columns: 1fr; align-items: start; gap: 2.25rem; }
 .project-card .project-media { width: min(100%, 46rem); }
 .project-card__copy { min-width: 0; max-width: 38rem; }
-.project-card h3 { margin: 0; color: var(--text); font: 800 clamp(1.7rem, 3.2vw, 2.9rem)/1 var(--font-display); letter-spacing: -0.045em; text-transform: uppercase; }
+.project-card h3 { margin: 0; color: var(--text); font: 800 clamp(1.9rem, 3.2vw, 2.9rem)/1.02 var(--font-display); letter-spacing: -0.045em; text-transform: uppercase; }
 .project-card__lead { margin: 1.35rem 0 0; color: var(--text); font: 400 clamp(1.15rem, 1.65vw, 1.38rem)/1.43 var(--font-serif); }
 .project-card__copy > p:not(.project-card__lead) { max-width: 36rem; margin: 0.75rem 0 0; color: var(--text-secondary); }
 .project-card__tags { margin-top: 1.35rem; }
@@ -572,7 +572,6 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 @media (max-width: 1080px) {
   .desktop-nav { gap: 0.85rem; }
   .desktop-nav a { font-size: 0.62rem; }
-  .project-card h3 { font-size: clamp(1.6rem, 3.4vw, 2.6rem); }
 }
 
 @media (max-width: 1024px) {
@@ -598,7 +597,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .theme-text-toggle { padding: 0.5rem 0.75rem; color: var(--text); background: var(--surface); border: 1px solid var(--border); cursor: pointer; font: inherit; }
   .theme-text-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-  .hero__title { font-size: clamp(2.3rem, 5.4vw, 3.9rem); }
+  .hero__title { font-size: clamp(2.2rem, 4.5vw, 3rem); }
   .article-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .loop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -631,10 +630,10 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .brand-mark { width: 30px; height: 30px; }
   .theme-toggle, .menu-toggle { width: 36px; height: 36px; }
   .hero { padding-top: calc(var(--header-height) + 3.7rem); }
-  .hero__title { font-size: clamp(1.8rem, 8vw, 2.8rem); line-height: 1.05; }
+  .hero__title { font-size: clamp(1.75rem, 8vw, 2.2rem); line-height: 1.05; }
   .hero__lead { font-size: 1.1rem; }
   .hero__signal { font-size: 0.6rem; }
-  .section h2 { font-size: clamp(2rem, 10.5vw, 3rem); line-height: 1; }
+  .section h2 { font-size: clamp(1.8rem, 5.5vw, 2.2rem); line-height: 1; }
   .eyebrow { font-size: 0.7rem; letter-spacing: 0.085em; }
   .tag-row span { font-size: 0.7rem; }
   .role-badge { font-size: 0.66rem; }
@@ -643,7 +642,6 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .panel { padding: 1.15rem; }
   .process-list li { grid-template-columns: 1.9rem minmax(0, 1fr); gap: 0.7rem; }
   .project-stack { gap: 4.25rem; }
-  .project-card h3 { font-size: clamp(1.7rem, 8.5vw, 2.4rem); line-height: 1.02; }
   .project-media figcaption { flex-direction: column; gap: 0.3rem; }
   .article-cards { grid-template-columns: 1fr; }
   .article-card { min-height: 17.5rem; padding: 1.35rem; }
@@ -657,7 +655,6 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .signal-row > div:last-child { grid-column: 2; }
   .now-row { grid-template-columns: 1fr; gap: 0.75rem; padding-block: 1.2rem; }
   .now-row .text-link { margin-top: 0.15rem; }
-  .contact-copy h2 { font-size: clamp(2.2rem, 11vw, 3.2rem); }
   .contact-actions { gap: 1.25rem; }
   .email-cta { width: 7rem; height: 7rem; }
   .site-footer__inner { align-items: flex-start; flex-direction: column; }
@@ -667,13 +664,12 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .brand-name { font-size: 0.78rem; }
   .header-time { gap: 0.25rem; padding-inline: 0.38rem; font-size: 0.56rem; }
   .header-time em { display: none; }
-  .hero__title { font-size: clamp(1.6rem, 8vw, 2.3rem); }
+  .hero__title { font-size: clamp(1.6rem, 8vw, 2rem); }
   .hero__tags span { font-size: 0.65rem; }
   .button-row { display: grid; grid-template-columns: 1fr; }
   .button { width: 100%; }
   .request-line { font-size: 0.75rem; }
   .request-meta { font-size: 0.59rem; }
-  .section h2 { font-size: 1.95rem; }
   .article-card h3 { font-size: 1.25rem; }
   .contact-links a { font-size: 0.67rem; }
 }
