@@ -147,7 +147,7 @@ const JOURNEY = [
 ];
 
 const SIGNALS = [
-  ['I build', 'Tools I ship independently', 'CyberBuddy is live, and VAPT Checklist is under active development. Both began with friction I encountered during real engagements.', Hammer],
+  ['I build', 'Tools I ship independently', 'CyberBuddy and VAPT Checklist are live, and ScriptSentry is under active development. Each began with friction I encountered during real engagements.', Hammer],
   ['I go deeper', 'Where specifications meet behavior', 'I research how browsers behave in practice: CORS, JWT, CSP, client-side crypto, and script-level analysis.', Search],
   ['I share', 'Writing grounded in verification', 'My Medium articles are grounded in testing and reproduction, with tools that help demonstrate the point.', PenTool],
 ];
@@ -155,7 +155,7 @@ const SIGNALS = [
 const NOW_ITEMS = [
   {
     label: 'Building',
-    detail: 'VAPT Checklist — a context-aware VAPT workspace, under active development.',
+    detail: 'VAPT Checklist — a local-first VAPT workspace; web testing live, Android & iOS in beta.',
     href: LINKS.vaptLive,
     action: 'Live preview',
     tone: 'green',
@@ -171,7 +171,7 @@ const NOW_ITEMS = [
   },
   {
     label: 'Writing',
-    detail: 'Browser security and real impact: CORS, JWT, CSP, and client-side crypto.',
+    detail: 'Write practical application security articles on topics across Web Application and API security, vulnerability research, and security testing.',
     href: LINKS.medium,
     action: 'Read on Medium',
     tone: 'orange',
@@ -268,7 +268,7 @@ const RESUME_DATA = {
         live: 'https://amitpal-cyberbuddy.github.io/VAPT-Checklist/',
         github: 'https://github.com/AmitPal-CyberBuddy/VAPT-Checklist',
       },
-      status: 'Under Development',
+      status: 'Live',
       description:
         'Context-aware VAPT methodology, checklist, knowledge base, and local-first workspace \u2014 623 validated items across 25 categories, 196 guided test families, 15 attack-chain graphs, 40 payload references, and 12 Burp Suite workflows.',
     },
@@ -653,9 +653,10 @@ function Hero({ onOpenResume }) {
         >
           <Eyebrow icon={ShieldCheck}>Amit Pal · Associate Consultant (VAPT) at Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
-            <span>I find logic flaws</span>
-            <span>attackers miss.</span>
-            <strong>Manual and automated Web &amp; API testing — validated by evidence, not assumptions.</strong>
+            <span>Identifying</span>
+            <span>Vulnerabilities</span>
+            <span>Before Attackers Do</span>
+            <strong>Manual and automated Web &amp; API testing — evidence before assumptions.</strong>
           </h1>
           <p className="hero__lead">High-impact Web &amp; API penetration testing that turns logic and authorization gaps into reproducible proof-of-concept evidence, clear remediation guidance, and reduced business risk.</p>
           <p className="hero__body">I build local-first tools to make authorized security testing clearer, faster, and easier to document.</p>
@@ -663,11 +664,6 @@ function Hero({ onOpenResume }) {
             <span>Web &amp; API security</span>
             <span>Manual &amp; automated</span>
             <span>Evidence-led reporting</span>
-          </div>
-          <div className="hero-evidence-preview" aria-label="Quick evidence preview">
-            <div className="preview-label">INT-0417 · Authorization logic gap</div>
-            <div className="preview-compare"><span>Expected</span><code>403 Forbidden</code><span>Observed</span><code>200 OK</code></div>
-            <p className="preview-note">User identity valid · endpoint did not re-check role elevation.</p>
           </div>
           <div className="button-row">
             <ButtonLink href="#work" className="button button--primary"><Hammer size={16} /> View selected work <ArrowUpRight size={15} /></ButtonLink>
@@ -716,7 +712,7 @@ function Focus() {
             <Eyebrow icon={Target}>Focus · what I do</Eyebrow>
             <p className="role-badge"><span className="status-dot" /><span>Current role</span><b>Associate Consultant · Ampcus Cyber · Aug 2026 → now</b></p>
             <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
-            <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. I assess web applications and APIs by understanding the system, testing it responsibly, and validating real impact.</p>
+            <p className="intro-lead">I am an Associate Consultant in VAPT at Ampcus Cyber. I assess web applications and APIs by understanding the system, testing it responsibly, and validating real impact.</p>
             <p>VAPT — Vulnerability Assessment and Penetration Testing — is the practice of finding, validating, and clearly explaining security issues that need attention.</p>
             <div className="trust-note"><Fingerprint size={16} /><span>Authorized, evidence-led security testing.</span></div>
           </Reveal>
@@ -797,12 +793,12 @@ const PROJECT_VISUALS = {
   },
   release: {
     className: 'release',
-    top: ['VAPT checklist // under development', 'Active dev'],
-    metrics: [['623', 'validated items'], ['25', 'categories']],
-    rows: [['Adaptive scope', 'context first'], ['Manual & automated', 'reproducible'], ['Coverage state', 'honest gaps']],
-    footer: ['Local-first workspace', 'Browser & visual QA'],
-    caption: ['Under Development', 'Context-aware VAPT workspace'],
-    aria: 'VAPT Checklist under development data',
+    top: ['VAPT Checklist · live', 'Web · Android/iOS beta'],
+    metrics: [['623', 'catalog checks'], ['06', 'stage loop']],
+    rows: [['Scenario presets', '16 plans'], ['Attack chains', 'proof required'], ['Local-first', 'no telemetry']],
+    footer: ['Authorized testing only', 'Live workspace'],
+    caption: ['Live · VAPT workspace', 'Web testing · Android/iOS next'],
+    aria: 'VAPT Checklist live workspace data',
   },
   experiment: {
     className: 'experiment',
@@ -860,13 +856,13 @@ function ProjectDataVisual({ type, image, alt }) {
 const PROJECT_EYEBROW_ICONS = { live: Zap, release: Layers3, experiment: TerminalSquare };
 const PROJECT_PRIMARY_BUTTONS = { live: 'button--violet', release: 'button--green', experiment: 'button--gold' };
 
-function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel, reverse = false }) {
+function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel }) {
   const reduceMotion = useReducedMotion();
   const eyebrowIcon = PROJECT_EYEBROW_ICONS[type] || Layers3;
   const primaryButton = PROJECT_PRIMARY_BUTTONS[type] || 'button--green';
   return (
     <motion.article
-      className={`project-card project-card--${type} ${reverse ? 'project-card--reverse' : ''}`}
+      className={`project-card project-card--${type}`}
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.16 }}
@@ -917,18 +913,17 @@ function Work() {
           />
           <ProjectCard
             type="release"
-            eyebrow="VAPT Checklist · Under Development"
+            eyebrow="VAPT Checklist · Live product"
             title="VAPT Checklist"
-            summary="A local-first, context-aware workspace for Web and API security testing."
-            detail="Fragmented checklists miss context and slow assessments down. VAPT Checklist connects taxonomy, scope, evidence, and honest coverage states — reducing manual testing friction and making 623 validated items across 25 categories, 196 guided families, and 15 attack chains faster to navigate during live assessments."
+            summary="A local-first VAPT workspace — pick a scenario, get a context-driven plan with variants and evidence, then retest."
+            detail="VAPT Checklist replaces static checklists with a six-stage loop — scope, discover, prioritize, test, report, retest — mapping 623 validated checks into context-driven plans with named variants, connected attack chains, and honest coverage states. Everything runs in the browser with no backend and no telemetry. Web testing is live; Android and iOS checklists are next."
             image="vapt-workflow.jpg"
             alt="VAPT Checklist structured security workflow"
-            tags={['623 items', '25 categories', '196 families', '15 attack chains', 'Under Development']}
+            tags={['623 checks', '16 plans', '6-stage loop', 'Local-first', 'Live']}
             primaryLink={LINKS.vaptLive}
             primaryLabel="Live preview"
             secondaryLink={LINKS.vaptRepo}
             secondaryLabel="View GitHub"
-            reverse
           />
           <ProjectCard
             type="experiment"
@@ -1116,9 +1111,7 @@ function Now() {
           <p className="intro-lead">A current snapshot of work, writing, maintenance, and learning.</p>
           <div className="now-meta">
             <p><MapPin size={16} /> Roots in West Bengal · building in Bengaluru · open to remote collaboration</p>
-            <p><Clock3 size={16} /> Current time in India · updated August 2026</p>
           </div>
-          <div className="learning-note"><Award size={16} /><span>Selected learning: API Penetration Testing and API Security Fundamentals · APIsec University · January 2026</span></div>
         </div>
         <div className="now-list">
           {NOW_ITEMS.map((item) => {
@@ -1333,11 +1326,6 @@ function ResumeDocument() {
 
 function ResumeViewer({ onClose }) {
   const reduceMotion = useReducedMotion();
-  const [showSizeNote, setShowSizeNote] = useState(false);
-
-  useEffect(() => {
-    setShowSizeNote(window.innerWidth < 768);
-  }, []);
 
   useEffect(() => {
     const onKeyDown = (e) => { if (e.key === 'Escape') onClose(); };
@@ -1382,14 +1370,6 @@ function ResumeViewer({ onClose }) {
             </button>
           </div>
         </div>
-        {showSizeNote && (
-          <div className="resume-viewer__size-note" role="status">
-            <span>For the best experience, view on a laptop or desktop. You can also try desktop mode in your browser.</span>
-            <button type="button" onClick={() => setShowSizeNote(false)} aria-label="Dismiss suggestion">
-              <X size={14} aria-hidden="true" />
-            </button>
-          </div>
-        )}
         <div className="resume-viewer__content">
           <ResumeDocument />
         </div>
