@@ -6,7 +6,9 @@ import {
   BookOpen,
   ChevronRight,
   Clock3,
+  Download,
   ExternalLink,
+  FileText,
   Fingerprint,
   Hammer,
   Layers3,
@@ -35,17 +37,18 @@ const LINKS = {
   vaptLive: 'https://amitpal-cyberbuddy.github.io/VAPT-Checklist/',
   vaptRepo: 'https://github.com/AmitPal-CyberBuddy/VAPT-Checklist',
   scriptSentry: 'https://github.com/AmitPal-CyberBuddy/ScriptSentry',
+  scriptSentryLive: 'https://amitpal-cyberbuddy.github.io/ScriptSentry/',
   email: 'amitpal.secure@gmail.com',
 };
 
 const NAV_ITEMS = [
   { id: 'work', label: 'Projects' },
+  { id: 'resume', label: 'Resume' },
   { id: 'focus', label: 'Focus' },
   { id: 'writing', label: 'Writing' },
   { id: 'learning', label: 'Loop' },
   { id: 'journey', label: 'Journey' },
   { id: 'now', label: 'Now' },
-  { id: 'resume', label: 'Resume' },
   { id: 'connect', label: 'Contact' },
 ];
 
@@ -127,7 +130,6 @@ const JOURNEY = [
     title: 'I transitioned into VAPT',
     role: 'Security Analyst · VAPT Team',
     detail: 'I moved into hands-on technical work: research and analysis, deliberate learning, then cybersecurity testing.',
-    current: true,
   },
   {
     date: 'Q1 2026',
@@ -135,10 +137,17 @@ const JOURNEY = [
     role: 'Performer of the Quarter · VAPT',
     detail: 'Soon after transitioning, I focused on learning quickly and taking ownership. The recognition reflects that approach, not just an award.',
   },
+  {
+    date: 'Aug 2026',
+    title: 'Promoted to Associate Consultant',
+    role: 'Associate Consultant · VAPT',
+    detail: 'Now leading end-to-end VAPT engagements, translating SOW requirements into assessment scope, and driving reporting, remediation, and closure across diverse client environments.',
+    current: true,
+  },
 ];
 
 const SIGNALS = [
-  ['I build', 'Tools I ship independently', 'CyberBuddy is live, and VAPT Checklist is moving through release-candidate QA. Both began with friction I encountered during real engagements.', Hammer],
+  ['I build', 'Tools I ship independently', 'CyberBuddy is live, and VAPT Checklist is under active development. Both began with friction I encountered during real engagements.', Hammer],
   ['I go deeper', 'Where specifications meet behavior', 'I research how browsers behave in practice: CORS, JWT, CSP, client-side crypto, and script-level analysis.', Search],
   ['I share', 'Writing grounded in verification', 'My Medium articles are grounded in testing and reproduction, with tools that help demonstrate the point.', PenTool],
 ];
@@ -146,7 +155,7 @@ const SIGNALS = [
 const NOW_ITEMS = [
   {
     label: 'Building',
-    detail: 'VAPT Checklist — a local-first, context-aware workspace in v1.0.0-r29 release-candidate QA.',
+    detail: 'VAPT Checklist \u2014 a context-aware VAPT workspace. ScriptSentry \u2014 a JavaScript security intelligence platform. Both under active development.',
     href: LINKS.vaptLive,
     action: 'Live preview',
     tone: 'green',
@@ -177,6 +186,117 @@ const NOW_ITEMS = [
     icon: Lightbulb,
   },
 ];
+
+const RESUME_DATA = {
+  header: {
+    name: 'AMIT PAL',
+    title: 'Application Security Consultant | Web Application & API PT',
+    location: 'Bengaluru, India',
+    phone: '+91 XXXXX XXXXX',
+    email: 'amitpal.secure@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/amitpal-wb/',
+    github: 'https://github.com/AmitPal-CyberBuddy',
+    portfolio: 'https://amitpal-cyberbuddy.github.io/Portfolio/',
+    medium: 'https://amitpxl.medium.com/',
+  },
+  summary:
+    'Application Security Consultant focused on Web Application and API PT, with hands-on experience managing end-to-end security assessments across diverse client environments. Experienced in translating assessment requirements into practical testing approaches, identifying and validating security vulnerabilities, and supporting clients through reporting, remediation, retesting, and project closure.',
+  experience: [
+    {
+      company: 'AMPCUS CYBER',
+      location: 'Bengaluru, India',
+      roles: [
+        {
+          title: 'Associate Consultant',
+          period: 'Aug 2026 \u2013 Present',
+          bullets: [
+            'Lead end-to-end Web Application and API PT engagements, covering multiple client applications and API collections across diverse engagements.',
+            'Translate SOW and client requirements into assessment scope, coordinating application coverage, testing access, and Black Box or Grey Box testing approaches.',
+            'Perform and validate security testing across authentication, authorization, session management, business logic, and input validation; assess practical impact and eliminate false positives.',
+            'Drive reporting, client walkthroughs, remediation validation, retesting, and closure while coordinating with clients, PMO, and internal stakeholders.',
+          ],
+        },
+        {
+          title: 'Security Analyst',
+          period: 'Feb 2026 \u2013 Jul 2026',
+          bullets: [
+            'Conducted Web Application and API security assessments using manual and automated testing techniques across client environments.',
+            'Assessed REST and SOAP APIs against relevant OWASP API Security risks, including authorization, authentication, input validation, and Mass Assignment.',
+            'Validated findings, documented technical impact and remediation guidance, and supported reporting and retesting activities.',
+          ],
+        },
+        {
+          title: 'Lead Generation Executive',
+          period: 'Dec 2023 \u2013 Jan 2026',
+          description:
+            'Conducted OSINT-driven market, organization, and stakeholder research; developed structured prospect intelligence to support targeted outreach, business development, and opportunity identification.',
+        },
+      ],
+    },
+  ],
+  independentWork: [
+    {
+      title: 'CyberBuddy',
+      links: {
+        live: 'https://amitpal-cyberbuddy.github.io/CyberBuddy/',
+        github: 'https://github.com/AmitPal-CyberBuddy/CyberBuddy',
+      },
+      description:
+        'Independent browser-based security testing console consolidating clickjacking, security headers, CSP, CORS, DNS/domain security, CSRF proof-of-concepts, and JWT analysis in one workspace.',
+    },
+    {
+      title: 'ScriptSentry',
+      links: {
+        live: 'https://amitpal-cyberbuddy.github.io/ScriptSentry/',
+        github: 'https://github.com/AmitPal-CyberBuddy/ScriptSentry',
+      },
+      status: 'Under Development',
+      description:
+        'Visual JavaScript security and script-behavior intelligence platform \u2014 secrets, crypto keys, APIs, storage, DOM risks, obfuscation, and data flows analyzed through a motion-rich dashboard with 20+ detection modules.',
+    },
+    {
+      title: 'VAPT Checklist',
+      links: {
+        live: 'https://amitpal-cyberbuddy.github.io/VAPT-Checklist/',
+        github: 'https://github.com/AmitPal-CyberBuddy/VAPT-Checklist',
+      },
+      status: 'Under Development',
+      description:
+        'Context-aware VAPT methodology, checklist, knowledge base, and local-first workspace \u2014 623 validated items across 25 categories, 196 guided test families, 15 attack-chain graphs, 40 payload references, and 12 Burp Suite workflows.',
+    },
+    {
+      title: 'Technical Security Writing',
+      links: { medium: 'https://amitpxl.medium.com/' },
+      description:
+        'Write practical application security articles on topics across Web Application and API security, vulnerability research, and security testing.',
+    },
+  ],
+  expertise: {
+    securityTesting: ['Web Application VAPT', 'API Security Testing', 'OWASP Top 10', 'OWASP API Security Top 10'],
+    assessmentFocus: ['Access Control', 'Authentication & Authorization', 'Session Management', 'Input Validation', 'Business Logic', 'Client-Side & Server-Side Testing'],
+    tools: ['Burp Suite', 'Postman', 'Nuclei', 'OWASP ZAP', 'Nmap', 'SQLMap'],
+  },
+  education: [
+    {
+      title: 'Bachelor of Computer Applications (BCA)',
+      period: '2020 \u2013 2023',
+      institution: 'Techno Main Salt Lake, MAKAUT University',
+      cgpa: '9.16/10',
+    },
+  ],
+  continuousLearning: [
+    {
+      title: 'PortSwigger Web Security Academy',
+      detail: '135+ hands-on labs completed',
+      description: 'Hands-on practice across Web Application security vulnerabilities and exploitation techniques.',
+    },
+    {
+      title: 'APIsec University',
+      detail: 'Jan 2026',
+      description: "API Penetration Testing (12 hours) \u00b7 API Security Fundamentals '25 (2 hours)",
+    },
+  ],
+};
 
 const asset = (name) => `${import.meta.env.BASE_URL}assets/${name}`;
 const MOTION_EASE = [0.16, 1, 0.3, 1];
@@ -340,19 +460,25 @@ function useActiveSection() {
   const [active, setActive] = useState('');
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting);
-        if (visible.length) setActive(visible[visible.length - 1].target.id);
-      },
-      { rootMargin: '-32% 0px -58% 0px', threshold: 0 },
-    );
+    const update = () => {
+      const offset = window.innerHeight * 0.35;
+      let current = '';
+      for (const { id } of NAV_ITEMS) {
+        const el = document.getElementById(id);
+        if (el && el.getBoundingClientRect().top <= offset) {
+          current = id;
+        }
+      }
+      setActive(current);
+    };
 
-    NAV_ITEMS.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) observer.observe(element);
-    });
-    return () => observer.disconnect();
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   }, []);
 
   return active;
@@ -406,7 +532,7 @@ function ButtonLink({ href, children, className = 'button button--secondary', ex
   );
 }
 
-function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen }) {
+function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen, onOpenResume }) {
   const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
@@ -497,7 +623,7 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
               {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />} Use {theme === 'dark' ? 'light' : 'dark'} mode
             </button>
             <a href={`mailto:${LINKS.email}`} tabIndex={menuOpen ? 0 : -1}><Mail size={14} /> {LINKS.email}</a>
-            <a href="#" aria-disabled="true" style={{pointerEvents:"none",opacity:0.55}} tabIndex={menuOpen ? 0 : -1}><Award size={14} /> Download CV (PDF)</a>
+            <button type="button" className="theme-text-toggle" onClick={() => { onOpenResume(); closeMenu(); }} tabIndex={menuOpen ? 0 : -1}><FileText size={14} /> View Resume</button>
           </div>
         </div>
       </nav>
@@ -505,7 +631,7 @@ function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen
   );
 }
 
-function Hero() {
+function Hero({ onOpenResume }) {
   const reduceMotion = useReducedMotion();
   return (
     <section id="top" className="hero section" aria-labelledby="hero-title">
@@ -538,12 +664,12 @@ function Hero() {
           <div className="button-row">
             <ButtonLink href="#work" className="button button--primary"><Hammer size={16} /> View selected work <ArrowUpRight size={15} /></ButtonLink>
             <ButtonLink href="#writing"><BookOpen size={16} /> Read research notes</ButtonLink>
-            <ButtonLink href="#" className="button button--secondary is-disabled" aria-label="Resume download coming soon" aria-disabled="true" style={{pointerEvents:"none",opacity:0.55}}><Award size={16} /> Download CV (PDF) <ArrowUpRight size={15} /></ButtonLink>
+            <button type="button" className="button button--secondary" onClick={onOpenResume} data-cursor="RESUME"><FileText size={16} /> View My Resume <ArrowUpRight size={15} /></button>
           </div>
           <div className="stats-bar" aria-label="Key metrics">
-            <div><strong>135+</strong> labs (PortSwigger / TryHackMe)</div>
-            <div><strong>623</strong> validated checklist items</div>
-            <div><strong>7</strong> live tools built</div>
+            <div><strong>135+</strong> hands-on labs</div>
+            <div><strong>3</strong> published articles</div>
+            <div><strong>3</strong> security projects</div>
           </div>
         </motion.div>
 
@@ -580,7 +706,7 @@ function Focus() {
         <div className="shell focus-layout">
           <Reveal className="section-intro focus-intro">
             <Eyebrow icon={Target}>Focus · what I do</Eyebrow>
-            <p className="role-badge"><span className="status-dot" /><span>Current role</span><b>Security Analyst (VAPT) · Ampcus Cyber · Feb 2026 → now</b></p>
+            <p className="role-badge"><span className="status-dot" /><span>Current role</span><b>Associate Consultant · Ampcus Cyber · Aug 2026 → now</b></p>
             <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
             <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. I assess web applications and APIs by understanding the system, testing it responsibly, and validating real impact.</p>
             <p>VAPT — Vulnerability Assessment and Penetration Testing — is the practice of finding, validating, and clearly explaining security issues that need attention.</p>
@@ -670,8 +796,8 @@ function ProjectDataVisual({ type, image, alt }) {
           transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
         />
         <div className="project-visual-frame__scrim" aria-hidden="true" />
-        <div className="project-data" role="group" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist release candidate data'}>
-          <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // release candidate'}</span><span>{isLive ? 'Local-first' : 'v1.0.0 RC'}</span></div>
+        <div className="project-data" role="group" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist under development data'}>
+          <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // under development'}</span><span>{isLive ? 'Local-first' : 'Active dev'}</span></div>
           <div className="project-data__metrics">
             {metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
           </div>
@@ -689,7 +815,7 @@ function ProjectDataVisual({ type, image, alt }) {
           transition={reduceMotion ? { duration: 0 } : { duration: 5.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' }}
         />
       </div>
-      <figcaption><span>{isLive ? 'Live · 7 tools' : 'v1.0.0 release candidate'}</span><span>{isLive ? 'Local-first browser security' : 'Context-aware VAPT workspace'}</span></figcaption>
+      <figcaption><span>{isLive ? 'Live · 7 tools' : 'Under Development'}</span><span>{isLive ? 'Local-first browser security' : 'Context-aware VAPT workspace'}</span></figcaption>
     </figure>
   );
 }
@@ -749,13 +875,13 @@ function Work() {
           />
           <ProjectCard
             type="release"
-            eyebrow="VAPT Checklist · v1.0.0-r29 release candidate"
+            eyebrow="VAPT Checklist · Under Development"
             title="VAPT Checklist"
             summary="A local-first, context-aware workspace for Web and API security testing."
-            detail="Fragmented checklists miss context and slow assessments down. VAPT Checklist connects taxonomy, scope, evidence, and honest coverage states — reducing manual testing friction and making 623 validated items faster to navigate during live assessments."
+            detail="Fragmented checklists miss context and slow assessments down. VAPT Checklist connects taxonomy, scope, evidence, and honest coverage states — reducing manual testing friction and making 623 validated items across 25 categories, 196 guided families, and 15 attack chains faster to navigate during live assessments."
             image="vapt-workflow.jpg"
             alt="VAPT Checklist structured security workflow"
-            tags={['623 validated items', '25 categories', 'Release candidate']}
+            tags={['623 items', '25 categories', '196 families', '15 attack chains', 'Under Development']}
             primaryLink={LINKS.vaptLive}
             primaryLabel="Live preview"
             secondaryLink={LINKS.vaptRepo}
@@ -766,13 +892,16 @@ function Work() {
 
         <article className="experiment-card">
           <div>
-            <Eyebrow icon={TerminalSquare}>Other experiment · Python</Eyebrow>
+            <Eyebrow icon={TerminalSquare}>Independent project · Python · Under Development</Eyebrow>
             <h3>ScriptSentry</h3>
-            <p>A Python experiment in line-by-line script analysis, extending the work beyond browser security.</p>
+            <p>A visual JavaScript security and script-behavior intelligence platform — secrets, crypto, APIs, DOM risks, data flows, and 20+ detection modules in a motion-rich dashboard.</p>
           </div>
           <div className="experiment-card__aside">
-            <span>Experimental · 2026</span>
-            <ButtonLink href={LINKS.scriptSentry} external><GitHubIcon size={16} /> View on GitHub <ExternalArrow /></ButtonLink>
+            <span>Under Development · 2026</span>
+            <div className="button-row">
+              <ButtonLink href={LINKS.scriptSentryLive} external className="button button--primary button--green"><ExternalLink size={16} /> Live preview <ExternalArrow /></ButtonLink>
+              <ButtonLink href={LINKS.scriptSentry} external><GitHubIcon size={16} /> View GitHub <ExternalArrow /></ButtonLink>
+            </div>
           </div>
         </article>
       </div>
@@ -920,6 +1049,14 @@ function Signals() {
           <p>“Your team’s professionalism and clarity made the difference. The report was not just findings — it was a clear path to fix things.”</p>
           <footer>Feedback from a SaaS assessment · client confidentiality protected</footer>
         </blockquote>
+        <blockquote className="impact-quote">
+          <p>“From navigating complex findings to supporting us through every step of the remediation process, your team’s professionalism, patience, and expertise made all the difference. Amit, you were our go-to person throughout this journey — always available when we needed guidance. We look forward to continuing this partnership for future security assessments.”</p>
+          <footer>VAPT & Mobile PT engagement closure · client confidentiality protected</footer>
+        </blockquote>
+        <blockquote className="impact-quote">
+          <p>“A heartfelt thank you to Amit and the entire team for the exceptional support throughout this engagement. The professionalism, patience, and diligence shown by you and everyone working in the background has been truly appreciated.”</p>
+          <footer>Web & Mobile PT engagement · client confidentiality protected</footer>
+        </blockquote>
       </div>
     </section>
   );
@@ -957,31 +1094,313 @@ function Now() {
   );
 }
 
-function Resume() {
+function downloadResumeATS() {
+  const r = RESUME_DATA;
+  const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>${esc(r.header.name)} - Resume</title>
+<style>
+@page{size:A4;margin:0.48in 0.64in}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10pt;line-height:1.4;color:#1a1a1a}
+h1{font-size:21pt;font-weight:700;margin-bottom:2pt}
+.subtitle{font-size:11pt;font-weight:700;color:#2E506B;margin-bottom:4pt}
+.contact{font-size:8.5pt;color:#555;margin-bottom:6pt}
+.contact a{color:#555;text-decoration:none}
+.summary{font-size:9.15pt;line-height:1.45;margin-bottom:8pt;color:#333}
+.section-title{font-size:10.2pt;font-weight:700;color:#2E506B;border-bottom:1px solid #D9DEE2;padding-bottom:3pt;margin-top:10pt;margin-bottom:6pt;text-transform:uppercase;letter-spacing:0.5pt}
+.company-row{display:flex;justify-content:space-between;align-items:baseline}
+.company{font-weight:700;font-size:9.5pt;margin-top:6pt}
+.location{font-size:8.6pt;color:#5A5A5A}
+.role-row{display:flex;justify-content:space-between;align-items:baseline}
+.role{font-weight:700;font-size:9.3pt;margin-top:4pt}
+.period{font-size:8.6pt;color:#5A5A5A}
+ul{margin:2pt 0 4pt 15pt}
+li{font-size:9.15pt;line-height:1.4;margin-bottom:1.5pt;color:#333}
+.desc{font-size:9.15pt;color:#333;margin-top:2pt;line-height:1.4}
+.project-row{display:flex;justify-content:space-between;align-items:baseline}
+.project-title{font-weight:700;font-size:9.3pt}
+.project-links{font-size:8.6pt;color:#5A5A5A}
+.project-links a{color:#5A5A5A;text-decoration:none}
+.expertise-group{margin-bottom:2pt;font-size:9.15pt;color:#333}
+.expertise-label{font-weight:700}
+.edu-row{display:flex;justify-content:space-between;align-items:baseline}
+.edu-title{font-weight:700;font-size:9.3pt}
+.edu-detail{font-size:8.6pt;color:#5A5A5A}
+.edu-institution{font-size:9.15pt;color:#333;margin-top:1pt}
+.edu-cgpa{font-weight:700}
+.learning-row{display:flex;justify-content:space-between;align-items:baseline}
+.learning-title{font-weight:700;font-size:9.3pt}
+.learning-detail{font-size:8.6pt;color:#5A5A5A}
+.learning-desc{font-size:9.15pt;color:#333;margin-top:1pt}
+.spacer{height:4pt}
+@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<h1>${esc(r.header.name)}</h1>
+<div class="subtitle">${esc(r.header.title)}</div>
+<div class="contact">${esc(r.header.location)} | ${esc(r.header.phone)} | <a href="mailto:${esc(r.header.email)}">${esc(r.header.email)}</a> | <a href="${r.header.linkedin}">LinkedIn</a> | <a href="${r.header.github}">GitHub</a> | <a href="${r.header.portfolio}">Portfolio</a> | <a href="${r.header.medium}">Medium</a></div>
+<div class="summary">${esc(r.summary)}</div>
+<div class="section-title">Experience</div>
+${r.experience.map((exp) => `<div class="company-row"><span class="company">${esc(exp.company)}</span><span class="location">${esc(exp.location)}</span></div>
+${exp.roles.map((role) => `<div class="role-row"><span class="role">${esc(role.title)}</span><span class="period">${esc(role.period)}</span></div>
+${role.bullets ? `<ul>${role.bullets.map((b) => `<li>${esc(b)}</li>`).join('')}</ul>` : ''}
+${role.description ? `<div class="desc">${esc(role.description)}</div>` : ''}`).join('')}`).join('')}
+<div class="section-title">Independent Work &amp; Security Writing</div>
+${r.independentWork.map((item) => `<div class="project-row"><span class="project-title">${esc(item.title)}</span><span class="project-links">${item.links.live ? `<a href="${item.links.live}">Live</a>` : ''}${item.links.github ? `${item.links.live ? ' | ' : ''}<a href="${item.links.github}">GitHub</a>` : ''}${item.links.medium ? `<a href="${item.links.medium}">Medium (@amitpxl)</a>` : ''}${item.status ? ` | <em>${esc(item.status)}</em>` : ''}</span></div>
+<div class="desc">${esc(item.description)}</div>
+<div class="spacer"></div>`).join('')}
+<div class="section-title">Expertise</div>
+<div class="expertise-group"><span class="expertise-label">Security Testing: </span>${r.expertise.securityTesting.map(esc).join(' \u00b7 ')}</div>
+<div class="expertise-group"><span class="expertise-label">Assessment Focus: </span>${r.expertise.assessmentFocus.map(esc).join(' \u00b7 ')}</div>
+<div class="expertise-group"><span class="expertise-label">Tools: </span>${r.expertise.tools.map(esc).join(' \u00b7 ')}</div>
+<div class="section-title">Education &amp; Continuous Learning</div>
+${r.education.map((edu) => `<div class="edu-row"><span class="edu-title">${esc(edu.title)}</span><span class="edu-detail">${esc(edu.period)}</span></div>
+<div class="edu-institution">${esc(edu.institution)} \u00b7 <span class="edu-cgpa">CGPA: ${esc(edu.cgpa)}</span></div>`).join('')}
+<div class="spacer"></div>
+${r.continuousLearning.map((item) => `<div class="learning-row"><span class="learning-title">${esc(item.title)}</span><span class="learning-detail">${esc(item.detail)}</span></div>
+<div class="learning-desc">${esc(item.description)}</div>
+<div class="spacer"></div>`).join('')}
+<script>window.onload=function(){setTimeout(function(){window.print()},300)}</script>
+</body>
+</html>`;
+
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const win = window.open(url, '_blank');
+  if (!win) {
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'Amit_Pal_Resume.html';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+  }
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+}
+
+function ResumeDocument() {
+  const r = RESUME_DATA;
+  return (
+    <div className="resume-doc">
+      <header className="resume-doc__header">
+        <h1 className="resume-doc__name">{r.header.name}</h1>
+        <p className="resume-doc__title">{r.header.title}</p>
+        <div className="resume-doc__contact">
+          <span>{r.header.location}</span>
+          <span>{r.header.phone}</span>
+          <a href={`mailto:${r.header.email}`}>{r.header.email}</a>
+          <a href={r.header.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href={r.header.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a href={r.header.portfolio} target="_blank" rel="noopener noreferrer">Portfolio</a>
+          <a href={r.header.medium} target="_blank" rel="noopener noreferrer">Medium</a>
+        </div>
+      </header>
+
+      <section className="resume-doc__section">
+        <p className="resume-doc__summary">{r.summary}</p>
+      </section>
+
+      <section className="resume-doc__section">
+        <h2 className="resume-doc__section-title">Experience</h2>
+        {r.experience.map((exp, i) => (
+          <div key={i} className="resume-doc__company">
+            <div className="resume-doc__company-header">
+              <span className="resume-doc__company-name">{exp.company}</span>
+              <span className="resume-doc__company-location">{exp.location}</span>
+            </div>
+            {exp.roles.map((role, j) => (
+              <div key={j} className="resume-doc__role">
+                <div className="resume-doc__role-header">
+                  <span className="resume-doc__role-title">{role.title}</span>
+                  <span className="resume-doc__role-period">{role.period}</span>
+                </div>
+                {role.bullets && (
+                  <ul className="resume-doc__bullets">
+                    {role.bullets.map((b, k) => <li key={k}>{b}</li>)}
+                  </ul>
+                )}
+                {role.description && <p className="resume-doc__desc">{role.description}</p>}
+              </div>
+            ))}
+          </div>
+        ))}
+      </section>
+
+      <section className="resume-doc__section">
+        <h2 className="resume-doc__section-title">Independent Work &amp; Security Writing</h2>
+        {r.independentWork.map((item, i) => (
+          <div key={i} className="resume-doc__project">
+            <div className="resume-doc__project-header">
+              <span className="resume-doc__project-title">{item.title}</span>
+              <span className="resume-doc__project-links">
+                {item.links.live && <a href={item.links.live} target="_blank" rel="noopener noreferrer">Live</a>}
+                {item.links.github && (
+                  <>
+                    {item.links.live && <span aria-hidden="true"> · </span>}
+                    <a href={item.links.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+                  </>
+                )}
+                {item.links.medium && <a href={item.links.medium} target="_blank" rel="noopener noreferrer">Medium (@amitpxl)</a>}
+                {item.status && <span className="resume-doc__project-status"> · {item.status}</span>}
+              </span>
+            </div>
+            <p className="resume-doc__desc">{item.description}</p>
+          </div>
+        ))}
+      </section>
+
+      <section className="resume-doc__section">
+        <h2 className="resume-doc__section-title">Expertise</h2>
+        <p className="resume-doc__expertise-group"><span className="resume-doc__expertise-label">Security Testing: </span>{r.expertise.securityTesting.join(' \u00b7 ')}</p>
+        <p className="resume-doc__expertise-group"><span className="resume-doc__expertise-label">Assessment Focus: </span>{r.expertise.assessmentFocus.join(' \u00b7 ')}</p>
+        <p className="resume-doc__expertise-group"><span className="resume-doc__expertise-label">Tools: </span>{r.expertise.tools.join(' \u00b7 ')}</p>
+      </section>
+
+      <section className="resume-doc__section">
+        <h2 className="resume-doc__section-title">Education &amp; Continuous Learning</h2>
+        {r.education.map((edu, i) => (
+          <div key={i} className="resume-doc__edu">
+            <div className="resume-doc__edu-header">
+              <span className="resume-doc__edu-title">{edu.title}</span>
+              <span className="resume-doc__edu-period">{edu.period}</span>
+            </div>
+            <p className="resume-doc__edu-institution">{edu.institution} · <span className="resume-doc__edu-cgpa">CGPA: {edu.cgpa}</span></p>
+          </div>
+        ))}
+        <div style={{ height: '0.5rem' }} />
+        {r.continuousLearning.map((item, i) => (
+          <div key={i} className="resume-doc__learning">
+            <div className="resume-doc__learning-header">
+              <span className="resume-doc__learning-title">{item.title}</span>
+              <span className="resume-doc__learning-detail">{item.detail}</span>
+            </div>
+            <p className="resume-doc__learning-desc">{item.description}</p>
+          </div>
+        ))}
+      </section>
+    </div>
+  );
+}
+
+function ResumeViewer({ onClose }) {
+  const reduceMotion = useReducedMotion();
+  const [showSizeNote, setShowSizeNote] = useState(false);
+
+  useEffect(() => {
+    setShowSizeNote(window.innerWidth < 768);
+  }, []);
+
+  useEffect(() => {
+    const onKeyDown = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKeyDown);
+    document.body.style.overflow = 'hidden';
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+      document.body.style.overflow = '';
+    };
+  }, [onClose]);
+
+  return (
+    <motion.div
+      className="resume-viewer-overlay"
+      initial={reduceMotion ? { opacity: 1 } : { opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: reduceMotion ? 0 : 0.3 }}
+      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+    >
+      <motion.div
+        className="resume-viewer"
+        initial={reduceMotion ? false : { opacity: 0, y: 40, scale: 0.97 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 40, scale: 0.97 }}
+        transition={{ duration: reduceMotion ? 0 : 0.4, ease: MOTION_EASE }}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Resume viewer"
+      >
+        <div className="resume-viewer__toolbar">
+          <div className="resume-viewer__toolbar-left">
+            <FileText size={16} aria-hidden="true" />
+            <span>Resume · Amit Pal</span>
+          </div>
+          <div className="resume-viewer__toolbar-right">
+            <button type="button" className="resume-viewer__btn" onClick={downloadResumeATS}>
+              <Download size={15} aria-hidden="true" /> <span>Download ATS PDF</span>
+            </button>
+            <button type="button" className="resume-viewer__close" onClick={onClose} aria-label="Close resume viewer">
+              <X size={18} aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+        {showSizeNote && (
+          <div className="resume-viewer__size-note" role="status">
+            <span>For the best experience, view on a laptop or desktop. You can also try desktop mode in your browser.</span>
+            <button type="button" onClick={() => setShowSizeNote(false)} aria-label="Dismiss suggestion">
+              <X size={14} aria-hidden="true" />
+            </button>
+          </div>
+        )}
+        <div className="resume-viewer__content">
+          <ResumeDocument />
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
+function Resume({ onOpenResume }) {
   return (
     <section id="resume" className="section resume-section" aria-labelledby="resume-title">
       <div className="shell resume-layout">
         <Reveal className="section-intro resume-intro">
-          <Eyebrow icon={Award}>Resume · updated 2026</Eyebrow>
+          <Eyebrow icon={FileText}>Resume · updated August 2026</Eyebrow>
           <h2 id="resume-title">Resume / <em>CV.</em></h2>
-          <p className="intro-lead">Updated security analyst resume covering VAPT work, custom tooling, and continuous lab credentials.</p>
-          <p>Includes authorization logic gaps, evidence-led reporting methodology, and practical remediation guidance from authorized web application and API testing.</p>
+          <p className="intro-lead">Application Security Consultant focused on Web Application and API PT, with hands-on experience managing end-to-end security assessments.</p>
+          <p>Currently Associate Consultant at Ampcus Cyber, leading VAPT engagements across diverse client environments.</p>
+          <div className="button-row">
+            <button type="button" className="button button--primary" onClick={onOpenResume} data-cursor="RESUME">
+              <FileText size={16} /> View My Resume <ArrowUpRight size={15} />
+            </button>
+            <button type="button" className="button button--secondary" onClick={downloadResumeATS} data-cursor="DOWNLOAD">
+              <Download size={16} /> Download ATS Resume
+            </button>
+          </div>
         </Reveal>
         <Reveal className="resume-content" delay={0.08}>
           <div className="panel panel--accent resume-panel">
+            <div className="resume-highlights">
+              <div className="resume-highlight">
+                <span className="resume-highlight__label">Current Role</span>
+                <span className="resume-highlight__value">Associate Consultant · Ampcus Cyber</span>
+              </div>
+              <div className="resume-highlight">
+                <span className="resume-highlight__label">Focus</span>
+                <span className="resume-highlight__value">Web Application &amp; API PT</span>
+              </div>
+              <div className="resume-highlight">
+                <span className="resume-highlight__label">Education</span>
+                <span className="resume-highlight__value">BCA · CGPA 9.16/10</span>
+              </div>
+              <div className="resume-highlight">
+                <span className="resume-highlight__label">Labs</span>
+                <span className="resume-highlight__value">135+ hands-on (PortSwigger)</span>
+              </div>
+            </div>
             <div className="resume-badges">
               <div className="badge-row">
-                <span className="badge">API Sec University</span>
-                <span className="badge">PortSwigger Labs</span>
-                <span className="badge">TryHackMe</span>
+                <span className="badge">Burp Suite</span>
+                <span className="badge">OWASP Top 10</span>
+                <span className="badge">API Security</span>
+                <span className="badge">Web Security</span>
+                <span className="badge">Penetration Testing</span>
+                <span className="badge">Manual & Automated Testing</span>
               </div>
-              <p className="badge-desc">API Penetration Testing · API Security Fundamentals · 135+ labs completed · January 2026 → present</p>
-            </div>
-            <div className="resume-cta-block">
-              <a href="#" className="button button--primary is-disabled" aria-label="Resume download coming soon" aria-disabled="true" style={{pointerEvents:'none', opacity:0.55}}>
-                <Award size={16} /> Download CV / Resume (PDF) — coming soon <ArrowUpRight size={15} />
-              </a>
-              <p className="resume-note"><em>Updated PDF will be activated here once shared — just drop it in /public/assets/.</em></p>
             </div>
           </div>
         </Reveal>
@@ -990,7 +1409,7 @@ function Resume() {
   );
 }
 
-function Contact() {
+function Contact({ onOpenResume }) {
   return (
     <section id="connect" className="section contact-section" aria-labelledby="contact-title">
       <div className="contact-grid-pattern" aria-hidden="true" />
@@ -998,13 +1417,13 @@ function Contact() {
         <div className="contact-copy">
           <Eyebrow icon={Mail}>Contact · collaborations welcome</Eyebrow>
           <h2 id="contact-title">Let’s make<br />security <em>clearer</em><br />together.</h2>
-          <p>Need Web or API VAPT with clear evidence and practical remediation context? Or want to discuss browser-security tooling? Let’s connect.</p>
+          <p>Need Web or API PT with clear evidence and practical remediation context? Or want to discuss browser-security tooling? Let’s connect.</p>
           <a className="email-address" href={`mailto:${LINKS.email}`} data-cursor="EMAIL"><Mail size={17} /> {LINKS.email}</a>
         </div>
         <div className="contact-actions">
           <div className="contact-primary-actions">
             <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME"><Mail size={22} /><span>Email<br />me <ArrowUpRight size={18} /></span></a>
-            <a href="#" className="email-cta is-disabled" aria-label="Resume download coming soon" aria-disabled="true" data-cursor="RESUME" style={{pointerEvents:'none', opacity:0.55}}><Award size={22} /><span>Download<br />CV — soon <ArrowUpRight size={18} /></span></a>
+            <button type="button" className="email-cta" onClick={onOpenResume} data-cursor="RESUME"><FileText size={22} /><span>View<br />Resume <ArrowUpRight size={18} /></span></button>
             <ButtonLink href={LINKS.linkedin} external className="button contact-linkedin" cursorLabel="LINKEDIN"><LinkedInIcon size={16} /> Connect on LinkedIn <ExternalArrow /></ButtonLink>
           </div>
           <div className="contact-links" aria-label="More external profiles">
@@ -1025,7 +1444,7 @@ function Footer() {
         <span>© 2026 Amit Pal · Application Security</span>
         <div>
           <a href="#top">Back to top ↑</a><span aria-hidden="true">·</span>
-          <a href="#" aria-disabled="true" style={{pointerEvents:"none",opacity:0.55}}>Resume</a><span aria-hidden="true">·</span>
+          <a href="#resume">Resume</a><span aria-hidden="true">·</span>
           <a href={`mailto:${LINKS.email}`}><Mail size={13} style={{verticalAlign:'-2px'}}/> Email</a><span aria-hidden="true">·</span>
           <a href={LINKS.github} target="_blank" rel="noopener noreferrer"><GitHubIcon size={13} style={{verticalAlign:'-2px'}}/> GitHub</a><span aria-hidden="true">·</span>
           <a href={LINKS.medium} target="_blank" rel="noopener noreferrer"><BookOpen size={13} style={{verticalAlign:'-2px'}}/> Medium</a><span aria-hidden="true">·</span>
@@ -1040,6 +1459,7 @@ export default function App() {
   const [theme, toggleTheme] = useTheme();
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [resumeOpen, setResumeOpen] = useState(false);
   const time = useCurrentTime();
   const activeSection = useActiveSection();
   const progress = useScrollProgress();
@@ -1061,21 +1481,23 @@ export default function App() {
         activeSection={activeSection}
         menuOpen={menuOpen}
         setMenuOpen={setMenuOpen}
+        onOpenResume={() => setResumeOpen(true)}
       />
       <main id="main">
-        <Hero />
+        <Hero onOpenResume={() => setResumeOpen(true)} />
         <Work />
+        <Resume onOpenResume={() => setResumeOpen(true)} />
         <Focus />
         <LearningLoop />
         <Writing />
         <Journey />
         <Signals />
         <Now />
-        <Contact />
-        <Resume />
+        <Contact onOpenResume={() => setResumeOpen(true)} />
       </main>
       <Footer />
       <AnimatePresence>{loading && <LoadingScreen />}</AnimatePresence>
+      <AnimatePresence>{resumeOpen && <ResumeViewer onClose={() => setResumeOpen(false)} />}</AnimatePresence>
     </MotionConfig>
   );
 }
