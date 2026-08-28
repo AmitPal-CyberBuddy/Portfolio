@@ -55,24 +55,24 @@ const NAV_ITEMS = [
 const WRITING = [
   {
     title: 'CORS Misconfiguration: When Reflecting the Origin Is Not the Whole Story',
-    insight: 'Reflection is not exploitation. Proving authenticated impact matters.',
+    insight: 'I check how a reflected origin behaves under a real cross-origin request — Reflection alone is not proof of exploitation.',
     link: 'https://amitpxl.medium.com/cors-misconfiguration-when-reflecting-the-origin-is-not-the-whole-story-956e2e6e18bc',
   },
   {
     title: "HTTP Request Smuggling vs Pipelining: Why They're Often Confused",
-    insight: "Why double responses in Repeater aren't always smuggling.",
+    insight: 'I check why double responses in Repeater are not always a smuggling sign — the two patterns are easy to mix up.',
     link: 'https://amitpxl.medium.com/http-request-smuggling-vs-http-request-pipelining-why-theyre-often-confused-44ffe6e528eb',
   },
   {
     title: 'How I Broke Client-Side Encryption By Frontend JavaScript Analysis',
-    insight: 'Frontend JavaScript is an attack surface, not just UI.',
+    insight: 'I check the JavaScript a page actually ships — frontend encryption is an attack surface, not just UI.',
     link: 'https://amitpxl.medium.com/how-i-broke-encrypted-requests-by-reading-frontend-javascript-b016c5b9078d',
   },
 ];
 
 const FOCUS_STEPS = [
   ['Scope & recon', 'Map the real attack surface before testing starts.'],
-  ['Web & API testing', 'Test manually first; scanners do not understand every workflow.'],
+  ['Web & API testing', 'Pair manual analysis with automated scanning — scanners alone miss the logic and business-rule flaws that matter.'],
   ['Validate impact', 'Confirm a finding is reproducible, meaningful, and safe to report.'],
   ['Clear reporting', 'Turn evidence into a practical path to remediation.'],
 ];
@@ -155,11 +155,19 @@ const SIGNALS = [
 const NOW_ITEMS = [
   {
     label: 'Building',
-    detail: 'VAPT Checklist \u2014 a context-aware VAPT workspace. ScriptSentry \u2014 a JavaScript security intelligence platform. Both under active development.',
+    detail: 'VAPT Checklist — a context-aware VAPT workspace, under active development.',
     href: LINKS.vaptLive,
     action: 'Live preview',
     tone: 'green',
     icon: Hammer,
+  },
+  {
+    label: 'Experimenting',
+    detail: 'ScriptSentry — a JavaScript security intelligence platform, under active development.',
+    href: LINKS.scriptSentryLive,
+    action: 'Live preview',
+    tone: 'violet',
+    icon: Zap,
   },
   {
     label: 'Writing',
@@ -643,17 +651,17 @@ function Hero({ onOpenResume }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.08, ease: MOTION_EASE }}
         >
-          <Eyebrow icon={ShieldCheck}>Amit Pal · Security Analyst (VAPT) at Ampcus Cyber</Eyebrow>
+          <Eyebrow icon={ShieldCheck}>Amit Pal · Associate Consultant (VAPT) at Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
-            <span>I secure Web Apps</span>
-            <span>&amp; APIs.</span>
-            <strong>Finding logic flaws before attackers do.</strong>
+            <span>I find logic flaws</span>
+            <span>attackers miss.</span>
+            <strong>Manual and automated Web &amp; API testing — validated by evidence, not assumptions.</strong>
           </h1>
-          <p className="hero__lead">Finding high-impact logic flaws in Web Applications &amp; APIs — backed by proof-of-concept evidence, practical remediation guidance, and reduced business risk.</p>
+          <p className="hero__lead">High-impact Web &amp; API penetration testing that turns logic and authorization gaps into reproducible proof-of-concept evidence, clear remediation guidance, and reduced business risk.</p>
           <p className="hero__body">I build local-first tools to make authorized security testing clearer, faster, and easier to document.</p>
           <div className="tag-row hero__tags" aria-label="Specialties">
             <span>Web &amp; API security</span>
-            <span>Manual validation</span>
+            <span>Manual &amp; automated</span>
             <span>Evidence-led reporting</span>
           </div>
           <div className="hero-evidence-preview" aria-label="Quick evidence preview">
@@ -691,7 +699,7 @@ function Hero({ onOpenResume }) {
             <div className="evidence-compare__observed"><span>Observed</span><code>200 OK</code></div>
           </div>
           <div className="evidence-panel__result"><span>Authorization logic</span><strong>Gap found</strong></div>
-          <div className="evidence-panel__footer">Manual validation · evidence before assumptions</div>
+          <div className="evidence-panel__footer">Manual &amp; automated validation · evidence before assumptions</div>
         </motion.aside>
       </div>
       <div className="hero__signal shell" aria-hidden="true"><span /> Scroll to explore</div>
@@ -748,17 +756,20 @@ function Focus() {
             <p className="intro-lead">Breaking down the logic flaw shown in the evidence banner: expected 403, observed 200. How it happens, why it matters, and what to check next.</p>
           </Reveal>
           <Reveal className="scenario-body" delay={0.08}>
-            <div className="panel">
+            <div className="panel scenario-card">
+              <span className="scenario-card__step">01</span>
               <h3>What I observed</h3>
               <p><code>GET /api/admin/users</code> returned <code>200 OK</code> with identity <code>user</code> — no role elevation required. The endpoint did not re-validate authorization after session establishment.</p>
             </div>
-            <div className="panel panel--accent">
+            <div className="panel panel--accent scenario-card">
+              <span className="scenario-card__step">02</span>
               <h3>Why it is high-impact</h3>
               <p>Access to admin user listings exposes PII, roles, and session identifiers — not a disclosure glitch, but a logic gap with direct data exposure. Remediation: enforce server-side authorization checks at the endpoint, not just at the route level.</p>
             </div>
-            <div className="panel">
+            <div className="panel scenario-card">
+              <span className="scenario-card__step">03</span>
               <h3>How I validated</h3>
-              <p>Manual replay in Repeater with valid session, no privilege change, repeated across three endpoints. Evidence captured with request/response pairs — reproducible by the client without custom tooling.</p>
+              <p>Correlated manual replay in Repeater with automated scan coverage across three endpoints — same valid session, no privilege change, repeated to rule out false positives. Evidence captured with request/response pairs — reproducible by the client without custom tooling.</p>
             </div>
           </Reveal>
         </div>
@@ -774,39 +785,65 @@ function Focus() {
   );
 }
 
+const PROJECT_VISUALS = {
+  live: {
+    className: 'live',
+    top: ['CyberBuddy // live', 'Local-first'],
+    metrics: [['07', 'checks live'], ['NO ACCOUNT', 'no sign-up']],
+    rows: [['CORS validation', 'evidence led'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']],
+    footer: ['Authorized testing only', 'Evidence-grade'],
+    caption: ['Live · 7 tools', 'Local-first browser security'],
+    aria: 'CyberBuddy live tool data',
+  },
+  release: {
+    className: 'release',
+    top: ['VAPT checklist // under development', 'Active dev'],
+    metrics: [['623', 'validated items'], ['25', 'categories']],
+    rows: [['Adaptive scope', 'context first'], ['Manual & automated', 'reproducible'], ['Coverage state', 'honest gaps']],
+    footer: ['Local-first workspace', 'Browser & visual QA'],
+    caption: ['Under Development', 'Context-aware VAPT workspace'],
+    aria: 'VAPT Checklist under development data',
+  },
+  experiment: {
+    className: 'experiment',
+    top: ['ScriptSentry // under development', 'Experiment'],
+    metrics: [['20+', 'detection modules'], ['JS', 'script analysis']],
+    rows: [['Secrets & crypto', 'key exposure'], ['DOM & storage', 'risk map'], ['Obfuscation', 'detector']],
+    footer: ['JavaScript security', 'Motion-rich dashboard'],
+    caption: ['Under Development', 'JS security intelligence'],
+    aria: 'ScriptSentry under development data',
+  },
+};
+
 function ProjectDataVisual({ type, image, alt }) {
   const reduceMotion = useReducedMotion();
-  const isLive = type === 'live';
-  const metrics = isLive
-    ? [['07', 'checks live'], ['NO ACCOUNT', 'no sign-up']]
-    : [['623', 'validated items'], ['25', 'categories']];
-  const rows = isLive
-    ? [['CORS validation', 'evidence led'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']]
-    : [['Adaptive scope', 'context first'], ['Manual validation', 'reproducible'], ['Coverage state', 'honest gaps']];
+  const visual = PROJECT_VISUALS[type] || PROJECT_VISUALS.release;
 
   return (
-    <figure className={`project-media project-media--${isLive ? 'live' : 'release'}`}>
+    <figure className={`project-media project-media--${visual.className}`}>
       <div className="project-visual-frame">
-        <motion.img
-          src={asset(image)}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          animate={reduceMotion ? { scale: 1, x: '0%' } : { scale: [1.03, 1.11, 1.03], x: ['-1.5%', '1.5%', '-1.5%'] }}
-          transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        {image && (
+          <motion.img
+            src={asset(image)}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            animate={reduceMotion ? { scale: 1, x: '0%' } : { scale: [1.03, 1.11, 1.03], x: ['-1.5%', '1.5%', '-1.5%'] }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        )}
         <div className="project-visual-frame__scrim" aria-hidden="true" />
-        <div className="project-data" role="group" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist under development data'}>
-          <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // under development'}</span><span>{isLive ? 'Local-first' : 'Active dev'}</span></div>
+        <div className="project-data" role="group" aria-label={visual.aria}>
+          <div className="project-data__top"><span><i /> {visual.top[0]}</span><span>{visual.top[1]}</span></div>
           <div className="project-data__metrics">
-            {metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
+            {visual.metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
           </div>
           <div className="project-data__rows">
-            {rows.map(([label, value], index) => (
+            {visual.rows.map(([label, value], index) => (
               <div key={label}><span>0{index + 1}</span><b>{label}</b><small>{value}</small></div>
             ))}
           </div>
-          <div className="project-data__footer"><span>{isLive ? 'Authorized testing only' : 'Local-first workspace'}</span><span>{isLive ? 'Evidence-grade' : 'Browser & visual QA'}</span></div>
+          <div className="project-data__footer"><span>{visual.footer[0]}</span><span>{visual.footer[1]}</span></div>
         </div>
         <motion.span
           className="project-scanline"
@@ -815,29 +852,34 @@ function ProjectDataVisual({ type, image, alt }) {
           transition={reduceMotion ? { duration: 0 } : { duration: 5.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' }}
         />
       </div>
-      <figcaption><span>{isLive ? 'Live · 7 tools' : 'Under Development'}</span><span>{isLive ? 'Local-first browser security' : 'Context-aware VAPT workspace'}</span></figcaption>
+      <figcaption><span>{visual.caption[0]}</span><span>{visual.caption[1]}</span></figcaption>
     </figure>
   );
 }
 
+const PROJECT_EYEBROW_ICONS = { live: Zap, release: Layers3, experiment: TerminalSquare };
+const PROJECT_PRIMARY_BUTTONS = { live: 'button--violet', release: 'button--green', experiment: 'button--gold' };
+
 function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel, reverse = false }) {
   const reduceMotion = useReducedMotion();
+  const eyebrowIcon = PROJECT_EYEBROW_ICONS[type] || Layers3;
+  const primaryButton = PROJECT_PRIMARY_BUTTONS[type] || 'button--green';
   return (
     <motion.article
-      className={`project-card ${reverse ? 'project-card--reverse' : ''}`}
+      className={`project-card project-card--${type} ${reverse ? 'project-card--reverse' : ''}`}
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.16 }}
       transition={{ duration: 0.65, ease: MOTION_EASE }}
     >
       <div className="project-card__copy">
-        <Eyebrow icon={type === 'live' ? Zap : Layers3}>{eyebrow}</Eyebrow>
+        <Eyebrow icon={eyebrowIcon}>{eyebrow}</Eyebrow>
         <h3>{title}</h3>
         <p className="project-card__lead">{summary}</p>
         <p>{detail}</p>
         <div className="tag-row project-card__tags">{tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
         <div className="button-row">
-          <ButtonLink href={primaryLink} external className={`button button--primary ${type === 'live' ? 'button--violet' : 'button--green'}`}><ExternalLink size={16} /> {primaryLabel}</ButtonLink>
+          <ButtonLink href={primaryLink} external className={`button button--primary ${primaryButton}`}><ExternalLink size={16} /> {primaryLabel}</ButtonLink>
           <ButtonLink href={secondaryLink} external><GitHubIcon size={16} /> {secondaryLabel}</ButtonLink>
         </div>
       </div>
@@ -888,22 +930,19 @@ function Work() {
             secondaryLabel="View GitHub"
             reverse
           />
+          <ProjectCard
+            type="experiment"
+            eyebrow="ScriptSentry · Under Development"
+            title="ScriptSentry"
+            summary="A browser-based visual intelligence platform for JavaScript security and script behavior."
+            detail="ScriptSentry reads the JavaScript an application actually ships — secrets, crypto keys, API calls, storage usage, DOM risks, and obfuscation — and surfaces them in a motion-rich dashboard with 20+ detection modules. It makes script-level analysis visible instead of a manual read-through."
+            tags={['20+ detection modules', 'Secrets & crypto', 'DOM risks', 'Data flows', 'Under Development']}
+            primaryLink={LINKS.scriptSentryLive}
+            primaryLabel="Live preview"
+            secondaryLink={LINKS.scriptSentry}
+            secondaryLabel="View GitHub"
+          />
         </div>
-
-        <article className="experiment-card">
-          <div>
-            <Eyebrow icon={TerminalSquare}>Independent project · Python · Under Development</Eyebrow>
-            <h3>ScriptSentry</h3>
-            <p>A visual JavaScript security and script-behavior intelligence platform — secrets, crypto, APIs, DOM risks, data flows, and 20+ detection modules in a motion-rich dashboard.</p>
-          </div>
-          <div className="experiment-card__aside">
-            <span>Under Development · 2026</span>
-            <div className="button-row">
-              <ButtonLink href={LINKS.scriptSentryLive} external className="button button--primary button--green"><ExternalLink size={16} /> Live preview <ExternalArrow /></ButtonLink>
-              <ButtonLink href={LINKS.scriptSentry} external><GitHubIcon size={16} /> View GitHub <ExternalArrow /></ButtonLink>
-            </div>
-          </div>
-        </article>
       </div>
     </section>
   );
@@ -936,9 +975,9 @@ function Writing() {
               viewport={{ once: true, amount: 0.16 }}
               transition={{ duration: 0.5, delay: index * 0.08, ease: MOTION_EASE }}
             >
-              <div className="article-card__meta"><span>Research note {String(index + 1).padStart(2, '0')}</span><ExternalArrow /></div>
+              <div className="article-card__meta"><span>I write · study {String(index + 1).padStart(2, '0')}</span><ExternalArrow /></div>
               <h3>{article.title}</h3>
-              <p>{article.insight}{index === 0 ? ' I built a two-origin probe to test the actual impact.' : ''}</p>
+              <p>{article.insight}</p>
               <span className="article-card__action"><BookOpen size={15} /> Read on Medium <span className="sr-only">(opens in a new tab)</span></span>
             </motion.a>
           ))}
@@ -1045,18 +1084,23 @@ function Signals() {
             </article>
           ))}
         </div>
-        <blockquote className="impact-quote">
-          <p>“Your team’s professionalism and clarity made the difference. The report was not just findings — it was a clear path to fix things.”</p>
-          <footer>Feedback from a SaaS assessment · client confidentiality protected</footer>
-        </blockquote>
-        <blockquote className="impact-quote">
-          <p>“From navigating complex findings to supporting us through every step of the remediation process, your team’s professionalism, patience, and expertise made all the difference. Amit, you were our go-to person throughout this journey — always available when we needed guidance. We look forward to continuing this partnership for future security assessments.”</p>
-          <footer>VAPT & Mobile PT engagement closure · client confidentiality protected</footer>
-        </blockquote>
-        <blockquote className="impact-quote">
-          <p>“A heartfelt thank you to Amit and the entire team for the exceptional support throughout this engagement. The professionalism, patience, and diligence shown by you and everyone working in the background has been truly appreciated.”</p>
-          <footer>Web & Mobile PT engagement · client confidentiality protected</footer>
-        </blockquote>
+        <div className="impact-quotes">
+          <blockquote className="impact-quote">
+            <span className="impact-quote__label">From a SaaS assessment</span>
+            <p>“Your team’s professionalism and clarity made the difference. The report was not just findings — it was a clear path to fix things.”</p>
+            <footer>Client confidentiality protected</footer>
+          </blockquote>
+          <blockquote className="impact-quote">
+            <span className="impact-quote__label">VAPT & Mobile PT closure</span>
+            <p>“From navigating complex findings to supporting us through every step of the remediation process, your team’s professionalism, patience, and expertise made all the difference. Amit, you were our go-to person throughout this journey — always available when we needed guidance. We look forward to continuing this partnership for future security assessments.”</p>
+            <footer>Client confidentiality protected</footer>
+          </blockquote>
+          <blockquote className="impact-quote">
+            <span className="impact-quote__label">Web & Mobile PT closure</span>
+            <p>“A heartfelt thank you to Amit and the entire team for the exceptional support throughout this engagement. The professionalism, patience, and diligence shown by you and everyone working in the background has been truly appreciated.”</p>
+            <footer>Client confidentiality protected</footer>
+          </blockquote>
+        </div>
       </div>
     </section>
   );
