@@ -699,7 +699,7 @@ function Hero({ onOpenResume }) {
             <div className="evidence-compare__observed"><span>Observed</span><code>200 OK</code></div>
           </div>
           <div className="evidence-panel__result"><span>Authorization logic</span><strong>Gap found</strong></div>
-          <div className="evidence-panel__footer">Manual + automated validation · evidence before assumptions</div>
+          <div className="evidence-panel__footer">Manual &amp; automated validation · evidence before assumptions</div>
         </motion.aside>
       </div>
       <div className="hero__signal shell" aria-hidden="true"><span /> Scroll to explore</div>
@@ -799,7 +799,7 @@ const PROJECT_VISUALS = {
     className: 'release',
     top: ['VAPT checklist // under development', 'Active dev'],
     metrics: [['623', 'validated items'], ['25', 'categories']],
-    rows: [['Adaptive scope', 'context first'], ['Manual + automated', 'reproducible'], ['Coverage state', 'honest gaps']],
+    rows: [['Adaptive scope', 'context first'], ['Manual & automated', 'reproducible'], ['Coverage state', 'honest gaps']],
     footer: ['Local-first workspace', 'Browser & visual QA'],
     caption: ['Under Development', 'Context-aware VAPT workspace'],
     aria: 'VAPT Checklist under development data',
