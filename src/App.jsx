@@ -72,7 +72,7 @@ const WRITING = [
 
 const FOCUS_STEPS = [
   ['Scope & recon', 'Map the real attack surface before testing starts.'],
-  ['Web & API testing', 'Test manually first; scanners do not understand every workflow.'],
+  ['Web & API testing', 'Pair manual analysis with automated scanning — scanners alone miss the logic and business-rule flaws that matter.'],
   ['Validate impact', 'Confirm a finding is reproducible, meaningful, and safe to report.'],
   ['Clear reporting', 'Turn evidence into a practical path to remediation.'],
 ];
@@ -655,13 +655,13 @@ function Hero({ onOpenResume }) {
           <h1 id="hero-title" className="hero__title">
             <span>I find logic flaws</span>
             <span>attackers miss.</span>
-            <strong>Manual Web &amp; API testing — validated by evidence, not assumptions.</strong>
+            <strong>Manual and automated Web &amp; API testing — validated by evidence, not assumptions.</strong>
           </h1>
-          <p className="hero__lead">Finding high-impact logic flaws in Web Applications &amp; APIs — backed by proof-of-concept evidence, practical remediation guidance, and reduced business risk.</p>
+          <p className="hero__lead">High-impact Web &amp; API penetration testing that turns logic and authorization gaps into reproducible proof-of-concept evidence, clear remediation guidance, and reduced business risk.</p>
           <p className="hero__body">I build local-first tools to make authorized security testing clearer, faster, and easier to document.</p>
           <div className="tag-row hero__tags" aria-label="Specialties">
             <span>Web &amp; API security</span>
-            <span>Manual validation</span>
+            <span>Manual &amp; automated</span>
             <span>Evidence-led reporting</span>
           </div>
           <div className="hero-evidence-preview" aria-label="Quick evidence preview">
@@ -699,7 +699,7 @@ function Hero({ onOpenResume }) {
             <div className="evidence-compare__observed"><span>Observed</span><code>200 OK</code></div>
           </div>
           <div className="evidence-panel__result"><span>Authorization logic</span><strong>Gap found</strong></div>
-          <div className="evidence-panel__footer">Manual validation · evidence before assumptions</div>
+          <div className="evidence-panel__footer">Manual + automated validation · evidence before assumptions</div>
         </motion.aside>
       </div>
       <div className="hero__signal shell" aria-hidden="true"><span /> Scroll to explore</div>
@@ -769,7 +769,7 @@ function Focus() {
             <div className="panel scenario-card">
               <span className="scenario-card__step">03</span>
               <h3>How I validated</h3>
-              <p>Manual replay in Repeater with valid session, no privilege change, repeated across three endpoints. Evidence captured with request/response pairs — reproducible by the client without custom tooling.</p>
+              <p>Correlated manual replay in Repeater with automated scan coverage across three endpoints — same valid session, no privilege change, repeated to rule out false positives. Evidence captured with request/response pairs — reproducible by the client without custom tooling.</p>
             </div>
           </Reveal>
         </div>
@@ -799,7 +799,7 @@ const PROJECT_VISUALS = {
     className: 'release',
     top: ['VAPT checklist // under development', 'Active dev'],
     metrics: [['623', 'validated items'], ['25', 'categories']],
-    rows: [['Adaptive scope', 'context first'], ['Manual validation', 'reproducible'], ['Coverage state', 'honest gaps']],
+    rows: [['Adaptive scope', 'context first'], ['Manual + automated', 'reproducible'], ['Coverage state', 'honest gaps']],
     footer: ['Local-first workspace', 'Browser & visual QA'],
     caption: ['Under Development', 'Context-aware VAPT workspace'],
     aria: 'VAPT Checklist under development data',
