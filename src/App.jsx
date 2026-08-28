@@ -653,9 +653,9 @@ function Hero({ onOpenResume }) {
         >
           <Eyebrow icon={ShieldCheck}>Amit Pal · Associate Consultant (VAPT) at Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
-            <span>I test Web Apps</span>
-            <span>&amp; APIs.</span>
-            <strong>Finding logic flaws before attackers do.</strong>
+            <span>I find logic flaws</span>
+            <span>attackers miss.</span>
+            <strong>Manual Web &amp; API testing — validated by evidence, not assumptions.</strong>
           </h1>
           <p className="hero__lead">Finding high-impact logic flaws in Web Applications &amp; APIs — backed by proof-of-concept evidence, practical remediation guidance, and reduced business risk.</p>
           <p className="hero__body">I build local-first tools to make authorized security testing clearer, faster, and easier to document.</p>
