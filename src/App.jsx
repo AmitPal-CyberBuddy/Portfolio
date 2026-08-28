@@ -664,11 +664,6 @@ function Hero({ onOpenResume }) {
             <span>Manual &amp; automated</span>
             <span>Evidence-led reporting</span>
           </div>
-          <div className="hero-evidence-preview" aria-label="Quick evidence preview">
-            <div className="preview-label">INT-0417 · Authorization logic gap</div>
-            <div className="preview-compare"><span>Expected</span><code>403 Forbidden</code><span>Observed</span><code>200 OK</code></div>
-            <p className="preview-note">User identity valid · endpoint did not re-check role elevation.</p>
-          </div>
           <div className="button-row">
             <ButtonLink href="#work" className="button button--primary"><Hammer size={16} /> View selected work <ArrowUpRight size={15} /></ButtonLink>
             <ButtonLink href="#writing"><BookOpen size={16} /> Read research notes</ButtonLink>
@@ -1333,11 +1328,9 @@ function ResumeDocument() {
 
 function ResumeViewer({ onClose }) {
   const reduceMotion = useReducedMotion();
-  const [showSizeNote, setShowSizeNote] = useState(false);
-
-  useEffect(() => {
-    setShowSizeNote(window.innerWidth < 768);
-  }, []);
+  // Derived once at mount from the viewport width instead of setting state
+  // inside an effect (avoids a cascading re-render on open).
+  const [showSizeNote, setShowSizeNote] = useState(() => window.innerWidth < 768);
 
   useEffect(() => {
     const onKeyDown = (e) => { if (e.key === 'Escape') onClose(); };
