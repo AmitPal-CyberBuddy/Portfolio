@@ -774,39 +774,65 @@ function Focus() {
   );
 }
 
+const PROJECT_VISUALS = {
+  live: {
+    className: 'live',
+    top: ['CyberBuddy // live', 'Local-first'],
+    metrics: [['07', 'checks live'], ['NO ACCOUNT', 'no sign-up']],
+    rows: [['CORS validation', 'evidence led'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']],
+    footer: ['Authorized testing only', 'Evidence-grade'],
+    caption: ['Live · 7 tools', 'Local-first browser security'],
+    aria: 'CyberBuddy live tool data',
+  },
+  release: {
+    className: 'release',
+    top: ['VAPT checklist // under development', 'Active dev'],
+    metrics: [['623', 'validated items'], ['25', 'categories']],
+    rows: [['Adaptive scope', 'context first'], ['Manual validation', 'reproducible'], ['Coverage state', 'honest gaps']],
+    footer: ['Local-first workspace', 'Browser & visual QA'],
+    caption: ['Under Development', 'Context-aware VAPT workspace'],
+    aria: 'VAPT Checklist under development data',
+  },
+  experiment: {
+    className: 'experiment',
+    top: ['ScriptSentry // under development', 'Experiment'],
+    metrics: [['20+', 'detection modules'], ['JS', 'script analysis']],
+    rows: [['Secrets & crypto', 'key exposure'], ['DOM & storage', 'risk map'], ['Obfuscation', 'detector']],
+    footer: ['JavaScript security', 'Motion-rich dashboard'],
+    caption: ['Under Development', 'JS security intelligence'],
+    aria: 'ScriptSentry under development data',
+  },
+};
+
 function ProjectDataVisual({ type, image, alt }) {
   const reduceMotion = useReducedMotion();
-  const isLive = type === 'live';
-  const metrics = isLive
-    ? [['07', 'checks live'], ['NO ACCOUNT', 'no sign-up']]
-    : [['623', 'validated items'], ['25', 'categories']];
-  const rows = isLive
-    ? [['CORS validation', 'evidence led'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']]
-    : [['Adaptive scope', 'context first'], ['Manual validation', 'reproducible'], ['Coverage state', 'honest gaps']];
+  const visual = PROJECT_VISUALS[type] || PROJECT_VISUALS.release;
 
   return (
-    <figure className={`project-media project-media--${isLive ? 'live' : 'release'}`}>
+    <figure className={`project-media project-media--${visual.className}`}>
       <div className="project-visual-frame">
-        <motion.img
-          src={asset(image)}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          animate={reduceMotion ? { scale: 1, x: '0%' } : { scale: [1.03, 1.11, 1.03], x: ['-1.5%', '1.5%', '-1.5%'] }}
-          transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-        />
+        {image && (
+          <motion.img
+            src={asset(image)}
+            alt={alt}
+            loading="lazy"
+            decoding="async"
+            animate={reduceMotion ? { scale: 1, x: '0%' } : { scale: [1.03, 1.11, 1.03], x: ['-1.5%', '1.5%', '-1.5%'] }}
+            transition={reduceMotion ? { duration: 0 } : { duration: 16, repeat: Infinity, ease: 'easeInOut' }}
+          />
+        )}
         <div className="project-visual-frame__scrim" aria-hidden="true" />
-        <div className="project-data" role="group" aria-label={isLive ? 'CyberBuddy live tool data' : 'VAPT Checklist under development data'}>
-          <div className="project-data__top"><span><i /> {isLive ? 'CyberBuddy // live' : 'VAPT checklist // under development'}</span><span>{isLive ? 'Local-first' : 'Active dev'}</span></div>
+        <div className="project-data" role="group" aria-label={visual.aria}>
+          <div className="project-data__top"><span><i /> {visual.top[0]}</span><span>{visual.top[1]}</span></div>
           <div className="project-data__metrics">
-            {metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
+            {visual.metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
           </div>
           <div className="project-data__rows">
-            {rows.map(([label, value], index) => (
+            {visual.rows.map(([label, value], index) => (
               <div key={label}><span>0{index + 1}</span><b>{label}</b><small>{value}</small></div>
             ))}
           </div>
-          <div className="project-data__footer"><span>{isLive ? 'Authorized testing only' : 'Local-first workspace'}</span><span>{isLive ? 'Evidence-grade' : 'Browser & visual QA'}</span></div>
+          <div className="project-data__footer"><span>{visual.footer[0]}</span><span>{visual.footer[1]}</span></div>
         </div>
         <motion.span
           className="project-scanline"
@@ -815,29 +841,34 @@ function ProjectDataVisual({ type, image, alt }) {
           transition={reduceMotion ? { duration: 0 } : { duration: 5.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' }}
         />
       </div>
-      <figcaption><span>{isLive ? 'Live · 7 tools' : 'Under Development'}</span><span>{isLive ? 'Local-first browser security' : 'Context-aware VAPT workspace'}</span></figcaption>
+      <figcaption><span>{visual.caption[0]}</span><span>{visual.caption[1]}</span></figcaption>
     </figure>
   );
 }
 
+const PROJECT_EYEBROW_ICONS = { live: Zap, release: Layers3, experiment: TerminalSquare };
+const PROJECT_PRIMARY_BUTTONS = { live: 'button--violet', release: 'button--green', experiment: 'button--gold' };
+
 function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel, reverse = false }) {
   const reduceMotion = useReducedMotion();
+  const eyebrowIcon = PROJECT_EYEBROW_ICONS[type] || Layers3;
+  const primaryButton = PROJECT_PRIMARY_BUTTONS[type] || 'button--green';
   return (
     <motion.article
-      className={`project-card ${reverse ? 'project-card--reverse' : ''}`}
+      className={`project-card project-card--${type} ${reverse ? 'project-card--reverse' : ''}`}
       initial={reduceMotion ? false : { opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.16 }}
       transition={{ duration: 0.65, ease: MOTION_EASE }}
     >
       <div className="project-card__copy">
-        <Eyebrow icon={type === 'live' ? Zap : Layers3}>{eyebrow}</Eyebrow>
+        <Eyebrow icon={eyebrowIcon}>{eyebrow}</Eyebrow>
         <h3>{title}</h3>
         <p className="project-card__lead">{summary}</p>
         <p>{detail}</p>
         <div className="tag-row project-card__tags">{tags.map((tag) => <span key={tag}>{tag}</span>)}</div>
         <div className="button-row">
-          <ButtonLink href={primaryLink} external className={`button button--primary ${type === 'live' ? 'button--violet' : 'button--green'}`}><ExternalLink size={16} /> {primaryLabel}</ButtonLink>
+          <ButtonLink href={primaryLink} external className={`button button--primary ${primaryButton}`}><ExternalLink size={16} /> {primaryLabel}</ButtonLink>
           <ButtonLink href={secondaryLink} external><GitHubIcon size={16} /> {secondaryLabel}</ButtonLink>
         </div>
       </div>
@@ -888,22 +919,19 @@ function Work() {
             secondaryLabel="View GitHub"
             reverse
           />
+          <ProjectCard
+            type="experiment"
+            eyebrow="ScriptSentry · Under Development"
+            title="ScriptSentry"
+            summary="A browser-based visual intelligence platform for JavaScript security and script behavior."
+            detail="ScriptSentry reads the JavaScript an application actually ships — secrets, crypto keys, API calls, storage usage, DOM risks, and obfuscation — and surfaces them in a motion-rich dashboard with 20+ detection modules. It makes script-level analysis visible instead of a manual read-through."
+            tags={['20+ detection modules', 'Secrets & crypto', 'DOM risks', 'Data flows', 'Under Development']}
+            primaryLink={LINKS.scriptSentryLive}
+            primaryLabel="Live preview"
+            secondaryLink={LINKS.scriptSentry}
+            secondaryLabel="View GitHub"
+          />
         </div>
-
-        <article className="experiment-card">
-          <div>
-            <Eyebrow icon={TerminalSquare}>Independent project · Python · Under Development</Eyebrow>
-            <h3>ScriptSentry</h3>
-            <p>A visual JavaScript security and script-behavior intelligence platform — secrets, crypto, APIs, DOM risks, data flows, and 20+ detection modules in a motion-rich dashboard.</p>
-          </div>
-          <div className="experiment-card__aside">
-            <span>Under Development · 2026</span>
-            <div className="button-row">
-              <ButtonLink href={LINKS.scriptSentryLive} external className="button button--primary button--green"><ExternalLink size={16} /> Live preview <ExternalArrow /></ButtonLink>
-              <ButtonLink href={LINKS.scriptSentry} external><GitHubIcon size={16} /> View GitHub <ExternalArrow /></ButtonLink>
-            </div>
-          </div>
-        </article>
       </div>
     </section>
   );

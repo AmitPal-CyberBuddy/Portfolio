@@ -319,6 +319,8 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .button--violet { color: var(--accent-violet-ink); background: var(--accent-violet); border-color: var(--accent-violet); }
 .button--violet:hover { color: var(--accent-violet-ink); background: color-mix(in srgb, var(--accent-violet) 80%, white); border-color: var(--accent-violet); }
 .button--green { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
+.button--gold { color: var(--accent-ink); background: var(--accent-gold); border-color: var(--accent-gold); }
+.button--gold:hover { color: var(--accent-ink); background: color-mix(in srgb, var(--accent-gold) 82%, white); border-color: var(--accent-gold); }
 .text-link { display: inline-flex; align-items: center; gap: 0.45rem; width: fit-content; padding-bottom: 0.28rem; color: var(--text); border-bottom: 1px solid currentColor; font: 700 0.68rem/1.25 var(--font-mono); letter-spacing: 0.075em; text-transform: uppercase; transition: color 160ms ease, gap 160ms var(--ease); }
 .text-link:hover { gap: 0.7rem; color: var(--accent); }
 
@@ -396,12 +398,13 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .project-card--reverse .project-card__copy { order: 2; }
 .project-card--reverse .project-media { order: 1; }
 .project-card__copy { min-width: 0; max-width: 38rem; }
-.project-card h3, .experiment-card h3 { margin: 0; color: var(--text); font: 800 clamp(2.1rem, 4vw, 3.8rem)/0.92 var(--font-display); letter-spacing: -0.05em; text-transform: uppercase; }
+.project-card h3 { margin: 0; color: var(--text); font: 800 clamp(2.1rem, 4vw, 3.8rem)/0.92 var(--font-display); letter-spacing: -0.05em; text-transform: uppercase; }
 .project-card__lead { margin: 1.35rem 0 0; color: var(--text); font: 400 clamp(1.15rem, 1.65vw, 1.38rem)/1.43 var(--font-serif); }
 .project-card__copy > p:not(.project-card__lead) { max-width: 36rem; margin: 0.75rem 0 0; color: var(--text-secondary); }
 .project-card__tags { margin-top: 1.35rem; }
 .project-card .eyebrow { color: var(--accent-violet); }
 .project-card--reverse .eyebrow { color: var(--accent); }
+.project-card--experiment .eyebrow { color: var(--accent-gold); }
 .project-media { min-width: 0; overflow: hidden; background: var(--surface); border: 1px solid var(--border-strong); box-shadow: var(--shadow); }
 .project-visual-frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; isolation: isolate; background: var(--surface-raised); }
 .project-visual-frame > img { position: absolute; z-index: -2; inset: -4%; width: 108%; max-width: none; height: 108%; object-fit: cover; object-position: center; opacity: 0.43; filter: saturate(0.82) contrast(1.08); }
@@ -409,6 +412,14 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .project-visual-frame__scrim { position: absolute; z-index: -1; inset: 0; background: linear-gradient(135deg, color-mix(in srgb, var(--surface-raised) 93%, transparent) 2%, color-mix(in srgb, var(--surface-raised) 55%, transparent) 56%, color-mix(in srgb, var(--surface-raised) 94%, transparent) 100%); }
 .project-media--live { --project-signal: var(--accent-violet); }
 .project-media--release { --project-signal: var(--accent); }
+.project-media--experiment { --project-signal: var(--accent-gold); }
+/* Image-less experiment frame: subtle scan-grid so it stays visually rich without a screenshot. */
+.project-media--experiment .project-visual-frame {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--accent-gold) 12%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--accent-gold) 12%, transparent) 1px, transparent 1px);
+  background-size: 36px 36px;
+}
 .project-data { position: absolute; inset: 1rem; display: flex; flex-direction: column; justify-content: space-between; color: var(--text); border: 1px solid color-mix(in srgb, var(--project-signal) 46%, var(--border)); background: color-mix(in srgb, var(--surface-raised) 68%, transparent); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 4%, transparent); }
 .project-data__top, .project-data__footer { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.62rem 0.75rem; color: var(--text-secondary); border-bottom: 1px solid var(--border); font: 600 clamp(0.52rem, 0.78vw, 0.65rem)/1.25 var(--font-mono); letter-spacing: 0.075em; text-transform: uppercase; }
 .project-data__top span { display: inline-flex; align-items: center; gap: 0.4rem; }
@@ -428,11 +439,6 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .project-scanline { position: absolute; inset: 0 auto auto 0; z-index: 1; width: 100%; height: 2px; pointer-events: none; background: linear-gradient(90deg, transparent, var(--project-signal), transparent); box-shadow: 0 0 15px var(--project-signal); opacity: 0.75; }
 .project-media figcaption { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.8rem 1rem; color: var(--text-secondary); border-top: 1px solid var(--border); font: 600 0.62rem/1.35 var(--font-mono); letter-spacing: 0.065em; text-transform: uppercase; }
 .project-media figcaption span:first-child { color: var(--project-signal); }
-.experiment-card { display: flex; align-items: end; justify-content: space-between; gap: 2rem; margin-top: clamp(4rem, 8vw, 7rem); padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--surface-soft); border: 1px solid var(--border); border-left: 3px solid var(--accent-gold); }
-.experiment-card h3 { margin-top: 0.35rem; font-size: clamp(1.75rem, 3.2vw, 2.8rem); }
-.experiment-card p { max-width: 36rem; margin: 0.75rem 0 0; color: var(--text-secondary); }
-.experiment-card__aside { display: flex; flex: 0 0 auto; flex-direction: column; align-items: flex-end; gap: 0.8rem; }
-.experiment-card__aside > span { color: var(--accent-gold); font: 600 0.65rem/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; }
 
 /* Writing */
 .writing-section .eyebrow { color: var(--accent-orange); }
@@ -634,8 +640,6 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .project-stack { gap: 4.25rem; }
   .project-card h3 { font-size: clamp(2.2rem, 11vw, 3.25rem); }
   .project-media figcaption { flex-direction: column; gap: 0.3rem; }
-  .experiment-card { align-items: flex-start; flex-direction: column; gap: 1.25rem; }
-  .experiment-card__aside { align-items: flex-start; }
   .article-cards { grid-template-columns: 1fr; }
   .article-card { min-height: 17.5rem; padding: 1.35rem; }
   .article-card h3 { max-width: 24ch; font-size: clamp(1.3rem, 6.5vw, 1.8rem); }
