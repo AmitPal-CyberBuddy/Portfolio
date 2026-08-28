@@ -171,7 +171,7 @@ const NOW_ITEMS = [
   },
   {
     label: 'Writing',
-    detail: 'Browser security and real impact: CORS, JWT, CSP, and client-side crypto.',
+    detail: 'Write practical application security articles on topics across Web Application and API security, vulnerability research, and security testing.',
     href: LINKS.medium,
     action: 'Read on Medium',
     tone: 'orange',
@@ -1111,9 +1111,7 @@ function Now() {
           <p className="intro-lead">A current snapshot of work, writing, maintenance, and learning.</p>
           <div className="now-meta">
             <p><MapPin size={16} /> Roots in West Bengal · building in Bengaluru · open to remote collaboration</p>
-            <p><Clock3 size={16} /> Current time in India · updated August 2026</p>
           </div>
-          <div className="learning-note"><Award size={16} /><span>Selected learning: API Penetration Testing and API Security Fundamentals · APIsec University · January 2026</span></div>
         </div>
         <div className="now-list">
           {NOW_ITEMS.map((item) => {
