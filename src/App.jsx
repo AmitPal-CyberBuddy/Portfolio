@@ -653,9 +653,10 @@ function Hero({ onOpenResume }) {
         >
           <Eyebrow icon={ShieldCheck}>Amit Pal · Associate Consultant (VAPT) at Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
-            <span>I find logic flaws</span>
-            <span>attackers miss.</span>
-            <strong>Manual and automated Web &amp; API testing — validated by evidence, not assumptions.</strong>
+            <span>Identifying</span>
+            <span>Vulnerabilities</span>
+            <span>Before Attackers Do</span>
+            <strong>Manual and automated Web &amp; API testing — evidence before assumptions.</strong>
           </h1>
           <p className="hero__lead">High-impact Web &amp; API penetration testing that turns logic and authorization gaps into reproducible proof-of-concept evidence, clear remediation guidance, and reduced business risk.</p>
           <p className="hero__body">I build local-first tools to make authorized security testing clearer, faster, and easier to document.</p>
@@ -711,7 +712,7 @@ function Focus() {
             <Eyebrow icon={Target}>Focus · what I do</Eyebrow>
             <p className="role-badge"><span className="status-dot" /><span>Current role</span><b>Associate Consultant · Ampcus Cyber · Aug 2026 → now</b></p>
             <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
-            <p className="intro-lead">I am a Security Analyst in VAPT at Ampcus Cyber. I assess web applications and APIs by understanding the system, testing it responsibly, and validating real impact.</p>
+            <p className="intro-lead">I am an Associate Consultant in VAPT at Ampcus Cyber. I assess web applications and APIs by understanding the system, testing it responsibly, and validating real impact.</p>
             <p>VAPT — Vulnerability Assessment and Penetration Testing — is the practice of finding, validating, and clearly explaining security issues that need attention.</p>
             <div className="trust-note"><Fingerprint size={16} /><span>Authorized, evidence-led security testing.</span></div>
           </Reveal>

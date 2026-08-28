@@ -50,7 +50,7 @@
   --space-5: 2rem;
   --space-6: 3rem;
   --space-7: 4.5rem;
-  --section-space: clamp(4.75rem, 9vw, 8.5rem);
+  --section-space: clamp(4rem, 7vw, 6.5rem);
   --gap-split: clamp(2.25rem, 4vw, 4.5rem);
   --header-height: 76px;
   --radius: 2px;
@@ -268,7 +268,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   text-transform: uppercase;
 }
 .eyebrow::after { content: ''; width: 1.75rem; height: 1px; background: currentColor; opacity: 0.55; }
-.section-heading { max-width: 45rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); }
+.section-heading { max-width: 45rem; margin-bottom: clamp(2.25rem, 4vw, 3.25rem); }
 .section-heading--split { max-width: none; display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
 .section-heading--split > p { max-width: 34rem; margin: 0; color: var(--text-secondary); font-family: var(--font-serif); font-size: clamp(1.1rem, 1.55vw, 1.3rem); line-height: 1.45; }
 .section h2, .section h3, .site-footer { text-wrap: balance; }
@@ -339,15 +339,15 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .hero-grid { position: absolute; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px); background-size: 54px 54px; mask-image: linear-gradient(120deg, black 0%, rgba(0,0,0,0.6) 52%, transparent 90%); opacity: 0.38; }
 .hero::after { content: ''; position: absolute; z-index: 0; width: min(55vw, 48rem); height: min(55vw, 48rem); right: -18rem; top: -13rem; background: radial-gradient(circle, color-mix(in srgb, var(--accent-blue) 23%, transparent), transparent 65%); pointer-events: none; }
 .hero__layout { position: relative; z-index: 1; display: grid; grid-template-columns: 1fr; gap: clamp(2.5rem, 5vw, 3.75rem); }
-.hero__copy { max-width: 46rem; }
-.hero__title { margin: 0; color: var(--text); font: 800 clamp(3rem, 5.7vw, 5.9rem)/0.96 var(--font-display); letter-spacing: -0.065em; text-transform: uppercase; }
+.hero__copy { max-width: 56rem; }
+.hero__title { margin: 0; color: var(--text); font: 800 clamp(2.4rem, 4.6vw, 4.2rem)/0.98 var(--font-display); letter-spacing: -0.045em; text-transform: uppercase; }
 .hero__title span, .hero__title strong { display: block; }
 .hero__title strong { margin-top: 0.18em; color: var(--accent); font-family: var(--font-serif); font-size: 0.68em; font-style: italic; font-weight: 400; letter-spacing: -0.045em; text-transform: none; }
 .hero__lead { max-width: 38rem; margin: 1.65rem 0 0; color: var(--text-secondary); font: 400 clamp(1.15rem, 1.65vw, 1.38rem)/1.45 var(--font-serif); }
 .hero__body { max-width: 38rem; margin: 0.75rem 0 0; color: var(--text-secondary); }
 .hero__tags { margin-top: 1.4rem; }
 .hero__tags span:first-child { color: var(--accent-ink); background: var(--accent); border-color: var(--accent); }
-.evidence-panel { width: min(100%, 52rem); justify-self: start; color: var(--text); background: color-mix(in srgb, var(--surface-raised) 94%, transparent); border: 1px solid var(--border-strong); box-shadow: var(--shadow); font-family: var(--font-mono); }
+.evidence-panel { width: min(100%, 56rem); justify-self: start; color: var(--text); background: color-mix(in srgb, var(--surface-raised) 94%, transparent); border: 1px solid var(--border-strong); box-shadow: var(--shadow); font-family: var(--font-mono); }
 .evidence-panel__top, .evidence-panel__footer { display: flex; justify-content: space-between; gap: 1rem; padding: 0.8rem 1rem; color: var(--muted); border-bottom: 1px solid var(--border); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase; }
 .evidence-panel__top span:first-child { display: flex; align-items: center; gap: 0.45rem; color: var(--text-secondary); }
 .status-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 17%, transparent); }
@@ -581,7 +581,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   html.custom-cursor-on, html.custom-cursor-on * { cursor: auto !important; }
   .cursor-system { display: none; }
 
-  :root { --section-space: clamp(4.25rem, 9vw, 6.5rem); }
+  :root { --section-space: clamp(3.5rem, 7vw, 5.5rem); }
 
   /* Navigation switches to the menu at the same width as the layout, so the
      header never feels disconnected from the content below it. */
@@ -599,7 +599,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .theme-text-toggle { padding: 0.5rem 0.75rem; color: var(--text); background: var(--surface); border: 1px solid var(--border); cursor: pointer; font: inherit; }
   .theme-text-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
-  .hero__title { font-size: clamp(2.85rem, 6.4vw, 4.7rem); }
+  .hero__title { font-size: clamp(2.3rem, 5.4vw, 3.9rem); }
   .article-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .loop-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -618,7 +618,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 }
 
 @media (max-width: 640px) {
-  :root { --gutter: 1.15rem; --section-space: 3.75rem; --header-height: 68px; }
+  :root { --gutter: 1.15rem; --section-space: 3.25rem; --header-height: 68px; }
   body { font-size: 15px; }
   .loader__main { font-size: clamp(2.65rem, 13vw, 4.25rem); }
   .loader__bottom { display: grid; gap: 0.35rem; }
@@ -632,7 +632,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .brand-mark { width: 30px; height: 30px; }
   .theme-toggle, .menu-toggle { width: 36px; height: 36px; }
   .hero { padding-top: calc(var(--header-height) + 3.7rem); }
-  .hero__title { font-size: clamp(2.35rem, 11.5vw, 3.6rem); line-height: 1; }
+  .hero__title { font-size: clamp(1.8rem, 8vw, 2.8rem); line-height: 1.05; }
   .hero__lead { font-size: 1.1rem; }
   .hero__signal { font-size: 0.6rem; }
   .section h2 { font-size: clamp(2rem, 10.5vw, 3rem); line-height: 1; }
@@ -668,7 +668,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .brand-name { font-size: 0.78rem; }
   .header-time { gap: 0.25rem; padding-inline: 0.38rem; font-size: 0.56rem; }
   .header-time em { display: none; }
-  .hero__title { font-size: clamp(2rem, 11.5vw, 2.9rem); }
+  .hero__title { font-size: clamp(1.6rem, 8vw, 2.3rem); }
   .hero__tags span { font-size: 0.65rem; }
   .button-row { display: grid; grid-template-columns: 1fr; }
   .button { width: 100%; }
