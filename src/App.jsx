@@ -55,17 +55,17 @@ const NAV_ITEMS = [
 const WRITING = [
   {
     title: 'CORS Misconfiguration: When Reflecting the Origin Is Not the Whole Story',
-    insight: 'Reflection is not exploitation. Proving authenticated impact matters.',
+    insight: 'I check how a reflected origin behaves under a real cross-origin request — Reflection alone is not proof of exploitation.',
     link: 'https://amitpxl.medium.com/cors-misconfiguration-when-reflecting-the-origin-is-not-the-whole-story-956e2e6e18bc',
   },
   {
     title: "HTTP Request Smuggling vs Pipelining: Why They're Often Confused",
-    insight: "Why double responses in Repeater aren't always smuggling.",
+    insight: 'I check why double responses in Repeater are not always a smuggling sign — the two patterns are easy to mix up.',
     link: 'https://amitpxl.medium.com/http-request-smuggling-vs-http-request-pipelining-why-theyre-often-confused-44ffe6e528eb',
   },
   {
     title: 'How I Broke Client-Side Encryption By Frontend JavaScript Analysis',
-    insight: 'Frontend JavaScript is an attack surface, not just UI.',
+    insight: 'I check the JavaScript a page actually ships — frontend encryption is an attack surface, not just UI.',
     link: 'https://amitpxl.medium.com/how-i-broke-encrypted-requests-by-reading-frontend-javascript-b016c5b9078d',
   },
 ];
@@ -155,11 +155,19 @@ const SIGNALS = [
 const NOW_ITEMS = [
   {
     label: 'Building',
-    detail: 'VAPT Checklist \u2014 a context-aware VAPT workspace. ScriptSentry \u2014 a JavaScript security intelligence platform. Both under active development.',
+    detail: 'VAPT Checklist — a context-aware VAPT workspace, under active development.',
     href: LINKS.vaptLive,
     action: 'Live preview',
     tone: 'green',
     icon: Hammer,
+  },
+  {
+    label: 'Experimenting',
+    detail: 'ScriptSentry — a JavaScript security intelligence platform, under active development.',
+    href: LINKS.scriptSentryLive,
+    action: 'Live preview',
+    tone: 'violet',
+    icon: Zap,
   },
   {
     label: 'Writing',
@@ -643,9 +651,9 @@ function Hero({ onOpenResume }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, delay: 0.08, ease: MOTION_EASE }}
         >
-          <Eyebrow icon={ShieldCheck}>Amit Pal · Security Analyst (VAPT) at Ampcus Cyber</Eyebrow>
+          <Eyebrow icon={ShieldCheck}>Amit Pal · Associate Consultant (VAPT) at Ampcus Cyber</Eyebrow>
           <h1 id="hero-title" className="hero__title">
-            <span>I secure Web Apps</span>
+            <span>I test Web Apps</span>
             <span>&amp; APIs.</span>
             <strong>Finding logic flaws before attackers do.</strong>
           </h1>
@@ -748,15 +756,18 @@ function Focus() {
             <p className="intro-lead">Breaking down the logic flaw shown in the evidence banner: expected 403, observed 200. How it happens, why it matters, and what to check next.</p>
           </Reveal>
           <Reveal className="scenario-body" delay={0.08}>
-            <div className="panel">
+            <div className="panel scenario-card">
+              <span className="scenario-card__step">01</span>
               <h3>What I observed</h3>
               <p><code>GET /api/admin/users</code> returned <code>200 OK</code> with identity <code>user</code> — no role elevation required. The endpoint did not re-validate authorization after session establishment.</p>
             </div>
-            <div className="panel panel--accent">
+            <div className="panel panel--accent scenario-card">
+              <span className="scenario-card__step">02</span>
               <h3>Why it is high-impact</h3>
               <p>Access to admin user listings exposes PII, roles, and session identifiers — not a disclosure glitch, but a logic gap with direct data exposure. Remediation: enforce server-side authorization checks at the endpoint, not just at the route level.</p>
             </div>
-            <div className="panel">
+            <div className="panel scenario-card">
+              <span className="scenario-card__step">03</span>
               <h3>How I validated</h3>
               <p>Manual replay in Repeater with valid session, no privilege change, repeated across three endpoints. Evidence captured with request/response pairs — reproducible by the client without custom tooling.</p>
             </div>
@@ -964,9 +975,9 @@ function Writing() {
               viewport={{ once: true, amount: 0.16 }}
               transition={{ duration: 0.5, delay: index * 0.08, ease: MOTION_EASE }}
             >
-              <div className="article-card__meta"><span>Research note {String(index + 1).padStart(2, '0')}</span><ExternalArrow /></div>
+              <div className="article-card__meta"><span>I write · study {String(index + 1).padStart(2, '0')}</span><ExternalArrow /></div>
               <h3>{article.title}</h3>
-              <p>{article.insight}{index === 0 ? ' I built a two-origin probe to test the actual impact.' : ''}</p>
+              <p>{article.insight}</p>
               <span className="article-card__action"><BookOpen size={15} /> Read on Medium <span className="sr-only">(opens in a new tab)</span></span>
             </motion.a>
           ))}
@@ -1073,18 +1084,23 @@ function Signals() {
             </article>
           ))}
         </div>
-        <blockquote className="impact-quote">
-          <p>“Your team’s professionalism and clarity made the difference. The report was not just findings — it was a clear path to fix things.”</p>
-          <footer>Feedback from a SaaS assessment · client confidentiality protected</footer>
-        </blockquote>
-        <blockquote className="impact-quote">
-          <p>“From navigating complex findings to supporting us through every step of the remediation process, your team’s professionalism, patience, and expertise made all the difference. Amit, you were our go-to person throughout this journey — always available when we needed guidance. We look forward to continuing this partnership for future security assessments.”</p>
-          <footer>VAPT & Mobile PT engagement closure · client confidentiality protected</footer>
-        </blockquote>
-        <blockquote className="impact-quote">
-          <p>“A heartfelt thank you to Amit and the entire team for the exceptional support throughout this engagement. The professionalism, patience, and diligence shown by you and everyone working in the background has been truly appreciated.”</p>
-          <footer>Web & Mobile PT engagement · client confidentiality protected</footer>
-        </blockquote>
+        <div className="impact-quotes">
+          <blockquote className="impact-quote">
+            <span className="impact-quote__label">From a SaaS assessment</span>
+            <p>“Your team’s professionalism and clarity made the difference. The report was not just findings — it was a clear path to fix things.”</p>
+            <footer>Client confidentiality protected</footer>
+          </blockquote>
+          <blockquote className="impact-quote">
+            <span className="impact-quote__label">VAPT & Mobile PT closure</span>
+            <p>“From navigating complex findings to supporting us through every step of the remediation process, your team’s professionalism, patience, and expertise made all the difference. Amit, you were our go-to person throughout this journey — always available when we needed guidance. We look forward to continuing this partnership for future security assessments.”</p>
+            <footer>Client confidentiality protected</footer>
+          </blockquote>
+          <blockquote className="impact-quote">
+            <span className="impact-quote__label">Web & Mobile PT closure</span>
+            <p>“A heartfelt thank you to Amit and the entire team for the exceptional support throughout this engagement. The professionalism, patience, and diligence shown by you and everyone working in the background has been truly appreciated.”</p>
+            <footer>Client confidentiality protected</footer>
+          </blockquote>
+        </div>
       </div>
     </section>
   );
