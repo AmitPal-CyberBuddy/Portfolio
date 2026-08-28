@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Local responsive-audit capture output (generated screenshots + metrics)
+scripts/audit/caps/
+scripts/audit/out/
