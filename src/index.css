@@ -211,7 +211,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   background: color-mix(in srgb, var(--accent) 9%, transparent);
   border: 1px solid color-mix(in srgb, var(--accent) 38%, var(--border));
 }
-.brand-name { display: grid; font: 800 0.86rem/0.86 var(--font-display); letter-spacing: -0.04em; text-transform: uppercase; }
+.brand-name { display: inline-flex; align-items: baseline; gap: 0.32em; color: var(--text); font: 800 0.86rem/0.86 var(--font-display); letter-spacing: -0.04em; text-transform: uppercase; }
 .brand-name b { font-weight: 800; }
 .brand-name span { color: var(--muted); }
 .desktop-nav { display: flex; align-items: center; justify-content: center; gap: clamp(0.8rem, 1.7vw, 1.6rem); min-width: 0; }
