@@ -277,7 +277,11 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .section-heading { max-width: 45rem; margin-bottom: clamp(2.25rem, 4vw, 3.25rem); }
 .section-heading--split { max-width: none; display: grid; grid-template-columns: 1fr; gap: 1.5rem; }
 .section-heading--split > p { max-width: 34rem; margin: 0; color: var(--text-secondary); font-family: var(--font-serif); font-size: clamp(1.1rem, 1.55vw, 1.3rem); line-height: 1.45; }
-.section h2, .section h3, .site-footer { text-wrap: balance; }
+/* Headings balance their line breaks; body copy avoids a dangling single word
+   at the end of a line. Both are progressive enhancements — ignored by older
+   browsers without affecting layout. */
+.section h2, .section h3, .hero__title span, .hero__title strong, .site-footer { text-wrap: balance; }
+p, li, figcaption, blockquote, dd, dt, .intro-lead { text-wrap: pretty; }
 .section h2 {
   margin: 0;
   color: var(--text);
@@ -298,11 +302,11 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   display: inline-flex;
   min-height: 30px;
   align-items: center;
-  padding: 0.34rem 0.55rem;
+  padding: 0.34rem 0.6rem;
   color: var(--text-secondary);
   background: transparent;
   border: 1px solid var(--border);
-  font: 600 0.65rem/1.2 var(--font-mono);
+  font: 600 0.66rem/1.2 var(--font-mono);
   letter-spacing: 0.055em;
   text-transform: uppercase;
 }
@@ -505,7 +509,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .journey-timeline h4 { margin: 0.5rem 0 0; color: var(--text-secondary); font: 600 0.69rem/1.4 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase; }
 .journey-timeline li > p:last-child { max-width: 38rem; margin: 0.8rem 0 0; color: var(--text-secondary); }
 .signals-section { background: var(--bg); }
-.signals-heading { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
+.signals-heading { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-bottom: clamp(2.25rem, 4vw, 3.25rem); }
 .signals-heading .eyebrow { margin-bottom: 0; color: var(--accent-gold); }
 .signals-heading p { max-width: 35rem; margin: 0; color: var(--text-secondary); font-family: var(--font-serif); font-size: 1.15rem; }
 .signals-list { border-top: 1px solid var(--border); }
@@ -526,7 +530,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .now-meta svg { flex: none; color: var(--accent); margin-top: 0.12rem; }
 .now-list { border-top: 1px solid var(--border); }
 .now-row { display: grid; grid-template-columns: minmax(8rem, 0.6fr) minmax(0, 1.4fr) auto; gap: 1.5rem; align-items: center; padding: 1.4rem 0; border-bottom: 1px solid var(--border); }
-.now-row__label { display: flex; align-items: center; gap: 0.5rem; color: var(--accent); font: 700 0.68rem/1.3 var(--font-mono); letter-spacing: 0.085em; text-transform: uppercase; }
+.now-row__label { display: flex; align-items: center; gap: 0.5rem; color: var(--accent); font: 700 0.68rem/1.3 var(--font-mono); letter-spacing: 0.085em; text-transform: uppercase; white-space: nowrap; }
 .now-row--orange .now-row__label { color: var(--accent-orange); }
 .now-row--violet .now-row__label { color: var(--accent-violet); }
 .now-row--gold .now-row__label { color: var(--accent-gold); }
@@ -569,7 +573,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .resume-layout { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
 .resume-badges { margin: 1.25rem 0; }
 .badge-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.badge { display: inline-flex; padding: 0.35rem 0.6rem; border-radius: 9999px; background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); font: 600 0.7rem/1.2 var(--font-mono); letter-spacing: 0.03em; text-transform: uppercase; }
+.badge { display: inline-flex; min-height: 30px; align-items: center; padding: 0.34rem 0.6rem; border-radius: 9999px; background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); font: 600 0.66rem/1.2 var(--font-mono); letter-spacing: 0.03em; text-transform: uppercase; }
 .badge-desc { margin: 0.65rem 0 0; color: var(--text-secondary); font: 400 0.82rem/1.45 var(--font-body); }
 .resume-cta-block { margin-top: 1.25rem; }
 .resume-note { margin: 0.75rem 0 0; color: var(--muted); font: 400 0.8rem/1.35 var(--font-mono); font-style: italic; }
