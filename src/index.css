@@ -98,7 +98,13 @@ html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header-height) + 
 body {
   min-width: 320px;
   margin: 0;
-  overflow-x: hidden;
+  /* Clip only decorative overflow (radial glows, off-canvas patterns that are
+     already contained by their parent section's overflow:hidden). This is not
+     the primary defence against horizontal scroll — each grid child sets
+     min-width:0 so genuinely overflowing components are fixed at the source
+     rather than silently hidden. clip (unlike hidden) does not create a scroll
+     container or a new blocking formatting context. */
+  overflow-x: clip;
   background: var(--bg);
   color: var(--text);
   font-family: var(--font-body);
@@ -371,8 +377,8 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 /* Every grid layout must let its children shrink below min-content width,
    otherwise long unbreakable headings (e.g. the case-study h2) blow out the
    container and cause horizontal scroll on small screens. */
-.focus-layout, .journey-layout, .now-layout { display: grid; grid-template-columns: 1fr; gap: var(--gap-split); }
-.focus-layout > *, .journey-layout > *, .now-layout > *,
+.focus-layout, .journey-layout, .now-layout, .resume-layout { display: grid; grid-template-columns: 1fr; gap: var(--gap-split); }
+.focus-layout > *, .journey-layout > *, .now-layout > *, .resume-layout > *,
 .section-heading--split > *, .project-card > *, .project-card__copy > *,
 .contact-layout > *, .scenario-layout > *, .scenario-body > * { min-width: 0; }
 .trust-note { display: flex; align-items: flex-start; gap: 0.6rem; margin-top: 1.5rem; padding: 0.9rem; color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); border-left: 2px solid var(--accent); font: 600 0.71rem/1.45 var(--font-mono); letter-spacing: 0.03em; text-transform: uppercase; }
@@ -399,25 +405,28 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 /* Projects */
 .work-section { background: var(--bg); }
 .project-stack { display: grid; gap: clamp(3.5rem, 7vw, 6rem); }
-.project-card { display: grid; grid-template-columns: 1fr; align-items: start; gap: 2.25rem; }
-.project-card .project-media { width: min(100%, 46rem); }
-.project-card__copy { min-width: 0; max-width: 38rem; }
+/* Single-column by default. Copy and media each fill the column — no fixed
+   caps so a small visual never sits alone inside an oversized container.
+   Readability comes from line-measure on the text, not from capping the block. */
+.project-card { display: grid; grid-template-columns: minmax(0, 1fr); align-items: stretch; gap: 2.25rem; }
 .project-card h3 { margin: 0; color: var(--text); font: 800 clamp(1.9rem, 3.2vw, 2.9rem)/1.02 var(--font-display); letter-spacing: -0.045em; text-transform: uppercase; }
-.project-card__lead { margin: 1.35rem 0 0; color: var(--text); font: 400 clamp(1.15rem, 1.65vw, 1.38rem)/1.43 var(--font-serif); }
-.project-card__copy > p:not(.project-card__lead) { max-width: 36rem; margin: 0.75rem 0 0; color: var(--text-secondary); }
+.project-card__lead { max-width: 42ch; margin: 1.35rem 0 0; color: var(--text); font: 400 clamp(1.15rem, 1.65vw, 1.38rem)/1.43 var(--font-serif); }
+.project-card__copy > p:not(.project-card__lead) { max-width: 62ch; margin: 0.75rem 0 0; color: var(--text-secondary); }
 .project-card__tags { margin-top: 1.35rem; }
 .project-card .eyebrow { color: var(--accent-violet); }
 .project-card--release .eyebrow { color: var(--accent); }
 .project-card--experiment .eyebrow { color: var(--accent-gold); }
-.project-media { min-width: 0; margin: 0; overflow: hidden; background: var(--surface); border: 1px solid var(--border-strong); box-shadow: var(--shadow); }
-.project-visual-frame { position: relative; aspect-ratio: 16 / 10; overflow: hidden; isolation: isolate; background: var(--surface-raised); }
-.project-visual-frame > img { position: absolute; z-index: -2; inset: -4%; width: 108%; max-width: none; height: 108%; object-fit: cover; object-position: center; opacity: 0.43; filter: saturate(0.82) contrast(1.08); }
+.project-media { min-width: 0; width: 100%; margin: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); border: 1px solid var(--border-strong); box-shadow: var(--shadow); }
+.project-visual-frame { position: relative; flex: 1 1 auto; min-height: 0; aspect-ratio: 16 / 10; overflow: hidden; isolation: isolate; background: var(--surface-raised); }
+.project-visual-frame > img { position: absolute; z-index: -2; inset: -2%; width: 104%; max-width: none; height: 104%; object-fit: cover; object-position: center; opacity: 0.43; filter: saturate(0.82) contrast(1.08); }
 [data-theme='light'] .project-visual-frame > img { opacity: 0.28; filter: saturate(0.72) contrast(1.02); }
 .project-visual-frame__scrim { position: absolute; z-index: -1; inset: 0; background: linear-gradient(135deg, color-mix(in srgb, var(--surface-raised) 93%, transparent) 2%, color-mix(in srgb, var(--surface-raised) 55%, transparent) 56%, color-mix(in srgb, var(--surface-raised) 94%, transparent) 100%); }
 .project-media--live { --project-signal: var(--accent-violet); }
 .project-media--release { --project-signal: var(--accent); }
 .project-media--experiment { --project-signal: var(--accent-gold); }
-/* Image-less experiment frame: subtle scan-grid so it stays visually rich without a screenshot. */
+/* Image-less ScriptSentry: no screenshot, so drop the outer card frame and let
+   the scan-grid + data console read as a live, unframed visual. */
+.project-media--experiment { border: 0; background: transparent; box-shadow: none; }
 .project-media--experiment .project-visual-frame {
   background-image:
     linear-gradient(color-mix(in srgb, var(--accent-gold) 12%, transparent) 1px, transparent 1px),
@@ -448,7 +457,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .project-data__footer { border-top: 1px solid var(--border); border-bottom: 0; color: var(--muted); font-size: clamp(0.48rem, 0.65vw, 0.58rem); }
 .project-data__footer span:last-child { color: var(--text-secondary); }
 .project-scanline { position: absolute; inset: 0 auto auto 0; z-index: 1; width: 100%; height: 2px; pointer-events: none; background: linear-gradient(90deg, transparent, var(--project-signal), transparent); box-shadow: 0 0 15px var(--project-signal); opacity: 0.75; }
-.project-media figcaption { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.8rem 1rem; color: var(--text-secondary); border-top: 1px solid var(--border); font: 600 0.62rem/1.35 var(--font-mono); letter-spacing: 0.065em; text-transform: uppercase; }
+.project-media figcaption { flex: 0 0 auto; display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.8rem 1rem; color: var(--text-secondary); border-top: 1px solid var(--border); font: 600 0.62rem/1.35 var(--font-mono); letter-spacing: 0.065em; text-transform: uppercase; }
 .project-media figcaption span:first-child { color: var(--project-signal); }
 
 /* Writing */
@@ -554,6 +563,130 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .site-footer a { color: var(--contact-body); border-bottom: 1px solid transparent; }
 .site-footer a:hover { color: var(--contact-accent); border-bottom-color: currentColor; }
 
+
+/* Resume section additions */
+.resume-section { background: var(--surface-soft); }
+.resume-layout { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
+.resume-badges { margin: 1.25rem 0; }
+.badge-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.badge { display: inline-flex; padding: 0.35rem 0.6rem; border-radius: 9999px; background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); font: 600 0.7rem/1.2 var(--font-mono); letter-spacing: 0.03em; text-transform: uppercase; }
+.badge-desc { margin: 0.65rem 0 0; color: var(--text-secondary); font: 400 0.82rem/1.45 var(--font-body); }
+.resume-cta-block { margin-top: 1.25rem; }
+.resume-note { margin: 0.75rem 0 0; color: var(--muted); font: 400 0.8rem/1.35 var(--font-mono); font-style: italic; }
+.resume-panel { padding: 1.5rem; }
+.loop-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1rem 0 1.5rem; }
+.loop-badges .badge { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); }
+.stats-bar { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text-secondary); font: 600 0.7rem/1.3 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+.stats-bar strong { display: block; color: var(--accent); font-size: 1.1rem; letter-spacing: -0.02em; text-transform: none; font-family: var(--font-display); }
+.scenario-section { background: var(--surface-soft); }
+.scenario-layout { display: grid; gap: clamp(1.5rem, 3vw, 3rem); grid-template-columns: 1fr; }
+.scenario-layout > * { min-width: 0; }
+.scenario-intro { max-width: 45rem; }
+.scenario-body { display: grid; gap: 1rem; grid-template-columns: 1fr; min-width: 0; }
+.scenario-card { display: flex; flex-direction: column; min-height: 14rem; }
+.scenario-card__step { color: var(--accent); font: 700 0.72rem/1 var(--font-mono); letter-spacing: 0.1em; }
+.scenario-card h3 { margin: 1.25rem 0 0; color: var(--text); font: 700 1.15rem/1.2 var(--font-display); letter-spacing: -0.02em; text-transform: uppercase; }
+.panel--accent.scenario-card .scenario-card__step { color: var(--accent); }
+.scenario-card p { margin: 0.75rem 0 0; font-size: 0.95rem; }
+/* ── Resume highlights (section panel) ── */
+.resume-highlights { display: grid; gap: 0; margin-bottom: 1.25rem; }
+.resume-highlight { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--border); }
+.resume-highlight:last-child { border-bottom: 0; }
+.resume-highlight__label { color: var(--muted); font: 600 0.62rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; flex: none; }
+.resume-highlight__value { color: var(--text); font: 600 0.82rem/1.3 var(--font-body); text-align: right; }
+
+/* ── Resume viewer overlay ── */
+.resume-viewer-overlay {
+  position: fixed; inset: 0; z-index: 500;
+  display: flex; align-items: flex-start; justify-content: center;
+  padding: clamp(1rem, 3vw, 2.5rem);
+  background: rgba(0, 0, 0, 0.62);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  overflow-y: auto;
+}
+.resume-viewer {
+  position: relative; width: min(100%, 54rem); margin: 0.5rem auto;
+  background: var(--surface); border: 1px solid var(--border-strong);
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
+}
+.resume-viewer__toolbar {
+  position: sticky; top: 0; z-index: 20;
+  isolation: isolate;
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 0.6rem 1.25rem;
+  background: var(--surface-raised); border-bottom: 1px solid var(--border);
+}
+.resume-viewer__toolbar-left { display: flex; align-items: center; gap: 0.55rem; color: var(--text-secondary); font: 600 0.66rem/1 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase; }
+.resume-viewer__toolbar-left svg { color: var(--accent); }
+.resume-viewer__toolbar-right { display: flex; align-items: center; gap: 0.5rem; }
+.resume-viewer__btn {
+  display: inline-flex; align-items: center; gap: 0.45rem; min-height: 36px; padding: 0 0.75rem;
+  color: var(--accent-ink); background: var(--accent); border: 1px solid var(--accent);
+  font: 700 0.6rem/1 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase;
+  cursor: pointer; transition: background 160ms ease, transform 160ms var(--ease);
+}
+.resume-viewer__btn:hover { background: color-mix(in srgb, var(--accent) 85%, white); transform: translateY(-1px); }
+.resume-viewer__close {
+  display: inline-grid; width: 36px; height: 36px; place-items: center; padding: 0;
+  color: var(--text-secondary); background: transparent; border: 1px solid var(--border);
+  cursor: pointer; transition: color 160ms ease, border-color 160ms ease;
+}
+.resume-viewer__close:hover { color: var(--accent); border-color: var(--accent); }
+.resume-viewer__content { position: relative; z-index: 0; padding: clamp(1.5rem, 4vw, 3rem); }
+
+/* ── Resume document (inside viewer) ── */
+.resume-doc__header { margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 2px solid var(--accent); }
+.resume-doc__name { margin: 0; color: var(--text); font: 800 clamp(1.8rem, 3.5vw, 2.4rem)/1 var(--font-display); letter-spacing: -0.04em; text-transform: uppercase; }
+.resume-doc__title { margin: 0.35rem 0 0; color: var(--accent); font: 700 clamp(0.72rem, 1vw, 0.85rem)/1.3 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+.resume-doc__contact { display: flex; flex-wrap: wrap; gap: 0.3rem 0; margin-top: 0.65rem; color: var(--text-secondary); font: 500 0.7rem/1.3 var(--font-mono); letter-spacing: 0.02em; }
+.resume-doc__contact > * { display: inline; }
+.resume-doc__contact > *:not(:last-child)::after { content: '\a0|\a0'; color: var(--muted); }
+.resume-doc__contact a { color: var(--accent-blue); transition: color 160ms ease; }
+.resume-doc__contact a:hover { color: var(--accent); }
+.resume-doc__section { margin-bottom: 1.5rem; }
+.resume-doc__section:last-child { margin-bottom: 0; }
+.resume-doc__summary { margin: 0; color: var(--text-secondary); font: 400 0.92rem/1.55 var(--font-serif); }
+.resume-doc__section-title { margin: 0 0 0.85rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); color: var(--accent); font: 700 0.72rem/1.3 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+.resume-doc__company { margin-bottom: 1rem; }
+.resume-doc__company:last-child { margin-bottom: 0; }
+.resume-doc__company-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
+.resume-doc__company-name { color: var(--text); font: 700 0.95rem/1.2 var(--font-display); letter-spacing: -0.01em; text-transform: uppercase; }
+.resume-doc__company-location { color: var(--muted); font: 500 0.68rem/1 var(--font-mono); letter-spacing: 0.04em; }
+.resume-doc__role { margin-bottom: 0.75rem; }
+.resume-doc__role:last-child { margin-bottom: 0; }
+.resume-doc__role-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.3rem; }
+.resume-doc__role-title { color: var(--text); font: 700 0.85rem/1.2 var(--font-body); }
+.resume-doc__role-period { color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; white-space: nowrap; }
+.resume-doc__bullets { padding-left: 1.15rem; margin: 0.25rem 0 0; list-style: none; }
+.resume-doc__bullets li { position: relative; padding-left: 0.65rem; margin-bottom: 0.3rem; color: var(--text-secondary); font: 400 0.88rem/1.5 var(--font-body); }
+.resume-doc__bullets li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
+.resume-doc__desc { margin: 0.25rem 0 0; color: var(--text-secondary); font: 400 0.88rem/1.5 var(--font-body); }
+.resume-doc__project { margin-bottom: 0.85rem; }
+.resume-doc__project:last-child { margin-bottom: 0; }
+.resume-doc__project-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.resume-doc__project-title { color: var(--text); font: 700 0.88rem/1.2 var(--font-body); }
+.resume-doc__project-links { display: flex; gap: 0.25rem; color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; align-items: baseline; }
+.resume-doc__project-links a { color: var(--accent-blue); transition: color 160ms ease; }
+.resume-doc__project-links a:hover { color: var(--accent); }
+.resume-doc__project-status { color: var(--accent-orange); font-style: italic; }
+.resume-doc__expertise-group { margin-bottom: 0.35rem; color: var(--text-secondary); font: 400 0.88rem/1.5 var(--font-body); }
+.resume-doc__expertise-group:last-child { margin-bottom: 0; }
+.resume-doc__expertise-label { font-weight: 700; color: var(--text); }
+.resume-doc__edu { margin-bottom: 0.65rem; }
+.resume-doc__edu:last-child { margin-bottom: 0; }
+.resume-doc__edu-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.resume-doc__edu-title { color: var(--text); font: 700 0.88rem/1.2 var(--font-body); }
+.resume-doc__edu-period { color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; }
+.resume-doc__edu-institution { color: var(--text-secondary); font: 400 0.85rem/1.4 var(--font-body); }
+.resume-doc__edu-cgpa { font-weight: 700; color: var(--text); }
+.resume-doc__learning { margin-bottom: 0.5rem; }
+.resume-doc__learning:last-child { margin-bottom: 0; }
+.resume-doc__learning-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
+.resume-doc__learning-title { color: var(--text); font: 700 0.85rem/1.2 var(--font-body); }
+.resume-doc__learning-detail { color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; }
+.resume-doc__learning-desc { margin: 0.15rem 0 0; color: var(--text-secondary); font: 400 0.85rem/1.4 var(--font-body); }
+
+
 /* ────────────────────────────────────────────────────────────────────────
    Responsive scale — one canonical set of breakpoints:
      1080px  small-desktop refinements
@@ -562,11 +695,15 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
       640px  mobile (list rows stack, display type scales down)
       400px  extra-small refinements
       340px  minimum-width guard
-   The page is a single column at every width — sections read top-to-bottom
-   with no left/right panes. All layout breakpoints are max-width so each
-   tier is a strict subset of the previous one. min-width is used only where
-   a sibling card row (scenario-body) must re-enable above a width, and for
-   coarse-pointer touch scaling.
+   Reading flow: paired sections (heading+copy, cards+media, intro+content)
+   sit side-by-side on desktop so the width is used, then collapse to a
+   single, comfortable column on tablet/mobile. All responsive rules live in
+   this one zone, grouped by breakpoint: the primary max-width tiers, the
+   scenario/resume-viewer overrides, the desktop min-width pairing, and the
+   reduced-motion/print rules. Primary layout breakpoints are max-width (each
+   tier is a strict subset of the previous); min-width is used only to re-enable
+   a desktop pairing above a width. No global root-font scaling is applied to
+   coarse pointers — readability comes from the type scale below.
    ──────────────────────────────────────────────────────────────────────── */
 
 @media (max-width: 1080px) {
@@ -674,13 +811,11 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .contact-links a { font-size: 0.67rem; }
 }
 
-/* Touch devices that report a wide viewport (a phone "requesting desktop
-   site", or a large touch-first tablet) render the page zoomed out, which
-   makes text unreadably small. Scale the root type up so body copy stays
-   legible once the browser shrinks the page to fit. */
-@media (pointer: coarse) and (min-width: 900px) {
-  html { font-size: 120%; }
-}
+/* No global root-font scaling for coarse pointers: a coarse pointer does not
+   mean the layout should shift by 20%, and touch laptops / wide tablets /
+   Android-desktop-mode all report coarse yet should keep the same proportions
+   as a mouse. Readability is handled by the normal responsive type scale and
+   the <meta name="viewport"> initial-scale=1.0, not by scaling every unit. */
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
@@ -692,129 +827,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .section { padding-block: 2rem; }
 }
 
-/* Resume section additions */
-.resume-section { background: var(--surface-soft); }
-.resume-layout { display: grid; gap: 2.5rem; grid-template-columns: 1fr; }
-.resume-badges { margin: 1.25rem 0; }
-.badge-row { display: flex; flex-wrap: wrap; gap: 0.35rem; }
-.badge { display: inline-flex; padding: 0.35rem 0.6rem; border-radius: 9999px; background: color-mix(in srgb, var(--accent) 12%, transparent); border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); font: 600 0.7rem/1.2 var(--font-mono); letter-spacing: 0.03em; text-transform: uppercase; }
-.badge-desc { margin: 0.65rem 0 0; color: var(--text-secondary); font: 400 0.82rem/1.45 var(--font-body); }
-.resume-cta-block { margin-top: 1.25rem; }
-.resume-note { margin: 0.75rem 0 0; color: var(--muted); font: 400 0.8rem/1.35 var(--font-mono); font-style: italic; }
-.resume-panel { padding: 1.5rem; }
-.loop-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 1rem 0 1.5rem; }
-.loop-badges .badge { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: color-mix(in srgb, var(--accent) 25%, transparent); color: var(--accent); }
-.stats-bar { display: flex; flex-wrap: wrap; gap: 1.25rem; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); color: var(--text-secondary); font: 600 0.7rem/1.3 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
-.stats-bar strong { display: block; color: var(--accent); font-size: 1.1rem; letter-spacing: -0.02em; text-transform: none; font-family: var(--font-display); }
-.scenario-section { background: var(--surface-soft); }
-.scenario-layout { display: grid; gap: clamp(1.5rem, 3vw, 3rem); grid-template-columns: 1fr; }
-.scenario-layout > * { min-width: 0; }
-.scenario-intro { max-width: 45rem; }
-.scenario-body { display: grid; gap: 1rem; grid-template-columns: 1fr; min-width: 0; }
 @media (min-width: 768px) { .scenario-body { grid-template-columns: repeat(3, 1fr); } }
-.scenario-card { display: flex; flex-direction: column; min-height: 14rem; }
-.scenario-card__step { color: var(--accent); font: 700 0.72rem/1 var(--font-mono); letter-spacing: 0.1em; }
-.scenario-card h3 { margin: 1.25rem 0 0; color: var(--text); font: 700 1.15rem/1.2 var(--font-display); letter-spacing: -0.02em; text-transform: uppercase; }
-.panel--accent.scenario-card .scenario-card__step { color: var(--accent); }
-.scenario-card p { margin: 0.75rem 0 0; font-size: 0.95rem; }
-/* ── Resume highlights (section panel) ── */
-.resume-highlights { display: grid; gap: 0; margin-bottom: 1.25rem; }
-.resume-highlight { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 0.65rem 0; border-bottom: 1px solid var(--border); }
-.resume-highlight:last-child { border-bottom: 0; }
-.resume-highlight__label { color: var(--muted); font: 600 0.62rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; flex: none; }
-.resume-highlight__value { color: var(--text); font: 600 0.82rem/1.3 var(--font-body); text-align: right; }
-
-/* ── Resume viewer overlay ── */
-.resume-viewer-overlay {
-  position: fixed; inset: 0; z-index: 500;
-  display: flex; align-items: flex-start; justify-content: center;
-  padding: clamp(1rem, 3vw, 2.5rem);
-  background: rgba(0, 0, 0, 0.62);
-  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
-  overflow-y: auto;
-}
-.resume-viewer {
-  position: relative; width: min(100%, 54rem); margin: 0.5rem auto;
-  background: var(--surface); border: 1px solid var(--border-strong);
-  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
-}
-.resume-viewer__toolbar {
-  position: sticky; top: 0; z-index: 20;
-  isolation: isolate;
-  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-  padding: 0.6rem 1.25rem;
-  background: var(--surface-raised); border-bottom: 1px solid var(--border);
-}
-.resume-viewer__toolbar-left { display: flex; align-items: center; gap: 0.55rem; color: var(--text-secondary); font: 600 0.66rem/1 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase; }
-.resume-viewer__toolbar-left svg { color: var(--accent); }
-.resume-viewer__toolbar-right { display: flex; align-items: center; gap: 0.5rem; }
-.resume-viewer__btn {
-  display: inline-flex; align-items: center; gap: 0.45rem; min-height: 36px; padding: 0 0.75rem;
-  color: var(--accent-ink); background: var(--accent); border: 1px solid var(--accent);
-  font: 700 0.6rem/1 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase;
-  cursor: pointer; transition: background 160ms ease, transform 160ms var(--ease);
-}
-.resume-viewer__btn:hover { background: color-mix(in srgb, var(--accent) 85%, white); transform: translateY(-1px); }
-.resume-viewer__close {
-  display: inline-grid; width: 36px; height: 36px; place-items: center; padding: 0;
-  color: var(--text-secondary); background: transparent; border: 1px solid var(--border);
-  cursor: pointer; transition: color 160ms ease, border-color 160ms ease;
-}
-.resume-viewer__close:hover { color: var(--accent); border-color: var(--accent); }
-.resume-viewer__content { position: relative; z-index: 0; padding: clamp(1.5rem, 4vw, 3rem); }
-
-/* ── Resume document (inside viewer) ── */
-.resume-doc__header { margin-bottom: 1.5rem; padding-bottom: 1.25rem; border-bottom: 2px solid var(--accent); }
-.resume-doc__name { margin: 0; color: var(--text); font: 800 clamp(1.8rem, 3.5vw, 2.4rem)/1 var(--font-display); letter-spacing: -0.04em; text-transform: uppercase; }
-.resume-doc__title { margin: 0.35rem 0 0; color: var(--accent); font: 700 clamp(0.72rem, 1vw, 0.85rem)/1.3 var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
-.resume-doc__contact { display: flex; flex-wrap: wrap; gap: 0.3rem 0; margin-top: 0.65rem; color: var(--text-secondary); font: 500 0.7rem/1.3 var(--font-mono); letter-spacing: 0.02em; }
-.resume-doc__contact > * { display: inline; }
-.resume-doc__contact > *:not(:last-child)::after { content: '\a0|\a0'; color: var(--muted); }
-.resume-doc__contact a { color: var(--accent-blue); transition: color 160ms ease; }
-.resume-doc__contact a:hover { color: var(--accent); }
-.resume-doc__section { margin-bottom: 1.5rem; }
-.resume-doc__section:last-child { margin-bottom: 0; }
-.resume-doc__summary { margin: 0; color: var(--text-secondary); font: 400 0.92rem/1.55 var(--font-serif); }
-.resume-doc__section-title { margin: 0 0 0.85rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); color: var(--accent); font: 700 0.72rem/1.3 var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
-.resume-doc__company { margin-bottom: 1rem; }
-.resume-doc__company:last-child { margin-bottom: 0; }
-.resume-doc__company-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.5rem; }
-.resume-doc__company-name { color: var(--text); font: 700 0.95rem/1.2 var(--font-display); letter-spacing: -0.01em; text-transform: uppercase; }
-.resume-doc__company-location { color: var(--muted); font: 500 0.68rem/1 var(--font-mono); letter-spacing: 0.04em; }
-.resume-doc__role { margin-bottom: 0.75rem; }
-.resume-doc__role:last-child { margin-bottom: 0; }
-.resume-doc__role-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.3rem; }
-.resume-doc__role-title { color: var(--text); font: 700 0.85rem/1.2 var(--font-body); }
-.resume-doc__role-period { color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; white-space: nowrap; }
-.resume-doc__bullets { padding-left: 1.15rem; margin: 0.25rem 0 0; list-style: none; }
-.resume-doc__bullets li { position: relative; padding-left: 0.65rem; margin-bottom: 0.3rem; color: var(--text-secondary); font: 400 0.88rem/1.5 var(--font-body); }
-.resume-doc__bullets li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 4px; height: 4px; background: var(--accent); border-radius: 50%; }
-.resume-doc__desc { margin: 0.25rem 0 0; color: var(--text-secondary); font: 400 0.88rem/1.5 var(--font-body); }
-.resume-doc__project { margin-bottom: 0.85rem; }
-.resume-doc__project:last-child { margin-bottom: 0; }
-.resume-doc__project-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-.resume-doc__project-title { color: var(--text); font: 700 0.88rem/1.2 var(--font-body); }
-.resume-doc__project-links { display: flex; gap: 0.25rem; color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; align-items: baseline; }
-.resume-doc__project-links a { color: var(--accent-blue); transition: color 160ms ease; }
-.resume-doc__project-links a:hover { color: var(--accent); }
-.resume-doc__project-status { color: var(--accent-orange); font-style: italic; }
-.resume-doc__expertise-group { margin-bottom: 0.35rem; color: var(--text-secondary); font: 400 0.88rem/1.5 var(--font-body); }
-.resume-doc__expertise-group:last-child { margin-bottom: 0; }
-.resume-doc__expertise-label { font-weight: 700; color: var(--text); }
-.resume-doc__edu { margin-bottom: 0.65rem; }
-.resume-doc__edu:last-child { margin-bottom: 0; }
-.resume-doc__edu-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-.resume-doc__edu-title { color: var(--text); font: 700 0.88rem/1.2 var(--font-body); }
-.resume-doc__edu-period { color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; }
-.resume-doc__edu-institution { color: var(--text-secondary); font: 400 0.85rem/1.4 var(--font-body); }
-.resume-doc__edu-cgpa { font-weight: 700; color: var(--text); }
-.resume-doc__learning { margin-bottom: 0.5rem; }
-.resume-doc__learning:last-child { margin-bottom: 0; }
-.resume-doc__learning-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; }
-.resume-doc__learning-title { color: var(--text); font: 700 0.85rem/1.2 var(--font-body); }
-.resume-doc__learning-detail { color: var(--muted); font: 500 0.65rem/1 var(--font-mono); letter-spacing: 0.04em; }
-.resume-doc__learning-desc { margin: 0.15rem 0 0; color: var(--text-secondary); font: 400 0.85rem/1.4 var(--font-body); }
-
 @media (max-width: 900px) {
   .resume-viewer { width: min(100%, 44rem); }
   .resume-viewer__content { padding: 2rem; }
@@ -861,4 +874,97 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   .resume-doc__project-links { font-size: 0.6rem; }
   .resume-doc__project { margin-bottom: 0.7rem; }
   .resume-doc__expertise-group { margin-bottom: 0.25rem; }
+}
+
+
+/* ────────────────────────────────────────────────────────────────────────
+   Desktop pairing — use the width of large screens instead of one tall
+   column. These are additive (min-width), so every smaller viewport keeps
+   the single-column reading flow defined above. Placed last so the overrides
+   win over the base single-column rules.
+   ──────────────────────────────────────────────────────────────────────── */
+
+@media (min-width: 1025px) {
+  /* Split section headings: eyebrow + title on the left, intro copy right. */
+  .section-heading--split {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    align-items: end;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+  .section-heading--split > div:first-child h2 { max-width: 30rem; }
+  .section-heading--split > p { justify-self: end; max-width: 34rem; }
+
+  /* Hero: copy left, evidence banner right. */
+  .hero__layout {
+    grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+    align-items: center;
+  }
+  .hero__copy { max-width: none; }
+  .evidence-panel { width: 100%; justify-self: end; }
+
+  /* Focus, Journey, Now, Resume: intro left, content right. Give the
+     content column more width so list rows and panels keep room to breathe. */
+  .focus-layout,
+  .journey-layout,
+  .now-layout,
+  .resume-layout {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+    gap: clamp(2.5rem, 5vw, 5rem);
+  }
+  .focus-intro, .journey-intro, .resume-intro {
+    align-self: start;
+  }
+
+  /* Give the Now rows a little more room in the narrower content column. */
+  .now-row {
+    grid-template-columns: minmax(6.5rem, 0.5fr) minmax(0, 1.5fr) auto;
+  }
+
+  /* Focus: process panel + the twin "focus" panels side by side. */
+  .focus-bottom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  /* Project cards: a curated trio, not three identical rows. Media fills the
+     content-defined column height (align-items: stretch) so neither column is
+     left empty and the framed visual is not a stretched, fixed-aspect box.
+     Per-tool character comes from which side is wider + framed vs frameless. */
+  .project-card { gap: clamp(2rem, 4vw, 4rem); }
+  .project-card__copy { align-self: center; }
+  .project-visual-frame { aspect-ratio: auto; }
+
+  /* CyberBuddy — copy left, media right; the image column leans slightly
+     wider so the "one roof, many checks" art reads as the hero detail. */
+  .project-card--live { grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); }
+
+  /* VAPT Checklist — mirrored: media (the wide workflow image) on the left,
+     copy on the right. The wider media column gives the artwork more presence. */
+  .project-card--release { grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); }
+  .project-card--release .project-media { order: -1; }
+
+  /* ScriptSentry — copy left, media right; the frameless scan-grid console
+     reads as a live feed rather than a framed screenshot. */
+  .project-card--experiment { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+
+  /* Signals heading: title left, description right. */
+  .signals-heading {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    align-items: end;
+    gap: clamp(2rem, 4vw, 4rem);
+  }
+  .signals-heading .eyebrow { grid-column: 1; }
+  .signals-heading h2 { grid-column: 1; }
+  .signals-heading p { grid-column: 2; grid-row: 1 / 3; align-self: end; justify-self: end; }
+
+  /* Contact: copy left, actions right. */
+  .contact-layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+    align-items: center;
+  }
+}
+
+/* Very small phones: the live clock crowds the header next to the brand
+   and the two controls, so keep it as a subtle icon-only indicator. */
+@media (max-width: 400px) {
+  .header-time span { display: none; }
+  .header-time { padding-inline: 0.4rem; }
 }
