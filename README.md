@@ -39,9 +39,9 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 ### VAPT Checklist — v1.0.0-r29 Release Candidate
 - **Live preview:** https://amitpal-cyberbuddy.github.io/VAPT-Checklist/
 - **Repo:** https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
-- **Status:** v1.0.0-r29 release candidate — browser and visual QA sign-off is still pending, so it is **not production-final**.
+- **Status:** Live for web testing; Android & iOS in beta. No backend, no telemetry.
 - Story: `Fragmented security checks → Taxonomy and normalization → Structured testing workflow → Operator-focused VAPT workspace`
-- Project-documented snapshot: 623 validated items across 25 categories. The [VAPT-Checklist repo](https://github.com/AmitPal-CyberBuddy/VAPT-Checklist) remains the authoritative source when these evolve.
+- Live snapshot: 2,006 catalog checks across 631 test families, 52 scenario plans, and 48 connected attack paths. The [VAPT-Checklist repo](https://github.com/AmitPal-CyberBuddy/VAPT-Checklist) remains the authoritative source when these evolve.
 - Context-aware workspace: presets, scoping questions, multi-role matrix, honest coverage states (tested · testing now · blocked · N/A · not tested)
 - Check ≠ coverage ≠ finding — evidence packs, Markdown coverage, CSV export
 - Local-first, no backend, no telemetry
@@ -66,7 +66,7 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 Order below is the actual render order in `src/App.jsx` — Hero → Projects → Focus → How I work → Writing → The Loop → Journey → Growth Signals → Now → Contact → Footer.
 
 ```
-HERO — Amit Pal, Security Analyst (VAPT) • Ampcus Cyber; direct routes to projects and writing,
+HERO — Amit Pal, Associate Consultant (VAPT) • Ampcus Cyber; direct routes to projects and writing,
        plus a compact evidence-capture artifact
 → FOCUS — an accessible explanation of VAPT, end-to-end testing flow, focus areas, and working principles
 → HOW I WORK — Test → Build → Research → Write
@@ -125,23 +125,27 @@ Workflow:
 
 ## Content Updates — Easy
 
-All authoritative content in `src/App.jsx` top:
+All authoritative content lives in `src/content.js`:
 
 - `LINKS` — LinkedIn, Medium, GitHub, live projects, email (authoritative only)
 - `WRITING` — Real Medium articles, verified links, no invented titles
-- `FOCUS_STEPS`, `LOOP_STEPS`, `JOURNEY`, `SIGNALS`, and `NOW_ITEMS` — concise, data-driven content blocks that map to the reusable section layouts.
+- `FOCUS_STEPS`, `LOOP_STEPS`, `JOURNEY`, `SIGNALS`, `NOW_ITEMS`, `RESUME_DATA`, and the `PROJECT_*` blocks — concise, data-driven content that maps to the section components and the `Reveal`/`Eyebrow`/`ButtonLink` primitives.
+
+The app is split into modules: shared hooks in `src/lib/hooks.js`, shared UI primitives in `src/lib/ui.jsx`, brand icons in `src/lib/icons.jsx`, and one component per section under `src/components/`. `src/App.jsx` only composes them.
 
 There are no `VAPT_CATEGORIES`, `CYBERBUDDY_TOOLS`, or `WRITING_REAL` constants — earlier revisions of this README described them, but they were never in the code.
 
 ### VAPT Checklist status and numbers: one authoritative source
 
-The portfolio reflects the project-documented release-candidate snapshot: **v1.0.0-r29**,
-**623 validated items**, and **25 categories**. Browser and visual QA sign-off remains
-pending. Status and counts can evolve, so the authoritative source is the project itself:
+The portfolio reflects the live workspace: **web testing is live**, with Android & iOS
+in beta, and currently **2,006 catalog checks** across **631 test families**, **52 scenario
+plans**, and **48 connected attack paths**. Status and counts can evolve, so the
+authoritative source is the project itself:
 https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
 
-These figures are a snapshot at the time of writing, not a claim of final production
-release. If a number or status needs verification, cite the project repository rather
+These figures are a snapshot at the time of writing; the portfolio keeps numbers
+qualitative where possible (trailer, not the movie). If a number or status needs
+verification, cite the project repository rather
 than this portfolio documentation.
 
 
