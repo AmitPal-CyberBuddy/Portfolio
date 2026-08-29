@@ -408,7 +408,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 /* Single-column by default. Copy and media each fill the column — no fixed
    caps so a small visual never sits alone inside an oversized container.
    Readability comes from line-measure on the text, not from capping the block. */
-.project-card { display: grid; grid-template-columns: minmax(0, 1fr); align-items: stretch; gap: 2.25rem; }
+.project-card { display: grid; grid-template-columns: minmax(0, 1fr); align-items: start; gap: 2.25rem; }
 .project-card h3 { margin: 0; color: var(--text); font: 800 clamp(1.9rem, 3.2vw, 2.9rem)/1.02 var(--font-display); letter-spacing: -0.045em; text-transform: uppercase; }
 .project-card__lead { max-width: 42ch; margin: 1.35rem 0 0; color: var(--text); font: 400 clamp(1.15rem, 1.65vw, 1.38rem)/1.43 var(--font-serif); }
 .project-card__copy > p:not(.project-card__lead) { max-width: 62ch; margin: 0.75rem 0 0; color: var(--text-secondary); }
@@ -417,10 +417,10 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
 .project-card--release .eyebrow { color: var(--accent); }
 .project-card--experiment .eyebrow { color: var(--accent-gold); }
 .project-media { min-width: 0; width: 100%; margin: 0; display: flex; flex-direction: column; overflow: hidden; background: var(--surface); border: 1px solid var(--border-strong); box-shadow: var(--shadow); }
-.project-visual-frame { position: relative; flex: 1 1 auto; min-height: 0; aspect-ratio: 16 / 10; overflow: hidden; isolation: isolate; background: var(--surface-raised); }
-.project-visual-frame > img { position: absolute; z-index: -2; inset: -2%; width: 104%; max-width: none; height: 104%; object-fit: cover; object-position: center; opacity: 0.43; filter: saturate(0.82) contrast(1.08); }
-[data-theme='light'] .project-visual-frame > img { opacity: 0.28; filter: saturate(0.72) contrast(1.02); }
-.project-visual-frame__scrim { position: absolute; z-index: -1; inset: 0; background: linear-gradient(135deg, color-mix(in srgb, var(--surface-raised) 93%, transparent) 2%, color-mix(in srgb, var(--surface-raised) 55%, transparent) 56%, color-mix(in srgb, var(--surface-raised) 94%, transparent) 100%); }
+.project-visual-frame { position: relative; flex: 0 0 auto; min-height: 0; aspect-ratio: 16 / 10; overflow: hidden; isolation: isolate; background: var(--surface-raised); }
+.project-visual-frame > img { position: absolute; z-index: -2; inset: 0; width: 100%; max-width: none; height: 100%; object-fit: cover; object-position: center; opacity: 0.62; filter: saturate(0.92) contrast(1.12); }
+[data-theme='light'] .project-visual-frame > img { opacity: 0.5; filter: saturate(0.82) contrast(1.04); }
+.project-visual-frame__scrim { position: absolute; z-index: -1; inset: 0; background: linear-gradient(135deg, color-mix(in srgb, var(--surface-raised) 62%, transparent) 2%, color-mix(in srgb, var(--surface-raised) 22%, transparent) 56%, color-mix(in srgb, var(--surface-raised) 68%, transparent) 100%); }
 .project-media--live { --project-signal: var(--accent-violet); }
 .project-media--release { --project-signal: var(--accent); }
 .project-media--experiment { --project-signal: var(--accent-gold); }
@@ -440,7 +440,7 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
     linear-gradient(color-mix(in srgb, var(--accent-gold) 16%, transparent) 1px, transparent 1px),
     linear-gradient(90deg, color-mix(in srgb, var(--accent-gold) 16%, transparent) 1px, transparent 1px);
 }
-.project-data { position: absolute; inset: 1rem; display: flex; flex-direction: column; justify-content: space-between; color: var(--text); border: 1px solid color-mix(in srgb, var(--project-signal) 46%, var(--border)); background: color-mix(in srgb, var(--surface-raised) 68%, transparent); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 4%, transparent); }
+.project-data { position: absolute; inset: 1rem; display: flex; flex-direction: column; justify-content: space-between; color: var(--text); border: 1px solid color-mix(in srgb, var(--project-signal) 46%, var(--border)); background: color-mix(in srgb, var(--surface-raised) 42%, transparent); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text) 4%, transparent); }
 .project-data__top, .project-data__footer { display: flex; justify-content: space-between; gap: 0.75rem; padding: 0.62rem 0.75rem; color: var(--text-secondary); border-bottom: 1px solid var(--border); font: 600 clamp(0.52rem, 0.78vw, 0.65rem)/1.25 var(--font-mono); letter-spacing: 0.075em; text-transform: uppercase; }
 .project-data__top span { display: inline-flex; align-items: center; gap: 0.4rem; }
 .project-data__top span:last-child { color: var(--project-signal); text-align: right; }
@@ -757,7 +757,8 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   body { font-size: 15px; }
   .loader__main { font-size: clamp(2.65rem, 13vw, 4.25rem); }
   .loader__bottom { display: grid; gap: 0.35rem; }
-  .project-visual-frame { aspect-ratio: 4 / 3; }
+  .project-visual-frame { flex: 0 0 auto; aspect-ratio: 4 / 3; }
+  .project-card { align-items: start; gap: 1.75rem; }
   .project-data { inset: 0.65rem; }
   .project-data__metrics, .project-data__rows { margin-inline: 0.5rem; }
   .project-data__metrics > div { min-height: 3rem; padding: 0.45rem; }
@@ -924,26 +925,27 @@ html.custom-cursor-on, html.custom-cursor-on * { cursor: none !important; }
   /* Focus: process panel + the twin "focus" panels side by side. */
   .focus-bottom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 
-  /* Project cards: a curated trio, not three identical rows. Media fills the
-     content-defined column height (align-items: stretch) so neither column is
-     left empty and the framed visual is not a stretched, fixed-aspect box.
-     Per-tool character comes from which side is wider + framed vs frameless. */
+  /* Project cards: a curated trio, not three identical rows. Each tool keeps a
+     deliberate split; the media sits at a comfortable aspect ratio (no slab),
+     the copy centres against it, and columns are balanced so neither side is
+     left empty. Per-tool character = which side is wider + framed vs frameless. */
   .project-card { gap: clamp(2rem, 4vw, 4rem); }
   .project-card__copy { align-self: center; }
-  .project-visual-frame { aspect-ratio: auto; }
+  .project-media { align-self: center; }
+  .project-visual-frame { flex: 0 0 auto; aspect-ratio: 4 / 3; }
 
-  /* CyberBuddy — copy left, media right; the image column leans slightly
-     wider so the "one roof, many checks" art reads as the hero detail. */
-  .project-card--live { grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); }
+  /* CyberBuddy — copy left, media right; the image leans wider so the
+     "one roof, many checks" art reads as the hero detail. */
+  .project-card--live { grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr); }
 
-  /* VAPT Checklist — mirrored: media (the wide workflow image) on the left,
-     copy on the right. The wider media column gives the artwork more presence. */
-  .project-card--release { grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); }
+  /* VAPT Checklist — mirrored: media (wide workflow image) on the left,
+     copy on the right, so the artwork gets presence without distortion. */
+  .project-card--release { grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); }
   .project-card--release .project-media { order: -1; }
 
   /* ScriptSentry — copy left, media right; the frameless scan-grid console
      reads as a live feed rather than a framed screenshot. */
-  .project-card--experiment { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+  .project-card--experiment { grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr); }
 
   /* Signals heading: title left, description right. */
   .signals-heading {
