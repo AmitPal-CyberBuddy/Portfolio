@@ -13,17 +13,29 @@ export function Contact({ onOpenResume }) {
   return (
     <section id="connect" className="section contact-section" aria-labelledby="contact-title">
       <div className="contact-grid-pattern" aria-hidden="true" />
-      <div className="shell contact-layout">
+      <div className="shell shell--wide contact-layout">
         <div className="contact-copy">
           <Eyebrow icon={Mail}>Contact · collaborations welcome</Eyebrow>
-          <h2 id="contact-title">Let’s make<br />security <em>clearer</em><br />together.</h2>
+          <h2 id="contact-title">Let’s make security <em>clearer together.</em></h2>
           <p>Need Web or API PT with clear evidence and practical remediation context? Or want to discuss browser-security tooling? Let’s connect.</p>
           <a className="email-address" href={`mailto:${LINKS.email}`} data-cursor="EMAIL"><Mail size={17} /> {LINKS.email}</a>
         </div>
         <div className="contact-actions">
           <div className="contact-primary-actions">
-            <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME"><Mail size={22} /><span>Email<br />me <ArrowUpRight size={18} /></span></a>
-            <button type="button" className="email-cta" onClick={onOpenResume} data-cursor="RESUME"><FileText size={22} /><span>View<br />Resume <ArrowUpRight size={18} /></span></button>
+            <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME">
+              <Mail size={22} />
+              <span className="email-cta__copy">
+                <span className="email-cta__title">Email</span>
+                <span className="email-cta__meta">Start a conversation <ArrowUpRight size={18} /></span>
+              </span>
+            </a>
+            <button type="button" className="email-cta" onClick={onOpenResume} data-cursor="RESUME">
+              <FileText size={22} />
+              <span className="email-cta__copy">
+                <span className="email-cta__title">Resume</span>
+                <span className="email-cta__meta">View full experience <ArrowUpRight size={18} /></span>
+              </span>
+            </button>
             <ButtonLink href={LINKS.linkedin} external className="button contact-linkedin" cursorLabel="LINKEDIN"><LinkedInIcon size={16} /> Connect on LinkedIn <ExternalArrow /></ButtonLink>
           </div>
           <div className="contact-links" aria-label="More external profiles">

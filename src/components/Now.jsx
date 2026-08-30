@@ -8,7 +8,7 @@ export function Now() {
       <div className="shell now-layout">
         <div className="section-intro">
           <Eyebrow icon={Clock3}>Now · August 2026</Eyebrow>
-          <h2 id="now-title">What I am<br /><em>working on.</em></h2>
+          <h2 id="now-title">What I am <em>working on.</em></h2>
           <p className="intro-lead">A current snapshot of work, writing, maintenance, and learning.</p>
           <div className="now-meta">
             <p><MapPin size={16} /> Roots in West Bengal · building in Bengaluru · open to remote collaboration</p>

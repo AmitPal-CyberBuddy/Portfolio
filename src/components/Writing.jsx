@@ -7,11 +7,11 @@ export function Writing() {
   const reduceMotion = useReducedMotion();
   return (
     <section id="writing" className="section section--soft writing-section" aria-labelledby="writing-title">
-      <div className="shell">
+      <div className="shell shell--wide">
         <Reveal className="section-heading section-heading--split">
           <div>
             <Eyebrow icon={PenTool}>Technical Writing · deep dives</Eyebrow>
-            <h2 id="writing-title">Technical Writing · <br /><em>deep dives.</em></h2>
+            <h2 id="writing-title">Technical Writing · <em>deep dives.</em></h2>
           </div>
           <p>Deep dives into browser specs, CORS behavior, request anomalies, and authorization logic gaps — backed by evidence and reproduction, not assumptions.</p>
         </Reveal>

@@ -20,7 +20,7 @@ export function Focus() {
           <Reveal className="section-intro focus-intro">
             <Eyebrow icon={Target}>Focus · what I do</Eyebrow>
             <p className="role-badge"><span className="status-dot" /><span>Current role</span><b>Associate Consultant · Ampcus Cyber · Aug 2026 → now</b></p>
-            <h2 id="focus-title">Practical<br /><em>appsec.</em></h2>
+            <h2 id="focus-title">Practical <em>appsec.</em></h2>
             <p className="intro-lead">I assess web applications and APIs by understanding the system, testing it responsibly, and validating real impact rather than reporting what a scanner returns.</p>
             <p>VAPT — Vulnerability Assessment and Penetration Testing — is the practice of finding, validating, and clearly explaining security issues that need attention.</p>
             <div className="trust-note"><Fingerprint size={16} /><span>Authorized, evidence-led security testing.</span></div>
@@ -57,7 +57,7 @@ export function Focus() {
         <div className="shell scenario-layout">
           <Reveal className="section-intro scenario-intro">
             <Eyebrow icon={ShieldCheck}>Case study · anonymized</Eyebrow>
-            <h2 id="scenario-title">The authorization gap<br /><em>in your banner.</em></h2>
+            <h2 id="scenario-title">The authorization gap <em>in your banner.</em></h2>
             <p className="intro-lead">Breaking down the logic flaw shown in the evidence banner: expected 403, observed 200. How it happens, why it matters, and what to check next.</p>
           </Reveal>
           <Reveal className="scenario-body" delay={0.08}>

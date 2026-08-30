@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import {
   ArrowUpRight,
@@ -7,10 +7,104 @@ import {
   X,
 } from 'lucide-react';
 import { MOTION_EASE, RESUME_DATA } from '../content';
+import { useFocusTrap } from '../lib/hooks';
 import { Eyebrow, Reveal } from '../lib/ui';
 
+function getPrintResumeData() {
+  return {
+    ...RESUME_DATA,
+    summary:
+      'Application Security Consultant focused on Web Application and API PT, leading end-to-end assessments across client environments. Experienced in scoping, testing, validation, reporting, remediation support, retesting, and closure.',
+    experience: RESUME_DATA.experience.map((exp) => ({
+      ...exp,
+      roles: exp.roles.map((role) => {
+        if (role.title === 'Associate Consultant') {
+          return {
+            ...role,
+            bullets: [
+              'Lead end-to-end Web Application and API PT engagements across multiple client applications and API collections.',
+              'Translate SOW and client requirements into scope, coverage, access planning, and Black Box/Grey Box testing approaches.',
+              'Validate vulnerabilities across authentication, authorization, session management, business logic, and input validation; eliminate false positives.',
+              'Drive reporting, walkthroughs, remediation validation, retesting, and engagement closure with clients and internal stakeholders.',
+            ],
+          };
+        }
+
+        if (role.title === 'Security Analyst') {
+          return {
+            ...role,
+            bullets: [
+              'Performed manual and automated Web Application and API security assessments across client environments.',
+              'Tested REST and SOAP APIs against OWASP API risks including authentication, authorization, input validation, and mass assignment.',
+              'Validated findings and supported reporting, remediation guidance, and retesting.',
+            ],
+          };
+        }
+
+        if (role.title === 'Lead Generation Executive') {
+          return {
+            ...role,
+            description:
+              'Conducted OSINT-driven market, organization, and stakeholder research to support targeted outreach and opportunity identification.',
+          };
+        }
+
+        return role;
+      }),
+    })),
+    independentWork: [
+      {
+        title: 'CyberBuddy',
+        links: {
+          live: 'https://amitpal-cyberbuddy.github.io/CyberBuddy/',
+          github: 'https://github.com/AmitPal-CyberBuddy/CyberBuddy',
+        },
+        description:
+          'Browser-based, local-first security suite covering clickjacking, headers, CSP, CORS, DNS, CSRF PoCs, and JWT analysis.',
+      },
+      {
+        title: 'ScriptSentry',
+        links: {
+          live: 'https://amitpal-cyberbuddy.github.io/ScriptSentry/',
+          github: 'https://github.com/AmitPal-CyberBuddy/ScriptSentry',
+        },
+        status: 'Live',
+        description:
+          'Local JavaScript security analysis platform surfacing secrets, crypto, APIs, storage, DOM risk, obfuscation, and exportable findings.',
+      },
+      {
+        title: 'VAPT Checklist',
+        links: {
+          live: 'https://amitpal-cyberbuddy.github.io/VAPT-Checklist/',
+          github: 'https://github.com/AmitPal-CyberBuddy/VAPT-Checklist',
+        },
+        status: 'Live',
+        description:
+          'Context-aware local-first VAPT workspace with 2,006 checks, 631 families, 52 plans, 48 attack paths, and no telemetry.',
+      },
+      {
+        title: 'Technical Security Writing',
+        links: { medium: 'https://amitpxl.medium.com/' },
+        description: 'Practical AppSec writing focused on web/API security, research, and testing.',
+      },
+    ],
+    continuousLearning: [
+      {
+        title: 'PortSwigger Web Security Academy',
+        detail: '135+ hands-on labs',
+        description: 'Hands-on practice across web vulnerabilities and exploitation techniques.',
+      },
+      {
+        title: 'APIsec University',
+        detail: 'Jan 2026',
+        description: 'API Penetration Testing (12h) and API Security Fundamentals 25 (2h).',
+      },
+    ],
+  };
+}
+
 function downloadResumeATS() {
-  const r = RESUME_DATA;
+  const r = getPrintResumeData();
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -18,41 +112,30 @@ function downloadResumeATS() {
 <meta charset="UTF-8">
 <title>${esc(r.header.name)} - Resume</title>
 <style>
-@page{size:A4;margin:0.48in 0.64in}
+@page{size:A4;margin:0.34in 0.42in}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:10pt;line-height:1.4;color:#1a1a1a}
-h1{font-size:21pt;font-weight:700;margin-bottom:2pt}
-.subtitle{font-size:11pt;font-weight:700;color:#2E506B;margin-bottom:4pt}
-.contact{font-size:8.5pt;color:#555;margin-bottom:6pt}
-.contact a{color:#555;text-decoration:none}
-.summary{font-size:9.15pt;line-height:1.45;margin-bottom:8pt;color:#333}
-.section-title{font-size:10.2pt;font-weight:700;color:#2E506B;border-bottom:1px solid #D9DEE2;padding-bottom:3pt;margin-top:10pt;margin-bottom:6pt;text-transform:uppercase;letter-spacing:0.5pt}
-.company-row{display:flex;justify-content:space-between;align-items:baseline}
-.company{font-weight:700;font-size:9.5pt;margin-top:6pt}
-.location{font-size:8.6pt;color:#5A5A5A}
-.role-row{display:flex;justify-content:space-between;align-items:baseline}
-.role{font-weight:700;font-size:9.3pt;margin-top:4pt}
-.period{font-size:8.6pt;color:#5A5A5A}
-ul{margin:2pt 0 4pt 15pt}
-li{font-size:9.15pt;line-height:1.4;margin-bottom:1.5pt;color:#333}
-.desc{font-size:9.15pt;color:#333;margin-top:2pt;line-height:1.4}
-.project-row{display:flex;justify-content:space-between;align-items:baseline}
-.project-title{font-weight:700;font-size:9.3pt}
-.project-links{font-size:8.6pt;color:#5A5A5A}
-.project-links a{color:#5A5A5A;text-decoration:none}
-.expertise-group{margin-bottom:2pt;font-size:9.15pt;color:#333}
-.expertise-label{font-weight:700}
-.edu-row{display:flex;justify-content:space-between;align-items:baseline}
-.edu-title{font-weight:700;font-size:9.3pt}
-.edu-detail{font-size:8.6pt;color:#5A5A5A}
-.edu-institution{font-size:9.15pt;color:#333;margin-top:1pt}
-.edu-cgpa{font-weight:700}
-.learning-row{display:flex;justify-content:space-between;align-items:baseline}
-.learning-title{font-weight:700;font-size:9.3pt}
-.learning-detail{font-size:8.6pt;color:#5A5A5A}
-.learning-desc{font-size:9.15pt;color:#333;margin-top:1pt}
-.spacer{height:4pt}
-@media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+html,body{width:100%}
+body{font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:8.55pt;line-height:1.24;color:#1a1a1a;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+h1{font-size:18pt;font-weight:700;margin-bottom:1pt;line-height:1.02}
+.subtitle{font-size:9.1pt;font-weight:700;color:#2E506B;margin-bottom:3pt}
+.contact{font-size:7.45pt;line-height:1.2;color:#555;margin-bottom:4pt}
+.contact a,.project-links a{color:#555;text-decoration:none}
+.summary{font-size:8.1pt;line-height:1.24;margin-bottom:5pt;color:#333}
+.section-title{font-size:8.85pt;font-weight:700;color:#2E506B;border-bottom:1px solid #D9DEE2;padding-bottom:2pt;margin-top:6pt;margin-bottom:4pt;text-transform:uppercase;letter-spacing:0.45pt;break-after:avoid}
+.company-row,.role-row,.project-row,.edu-row,.learning-row{display:flex;justify-content:space-between;align-items:baseline;gap:10pt;page-break-inside:avoid}
+.company{font-weight:700;font-size:8.7pt;margin-top:3pt}
+.location,.period,.project-links,.edu-detail,.learning-detail{font-size:7.4pt;color:#5A5A5A;white-space:nowrap}
+.role{font-weight:700;font-size:8.35pt;margin-top:2pt}
+ul{margin:1pt 0 2pt 12pt}
+li{font-size:8pt;line-height:1.22;margin-bottom:0.8pt;color:#333}
+.desc,.expertise-group,.edu-institution,.learning-desc{font-size:8pt;line-height:1.22;color:#333}
+.desc{margin-top:1pt}
+.project-title,.edu-title,.learning-title{font-weight:700;font-size:8.25pt}
+.expertise-group{margin-bottom:1pt}
+.expertise-label,.edu-cgpa{font-weight:700}
+.edu-institution,.learning-desc{margin-top:1pt}
+.spacer{height:2pt}
+.company-row,.role-row,.project-row,.edu-row,.learning-row,.desc,ul,.section-title{orphans:2;widows:2}
 </style>
 </head>
 <body>
@@ -187,7 +270,7 @@ function ResumeDocument() {
             <p className="resume-doc__edu-institution">{edu.institution} · <span className="resume-doc__edu-cgpa">CGPA: {edu.cgpa}</span></p>
           </div>
         ))}
-        <div style={{ height: '0.5rem' }} />
+        <div className="resume-doc__spacer" aria-hidden="true" />
         {r.continuousLearning.map((item, i) => (
           <div key={i} className="resume-doc__learning">
             <div className="resume-doc__learning-header">
@@ -204,16 +287,20 @@ function ResumeDocument() {
 
 export function ResumeViewer({ onClose }) {
   const reduceMotion = useReducedMotion();
+  const viewerRef = useRef(null);
+
+  useFocusTrap(viewerRef, true, {
+    onEscape: onClose,
+    initialFocusSelector: '.resume-viewer__close',
+  });
 
   useEffect(() => {
-    const onKeyDown = (e) => { if (e.key === 'Escape') onClose(); };
-    window.addEventListener('keydown', onKeyDown);
+    const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     return () => {
-      window.removeEventListener('keydown', onKeyDown);
-      document.body.style.overflow = '';
+      document.body.style.overflow = previousOverflow;
     };
-  }, [onClose]);
+  }, []);
 
   return (
     <motion.div
@@ -225,6 +312,7 @@ export function ResumeViewer({ onClose }) {
       onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
     >
       <motion.div
+        ref={viewerRef}
         className="resume-viewer"
         initial={reduceMotion ? false : { opacity: 0, y: 40, scale: 0.97 }}
         animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -232,12 +320,12 @@ export function ResumeViewer({ onClose }) {
         transition={{ duration: reduceMotion ? 0 : 0.4, ease: MOTION_EASE }}
         role="dialog"
         aria-modal="true"
-        aria-label="Resume viewer"
+        aria-labelledby="resume-viewer-title"
       >
         <div className="resume-viewer__toolbar">
           <div className="resume-viewer__toolbar-left">
             <FileText size={16} aria-hidden="true" />
-            <span>Resume · Amit Pal</span>
+            <span id="resume-viewer-title">Resume · Amit Pal</span>
           </div>
           <div className="resume-viewer__toolbar-right">
             <button type="button" className="resume-viewer__btn" onClick={downloadResumeATS} aria-label="Print or save ATS resume" title="Print or save ATS resume">
@@ -309,5 +397,3 @@ export function Resume({ onOpenResume }) {
     </section>
   );
 }
-
-

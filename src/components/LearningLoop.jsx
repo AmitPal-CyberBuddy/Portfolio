@@ -7,7 +7,7 @@ export function LearningLoop() {
   const reduceMotion = useReducedMotion();
   return (
     <section id="learning" className="section loop-section" aria-labelledby="loop-title">
-      <div className="shell">
+      <div className="shell shell--wide">
         <div className="section-heading loop-heading">
           <Eyebrow icon={Lightbulb}>How I learn and apply</Eyebrow>
           <h2 id="loop-title">The loop</h2>
