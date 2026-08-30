@@ -84,11 +84,11 @@ function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, 
 export function Projects() {
   return (
     <section id="work" className="section work-section" aria-labelledby="work-title">
-      <div className="shell">
+      <div className="shell shell--wide">
         <Reveal className="section-heading section-heading--split">
           <div>
             <Eyebrow icon={Hammer}>Projects · independent security work</Eyebrow>
-            <h2 id="work-title">Custom Tooling · <br /><em>local-first utilities.</em></h2>
+            <h2 id="work-title">Custom Tooling · <em>local-first utilities.</em></h2>
           </div>
           <p>Local-first utilities built for authorized testing and rapid evidence capture — designed to make investigation, evidence, and security conversations clearer.</p>
         </Reveal>

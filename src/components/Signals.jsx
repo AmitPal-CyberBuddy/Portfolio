@@ -5,7 +5,7 @@ import { Eyebrow } from '../lib/ui';
 export function Signals() {
   return (
     <section className="section signals-section" aria-labelledby="signals-title">
-      <div className="shell">
+      <div className="shell shell--wide">
         <div className="signals-heading">
           <Eyebrow icon={TrendingUp}>Beyond any single engagement</Eyebrow>
           <h2 id="signals-title">Growth signals</h2>

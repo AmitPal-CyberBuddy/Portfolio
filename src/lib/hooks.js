@@ -1,5 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { NAV_ITEMS } from '../content';
+
+const FOCUSABLE_SELECTOR = [
+  'a[href]',
+  'button:not([disabled])',
+  'input:not([disabled])',
+  'select:not([disabled])',
+  'textarea:not([disabled])',
+  '[tabindex]:not([tabindex="-1"])',
+].join(', ');
+
+function getFocusableElements(container) {
+  if (!container) return [];
+  return Array.from(container.querySelectorAll(FOCUSABLE_SELECTOR)).filter((element) => {
+    if (!(element instanceof HTMLElement)) return false;
+    if (element.hasAttribute('hidden') || element.getAttribute('aria-hidden') === 'true') return false;
+    return !element.inert;
+  });
+}
 
 export function useCurrentTime() {
   const [time, setTime] = useState('');
@@ -85,4 +103,64 @@ export function useScrollProgress() {
   }, []);
 
   return progress;
+}
+
+export function useFocusTrap(containerRef, active, { onEscape, initialFocusSelector } = {}) {
+  const returnFocusRef = useRef(null);
+
+  useEffect(() => {
+    if (!active) return undefined;
+
+    const container = containerRef.current;
+    if (!container) return undefined;
+
+    returnFocusRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    const focusInitial = () => {
+      const focusables = getFocusableElements(container);
+      const initialTarget = initialFocusSelector
+        ? container.querySelector(initialFocusSelector)
+        : focusables[0];
+
+      if (initialTarget instanceof HTMLElement) initialTarget.focus();
+    };
+
+    const frame = window.requestAnimationFrame(focusInitial);
+
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        onEscape?.();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const focusables = getFocusableElements(container);
+      if (!focusables.length) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      }
+
+      if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      document.removeEventListener('keydown', onKeyDown);
+      returnFocusRef.current?.focus?.();
+    };
+  }, [active, containerRef, initialFocusSelector, onEscape]);
 }

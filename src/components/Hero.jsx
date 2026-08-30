@@ -14,7 +14,7 @@ export function Hero({ onOpenResume }) {
   return (
     <section id="top" className="hero section" aria-labelledby="hero-title">
       <div className="hero-grid" aria-hidden="true" />
-      <div className="shell hero__layout">
+      <div className="shell shell--hero hero__layout">
         <motion.div
           className="hero__copy"
           initial={reduceMotion ? false : { opacity: 0, y: 28 }}

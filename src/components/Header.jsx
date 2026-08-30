@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import {
   ChevronRight,
   Clock3,
@@ -11,26 +11,36 @@ import {
   X,
 } from 'lucide-react';
 import { LINKS, NAV_ITEMS } from '../content';
+import { useFocusTrap } from '../lib/hooks';
 
 export function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen, onOpenResume }) {
+  const drawerRef = useRef(null);
   const closeMenu = () => setMenuOpen(false);
 
-  useEffect(() => {
-    const onKeyDown = (event) => {
-      if (event.key === 'Escape') setMenuOpen(false);
-    };
-    if (menuOpen) window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [menuOpen, setMenuOpen]);
+  useFocusTrap(drawerRef, menuOpen, {
+    onEscape: closeMenu,
+    initialFocusSelector: '[data-nav-focus]',
+  });
 
   useEffect(() => {
     document.body.classList.toggle('menu-open', menuOpen);
     return () => document.body.classList.remove('menu-open');
   }, [menuOpen]);
 
+  useEffect(() => {
+    const query = window.matchMedia('(min-width: 1180px)');
+    const sync = (event) => {
+      if (event.matches) setMenuOpen(false);
+    };
+
+    sync(query);
+    query.addEventListener('change', sync);
+    return () => query.removeEventListener('change', sync);
+  }, [setMenuOpen]);
+
   return (
     <header className="site-header">
-      <div className="site-header__inner shell">
+      <div className="site-header__inner shell shell--wide">
         <a href="#top" className="brand" aria-label="Amit Pal — back to top" onClick={closeMenu} data-cursor="HOME">
           <span className="brand-mark"><ShieldCheck size={17} aria-hidden="true" /></span>
           <span className="brand-name"><b>Amit</b><span>Pal</span></span>
@@ -81,32 +91,54 @@ export function Header({ theme, toggleTheme, time, activeSection, menuOpen, setM
         </div>
       </div>
 
-      <nav id="mobile-navigation" className={`mobile-nav ${menuOpen ? 'is-open' : ''}`} aria-label="Mobile navigation" aria-hidden={!menuOpen}>
-        <div className="shell mobile-nav__inner">
-          <p className="mobile-nav__label">Navigate the portfolio</p>
-          {NAV_ITEMS.map((item, index) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={activeSection === item.id ? 'is-active' : ''}
-              aria-current={activeSection === item.id ? 'location' : undefined}
-              onClick={closeMenu}
-              tabIndex={menuOpen ? 0 : -1}
-            >
-              <span>{item.label}</span>
-              <small>0{index + 1}</small>
-              <ChevronRight size={18} aria-hidden="true" />
-            </a>
-          ))}
+      <aside
+        id="mobile-navigation"
+        ref={drawerRef}
+        className={`mobile-nav ${menuOpen ? 'is-open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="mobile-nav-title"
+        aria-hidden={!menuOpen}
+      >
+        <div className="mobile-nav__backdrop" aria-hidden="true" onClick={closeMenu} />
+        <div className="shell shell--wide mobile-nav__panel">
+          <p id="mobile-nav-title" className="mobile-nav__label">Navigate the portfolio</p>
+          <nav className="mobile-nav__links" aria-label="Mobile navigation links">
+            {NAV_ITEMS.map((item, index) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={activeSection === item.id ? 'is-active' : ''}
+                aria-current={activeSection === item.id ? 'location' : undefined}
+                onClick={closeMenu}
+                tabIndex={menuOpen ? 0 : -1}
+                data-nav-focus={index === 0 ? 'true' : undefined}
+              >
+                <span>{item.label}</span>
+                <small>0{index + 1}</small>
+                <ChevronRight size={18} aria-hidden="true" />
+              </a>
+            ))}
+          </nav>
           <div className="mobile-nav__footer">
             <button type="button" className="theme-text-toggle" onClick={toggleTheme} tabIndex={menuOpen ? 0 : -1}>
               {theme === 'dark' ? <Sun size={15} /> : <Moon size={15} />} Use {theme === 'dark' ? 'light' : 'dark'} mode
             </button>
-            <a href={`mailto:${LINKS.email}`} tabIndex={menuOpen ? 0 : -1}><Mail size={14} /> {LINKS.email}</a>
-            <button type="button" className="theme-text-toggle" onClick={() => { onOpenResume(); closeMenu(); }} tabIndex={menuOpen ? 0 : -1}><FileText size={14} /> View Resume</button>
+            <a href={`mailto:${LINKS.email}`} className="mobile-nav__footer-link" tabIndex={menuOpen ? 0 : -1}><Mail size={14} /> {LINKS.email}</a>
+            <button
+              type="button"
+              className="theme-text-toggle"
+              onClick={() => {
+                onOpenResume();
+                closeMenu();
+              }}
+              tabIndex={menuOpen ? 0 : -1}
+            >
+              <FileText size={14} /> View Resume
+            </button>
           </div>
         </div>
-      </nav>
+      </aside>
     </header>
   );
 }

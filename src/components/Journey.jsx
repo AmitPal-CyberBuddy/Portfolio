@@ -10,7 +10,7 @@ export function Journey() {
       <div className="shell journey-layout">
         <Reveal className="section-intro journey-intro">
           <Eyebrow icon={Route}>Journey · Nov 2023 → now</Eyebrow>
-          <h2 id="journey-title">From research<br />to <em>security.</em></h2>
+          <h2 id="journey-title">From research to <em>security.</em></h2>
           <p className="intro-lead">My move into VAPT was shaped by research, deliberate learning, hands-on practice, and a desire to take on technical work.</p>
           <p>The timeline shows a clear thread: attention to detail, consistent delivery, and growing ownership.</p>
         </Reveal>
