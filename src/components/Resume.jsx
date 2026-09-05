@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { MOTION_EASE, RESUME_DATA } from '../content';
 import { useFocusTrap } from '../lib/hooks';
-import { Eyebrow, Reveal } from '../lib/ui';
+import { Reveal, SectionHeader } from '../lib/ui';
 
 function getPrintResumeData() {
   return {
@@ -346,53 +346,51 @@ export function ResumeViewer({ onClose }) {
 
 export function Resume({ onOpenResume }) {
   return (
-    <section id="resume" className="section resume-section" aria-labelledby="resume-title">
-      <div className="shell resume-layout">
-        <Reveal className="section-intro resume-intro">
-          <Eyebrow icon={FileText}>Resume · updated August 2026</Eyebrow>
-          <h2 id="resume-title">Resume / <em>CV.</em></h2>
-          <p className="intro-lead">Application Security Consultant focused on Web Application and API PT, with hands-on experience managing end-to-end security assessments.</p>
-          <div className="button-row">
-            <button type="button" className="button button--primary" onClick={onOpenResume} data-cursor="RESUME">
-              <FileText size={16} /> View My Resume <ArrowUpRight size={15} />
-            </button>
-            <button type="button" className="button button--secondary" onClick={downloadResumeATS} data-cursor="DOWNLOAD">
-              <Download size={16} /> Print / Save ATS Resume
-            </button>
-          </div>
-        </Reveal>
-        <Reveal className="resume-content" delay={0.08}>
-          <div className="panel panel--accent resume-panel">
-            <div className="resume-highlights">
-              <div className="resume-highlight">
-                <span className="resume-highlight__label">Current Role</span>
-                <span className="resume-highlight__value">Associate Consultant · Ampcus Cyber</span>
-              </div>
-              <div className="resume-highlight">
-                <span className="resume-highlight__label">Focus</span>
-                <span className="resume-highlight__value">Web Application &amp; API PT</span>
-              </div>
-              <div className="resume-highlight">
-                <span className="resume-highlight__label">Education</span>
-                <span className="resume-highlight__value">BCA · CGPA 9.16/10</span>
-              </div>
-              <div className="resume-highlight">
-                <span className="resume-highlight__label">Labs</span>
-                <span className="resume-highlight__value">135+ hands-on (PortSwigger)</span>
-              </div>
+    <section id="resume" className="section section--soft resume-section" aria-labelledby="resume-title">
+      <div className="shell">
+        <SectionHeader
+          index="03"
+          icon={FileText}
+          eyebrow="Resume — on file"
+          meta="Updated September 2026"
+          titleId="resume-title"
+          title={<>Resume / <em>CV.</em></>}
+          aside="Application Security Consultant focused on Web Application and API PT, with hands-on experience managing end-to-end security assessments."
+        />
+
+        <div className="resume-layout">
+          <Reveal className="resume-intro">
+            <div className="button-row">
+              <button type="button" className="button button--primary" onClick={onOpenResume} data-cursor="RESUME">
+                <FileText size={16} /> View My Resume <ArrowUpRight size={15} />
+              </button>
+              <button type="button" className="button button--secondary" onClick={downloadResumeATS} data-cursor="DOWNLOAD">
+                <Download size={16} /> Print / Save ATS Resume
+              </button>
             </div>
-            <div className="resume-badges">
+            <p className="resume-note">Viewable in-browser, or exported as a clean, ATS-friendly document.</p>
+          </Reveal>
+
+          <Reveal className="resume-facts" delay={0.08}>
+            <dl className="fact-ledger">
+              <div className="fact-ledger__row"><dt>Current role</dt><dd>Associate Consultant · Ampcus Cyber</dd></div>
+              <div className="fact-ledger__row"><dt>Focus</dt><dd>Web Application &amp; API PT</dd></div>
+              <div className="fact-ledger__row"><dt>Education</dt><dd>BCA · CGPA 9.16/10</dd></div>
+              <div className="fact-ledger__row"><dt>Labs</dt><dd>135+ hands-on · PortSwigger</dd></div>
+            </dl>
+            <div className="resume-stack">
+              <span className="resume-stack__label">Tools &amp; coverage</span>
               <div className="badge-row">
                 <span className="badge">Burp Suite</span>
                 <span className="badge">OWASP Top 10</span>
                 <span className="badge">API Security</span>
                 <span className="badge">Web Security</span>
                 <span className="badge">Penetration Testing</span>
-                <span className="badge">Manual & Automated Testing</span>
+                <span className="badge">Manual &amp; Automated Testing</span>
               </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

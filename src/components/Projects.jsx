@@ -9,7 +9,13 @@ import {
   PROJECT_VISUALS,
 } from '../content';
 import { GitHubIcon } from '../lib/icons';
-import { ButtonLink, Eyebrow, Reveal } from '../lib/ui';
+import { ButtonLink, Eyebrow, SectionHeader } from '../lib/ui';
+
+const WORKS_INDEX = [
+  ['01', 'CyberBuddy', 'Featured live product', '#project-cyberbuddy'],
+  ['02', 'VAPT Checklist', 'Live workspace', '#project-vapt'],
+  ['03', 'ScriptSentry', 'Live open source', '#project-scriptsentry'],
+];
 
 function ProjectDataVisual({ type, image, alt }) {
   const reduceMotion = useReducedMotion();
@@ -34,6 +40,14 @@ function ProjectDataVisual({ type, image, alt }) {
           <div className="project-data__metrics">
             {visual.metrics.map(([value, label]) => <div key={value}><strong>{value}</strong><span>{label}</span></div>)}
           </div>
+          <div className="project-data__units">
+            <div className="unit-bar" aria-hidden="true">
+              {Array.from({ length: visual.units.total }, (_, i) => (
+                <i key={i} className="is-live">{visual.units.cells?.[i] ?? ''}</i>
+              ))}
+            </div>
+            <span className="project-data__units-label">{visual.units.label}</span>
+          </div>
           <div className="project-data__rows">
             {visual.rows.map(([label, value], index) => (
               <div key={label}><span>0{index + 1}</span><b>{label}</b><small>{value}</small></div>
@@ -53,20 +67,24 @@ function ProjectDataVisual({ type, image, alt }) {
   );
 }
 
-function ProjectCard({ type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel }) {
+function ProjectCard({ id, num, type, title, eyebrow, summary, detail, image, alt, tags, primaryLink, primaryLabel, secondaryLink, secondaryLabel }) {
   const reduceMotion = useReducedMotion();
   const eyebrowIcon = PROJECT_EYEBROW_ICONS[type] || Layers3;
   const primaryButton = PROJECT_PRIMARY_BUTTONS[type] || 'button--green';
   return (
     <motion.article
+      id={id}
       className={`project-card project-card--${type}`}
-      initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+      initial={reduceMotion ? false : { opacity: 0, y: 26 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.16 }}
-      transition={{ duration: 0.65, ease: MOTION_EASE }}
+      viewport={{ once: true, amount: 0.14 }}
+      transition={{ duration: 0.7, ease: MOTION_EASE }}
     >
-      <div className="project-card__copy">
+      <div className="project-card__meta">
+        <span className="project-card__num">{num}</span>
         <Eyebrow icon={eyebrowIcon}>{eyebrow}</Eyebrow>
+      </div>
+      <div className="project-card__copy">
         <h3>{title}</h3>
         <p className="project-card__lead">{summary}</p>
         <p>{detail}</p>
@@ -85,16 +103,30 @@ export function Projects() {
   return (
     <section id="work" className="section work-section" aria-labelledby="work-title">
       <div className="shell shell--wide">
-        <Reveal className="section-heading section-heading--split">
-          <div>
-            <Eyebrow icon={Hammer}>Projects · independent security work</Eyebrow>
-            <h2 id="work-title">Custom Tooling · <em>local-first utilities.</em></h2>
-          </div>
-          <p>Local-first utilities built for authorized testing and rapid evidence capture — designed to make investigation, evidence, and security conversations clearer.</p>
-        </Reveal>
+        <SectionHeader
+          index="04"
+          icon={Hammer}
+          eyebrow="Projects — independent security work"
+          meta="03 shipped · all local-first"
+          titleId="work-title"
+          title={<>Custom tooling, <em>built to document.</em></>}
+          aside="Local-first utilities built for authorized testing and rapid evidence capture — designed to make investigation, evidence, and security conversations clearer."
+        />
+
+        <nav className="project-index" aria-label="Project index">
+          {WORKS_INDEX.map(([num, name, status, href]) => (
+            <a key={href} href={href} data-cursor="VIEW">
+              <span className="project-index__num">{num}</span>
+              <span className="project-index__name">{name}</span>
+              <span className="project-index__status">{status}</span>
+            </a>
+          ))}
+        </nav>
 
         <div className="project-stack">
           <ProjectCard
+            id="project-cyberbuddy"
+            num="01"
             type="live"
             eyebrow="CyberBuddy · featured live product"
             title="CyberBuddy"
@@ -109,11 +141,13 @@ export function Projects() {
             secondaryLabel="View GitHub"
           />
           <ProjectCard
+            id="project-vapt"
+            num="02"
             type="release"
             eyebrow="VAPT Checklist · Live workspace"
             title="VAPT Checklist"
             summary="A local-first VAPT workspace — pick a scenario, get a context-driven plan with variants and evidence, then retest."
-            detail="VAPT Checklist replaces static checklists with a six-stage loop — scope, discover, prioritize, test, report, retest — organizing the whole catalog into context-driven plans with named variants, connected attack paths, and honest coverage states. Everything runs in the browser with no backend and no telemetry. Web testing is live; Android and iOS checklists are next."
+            detail="VAPT Checklist replaces static checklists with a six-stage loop — scope, discover, prioritize, test, report, retest — organizing the whole catalog into context-driven plans with named variants, connected attack paths, and honest coverage states. Everything runs in the browser with no backend and no telemetry. Web testing is live; Android and iOS coverage is in beta."
             image="vapt-workflow.jpg"
             alt="VAPT Checklist structured security workflow"
             tags={['Scenario-based plans', 'Connected attack paths', '6-stage loop', 'Local-first', 'Live']}
@@ -123,6 +157,8 @@ export function Projects() {
             secondaryLabel="View GitHub"
           />
           <ProjectCard
+            id="project-scriptsentry"
+            num="03"
             type="experiment"
             eyebrow="ScriptSentry · Live open-source"
             title="ScriptSentry"
@@ -139,5 +175,3 @@ export function Projects() {
     </section>
   );
 }
-
-
