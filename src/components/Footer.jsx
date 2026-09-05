@@ -6,7 +6,7 @@ export function Footer() {
   return (
     <footer className="site-footer">
       <div className="shell shell--wide site-footer__inner">
-        <span>© 2026 Amit Pal · Application Security</span>
+        <span className="site-footer__sig">© 2026 Amit Pal · Application Security <em>— test deliberately, validate impact.</em></span>
         <nav className="site-footer__links" aria-label="Footer links">
           <a href="#top">Back to top ↑</a>
           <a href="#resume">Resume</a>

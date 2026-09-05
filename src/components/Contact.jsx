@@ -1,49 +1,65 @@
-import {
-  ArrowUpRight,
-  BookOpen,
-  FileText,
-  Mail,
-  ShieldCheck,
-} from 'lucide-react';
+import { ArrowUpRight, BookOpen, FileText, Mail, ShieldCheck } from 'lucide-react';
 import { LINKS } from '../content';
 import { GitHubIcon, LinkedInIcon } from '../lib/icons';
-import { ButtonLink, Eyebrow, ExternalArrow } from '../lib/ui';
 
 export function Contact({ onOpenResume }) {
   return (
     <section id="connect" className="section contact-section" aria-labelledby="contact-title">
       <div className="contact-grid-pattern" aria-hidden="true" />
       <div className="shell shell--wide contact-layout">
-        <div className="contact-copy">
-          <Eyebrow icon={Mail}>Contact · collaborations welcome</Eyebrow>
-          <h2 id="contact-title">Let’s make security <em>clearer together.</em></h2>
-          <p>Need Web or API PT with clear evidence and practical remediation context? Or want to discuss browser-security tooling? Let’s connect.</p>
-          <a className="email-address" href={`mailto:${LINKS.email}`} data-cursor="EMAIL"><Mail size={17} /> {LINKS.email}</a>
-        </div>
-        <div className="contact-actions">
-          <div className="contact-primary-actions">
-            <a href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} className="email-cta" data-cursor="EMAIL ME">
-              <Mail size={22} />
-              <span className="email-cta__copy">
-                <span className="email-cta__title">Email</span>
-                <span className="email-cta__meta">Start a conversation <ArrowUpRight size={18} /></span>
-              </span>
-            </a>
-            <button type="button" className="email-cta" onClick={onOpenResume} data-cursor="RESUME">
-              <FileText size={22} />
-              <span className="email-cta__copy">
-                <span className="email-cta__title">Resume</span>
-                <span className="email-cta__meta">View full experience <ArrowUpRight size={18} /></span>
-              </span>
-            </button>
-            <ButtonLink href={LINKS.linkedin} external className="button contact-linkedin" cursorLabel="LINKEDIN"><LinkedInIcon size={16} /> Connect on LinkedIn <ExternalArrow /></ButtonLink>
+        <header className="contact-head">
+          <div className="section-head__meta">
+            <div className="section-head__index">
+              <b>10</b>
+              <i aria-hidden="true" />
+              <span className="eyebrow"><Mail size={14} aria-hidden="true" /><span>Contact — collaborations welcome</span></span>
+            </div>
+            <span className="section-head__note">Bengaluru · open to remote collaboration</span>
           </div>
-          <div className="contact-links" aria-label="More external profiles">
-            <a href={LINKS.medium} target="_blank" rel="noopener noreferrer" data-cursor="MEDIUM"><BookOpen size={17} /><span>Medium <span className="sr-only">(opens in a new tab)</span></span><ExternalArrow /></a>
-            <a href={LINKS.github} target="_blank" rel="noopener noreferrer" data-cursor="GITHUB"><GitHubIcon size={17} /><span>GitHub <span className="sr-only">(opens in a new tab)</span></span><ExternalArrow /></a>
-          </div>
-          <p className="contact-note"><ShieldCheck size={15} /> Static site · no tracking · no telemetry</p>
+          <h2 id="contact-title">
+            Let’s make <em>security</em> clearer <em className="outline">together.</em>
+          </h2>
+        </header>
+
+        <p className="contact-lead">
+          Need Web or API PT with clear evidence and practical remediation context?
+          Or want to discuss browser-security tooling? Let’s connect.
+        </p>
+
+        <a className="contact-emailline" href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} data-cursor="EMAIL ME">
+          <Mail size={22} aria-hidden="true" />
+          <span>{LINKS.email}</span>
+          <ArrowUpRight size={26} aria-hidden="true" />
+        </a>
+
+        <div className="connect-ledger" aria-label="Ways to connect">
+          <button type="button" className="connect-row" onClick={onOpenResume} data-cursor="RESUME">
+            <span className="connect-row__num">01</span>
+            <span className="connect-row__label">Resume</span>
+            <span className="connect-row__detail">Full experience — viewable in-browser</span>
+            <FileText size={17} aria-hidden="true" />
+          </button>
+          <a className="connect-row" href={LINKS.linkedin} target="_blank" rel="noopener noreferrer" data-cursor="LINKEDIN">
+            <span className="connect-row__num">02</span>
+            <span className="connect-row__label">LinkedIn</span>
+            <span className="connect-row__detail">Connect professionally<span className="sr-only"> (opens in a new tab)</span></span>
+            <LinkedInIcon size={17} aria-hidden="true" />
+          </a>
+          <a className="connect-row" href={LINKS.github} target="_blank" rel="noopener noreferrer" data-cursor="GITHUB">
+            <span className="connect-row__num">03</span>
+            <span className="connect-row__label">GitHub</span>
+            <span className="connect-row__detail">Tools and source, open by default<span className="sr-only"> (opens in a new tab)</span></span>
+            <GitHubIcon size={17} aria-hidden="true" />
+          </a>
+          <a className="connect-row" href={LINKS.medium} target="_blank" rel="noopener noreferrer" data-cursor="MEDIUM">
+            <span className="connect-row__num">04</span>
+            <span className="connect-row__label">Medium</span>
+            <span className="connect-row__detail">Three evidence-led studies<span className="sr-only"> (opens in a new tab)</span></span>
+            <BookOpen size={17} aria-hidden="true" />
+          </a>
         </div>
+
+        <p className="contact-note"><ShieldCheck size={15} aria-hidden="true" /> Static site · no tracking · no telemetry</p>
       </div>
     </section>
   );
