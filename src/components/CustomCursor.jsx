@@ -6,6 +6,7 @@ export function CustomCursor() {
   const [enabled, setEnabled] = useState(false);
   const [label, setLabel] = useState('');
   const [hovering, setHovering] = useState(false);
+  const [pressed, setPressed] = useState(false);
 
   useEffect(() => {
     const query = window.matchMedia('(pointer: fine)');
@@ -35,6 +36,8 @@ export function CustomCursor() {
       setHovering(Boolean(trigger));
       setLabel(trigger?.getAttribute('data-cursor') || '');
     };
+    const onDown = () => setPressed(true);
+    const onUp = () => setPressed(false);
     const animate = () => {
       dot.x += (point.x - dot.x) * 0.34;
       dot.y += (point.y - dot.y) * 0.34;
@@ -48,11 +51,17 @@ export function CustomCursor() {
     document.documentElement.classList.add('custom-cursor-on');
     window.addEventListener('pointermove', onMove, { passive: true });
     window.addEventListener('pointerover', onOver);
+    window.addEventListener('pointerdown', onDown);
+    window.addEventListener('pointerup', onUp);
+    window.addEventListener('blur', onUp);
     animate();
     return () => {
       document.documentElement.classList.remove('custom-cursor-on');
       window.removeEventListener('pointermove', onMove);
       window.removeEventListener('pointerover', onOver);
+      window.removeEventListener('pointerdown', onDown);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('blur', onUp);
       window.cancelAnimationFrame(frame);
     };
   }, [enabled]);
@@ -61,7 +70,7 @@ export function CustomCursor() {
   return (
     <div className="cursor-system" aria-hidden="true">
       <span ref={dotRef} className="cursor-dot" />
-      <span ref={ringRef} className={`cursor-ring ${hovering ? 'is-hovering' : ''}`}><span>{label}</span></span>
+      <span ref={ringRef} className={`cursor-ring ${hovering ? 'is-hovering' : ''} ${pressed ? 'is-pressed' : ''}`}><span>{label}</span></span>
     </div>
   );
 }

@@ -70,7 +70,7 @@ function getPrintResumeData() {
         },
         status: 'Live',
         description:
-          'Local JavaScript security analysis platform surfacing secrets, crypto, APIs, storage, DOM risk, obfuscation, and exportable findings.',
+          'Privacy-first local JavaScript security analyzer — taint-tracked secrets, DOM-XSS and API surface discovery, 0–100 evidence-weighted scoring, SARIF/OpenAPI exports, scan history and build diffing.',
       },
       {
         title: 'VAPT Checklist',
@@ -80,7 +80,7 @@ function getPrintResumeData() {
         },
         status: 'Live',
         description:
-          'Context-aware local-first VAPT workspace with 2,006 checks, 631 families, 52 plans, 48 attack paths, and no telemetry.',
+          'Context-aware local-first VAPT workspace — 178+ OWASP/CWE-mapped tests with per-test applicability reasons, status/result tracking, and 5-sheet Excel export; no telemetry.',
       },
       {
         title: 'Technical Security Writing',

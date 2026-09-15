@@ -138,7 +138,7 @@ export const SIGNALS = [
 export const NOW_ITEMS = [
   {
     label: 'Building',
-    detail: 'VAPT Checklist — a local-first VAPT workspace; web testing live, Android & iOS in beta.',
+    detail: 'VAPT Checklist — 178+ OWASP/CWE-mapped tests live for web, REST API & GraphQL, tracked to a 5-sheet Excel report.',
     href: LINKS.vaptLive,
     action: 'Live preview',
     tone: 'green',
@@ -243,7 +243,7 @@ export const RESUME_DATA = {
       },
       status: 'Live',
       description:
-        'Visual JavaScript security and script-behavior intelligence platform \u2014 secrets, crypto keys, APIs, storage, DOM risks, obfuscation, and data flows analyzed through a motion-rich dashboard with 20+ detection modules. Runs 100% locally and is free and open source.',
+        'Privacy-first JavaScript security analyzer \u2014 tree-sitter AST analysis with source\u2192sink taint tracking surfaces secrets, crypto keys, DOM-XSS paths, exfiltration routes, and API surface (OpenAPI export), graded 0\u2013100 by evidence weight. Runs 100% locally via a pairing-token engine, with scan history and build diffing. Free, MIT open source.',
     },
     {
       title: 'VAPT Checklist',
@@ -253,7 +253,7 @@ export const RESUME_DATA = {
       },
       status: 'Live',
       description:
-        'Context-aware VAPT methodology, checklist, knowledge base, and local-first workspace \u2014 2,006 catalog checks organized into 631 test families and 52 scenario plans, with 48 connected attack paths and no telemetry.',
+        'Browser-based VAPT checklist and assessment tracker \u2014 a 178+ test library mapped to OWASP and CWE, narrowed per engagement by application context (web, REST & GraphQL APIs and more), with per-test applicability reasons, status/result tracking and a one-click 5-sheet Excel export. Local-first, no telemetry.',
     },
     {
       title: 'Technical Security Writing',
@@ -294,7 +294,7 @@ export const PROJECT_VISUALS = {
     className: 'live',
     top: ['CyberBuddy // live', 'Local-first'],
     metrics: [['07', 'checks live'], ['NO ACCOUNT', 'no sign-up']],
-    units: { total: 7, label: '07 / 07 checks online' },
+    units: { total: 7, cells: ['CJ', 'HD', 'CO', 'CS', 'DN', 'CF', 'JW'], label: '07 / 07 checks online' },
     rows: [['CORS validation', 'evidence led'], ['Headers audit', 'policy signals'], ['JWT workbench', 'local only']],
     footer: ['Authorized testing only', 'Evidence-grade'],
     caption: ['Live · 7 tools', 'Local-first browser security'],
@@ -302,21 +302,21 @@ export const PROJECT_VISUALS = {
   },
   release: {
     className: 'release',
-    top: ['VAPT Checklist · live', 'Web live · Android/iOS beta'],
-    metrics: [['2,006', 'catalog checks'], ['631', 'test families']],
-    units: { total: 6, cells: ['S', 'D', 'P', 'T', 'R', 'R'], label: '6-stage loop · web live' },
-    rows: [['52 plans', 'scenario-based'], ['48 attack paths', 'connected'], ['6-stage loop', 'scope → retest']],
-    footer: ['Authorized testing only', 'Web live · mobile in beta'],
-    caption: ['Live · VAPT workspace', 'Web testing · Android/iOS beta'],
+    top: ['VAPT Checklist · live', 'Local-first'],
+    metrics: [['178+', 'tests in library'], ['18', 'categories']],
+    units: { total: 6, cells: ['01', '02', '03', '04', '05', '06'], label: '6-step assessment flow' },
+    rows: [['Applicability', 'reasoned per test'], ['Tracking', 'status · result · notes'], ['Export', '5-sheet Excel']],
+    footer: ['Authorized testing only', 'Library v1.3.1'],
+    caption: ['Live · VAPT workspace', '178+ checks · OWASP & CWE'],
     aria: 'VAPT Checklist live workspace data',
   },
   experiment: {
     className: 'experiment',
-    top: ['ScriptSentry · live', 'Free & open source'],
-    metrics: [['20+', 'detection modules'], ['100%', 'local analysis']],
-    units: { total: 20, label: '20+ detection modules online' },
-    rows: [['Secrets & crypto', 'key exposure'], ['DOM & storage', 'risk map'], ['Exports', 'HTML/TXT/CSV/SARIF']],
-    footer: ['JavaScript security', 'Local analysis'],
+    top: ['ScriptSentry · live', 'Free & MIT open source'],
+    metrics: [['10', 'capability areas'], ['100%', 'local analysis']],
+    units: { total: 10, cells: ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'], label: '10 capabilities · one engine' },
+    rows: [['Taint paths', 'source → sink'], ['API surface', 'OpenAPI map'], ['Scan history', 'build diffing']],
+    footer: ['JavaScript security', 'Pairing-token engine'],
     caption: ['Live · open source', 'JS security intelligence'],
     aria: 'ScriptSentry live open source data',
   },

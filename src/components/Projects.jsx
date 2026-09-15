@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
 import { ExternalLink, Hammer, Layers3 } from 'lucide-react';
 import {
   asset,
@@ -19,10 +20,28 @@ const WORKS_INDEX = [
 
 function ProjectDataVisual({ type, image, alt }) {
   const reduceMotion = useReducedMotion();
+  const figureRef = useRef(null);
+  // Ambient loops (image drift, scanline) only animate while the console is on
+  // screen — offscreen compositing work is wasted battery and frame budget.
+  const inView = useInView(figureRef, { amount: 0.2 });
   const visual = PROJECT_VISUALS[type] || PROJECT_VISUALS.release;
+  const ambient = inView && !reduceMotion;
+
+  // Cursor-tracking spotlight wash over the console (fine pointers only).
+  const onSpotMove = (event) => {
+    const el = figureRef.current;
+    if (!el || event.pointerType !== 'mouse') return;
+    const rect = el.getBoundingClientRect();
+    el.style.setProperty('--spot-x', `${(((event.clientX - rect.left) / rect.width) * 100).toFixed(1)}%`);
+    el.style.setProperty('--spot-y', `${(((event.clientY - rect.top) / rect.height) * 100).toFixed(1)}%`);
+  };
 
   return (
-    <figure className={`project-media project-media--${visual.className}`}>
+    <figure
+      ref={figureRef}
+      className={`project-media project-media--${visual.className}`}
+      onPointerMove={onSpotMove}
+    >
       <div className="project-visual-frame">
         {image && (
           <motion.img
@@ -30,8 +49,9 @@ function ProjectDataVisual({ type, image, alt }) {
             alt={alt}
             loading="lazy"
             decoding="async"
-            animate={reduceMotion ? { scale: 1, x: '0%' } : { scale: [1.01, 1.05, 1.01], x: ['-1%', '1%', '-1%'] }}
-            transition={reduceMotion ? { duration: 0 } : { duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+            initial={false}
+            animate={ambient ? { scale: [1.01, 1.05, 1.01], x: ['-1%', '1%', '-1%'] } : { scale: 1.01, x: '0%' }}
+            transition={ambient ? { duration: 18, repeat: Infinity, ease: 'easeInOut' } : { duration: 0.4, ease: MOTION_EASE }}
           />
         )}
         <div className="project-visual-frame__scrim" aria-hidden="true" />
@@ -43,7 +63,7 @@ function ProjectDataVisual({ type, image, alt }) {
           <div className="project-data__units">
             <div className="unit-bar" aria-hidden="true">
               {Array.from({ length: visual.units.total }, (_, i) => (
-                <i key={i} className="is-live">{visual.units.cells?.[i] ?? ''}</i>
+                <i key={i} className="is-live">{visual.units.cells?.[i] ?? String(i + 1).padStart(2, '0')}</i>
               ))}
             </div>
             <span className="project-data__units-label">{visual.units.label}</span>
@@ -58,9 +78,11 @@ function ProjectDataVisual({ type, image, alt }) {
         <motion.span
           className="project-scanline"
           aria-hidden="true"
-          animate={reduceMotion ? { top: '0%' } : { top: ['-2%', '102%'] }}
-          transition={reduceMotion ? { duration: 0 } : { duration: 5.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' }}
+          initial={false}
+          animate={ambient ? { top: ['-2%', '102%'], opacity: 0.75 } : { top: '-4%', opacity: 0 }}
+          transition={ambient ? { duration: 5.5, repeat: Infinity, repeatDelay: 2.5, ease: 'linear' } : { duration: 0.35, ease: 'easeOut' }}
         />
+        <span className="project-spotlight" aria-hidden="true" />
       </div>
       <figcaption><span>{visual.caption[0]}</span><span>{visual.caption[1]}</span></figcaption>
     </figure>
@@ -146,11 +168,11 @@ export function Projects() {
             type="release"
             eyebrow="VAPT Checklist · Live workspace"
             title="VAPT Checklist"
-            summary="A local-first VAPT workspace — pick a scenario, get a context-driven plan with variants and evidence, then retest."
-            detail="VAPT Checklist replaces static checklists with a six-stage loop — scope, discover, prioritize, test, report, retest — organizing the whole catalog into context-driven plans with named variants, connected attack paths, and honest coverage states. Everything runs in the browser with no backend and no telemetry. Web testing is live; Android and iOS coverage is in beta."
+            summary="A local-first VAPT checklist and tracker — describe the target, and the library narrows 178+ OWASP/CWE-mapped checks to exactly what applies."
+            detail="Static checklists age into noise, so VAPT Checklist starts from the application instead: around twenty scoping answers — authentication, uploads, tenants, asset types — include or exclude tests, and every check explains why it applies. A keyboard-first workspace records status, result and notes per test, progress is computed from one formula everywhere, and one click exports a 5-sheet Excel report. Everything runs in the browser — local data, no backend, no telemetry. Web, REST API and GraphQL are fully supported; SOAP, mobile and cloud ship with honestly labelled depth."
             image="vapt-workflow.jpg"
             alt="VAPT Checklist structured security workflow"
-            tags={['Scenario-based plans', 'Connected attack paths', '6-stage loop', 'Local-first', 'Live']}
+            tags={['Context-driven checklist', 'OWASP & CWE mapped', '5-sheet Excel report', 'Keyboard-first', 'Live']}
             primaryLink={LINKS.vaptLive}
             primaryLabel="Live preview"
             secondaryLink={LINKS.vaptRepo}
@@ -162,9 +184,9 @@ export function Projects() {
             type="experiment"
             eyebrow="ScriptSentry · Live open-source"
             title="ScriptSentry"
-            summary="A local-first visual intelligence platform for JavaScript security and script behavior."
-            detail="ScriptSentry reads the JavaScript an application actually ships — secrets, crypto keys, API calls, storage usage, DOM risks, and obfuscation — and surfaces them in a motion-rich dashboard. It runs 100% locally, analyzes a pasted fragment or a live URL, and exports HTML, TXT, CSV, or SARIF. Free and open source."
-            tags={['20+ detection modules', 'Secrets & crypto', 'Data flows', 'Open source', 'Local analysis']}
+            summary="A privacy-first JavaScript security analyzer — paste code, drop bundles, or point it at a live URL."
+            detail="ScriptSentry reads the JavaScript an application actually ships — secrets and crypto keys, source→sink DOM-XSS paths, exfiltration routes, API surface, and obfuscation — and grades every script with an evidence-weighted 0–100 risk score on tree-sitter AST analysis. A pairing-token engine runs everything on your machine: exports HTML, TXT, CSV, SARIF, JSON and an OpenAPI map, keeps scan history, and diffs build-over-build. Optional local runtime evidence and local-AI triage — nothing ever leaves localhost. Free, MIT open source."
+            tags={['Static + taint analysis', '0–100 risk scoring', 'OpenAPI export', 'Build diffing', 'Local analysis']}
             primaryLink={LINKS.scriptSentryLive}
             primaryLabel="Live preview"
             secondaryLink={LINKS.scriptSentry}

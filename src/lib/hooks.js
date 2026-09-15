@@ -105,6 +105,81 @@ export function useScrollProgress() {
   return progress;
 }
 
+/**
+ * Whether the page has been scrolled past `offset` — used to switch the fixed
+ * header into its compact, elevated state. Scroll events are passive and the
+ * state only flips at the threshold, so this never thrashes the main thread.
+ */
+export function useScrolled(offset = 28) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const update = () => setScrolled(window.scrollY > offset);
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, [offset]);
+
+  return scrolled;
+}
+
+/**
+ * Fit-text: shrinks the referenced element's font-size until every
+ * `[data-fit-line]` child fits horizontally. Display headings built from one
+ * long unbreakable word ("Vulnerabilities") would otherwise clip inside
+ * overflow masks (or overflow the shell) on narrow screens and with real
+ * font metrics. Re-measures on container resize and once web fonts finish
+ * loading — fallback metrics and real metrics differ, so the first pass is
+ * provisional. Writes are guarded so ResizeObserver height feedback cannot
+ * bounce the size back and forth.
+ */
+export function useFitText(ref) {
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return undefined;
+
+    let fittedWidth = 0;
+
+    const fit = (force = false) => {
+      const available = root.clientWidth;
+      if (!available) return;
+      // Height-only changes (e.g. our own scaling) must not retrigger a pass.
+      if (!force && fittedWidth === available) return;
+
+      root.style.fontSize = '';
+      const lines = root.querySelectorAll('[data-fit-line]');
+      if (!lines.length) return;
+      const base = parseFloat(window.getComputedStyle(root).fontSize) || 0;
+      let widest = 0;
+      lines.forEach((line) => {
+        widest = Math.max(widest, line.scrollWidth);
+      });
+
+      fittedWidth = available;
+      if (base > 0 && widest > available) {
+        root.style.fontSize = `${Math.max(base * (available / widest), 16).toFixed(2)}px`;
+      }
+    };
+
+    fit(true);
+    const observer = new ResizeObserver(() => fit());
+    observer.observe(root);
+
+    const onFontsReady = () => fit(true);
+    if (document.fonts) {
+      document.fonts.ready.then(onFontsReady);
+      document.fonts.addEventListener('loadingdone', onFontsReady);
+      document.fonts.addEventListener('loadingerror', onFontsReady);
+    }
+
+    return () => {
+      observer.disconnect();
+      document.fonts?.removeEventListener('loadingdone', onFontsReady);
+      document.fonts?.removeEventListener('loadingerror', onFontsReady);
+    };
+  }, [ref]);
+}
+
 export function useFocusTrap(containerRef, active, { onEscape, initialFocusSelector } = {}) {
   const returnFocusRef = useRef(null);
 
