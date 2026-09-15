@@ -1,8 +1,43 @@
-import { ArrowUpRight, BookOpen, FileText, Mail, ShieldCheck } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight, BookOpen, Check, Copy, FileText, Mail, ShieldCheck } from 'lucide-react';
 import { LINKS } from '../content';
 import { GitHubIcon, LinkedInIcon } from '../lib/icons';
 
+async function copyText(text) {
+  if (navigator.clipboard?.writeText) {
+    await navigator.clipboard.writeText(text);
+    return;
+  }
+  // Fallback for non-secure contexts / older engines.
+  const field = document.createElement('textarea');
+  field.value = text;
+  field.setAttribute('readonly', '');
+  field.style.position = 'absolute';
+  field.style.left = '-9999px';
+  document.body.appendChild(field);
+  field.select();
+  document.execCommand('copy');
+  document.body.removeChild(field);
+}
+
 export function Contact({ onOpenResume }) {
+  const [copied, setCopied] = useState(false);
+  const resetTimer = useRef(null);
+
+  useEffect(() => () => window.clearTimeout(resetTimer.current), []);
+
+  const handleCopy = async () => {
+    try {
+      await copyText(LINKS.email);
+      setCopied(true);
+      window.clearTimeout(resetTimer.current);
+      resetTimer.current = window.setTimeout(() => setCopied(false), 2200);
+    } catch {
+      // Clipboard blocked — fall back to opening the mail client.
+      window.location.href = `mailto:${LINKS.email}`;
+    }
+  };
+
   return (
     <section id="connect" className="section contact-section" aria-labelledby="contact-title">
       <div className="contact-grid-pattern" aria-hidden="true" />
@@ -26,11 +61,24 @@ export function Contact({ onOpenResume }) {
           Or want to discuss browser-security tooling? Let’s connect.
         </p>
 
-        <a className="contact-emailline" href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} data-cursor="EMAIL ME">
-          <Mail size={22} aria-hidden="true" />
-          <span>{LINKS.email}</span>
-          <ArrowUpRight size={26} aria-hidden="true" />
-        </a>
+        <div className="contact-emailbar">
+          <a className="contact-emailline" href={`mailto:${LINKS.email}?subject=Portfolio%20contact`} data-cursor="EMAIL ME">
+            <Mail size={22} aria-hidden="true" />
+            <span>{LINKS.email}</span>
+            <ArrowUpRight size={26} aria-hidden="true" />
+          </a>
+          <button
+            type="button"
+            className={`contact-copy${copied ? ' is-copied' : ''}`}
+            onClick={handleCopy}
+            aria-label={copied ? 'Email address copied to clipboard' : `Copy ${LINKS.email} to clipboard`}
+            data-cursor="COPY"
+          >
+            {copied ? <Check size={15} aria-hidden="true" /> : <Copy size={15} aria-hidden="true" />}
+            <span>{copied ? 'Copied' : 'Copy'}</span>
+          </button>
+          <span className="sr-only" role="status">{copied ? 'Email address copied to clipboard.' : ''}</span>
+        </div>
 
         <div className="connect-ledger" aria-label="Ways to connect">
           <button type="button" className="connect-row" onClick={onOpenResume} data-cursor="RESUME">

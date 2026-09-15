@@ -36,14 +36,14 @@ VAPT • Web & API Security • Mobile • Security Tooling • Research • Wri
 
 ## Projects — Storytelling, Not Cards
 
-### VAPT Checklist — v1.0.0-r29 Release Candidate
+### VAPT Checklist — Live Assessment Workspace (library v1.3.1)
 - **Live preview:** https://amitpal-cyberbuddy.github.io/VAPT-Checklist/
 - **Repo:** https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
-- **Status:** Live for web testing; Android & iOS in beta. No backend, no telemetry.
-- Story: `Fragmented security checks → Taxonomy and normalization → Structured testing workflow → Operator-focused VAPT workspace`
-- Live snapshot: 2,006 catalog checks across 631 test families, 52 scenario plans, and 48 connected attack paths. The [VAPT-Checklist repo](https://github.com/AmitPal-CyberBuddy/VAPT-Checklist) remains the authoritative source when these evolve.
-- Context-aware workspace: presets, scoping questions, multi-role matrix, honest coverage states (tested · testing now · blocked · N/A · not tested)
-- Check ≠ coverage ≠ finding — evidence packs, Markdown coverage, CSV export
+- **Status:** Live — web, REST API & GraphQL fully supported; SOAP, mobile and cloud shipped with honestly labelled depth. No backend, no telemetry.
+- Story: `Fragmented security checks → Context-driven applicability → Tracked testing workspace → Report-grade Excel export`
+- Live snapshot: 178+ security-testing checks in the bundled library across 18 categories, each mapped to OWASP & CWE, narrowed per engagement by ~20 scoping answers, and exported as a 5-sheet Excel report. The [VAPT-Checklist repo](https://github.com/AmitPal-CyberBuddy/VAPT-Checklist) remains the authoritative source when these evolve.
+- Context-aware workspace: applicability rules reasoned per test (never hidden silently), one progress formula everywhere
+- Keyboard-first testing workspace (j/k, 1/2/3, v/b) with status · result · notes per check
 - Local-first, no backend, no telemetry
 
 ### CyberBuddy — Browser-Based Security Assessment Suite — Live
@@ -137,9 +137,11 @@ There are no `VAPT_CATEGORIES`, `CYBERBUDDY_TOOLS`, or `WRITING_REAL` constants 
 
 ### VAPT Checklist status and numbers: one authoritative source
 
-The portfolio reflects the live workspace: **web testing is live**, with Android & iOS
-in beta, and currently **2,006 catalog checks** across **631 test families**, **52 scenario
-plans**, and **48 connected attack paths**. Status and counts can evolve, so the
+The portfolio reflects the live workspace (library v1.3.1): **web, REST API and GraphQL
+testing are fully supported**, with SOAP, mobile and cloud shipped at honestly labelled
+depth — the bundled library carries **178+ security-testing checks** across **18
+categories**, each with OWASP/CWE mapping, per-test applicability reasons, and a
+**5-sheet Excel export**. Status and counts can evolve, so the
 authoritative source is the project itself:
 https://github.com/AmitPal-CyberBuddy/VAPT-Checklist
 

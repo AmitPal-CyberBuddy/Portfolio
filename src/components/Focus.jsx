@@ -112,8 +112,23 @@ export function Focus() {
       <section className="approach-band" aria-label="How I work">
         <div className="shell approach-band__inner">
           <p className="approach-band__label"><Route size={15} aria-hidden="true" /> How I work</p>
-          <p className="approach-band__flow"><Search size={15} aria-hidden="true" /> Test <i>→</i> <Hammer size={15} aria-hidden="true" /> Build <i>→</i> <Lightbulb size={15} aria-hidden="true" /> Research <i>→</i> <PenTool size={15} aria-hidden="true" /> Write</p>
-          <span>From testing to practical next steps.</span>
+          <div className="ticker" aria-hidden="true">
+            <div className="ticker__track">
+              {[0, 1].map((set) => (
+                <span className="ticker__set" key={set}>
+                  {[0, 1, 2].map((seq) => (
+                    <span className="ticker__seq" key={seq}>
+                      <span className="ticker__item"><Search size={14} /> Test</span><i>→</i>
+                      <span className="ticker__item"><Hammer size={14} /> Build</span><i>→</i>
+                      <span className="ticker__item"><Lightbulb size={14} /> Research</span><i>→</i>
+                      <span className="ticker__item"><PenTool size={14} /> Write</span><b>//</b>
+                    </span>
+                  ))}
+                </span>
+              ))}
+            </div>
+          </div>
+          <span className="approach-band__note">From testing to practical next steps.</span>
         </div>
       </section>
     </>

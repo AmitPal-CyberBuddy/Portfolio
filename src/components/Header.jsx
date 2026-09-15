@@ -11,10 +11,11 @@ import {
   X,
 } from 'lucide-react';
 import { LINKS, NAV_ITEMS } from '../content';
-import { useFocusTrap } from '../lib/hooks';
+import { useFocusTrap, useScrolled } from '../lib/hooks';
 
 export function Header({ theme, toggleTheme, time, activeSection, menuOpen, setMenuOpen, onOpenResume }) {
   const drawerRef = useRef(null);
+  const scrolled = useScrolled(28);
   const closeMenu = () => setMenuOpen(false);
 
   useFocusTrap(drawerRef, menuOpen, {
@@ -39,7 +40,7 @@ export function Header({ theme, toggleTheme, time, activeSection, menuOpen, setM
   }, [setMenuOpen]);
 
   return (
-    <header className="site-header">
+    <header className={`site-header${scrolled ? ' is-scrolled' : ''}`}>
       <div className="site-header__inner shell shell--wide">
         <a href="#top" className="brand" aria-label="Amit Pal — back to top" onClick={closeMenu} data-cursor="HOME">
           <span className="brand-mark"><ShieldCheck size={17} aria-hidden="true" /></span>
@@ -61,6 +62,14 @@ export function Header({ theme, toggleTheme, time, activeSection, menuOpen, setM
         </nav>
 
         <div className="header-tools">
+          <button
+            type="button"
+            className="header-cta"
+            onClick={onOpenResume}
+            data-cursor="RESUME"
+          >
+            <FileText size={14} aria-hidden="true" /> Resume
+          </button>
           <time className="header-time" aria-label={`Current time in India: ${time || 'loading'}`}>
             <Clock3 size={14} aria-hidden="true" />
             <span>{time || '—:—:—'} <em>IST</em></span>
